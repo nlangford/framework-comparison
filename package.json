@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "The intention of this project is to compare different front end frameworks, consuming from the same backend/api to evaluate ease of use and functionality/feature sets",
   "main": "server.js",
-  "start": "cd angular && npm install && ng build && cd ../vue && npm install && node build/build.js && cd ../react && npm install && npm build && cd .. && node server.js",
+  "start": "server.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "postinstall":"cd angular && npm install && ng build && cd ../vue && npm install && node build/build.js && cd ../react && npm install && npm build"
   },
   "repository": {
     "type": "git",
