@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "The intention of this project is to compare different front end frameworks, consuming from the same backend/api to evaluate ease of use and functionality/feature sets",
   "main": "server.js",
+  "start": "server.js",
   "scripts": {
     "test": "test"
   },
