@@ -7,7 +7,7 @@
   "scripts": {
     "test": "test",
     "heroku-prebuild": "npm install --prefix angular && npm install --prefix vue && npm install --prefix react",
-    "heroku-postbuild": "node build/build.js --prefix vue && npm build --prefix react" 
+    "heroku-postbuild": "npm build --prefix react" 
   },
   "repository": {
     "type": "git",
