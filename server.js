@@ -6,6 +6,8 @@ let express = require("express"),
     port    = process.env.PORT || 3000,
     mongodb_uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/comfram';
 
+    console.log("Mongo uri", mongodb_uri);
+
 let db = require('./db');
 
 //EXPRESS SETUP
