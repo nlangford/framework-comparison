@@ -6,7 +6,7 @@
   "start": "server.js",
   "scripts": {
     "test": "test",
-    "postinstall":"cd angular && npm install && ng build && cd ../vue && npm install && node build/build.js && cd ../react && npm install && npm build"
+    "heroku-prebuild":"cd angular && npm install && ng build && cd ../vue && npm install && node build/build.js && cd ../react && npm install && npm build"
   },
   "repository": {
     "type": "git",
