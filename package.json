@@ -6,7 +6,7 @@
   "start": "server.js",
   "scripts": {
     "test": "test",
-    "heroku-prebuild":"cd angular && npm install && ng build && cd ../vue && npm install && node build/build.js && cd ../react && npm install && npm build"
+    "heroku-prebuild":"npm install --prefix angular && ng build --prefix angular && npm install --prefix vue && node build/build.js --prefix vue && npm install --prefix react && npm build --prefix react"
   },
   "repository": {
     "type": "git",
