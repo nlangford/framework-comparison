@@ -3,7 +3,8 @@ let express = require("express"),
     app     = express(),
     bodyParser = require("body-parser"),
     ObjectId = require('mongodb').ObjectID,
-    port    = 3000 || process.env.PORT;
+    port    = process.env.PORT || 3000,
+    mongodb_uri = process.env.MONGODB_URI || 'mongodb://localhost:27017/comfram';
 
 let db = require('./db');
 
@@ -65,7 +66,7 @@ router.delete('/lists/:id', function(req, res){
 });
 
 //START SERVER
-db.connect('mongodb://localhost:27017/comfram', function(err) {
+db.connect(mongodb_uri, function(err) {
     if (err) {
         console.log('Unable to connect to Mongo.');
         process.exit(1);
