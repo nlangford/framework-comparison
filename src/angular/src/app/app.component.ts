@@ -16,4 +16,9 @@ export class AppComponent {
   loadLists() {
     this.appService.getLists().subscribe(data => {this.lists = data;});
   }
+
+  deleteList(objId){
+    let response = this.appService.deleteList(objId);
+    this.loadLists();
+  }
 }

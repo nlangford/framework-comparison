@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<div style=\"text-align:center\">\r\n  <h1>\r\n    Welcome to {{title}}!\r\n  </h1>\r\n</div>\r\n<div>\r\n  <li *ngFor=\"let list of lists\">\r\n    {{ list.name }}\r\n    {{ list.items }}\r\n  </li>\r\n</div>\r\n\r\n"
+module.exports = "<div class=\"row\">\r\n  <div  *ngFor=\"let list of lists\" class=\"col-xs-12 col-sm-6 col-md-4 col-lg-2\">\r\n    <div class=\"card\">\r\n      <div class=\"card-header\" style=\"text-transform:capitalize;font-weight: bold\">\r\n        {{ list.name }}\r\n      </div>\r\n      <ul class=\"list-group list-group-flush\">\r\n        <li *ngFor=\"let item of list.items\" class=\"list-group-item\">{{ item }}</li>\r\n      </ul>\r\n      <button class=\"btn btn-primary\" (click)=\"deleteList(list._id)\">Delete</button>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -59,6 +59,10 @@ var AppComponent = (function () {
     AppComponent.prototype.loadLists = function () {
         var _this = this;
         this.appService.getLists().subscribe(function (data) { _this.lists = data; });
+    };
+    AppComponent.prototype.deleteList = function (objId) {
+        var response = this.appService.deleteList(objId);
+        this.loadLists();
     };
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
@@ -142,9 +146,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AppService = (function () {
     function AppService(http) {
         this.http = http;
+        this.apiUrl = window.location.protocol + '//' + window.location.host + '/api/';
     }
     AppService.prototype.getLists = function () {
-        return this.http.get(window.location.protocol + "//" + window.location.host + "/api/lists").map(function (res) { return res.json(); });
+        return this.http.get(this.apiUrl + 'lists').map(function (res) { return res.json(); });
+    };
+    AppService.prototype.deleteList = function (objId) {
+        return this.http.delete(this.apiUrl + 'lists/' + objId).subscribe(function (ok) { console.log(ok); });
     };
     AppService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["w" /* Injectable */])(),
