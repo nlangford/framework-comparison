@@ -12,9 +12,9 @@ let db = require('./db');
 app.use(bodyParser.json());
 app.use('/api/', router);
 app.use(express.static('public'));
-app.use('/angular', express.static('angular/dist'));
-app.use('/react', express.static('react/build'));
-app.use('/vue', express.static('vue/dist'));
+app.use('/angular', express.static('build/angular'));
+app.use('/react', express.static('build/react'));
+app.use('/vue', express.static('build/vue'));
 
 
 //API
