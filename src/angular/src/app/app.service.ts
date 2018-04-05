@@ -10,7 +10,7 @@ export class AppService {
   ) { }
 
   getLists(){
-    return this.http.get(`http://localhost:3000/api/lists`).map((res:Response) => res.json());
+    return this.http.get(window.location.protocol + `//` + window.location.host + `/api/lists`).map((res:Response) => res.json());
   }
 
 }
