@@ -8,11 +8,11 @@
   <form>
       <div class="form-group">
         <label for="name">List Name</label>
-        <input [(ngModel)]="options.list.name" name="name" class="form-control" style="font-weight:bold;" required/>
+        <input [(ngModel)]="options.list.name" name="name" class="form-control" style="font-weight:bold;" placeholder="List Name" required/>
       </div>
       <div class="form-group" *ngFor="let item of options.list.items; let i = index;">
         <div class="input-group">
-          <input [(ngModel)]="options.list.items[i].name" name="list-item-{{ i }}" class="form-control" required/>
+          <input [(ngModel)]="options.list.items[i].name" name="list-item-{{ i }}" class="form-control" placeholder="List Item" required/>
           <div class="input-group-append">
               <button class="btn btn-outline-danger" id="remove-list-item-{{ i }}" (click)="options.list.items.splice(i, 1);">X</button>
           </div>

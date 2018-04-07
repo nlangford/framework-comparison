@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavComponent } from './nav/nav.component';
 import { AppService } from './app.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmModal } from './modal/confirm-modal/confirm-modal.component';
@@ -34,11 +35,11 @@ export class AppComponent {
     const modalRef = this.modal.open(ConfirmModal);
     modalRef.componentInstance.options = options;
 
-    modalRef.result.then(
-      () => {let response = this.appService.deleteList(id);this.loadLists();}
-    ).catch(
-      () => {console.log("Delete Cancelled")}
-    );
+    modalRef.result.then(() => {
+      let response = this.appService.deleteList(id);this.loadLists();
+    }).catch(() => {
+      console.log("Delete Cancelled")
+    });
   }
   
   editList(list){
@@ -55,7 +56,7 @@ export class AppComponent {
     modalRef.result.then(
       (data) => {
         let response = this.appService.updateList(data);
-        this.loadLists();
+        list = data;
         console.log(response);
       }
     ).catch(

@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\" style=\"margin-top:1rem;\">\r\n  <div class=\"row\">\r\n      <div *ngFor=\"let list of lists\" class=\"col-xs-12 col-sm-6 col-md-4 col-lg-2\">\r\n        <div class=\"card\">\r\n          <div class=\"card-header\" style=\"text-transform:capitalize;font-weight: bold\">\r\n            {{ list.name }}\r\n          </div>\r\n          <ul class=\"list-group list-group-flush\">\r\n            <li *ngFor=\"let item of list.items\" class=\"list-group-item\">{{ item.name }}</li>\r\n            <li class=\"list-group-item\">          \r\n                <button class=\"btn btn-primary\" (click)=\"editList(list)\">Edit</button>\r\n                <button class=\"btn btn-secondary\" (click)=\"deleteList(list._id)\">Delete</button>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n    </div>\r\n</div>"
+module.exports = "<app-nav></app-nav>\r\n<div class=\"container-fluid\" style=\"margin-top:1rem;\">\r\n  <div class=\"row\">\r\n      <div *ngFor=\"let list of lists\" class=\"col-xs-12 col-sm-6 col-md-4 col-lg-2\">\r\n        <div class=\"card\">\r\n          <div class=\"card-header\" style=\"text-transform:capitalize;font-weight: bold\">\r\n            {{ list.name }}\r\n          </div>\r\n          <ul class=\"list-group list-group-flush\">\r\n            <li *ngFor=\"let item of list.items\" class=\"list-group-item\">{{ item.name }}</li>\r\n            <li class=\"list-group-item\">          \r\n                <button class=\"btn btn-primary\" (click)=\"editList(list)\">Edit</button>\r\n                <button class=\"btn btn-secondary\" (click)=\"deleteList(list._id)\">Delete</button>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -77,7 +77,12 @@ var AppComponent = (function () {
         };
         var modalRef = this.modal.open(__WEBPACK_IMPORTED_MODULE_3__modal_confirm_modal_confirm_modal_component__["a" /* ConfirmModal */]);
         modalRef.componentInstance.options = options;
-        modalRef.result.then(function () { var response = _this.appService.deleteList(id); _this.loadLists(); }).catch(function () { console.log("Delete Cancelled"); });
+        modalRef.result.then(function () {
+            var response = _this.appService.deleteList(id);
+            _this.loadLists();
+        }).catch(function () {
+            console.log("Delete Cancelled");
+        });
     };
     AppComponent.prototype.editList = function (list) {
         var _this = this;
@@ -91,7 +96,7 @@ var AppComponent = (function () {
         modalRef.componentInstance.options = options;
         modalRef.result.then(function (data) {
             var response = _this.appService.updateList(data);
-            _this.loadLists();
+            list = data;
             console.log(response);
         }).catch(function () {
             console.log("Edit Cancelled");
@@ -127,12 +132,14 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_http__ = __webpack_require__("./node_modules/@angular/http/esm5/http.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modal_confirm_modal_confirm_modal_component__ = __webpack_require__("./src/app/modal/confirm-modal/confirm-modal.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modal_edit_modal_edit_modal_component__ = __webpack_require__("./src/app/modal/edit-modal/edit-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__nav_nav_component__ = __webpack_require__("./src/app/nav/nav.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -150,7 +157,8 @@ var AppModule = (function () {
             declarations: [
                 __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
                 __WEBPACK_IMPORTED_MODULE_7__modal_confirm_modal_confirm_modal_component__["a" /* ConfirmModal */],
-                __WEBPACK_IMPORTED_MODULE_8__modal_edit_modal_edit_modal_component__["a" /* EditModal */]
+                __WEBPACK_IMPORTED_MODULE_8__modal_edit_modal_edit_modal_component__["a" /* EditModal */],
+                __WEBPACK_IMPORTED_MODULE_9__nav_nav_component__["a" /* NavComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -206,6 +214,9 @@ var AppService = (function () {
     };
     AppService.prototype.updateList = function (obj) {
         return this.http.put(this.apiUrl + 'lists/', obj).subscribe(function (ok) { console.log(ok); });
+    };
+    AppService.prototype.addList = function (obj) {
+        return this.http.post(this.apiUrl + 'lists/', obj).subscribe(function (ok) { console.log(ok); });
     };
     AppService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["y" /* Injectable */])(),
@@ -268,7 +279,7 @@ var ConfirmModal = (function () {
 /***/ "./src/app/modal/edit-modal/edit-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-header\">\n  <h4 class=\"modal-title\">{{ options.header }}</h4>\n  <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"activeModal.dismiss('Cross click')\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"modal-body\">\n  <form>\n      <div class=\"form-group\">\n        <label for=\"name\">List Name</label>\n        <input [(ngModel)]=\"options.list.name\" name=\"name\" class=\"form-control\" style=\"font-weight:bold;\" required/>\n      </div>\n      <div class=\"form-group\" *ngFor=\"let item of options.list.items; let i = index;\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"options.list.items[i].name\" name=\"list-item-{{ i }}\" class=\"form-control\" required/>\n          <div class=\"input-group-append\">\n              <button class=\"btn btn-outline-danger\" id=\"remove-list-item-{{ i }}\" (click)=\"options.list.items.splice(i, 1);\">X</button>\n          </div>\n        </div>\n      </div>\n      <button class=\"btn btn-outline-primary form-control\" (click)=\"options.list.items.push({name:'', complete:false})\">+</button>\n  </form>\n</div>\n<div class=\"modal-footer\">\n  <button type=\"button\" class=\"btn btn-danger\" (click)=\"activeModal.close(options.list)\">{{ options.confirm }}</button>\n  <button type=\"button\" class=\"btn btn-outline-light\" (click)=\"activeModal.dismiss('Cancel')\">{{ options.cancel }}</button>\n</div>"
+module.exports = "<div class=\"modal-header\">\n  <h4 class=\"modal-title\">{{ options.header }}</h4>\n  <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"activeModal.dismiss('Cross click')\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"modal-body\">\n  <form>\n      <div class=\"form-group\">\n        <label for=\"name\">List Name</label>\n        <input [(ngModel)]=\"options.list.name\" name=\"name\" class=\"form-control\" style=\"font-weight:bold;\" placeholder=\"List Name\" required/>\n      </div>\n      <div class=\"form-group\" *ngFor=\"let item of options.list.items; let i = index;\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"options.list.items[i].name\" name=\"list-item-{{ i }}\" class=\"form-control\" placeholder=\"List Item\" required/>\n          <div class=\"input-group-append\">\n              <button class=\"btn btn-outline-danger\" id=\"remove-list-item-{{ i }}\" (click)=\"options.list.items.splice(i, 1);\">X</button>\n          </div>\n        </div>\n      </div>\n      <button class=\"btn btn-outline-primary form-control\" (click)=\"options.list.items.push({name:'', complete:false})\">+</button>\n  </form>\n</div>\n<div class=\"modal-footer\">\n  <button type=\"button\" class=\"btn btn-danger\" (click)=\"activeModal.close(options.list)\">{{ options.confirm }}</button>\n  <button type=\"button\" class=\"btn btn-outline-light\" (click)=\"activeModal.dismiss('Cancel')\">{{ options.cancel }}</button>\n</div>"
 
 /***/ }),
 
@@ -306,6 +317,84 @@ var EditModal = (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__ng_bootstrap_ng_bootstrap__["a" /* NgbActiveModal */]])
     ], EditModal);
     return EditModal;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/nav/nav.component.css":
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ "./src/app/nav/nav.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" href=\"#\">To Do Lists</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"angular\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n          <button class=\"btn btn-primary\" (click)=\"addList()\">Add List</button>\n        </li>\n    </ul>\n  </div>\n</nav>"
+
+/***/ }),
+
+/***/ "./src/app/nav/nav.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NavComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_component__ = __webpack_require__("./src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__ = __webpack_require__("./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modal_edit_modal_edit_modal_component__ = __webpack_require__("./src/app/modal/edit-modal/edit-modal.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_service__ = __webpack_require__("./src/app/app.service.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var NavComponent = (function () {
+    function NavComponent(app, appService, modal) {
+        this.app = app;
+        this.appService = appService;
+        this.modal = modal;
+    }
+    NavComponent.prototype.ngOnInit = function () {
+    };
+    NavComponent.prototype.addList = function () {
+        var _this = this;
+        var modalRef = this.modal.open(__WEBPACK_IMPORTED_MODULE_3__modal_edit_modal_edit_modal_component__["a" /* EditModal */]);
+        modalRef.componentInstance.options = {
+            heading: "Add new list",
+            list: { name: "", items: [{ name: "", completed: false }] },
+            confirm: "Add",
+            cancel: "Cancel"
+        };
+        modalRef.result.then(function (data) {
+            var response = _this.appService.addList(data);
+            console.log("response", response);
+            _this.app.lists.push(data);
+        }).catch(function (data) {
+            console.log("Add cancelled", data);
+        });
+    };
+    NavComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'app-nav',
+            template: __webpack_require__("./src/app/nav/nav.component.html"),
+            styles: [__webpack_require__("./src/app/nav/nav.component.css")]
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__app_component__["a" /* AppComponent */], __WEBPACK_IMPORTED_MODULE_4__app_service__["a" /* AppService */], __WEBPACK_IMPORTED_MODULE_2__ng_bootstrap_ng_bootstrap__["b" /* NgbModal */]])
+    ], NavComponent);
+    return NavComponent;
 }());
 
 
