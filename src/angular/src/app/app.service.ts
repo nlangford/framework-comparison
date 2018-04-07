@@ -18,5 +18,9 @@ export class AppService {
   deleteList(objId) {
     return this.http.delete(this.apiUrl + 'lists/' + objId).subscribe((ok)=>{console.log(ok)});
   }
+  
+  updateList(obj) {
+    return this.http.put(this.apiUrl + 'lists/', obj).subscribe((ok)=>{console.log(ok)});
+  }
 
 }

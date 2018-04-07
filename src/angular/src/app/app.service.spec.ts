@@ -12,8 +12,4 @@ describe('AppService', () => {
   it('should be created', inject([AppService], (service: AppService) => {
     expect(service).toBeTruthy();
   }));
-
-  it('should return all lists as an array', inject([AppService], (service: AppService) => {
-    expect(typeof(service.getLists())).toEqual('Array');
-  }));
 });

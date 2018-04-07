@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ options.header }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+      <div class="form-group">
+        <label for="name">List Name</label>
+        <input [(ngModel)]="options.list.name" name="name" class="form-control" style="font-weight:bold;" required/>
+      </div>
+      <div class="form-group" *ngFor="let item of options.list.items; let i = index;">
+        <div class="input-group">
+          <input [(ngModel)]="options.list.items[i].name" name="list-item-{{ i }}" class="form-control" required/>
+          <div class="input-group-append">
+              <button class="btn btn-outline-danger" id="remove-list-item-{{ i }}" (click)="options.list.items.splice(i, 1);">X</button>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-outline-primary form-control" (click)="options.list.items.push({name:'', complete:false})">+</button>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="activeModal.close(options.list)">{{ options.confirm }}</button>
+  <button type="button" class="btn btn-outline-light" (click)="activeModal.dismiss('Cancel')">{{ options.cancel }}</button>
+</div>
