@@ -22,5 +22,9 @@ export class AppService {
   updateList(obj) {
     return this.http.put(this.apiUrl + 'lists/', obj).subscribe((ok)=>{console.log(ok)});
   }
+  
+  addList(obj) {
+    return this.http.post(this.apiUrl + 'lists/', obj).subscribe((ok)=>{console.log(ok)});
+  }
 
 }

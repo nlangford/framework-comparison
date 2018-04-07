@@ -9,13 +9,15 @@ import { AppService } from './app.service';
 import { Http, HttpModule } from '@angular/http';
 import { ConfirmModal } from './modal/confirm-modal/confirm-modal.component';
 import { EditModal } from './modal/edit-modal/edit-modal.component';
+import { NavComponent } from './nav/nav.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ConfirmModal,
-    EditModal
+    EditModal,
+    NavComponent
   ],
   imports: [
     BrowserModule,
