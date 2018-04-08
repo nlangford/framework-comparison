@@ -65,4 +65,9 @@ export class AppComponent {
         this.loadLists();}
     );
   }
+
+  updateList(list){
+    let response = this.appService.updateList(list);
+    console.log(response);
+  }
 }

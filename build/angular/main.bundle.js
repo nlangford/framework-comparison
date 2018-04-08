@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<app-nav></app-nav>\r\n<div class=\"container-fluid\" style=\"margin-top:1rem;\">\r\n  <div class=\"row\">\r\n      <div *ngFor=\"let list of lists\" class=\"col-xs-12 col-sm-6 col-md-4 col-lg-2\">\r\n        <div class=\"card\">\r\n          <div class=\"card-header\" style=\"text-transform:capitalize;font-weight: bold\">\r\n            {{ list.name }}\r\n          </div>\r\n          <ul class=\"list-group list-group-flush\">\r\n            <li *ngFor=\"let item of list.items\" class=\"list-group-item\">{{ item.name }}</li>\r\n            <li class=\"list-group-item\">          \r\n                <button class=\"btn btn-primary\" (click)=\"editList(list)\">Edit</button>\r\n                <button class=\"btn btn-secondary\" (click)=\"deleteList(list._id)\">Delete</button>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </div>\r\n    </div>\r\n</div>"
+module.exports = "<app-nav></app-nav>\r\n<div class=\"container-fluid\" style=\"margin-top:1rem;\">\r\n  <div class=\"row\">\r\n    <div *ngFor=\"let list of lists\" class=\"col-xs-12 col-sm-6 col-md-4 col-lg-2\">\r\n      <div class=\"card\">\r\n        <div class=\"card-header\" style=\"text-transform:capitalize;font-weight: bold\">\r\n          {{ list.name }}\r\n        </div>\r\n        <ul class=\"list-group list-group-flush\">\r\n          <li *ngFor=\"let item of list.items\" class=\"list-group-item\">\r\n            <span [ngClass]=\"{'complete': item.completed}\">{{ item.name }}</span>\r\n            <input type=\"checkbox\" (change)=\"updateList(list)\" [(ngModel)]=\"item.completed\" class=\"float-right\" />\r\n          </li>\r\n          <li class=\"list-group-item\">\r\n            <button class=\"btn btn-primary\" (click)=\"editList(list)\">Edit</button>\r\n            <button class=\"btn btn-secondary\" (click)=\"deleteList(list._id)\">Delete</button>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
@@ -102,6 +102,10 @@ var AppComponent = (function () {
             console.log("Edit Cancelled");
             _this.loadLists();
         });
+    };
+    AppComponent.prototype.updateList = function (list) {
+        var response = this.appService.updateList(list);
+        console.log(response);
     };
     AppComponent = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
@@ -232,7 +236,7 @@ var AppService = (function () {
 /***/ "./src/app/modal/confirm-modal/confirm-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-header\">\n  <h4 class=\"modal-title\">{{ options.header }}</h4>\n  <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"activeModal.dismiss('Cross click')\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"modal-body\">\n  <p>{{ options.message }}</p>\n</div>\n<div class=\"modal-footer\">\n  <button type=\"button\" class=\"btn btn-danger\" (click)=\"activeModal.close('Confirm')\">{{options.confirm}}</button>\n  <button type=\"button\" class=\"btn btn-outline-light\" (click)=\"activeModal.dismiss('Cancel')\">{{options.cancel}}</button>\n</div>"
+module.exports = "<div class=\"modal-header\">\r\n  <h4 class=\"modal-title\">{{ options.header }}</h4>\r\n  <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"activeModal.dismiss('Cross click')\">\r\n    <span aria-hidden=\"true\">&times;</span>\r\n  </button>\r\n</div>\r\n<div class=\"modal-body\">\r\n  <p>{{ options.message }}</p>\r\n</div>\r\n<div class=\"modal-footer\">\r\n  <button type=\"button\" class=\"btn btn-danger\" (click)=\"activeModal.close('Confirm')\">{{options.confirm}}</button>\r\n  <button type=\"button\" class=\"btn btn-outline-light\" (click)=\"activeModal.dismiss('Cancel')\">{{options.cancel}}</button>\r\n</div>"
 
 /***/ }),
 
@@ -279,7 +283,7 @@ var ConfirmModal = (function () {
 /***/ "./src/app/modal/edit-modal/edit-modal.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"modal-header\">\n  <h4 class=\"modal-title\">{{ options.header }}</h4>\n  <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"activeModal.dismiss('Cross click')\">\n    <span aria-hidden=\"true\">&times;</span>\n  </button>\n</div>\n<div class=\"modal-body\">\n  <form>\n      <div class=\"form-group\">\n        <label for=\"name\">List Name</label>\n        <input [(ngModel)]=\"options.list.name\" name=\"name\" class=\"form-control\" style=\"font-weight:bold;\" placeholder=\"List Name\" required/>\n      </div>\n      <div class=\"form-group\" *ngFor=\"let item of options.list.items; let i = index;\">\n        <div class=\"input-group\">\n          <input [(ngModel)]=\"options.list.items[i].name\" name=\"list-item-{{ i }}\" class=\"form-control\" placeholder=\"List Item\" required/>\n          <div class=\"input-group-append\">\n              <button class=\"btn btn-outline-danger\" id=\"remove-list-item-{{ i }}\" (click)=\"options.list.items.splice(i, 1);\">X</button>\n          </div>\n        </div>\n      </div>\n      <button class=\"btn btn-outline-primary form-control\" (click)=\"options.list.items.push({name:'', complete:false})\">+</button>\n  </form>\n</div>\n<div class=\"modal-footer\">\n  <button type=\"button\" class=\"btn btn-danger\" (click)=\"activeModal.close(options.list)\">{{ options.confirm }}</button>\n  <button type=\"button\" class=\"btn btn-outline-light\" (click)=\"activeModal.dismiss('Cancel')\">{{ options.cancel }}</button>\n</div>"
+module.exports = "<div class=\"modal-header\">\r\n  <h4 class=\"modal-title\">{{ options.header }}</h4>\r\n  <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"activeModal.dismiss('Cross click')\">\r\n    <span aria-hidden=\"true\">&times;</span>\r\n  </button>\r\n</div>\r\n<div class=\"modal-body\">\r\n  <form>\r\n      <div class=\"form-group\">\r\n        <label for=\"name\">List Name</label>\r\n        <input [(ngModel)]=\"options.list.name\" name=\"name\" class=\"form-control\" style=\"font-weight:bold;\" placeholder=\"List Name\" required/>\r\n      </div>\r\n      <div class=\"form-group\" *ngFor=\"let item of options.list.items; let i = index;\">\r\n        <div class=\"input-group\">\r\n          <input [(ngModel)]=\"options.list.items[i].name\" name=\"list-item-{{ i }}\" class=\"form-control\" placeholder=\"List Item\" required/>\r\n          <div class=\"input-group-append\">\r\n              <button type=\"button\" class=\"btn btn-outline-danger\" id=\"remove-list-item-{{ i }}\" (click)=\"options.list.items.splice(i, 1);\" >X</button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <button type=\"button\" class=\"btn btn-outline-primary form-control\" (click)=\"options.list.items.push({name:'', complete:false})\">+</button>\r\n  </form>\r\n</div>\r\n<div class=\"modal-footer\">\r\n  <button type=\"button\" class=\"btn btn-danger\" (click)=\"activeModal.close(options.list)\">{{ options.confirm }}</button>\r\n  <button type=\"button\" class=\"btn btn-outline-light\" (click)=\"activeModal.dismiss('Cancel')\">{{ options.cancel }}</button>\r\n</div>"
 
 /***/ }),
 
@@ -333,7 +337,7 @@ module.exports = ""
 /***/ "./src/app/nav/nav.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" href=\"#\">To Do Lists</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\n    <ul class=\"navbar-nav mr-auto\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" href=\"angular\">Home <span class=\"sr-only\">(current)</span></a>\n      </li>\n      <li class=\"nav-item active\">\n          <button class=\"btn btn-primary\" (click)=\"addList()\">Add List</button>\n        </li>\n    </ul>\n  </div>\n</nav>"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\r\n  <a class=\"navbar-brand\" href=\"#\">To Do Lists</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n    <ul class=\"navbar-nav mr-auto\">\r\n      <li class=\"nav-item active\">\r\n        <a class=\"nav-link\" href=\"angular\">Home <span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n      <li class=\"nav-item active\">\r\n          <button class=\"btn btn-primary\" (click)=\"addList()\">Add List</button>\r\n        </li>\r\n    </ul>\r\n  </div>\r\n</nav>"
 
 /***/ }),
 
