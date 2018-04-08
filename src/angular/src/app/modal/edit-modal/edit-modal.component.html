@@ -14,11 +14,11 @@
         <div class="input-group">
           <input [(ngModel)]="options.list.items[i].name" name="list-item-{{ i }}" class="form-control" placeholder="List Item" required/>
           <div class="input-group-append">
-              <button class="btn btn-outline-danger" id="remove-list-item-{{ i }}" (click)="options.list.items.splice(i, 1);">X</button>
+              <button type="button" class="btn btn-outline-danger" id="remove-list-item-{{ i }}" (click)="options.list.items.splice(i, 1);">X</button>
           </div>
         </div>
       </div>
-      <button class="btn btn-outline-primary form-control" (click)="options.list.items.push({name:'', complete:false})">+</button>
+      <button type="button" class="btn btn-outline-primary form-control" (click)="options.list.items.push({name:'', complete:false})">+</button>
   </form>
 </div>
 <div class="modal-footer">

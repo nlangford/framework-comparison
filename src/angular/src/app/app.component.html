@@ -1,19 +1,22 @@
 <app-nav></app-nav>
 <div class="container-fluid" style="margin-top:1rem;">
   <div class="row">
-      <div *ngFor="let list of lists" class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
-        <div class="card">
-          <div class="card-header" style="text-transform:capitalize;font-weight: bold">
-            {{ list.name }}
-          </div>
-          <ul class="list-group list-group-flush">
-            <li *ngFor="let item of list.items" class="list-group-item">{{ item.name }}</li>
-            <li class="list-group-item">          
-                <button class="btn btn-primary" (click)="editList(list)">Edit</button>
-                <button class="btn btn-secondary" (click)="deleteList(list._id)">Delete</button>
-            </li>
-          </ul>
+    <div *ngFor="let list of lists" class="col-xs-12 col-sm-6 col-md-4 col-lg-2">
+      <div class="card">
+        <div class="card-header" style="text-transform:capitalize;font-weight: bold">
+          {{ list.name }}
         </div>
+        <ul class="list-group list-group-flush">
+          <li *ngFor="let item of list.items" class="list-group-item">
+            <span [ngClass]="{'complete': item.completed}">{{ item.name }}</span>
+            <input type="checkbox" (change)="updateList(list)" [(ngModel)]="item.completed" class="float-right" />
+          </li>
+          <li class="list-group-item">
+            <button class="btn btn-primary" (click)="editList(list)">Edit</button>
+            <button class="btn btn-secondary" (click)="deleteList(list._id)">Delete</button>
+          </li>
+        </ul>
       </div>
     </div>
+  </div>
 </div>

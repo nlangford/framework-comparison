@@ -4,7 +4,6 @@ webpackJsonp(["vendor"],{
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export ɵregisterLocaleData */
 /* unused harmony export NgLocaleLocalization */
 /* unused harmony export NgLocalization */
 /* unused harmony export registerLocaleData */
@@ -15,7 +14,6 @@ webpackJsonp(["vendor"],{
 /* unused harmony export FormatWidth */
 /* unused harmony export NumberSymbol */
 /* unused harmony export WeekDay */
-/* unused harmony export getCurrencySymbol */
 /* unused harmony export getLocaleDayPeriods */
 /* unused harmony export getLocaleDayNames */
 /* unused harmony export getLocaleMonthNames */
@@ -33,6 +31,7 @@ webpackJsonp(["vendor"],{
 /* unused harmony export getLocaleNumberFormat */
 /* unused harmony export getLocaleCurrencyName */
 /* unused harmony export getLocaleCurrencySymbol */
+/* unused harmony export CURRENCIES */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return parseCookieValue; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CommonModule; });
 /* unused harmony export DeprecatedI18NPipesModule */
@@ -91,8 +90,8 @@ webpackJsonp(["vendor"],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_tslib__ = __webpack_require__("./node_modules/tslib/tslib.es6.js");
 /**
- * @license Angular v5.2.9
- * (c) 2010-2018 Google, Inc. https://angular.io/
+ * @license Angular v5.0.2
+ * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 
@@ -132,7 +131,7 @@ webpackJsonp(["vendor"],{
  * \@stable
  * @abstract
  */
-var PlatformLocation = /** @class */ (function () {
+var PlatformLocation = (function () {
     function PlatformLocation() {
     }
     return PlatformLocation;
@@ -184,7 +183,7 @@ var LOCATION_INITIALIZED = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /
  * \@stable
  * @abstract
  */
-var LocationStrategy = /** @class */ (function () {
+var LocationStrategy = (function () {
     function LocationStrategy() {
     }
     return LocationStrategy;
@@ -250,7 +249,7 @@ var APP_BASE_HREF = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /* Injec
  * {\@example common/location/ts/path_location_component.ts region='LocationComponent'}
  * \@stable
  */
-var Location = /** @class */ (function () {
+var Location = (function () {
     function Location(platformStrategy) {
         var _this = this;
         /**
@@ -564,7 +563,7 @@ function _stripIndexHtml(url) {
  *
  * \@stable
  */
-var HashLocationStrategy = /** @class */ (function (_super) {
+var HashLocationStrategy = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_1_tslib__["b" /* __extends */])(HashLocationStrategy, _super);
     function HashLocationStrategy(_platformLocation, _baseHref) {
         var _this = _super.call(this) || this;
@@ -727,7 +726,7 @@ var HashLocationStrategy = /** @class */ (function (_super) {
  *
  * \@stable
  */
-var PathLocationStrategy = /** @class */ (function (_super) {
+var PathLocationStrategy = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_1_tslib__["b" /* __extends */])(PathLocationStrategy, _super);
     function PathLocationStrategy(_platformLocation, href) {
         var _this = _super.call(this) || this;
@@ -864,16 +863,7 @@ var PathLocationStrategy = /** @class */ (function (_super) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-// THIS CODE IS GENERATED - DO NOT MODIFY
-// See angular/tools/gulp-tasks/cldr/extract.js
-/**
- * \@internal
+ * \@experimental
  */
 var CURRENCIES = {
     'AOA': [, 'Kz'],
@@ -992,16 +982,6 @@ var CURRENCIES = {
  */
 // THIS CODE IS GENERATED - DO NOT MODIFY
 // See angular/tools/gulp-tasks/cldr/extract.js
-/**
- * @param {?} n
- * @return {?}
- */
-function plural(n) {
-    var /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
-    if (i === 1 && v === 0)
-        return 1;
-    return 5;
-}
 var localeEn = [
     'en',
     [
@@ -1036,19 +1016,18 @@ var localeEn = [
         '{1} \'at\' {0}',
     ],
     ['.', ',', ';', '%', '+', '-', 'E', '×', '‰', '∞', 'NaN', ':'],
-    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar', plural
+    ['#,##0.###', '#,##0%', '¤#,##0.00', '#E0'], '$', 'US Dollar',
+    function (n) {
+        var /** @type {?} */ i = Math.floor(Math.abs(n)), /** @type {?} */ v = n.toString().replace(/^[^.]*\.?/, '').length;
+        if (i === 1 && v === 0)
+            return 1;
+        return 5;
+    }
 ];
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * \@experimental i18n support is experimental.
@@ -1060,16 +1039,11 @@ var LOCALE_DATA = {};
  *
  * \@experimental i18n support is experimental.
  * @param {?} data
- * @param {?=} localeId
  * @param {?=} extraData
  * @return {?}
  */
-function registerLocaleData(data, localeId, extraData) {
-    if (typeof localeId !== 'string') {
-        extraData = localeId;
-        localeId = data[0 /* LocaleId */];
-    }
-    localeId = localeId.toLowerCase().replace(/_/g, '-');
+function registerLocaleData(data, extraData) {
+    var /** @type {?} */ localeId = data[0 /* LocaleId */].toLowerCase().replace(/_/g, '-');
     LOCALE_DATA[localeId] = data;
     if (extraData) {
         LOCALE_DATA[localeId][18 /* ExtraData */] = extraData;
@@ -1313,7 +1287,7 @@ function getLocaleWeekEndRange(locale) {
  */
 function getLocaleDateFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return getLastDefinedValue(data[10 /* DateFormat */], width);
+    return data[10 /* DateFormat */][width];
 }
 /**
  * Time format that depends on the locale.
@@ -1340,7 +1314,7 @@ function getLocaleDateFormat(locale, width) {
  */
 function getLocaleTimeFormat(locale, width) {
     var /** @type {?} */ data = findLocaleData(locale);
-    return getLastDefinedValue(data[11 /* TimeFormat */], width);
+    return data[11 /* TimeFormat */][width];
 }
 /**
  * Date-time format that depends on the locale.
@@ -1593,20 +1567,17 @@ function findLocaleData(locale) {
 }
 /**
  * Return the currency symbol for a given currency code, or the code if no symbol available
- * (e.g.: format narrow = $, format wide = US$, code = USD)
+ * (e.g.: $, US$, or USD)
  *
- * \@experimental i18n support is experimental.
+ * \@internal
  * @param {?} code
  * @param {?} format
  * @return {?}
  */
-function getCurrencySymbol(code, format) {
-    var /** @type {?} */ currency = CURRENCIES[code] || [];
-    var /** @type {?} */ symbolNarrow = currency[1];
-    if (format === 'narrow' && typeof symbolNarrow === 'string') {
-        return symbolNarrow;
-    }
-    return currency[0] || code;
+function findCurrencySymbol(code, format) {
+    var /** @type {?} */ currency = CURRENCIES[code] || {};
+    var /** @type {?} */ symbol = currency[0] || code;
+    return format === 'wide' ? symbol : currency[1] || symbol;
 }
 
 /**
@@ -1628,7 +1599,7 @@ var DEPRECATED_PLURAL_FN = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["z" /
  * \@experimental
  * @abstract
  */
-var NgLocalization = /** @class */ (function () {
+var NgLocalization = (function () {
     function NgLocalization() {
     }
     return NgLocalization;
@@ -1637,6 +1608,8 @@ var NgLocalization = /** @class */ (function () {
  * Returns the plural category for a given value.
  * - "=value" when the case exists,
  * - the plural category otherwise
+ *
+ * \@internal
  * @param {?} value
  * @param {?} cases
  * @param {?} ngLocalization
@@ -1662,7 +1635,7 @@ function getPluralCategory(value, cases, ngLocalization, locale) {
  *
  * \@experimental
  */
-var NgLocaleLocalization = /** @class */ (function (_super) {
+var NgLocaleLocalization = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_1_tslib__["b" /* __extends */])(NgLocaleLocalization, _super);
     function NgLocaleLocalization(locale, /** @deprecated from v5 */
         deprecatedPluralFn) {
@@ -2091,13 +2064,6 @@ function getPluralCase(locale, nLike) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @param {?} cookieStr
  * @param {?} name
  * @return {?}
@@ -2154,7 +2120,7 @@ function parseCookieValue(cookieStr, name) {
  *
  * \@stable
  */
-var NgClass = /** @class */ (function () {
+var NgClass = (function () {
     function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
         this._iterableDiffers = _iterableDiffers;
         this._keyValueDiffers = _keyValueDiffers;
@@ -2410,7 +2376,7 @@ var NgClass = /** @class */ (function () {
  *
  * \@experimental
  */
-var NgComponentOutlet = /** @class */ (function () {
+var NgComponentOutlet = (function () {
     function NgComponentOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
         this._componentRef = null;
@@ -2486,7 +2452,7 @@ var NgComponentOutlet = /** @class */ (function () {
 /**
  * \@stable
  */
-var NgForOfContext = /** @class */ (function () {
+var NgForOfContext = (function () {
     function NgForOfContext($implicit, ngForOf, index, count) {
         this.$implicit = $implicit;
         this.ngForOf = ngForOf;
@@ -2597,7 +2563,7 @@ var NgForOfContext = /** @class */ (function () {
  *
  * \@stable
  */
-var NgForOf = /** @class */ (function () {
+var NgForOf = (function () {
     function NgForOf(_viewContainer, _template, _differs) {
         this._viewContainer = _viewContainer;
         this._template = _template;
@@ -2746,7 +2712,7 @@ var NgForOf = /** @class */ (function () {
     };
     return NgForOf;
 }());
-var RecordViewTuple = /** @class */ (function () {
+var RecordViewTuple = (function () {
     function RecordViewTuple(record, view) {
         this.record = record;
         this.view = view;
@@ -2861,7 +2827,7 @@ function getTypeNameForDebugging(type) {
  *
  * \@stable
  */
-var NgIf = /** @class */ (function () {
+var NgIf = (function () {
     function NgIf(_viewContainer, templateRef) {
         this._viewContainer = _viewContainer;
         this._context = new NgIfContext();
@@ -2955,7 +2921,7 @@ var NgIf = /** @class */ (function () {
 /**
  * \@stable
  */
-var NgIfContext = /** @class */ (function () {
+var NgIfContext = (function () {
     function NgIfContext() {
         this.$implicit = null;
         this.ngIf = null;
@@ -2974,7 +2940,7 @@ var NgIfContext = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var SwitchView = /** @class */ (function () {
+var SwitchView = (function () {
     function SwitchView(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
         this._templateRef = _templateRef;
@@ -3059,7 +3025,7 @@ var SwitchView = /** @class */ (function () {
  *
  * \@stable
  */
-var NgSwitch = /** @class */ (function () {
+var NgSwitch = (function () {
     function NgSwitch() {
         this._defaultUsed = false;
         this._caseCount = 0;
@@ -3180,7 +3146,7 @@ var NgSwitch = /** @class */ (function () {
  *
  * \@stable
  */
-var NgSwitchCase = /** @class */ (function () {
+var NgSwitchCase = (function () {
     function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
         this.ngSwitch = ngSwitch;
         ngSwitch._addCase();
@@ -3230,7 +3196,7 @@ var NgSwitchCase = /** @class */ (function () {
  *
  * \@stable
  */
-var NgSwitchDefault = /** @class */ (function () {
+var NgSwitchDefault = (function () {
     function NgSwitchDefault(viewContainer, templateRef, ngSwitch) {
         ngSwitch._addDefault(new SwitchView(viewContainer, templateRef));
     }
@@ -3288,7 +3254,7 @@ var NgSwitchDefault = /** @class */ (function () {
  *
  * \@experimental
  */
-var NgPlural = /** @class */ (function () {
+var NgPlural = (function () {
     function NgPlural(_localization) {
         this._localization = _localization;
         this._caseViews = {};
@@ -3382,7 +3348,7 @@ var NgPlural = /** @class */ (function () {
  *
  * \@experimental
  */
-var NgPluralCase = /** @class */ (function () {
+var NgPluralCase = (function () {
     function NgPluralCase(value, template, viewContainer, ngPlural) {
         this.value = value;
         var /** @type {?} */ isANumber = !isNaN(Number(value));
@@ -3434,7 +3400,7 @@ var NgPluralCase = /** @class */ (function () {
  *
  * \@stable
  */
-var NgStyle = /** @class */ (function () {
+var NgStyle = (function () {
     function NgStyle(_differs, _ngEl, _renderer) {
         this._differs = _differs;
         this._ngEl = _ngEl;
@@ -3495,12 +3461,7 @@ var NgStyle = /** @class */ (function () {
     function (nameAndUnit, value) {
         var _a = nameAndUnit.split('.'), name = _a[0], unit = _a[1];
         value = value != null && unit ? "" + value + unit : value;
-        if (value != null) {
-            this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
-        }
-        else {
-            this._renderer.removeStyle(this._ngEl.nativeElement, name);
-        }
+        this._renderer.setStyle(this._ngEl.nativeElement, name, /** @type {?} */ (value));
     };
     NgStyle.decorators = [
         { type: __WEBPACK_IMPORTED_MODULE_0__angular_core__["s" /* Directive */], args: [{ selector: '[ngStyle]' },] },
@@ -3544,7 +3505,7 @@ var NgStyle = /** @class */ (function () {
  * `[ngTemplateOutletContext]` should be an object, the object's keys will be available for binding
  * by the local template `let` declarations.
  *
- * Note: using the key `$implicit` in the context object will set its value as default.
+ * Note: using the key `$implicit` in the context object will set it's value as default.
  *
  * ## Example
  *
@@ -3552,7 +3513,7 @@ var NgStyle = /** @class */ (function () {
  *
  * \@stable
  */
-var NgTemplateOutlet = /** @class */ (function () {
+var NgTemplateOutlet = (function () {
     function NgTemplateOutlet(_viewContainerRef) {
         this._viewContainerRef = _viewContainerRef;
     }
@@ -3663,13 +3624,6 @@ var NgTemplateOutlet = /** @class */ (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * A collection of Angular directives that are likely to be used in each and every Angular
@@ -4011,13 +3965,6 @@ function getDateTranslation(date, locale, name, width, form, extended) {
             return getLocaleDayPeriods(locale, form, /** @type {?} */ (width))[currentHours_1 < 12 ? 0 : 1];
         case TranslationType.Eras:
             return getLocaleEraNames(locale, /** @type {?} */ (width))[date.getFullYear() <= 0 ? 0 : 1];
-        default:
-            // This default case is not needed by TypeScript compiler, as the switch is exhaustive.
-            // However Closure Compiler does not understand that and reports an error in typed mode.
-            // The `throw new Error` below works around the problem, and the unexpected: never variable
-            // makes sure tsc still checks this code is unreachable.
-            var /** @type {?} */ unexpected = name;
-            throw new Error("unexpected translation type " + unexpected);
     }
 }
 /**
@@ -4489,7 +4436,7 @@ var ISO8601_DATE_REGEX = /^(\d{4})-?(\d\d)-?(\d\d)(?:T(\d\d)(?::?(\d\d)(?::?(\d\
  *
  * \@stable
  */
-var DatePipe = /** @class */ (function () {
+var DatePipe = (function () {
     function DatePipe(locale) {
         this.locale = locale;
     }
@@ -4515,7 +4462,6 @@ var DatePipe = /** @class */ (function () {
             value = value.trim();
         }
         var /** @type {?} */ date;
-        var /** @type {?} */ match;
         if (isDate$1(value)) {
             date = value;
         }
@@ -4535,14 +4481,17 @@ var DatePipe = /** @class */ (function () {
             var _a = value.split('-').map(function (val) { return +val; }), y = _a[0], m = _a[1], d = _a[2];
             date = new Date(y, m - 1, d);
         }
-        else if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
-            date = isoStringToDate(match);
-        }
         else {
             date = new Date(value);
         }
         if (!isDate$1(date)) {
-            throw invalidPipeArgumentError(DatePipe, value);
+            var /** @type {?} */ match = void 0;
+            if ((typeof value === 'string') && (match = value.match(ISO8601_DATE_REGEX))) {
+                date = isoStringToDate(match);
+            }
+            else {
+                throw invalidPipeArgumentError(DatePipe, value);
+            }
         }
         return formatDate(date, format, locale || this.locale, timezone);
     };
@@ -4564,10 +4513,8 @@ function isoStringToDate(match) {
     var /** @type {?} */ date = new Date(0);
     var /** @type {?} */ tzHour = 0;
     var /** @type {?} */ tzMin = 0;
-    // match[8] means that the string contains "Z" (UTC) or a timezone like "+01:00" or "+0100"
     var /** @type {?} */ dateSetter = match[8] ? date.setUTCFullYear : date.setFullYear;
     var /** @type {?} */ timeSetter = match[8] ? date.setUTCHours : date.setHours;
-    // if there is a timezone defined like "+01:00" or "+0100"
     if (match[9]) {
         tzHour = +(match[9] + match[10]);
         tzMin = +(match[9] + match[11]);
@@ -4592,7 +4539,14 @@ function isDate$1(value) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var NumberFormatter = /** @class */ (function () {
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var NumberFormatter = (function () {
     function NumberFormatter() {
     }
     /**
@@ -4833,7 +4787,7 @@ function dateFormatter(format, date, locale) {
 function partToTime(part) {
     return part === '\'\'' ? '\'' : part.replace(/(^'|'$)/g, '').replace(/''/g, '\'');
 }
-var DateFormatter = /** @class */ (function () {
+var DateFormatter = (function () {
     function DateFormatter() {
     }
     /**
@@ -4927,7 +4881,7 @@ var DateFormatter = /** @class */ (function () {
  *
  * \@stable
  */
-var DeprecatedDatePipe = /** @class */ (function () {
+var DeprecatedDatePipe = (function () {
     function DeprecatedDatePipe(_locale) {
         this._locale = _locale;
     }
@@ -5060,6 +5014,10 @@ function formatNumber$1(value, locale, style, digitsInfo, currency) {
     else {
         num = value;
     }
+    if (style === NumberFormatStyle.Percent) {
+        num = num * 100;
+    }
+    var /** @type {?} */ numStr = Math.abs(num) + '';
     var /** @type {?} */ pattern = parseNumberFormat(format, getLocaleNumberSymbol(locale, NumberSymbol.MinusSign));
     var /** @type {?} */ formattedText = '';
     var /** @type {?} */ isZero = false;
@@ -5067,10 +5025,7 @@ function formatNumber$1(value, locale, style, digitsInfo, currency) {
         formattedText = getLocaleNumberSymbol(locale, NumberSymbol.Infinity);
     }
     else {
-        var /** @type {?} */ parsedNumber = parseNumber(num);
-        if (style === NumberFormatStyle.Percent) {
-            parsedNumber = toPercent(parsedNumber);
-        }
+        var /** @type {?} */ parsedNumber = parseNumber(numStr);
         var /** @type {?} */ minInt = pattern.minInt;
         var /** @type {?} */ minFraction = pattern.minFrac;
         var /** @type {?} */ maxFraction = pattern.maxFrac;
@@ -5216,38 +5171,12 @@ function parseNumberFormat(format, minusSign) {
     return p;
 }
 /**
- * @param {?} parsedNumber
- * @return {?}
- */
-function toPercent(parsedNumber) {
-    // if the number is 0, don't do anything
-    if (parsedNumber.digits[0] === 0) {
-        return parsedNumber;
-    }
-    // Getting the current number of decimals
-    var /** @type {?} */ fractionLen = parsedNumber.digits.length - parsedNumber.integerLen;
-    if (parsedNumber.exponent) {
-        parsedNumber.exponent += 2;
-    }
-    else {
-        if (fractionLen === 0) {
-            parsedNumber.digits.push(0, 0);
-        }
-        else if (fractionLen === 1) {
-            parsedNumber.digits.push(0);
-        }
-        parsedNumber.integerLen += 2;
-    }
-    return parsedNumber;
-}
-/**
- * Parses a number.
+ * Parse a number (as a string)
  * Significant bits of this parse algorithm came from https://github.com/MikeMcl/big.js/
- * @param {?} num
+ * @param {?} numStr
  * @return {?}
  */
-function parseNumber(num) {
-    var /** @type {?} */ numStr = Math.abs(num) + '';
+function parseNumber(numStr) {
     var /** @type {?} */ exponent = 0, /** @type {?} */ digits, /** @type {?} */ integerLen;
     var /** @type {?} */ i, /** @type {?} */ j, /** @type {?} */ zeros;
     // Decimal point?
@@ -5347,24 +5276,11 @@ function roundNumber(parsedNumber, minFrac, maxFrac) {
     // Pad out with zeros to get the required fraction length
     for (; fractionLen < Math.max(0, fractionSize); fractionLen++)
         digits.push(0);
-    var /** @type {?} */ dropTrailingZeros = fractionSize !== 0;
-    // Minimal length = nb of decimals required + current nb of integers
-    // Any number besides that is optional and can be removed if it's a trailing 0
-    var /** @type {?} */ minLen = minFrac + parsedNumber.integerLen;
     // Do any carrying, e.g. a digit was rounded up to 10
     var /** @type {?} */ carry = digits.reduceRight(function (carry, d, i, digits) {
         d = d + carry;
-        digits[i] = d < 10 ? d : d - 10; // d % 10
-        if (dropTrailingZeros) {
-            // Do not keep meaningless fractional trailing zeros (e.g. 15.52000 --> 15.52)
-            if (digits[i] === 0 && i >= minLen) {
-                digits.pop();
-            }
-            else {
-                dropTrailingZeros = false;
-            }
-        }
-        return d >= 10 ? 1 : 0; // Math.floor(d / 10);
+        digits[i] = d % 10;
+        return Math.floor(d / 10);
     }, 0);
     if (carry) {
         digits.unshift(carry);
@@ -5477,7 +5393,7 @@ function formatNumber(pipe, locale, value, style, digits, currency, currencyAsSy
  *
  * \@stable
  */
-var DeprecatedDecimalPipe = /** @class */ (function () {
+var DeprecatedDecimalPipe = (function () {
     function DeprecatedDecimalPipe(_locale) {
         this._locale = _locale;
     }
@@ -5523,7 +5439,7 @@ var DeprecatedDecimalPipe = /** @class */ (function () {
  *
  * \@stable
  */
-var DeprecatedPercentPipe = /** @class */ (function () {
+var DeprecatedPercentPipe = (function () {
     function DeprecatedPercentPipe(_locale) {
         this._locale = _locale;
     }
@@ -5573,7 +5489,7 @@ var DeprecatedPercentPipe = /** @class */ (function () {
  *
  * \@stable
  */
-var DeprecatedCurrencyPipe = /** @class */ (function () {
+var DeprecatedCurrencyPipe = (function () {
     function DeprecatedCurrencyPipe(_locale) {
         this._locale = _locale;
     }
@@ -5611,13 +5527,6 @@ var DeprecatedCurrencyPipe = /** @class */ (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * A collection of deprecated i18n pipes that require intl api
  *
  * @deprecated from v5
@@ -5635,7 +5544,7 @@ var COMMON_DEPRECATED_I18N_PIPES = [DeprecatedDecimalPipe, DeprecatedPercentPipe
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var ObservableStrategy = /** @class */ (function () {
+var ObservableStrategy = (function () {
     function ObservableStrategy() {
     }
     /**
@@ -5671,7 +5580,7 @@ var ObservableStrategy = /** @class */ (function () {
     function (subscription) { subscription.unsubscribe(); };
     return ObservableStrategy;
 }());
-var PromiseStrategy = /** @class */ (function () {
+var PromiseStrategy = (function () {
     function PromiseStrategy() {
     }
     /**
@@ -5734,7 +5643,7 @@ var _observableStrategy = new ObservableStrategy();
  *
  * \@stable
  */
-var AsyncPipe = /** @class */ (function () {
+var AsyncPipe = (function () {
     function AsyncPipe(_ref) {
         this._ref = _ref;
         this._latestValue = null;
@@ -5868,7 +5777,7 @@ var AsyncPipe = /** @class */ (function () {
  *
  * \@stable
  */
-var LowerCasePipe = /** @class */ (function () {
+var LowerCasePipe = (function () {
     function LowerCasePipe() {
     }
     /**
@@ -5911,7 +5820,7 @@ function titleCaseWord(word) {
  *
  * \@stable
  */
-var TitleCasePipe = /** @class */ (function () {
+var TitleCasePipe = (function () {
     function TitleCasePipe() {
     }
     /**
@@ -5942,7 +5851,7 @@ var TitleCasePipe = /** @class */ (function () {
  *
  * \@stable
  */
-var UpperCasePipe = /** @class */ (function () {
+var UpperCasePipe = (function () {
     function UpperCasePipe() {
     }
     /**
@@ -6000,7 +5909,7 @@ var _INTERPOLATION_REGEXP = /#/g;
  *
  * \@experimental
  */
-var I18nPluralPipe = /** @class */ (function () {
+var I18nPluralPipe = (function () {
     function I18nPluralPipe(_localization) {
         this._localization = _localization;
     }
@@ -6063,7 +5972,7 @@ var I18nPluralPipe = /** @class */ (function () {
  *
  *  \@experimental
  */
-var I18nSelectPipe = /** @class */ (function () {
+var I18nSelectPipe = (function () {
     function I18nSelectPipe() {
     }
     /**
@@ -6122,7 +6031,7 @@ var I18nSelectPipe = /** @class */ (function () {
  *
  * \@stable
  */
-var JsonPipe = /** @class */ (function () {
+var JsonPipe = (function () {
     function JsonPipe() {
     }
     /**
@@ -6179,7 +6088,7 @@ var JsonPipe = /** @class */ (function () {
  *
  * \@stable
  */
-var DecimalPipe = /** @class */ (function () {
+var DecimalPipe = (function () {
     function DecimalPipe(_locale) {
         this._locale = _locale;
     }
@@ -6233,7 +6142,7 @@ var DecimalPipe = /** @class */ (function () {
  *
  * \@stable
  */
-var PercentPipe = /** @class */ (function () {
+var PercentPipe = (function () {
     function PercentPipe(_locale) {
         this._locale = _locale;
     }
@@ -6295,7 +6204,7 @@ var PercentPipe = /** @class */ (function () {
  *
  * \@stable
  */
-var CurrencyPipe = /** @class */ (function () {
+var CurrencyPipe = (function () {
     function CurrencyPipe(_locale) {
         this._locale = _locale;
     }
@@ -6328,7 +6237,7 @@ var CurrencyPipe = /** @class */ (function () {
         }
         var /** @type {?} */ currency = currencyCode || 'USD';
         if (display !== 'code') {
-            currency = getCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow');
+            currency = findCurrencySymbol(currency, display === 'symbol' ? 'wide' : 'narrow');
         }
         var _a = formatNumber$1(value, locale, NumberFormatStyle.Currency, digits, currency), str = _a.str, error = _a.error;
         if (error) {
@@ -6408,7 +6317,7 @@ function isEmpty(value) {
  *
  * \@stable
  */
-var SlicePipe = /** @class */ (function () {
+var SlicePipe = (function () {
     function SlicePipe() {
     }
     /**
@@ -6460,6 +6369,11 @@ var SlicePipe = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * @module
+ * @description
+ * This module provides a set of common Pipes.
+ */
+/**
  * A collection of Angular pipes that are likely to be used in each and every application.
  */
 var COMMON_PIPES = [
@@ -6493,7 +6407,7 @@ var COMMON_PIPES = [
  *
  * \@stable
  */
-var CommonModule = /** @class */ (function () {
+var CommonModule = (function () {
     function CommonModule() {
     }
     CommonModule.decorators = [
@@ -6515,7 +6429,7 @@ var ɵ0 = getPluralCase;
  *
  * @deprecated from v5
  */
-var DeprecatedI18NPipesModule = /** @class */ (function () {
+var DeprecatedI18NPipesModule = (function () {
     function DeprecatedI18NPipesModule() {
     }
     DeprecatedI18NPipesModule.decorators = [
@@ -6615,9 +6529,14 @@ function isPlatformWorkerUi(platformId) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+/**
  * \@stable
  */
-var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Version */]('5.2.9');
+var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Version */]('5.0.2');
 
 /**
  * @fileoverview added by tsickle
@@ -6777,15 +6696,12 @@ var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Version */
 /* unused harmony export mergeAnalyzedFiles */
 /* unused harmony export GeneratedFile */
 /* unused harmony export toTypeScript */
-/* unused harmony export formattedError */
-/* unused harmony export isFormattedError */
 /* unused harmony export StaticReflector */
 /* unused harmony export StaticSymbol */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return StaticSymbolCache; });
 /* unused harmony export ResolvedStaticSymbol */
 /* unused harmony export StaticSymbolResolver */
 /* unused harmony export unescapeIdentifier */
-/* unused harmony export unwrapResolvedMetadata */
 /* unused harmony export AotSummaryResolver */
 /* unused harmony export AstPath */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SummaryResolver; });
@@ -6895,8 +6811,8 @@ var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Version */
 /* unused harmony export removeSummaryDuplicates */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__("./node_modules/tslib/tslib.es6.js");
 /**
- * @license Angular v5.2.9
- * (c) 2010-2018 Google, Inc. https://angular.io/
+ * @license Angular v5.0.2
+ * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 
@@ -6905,18 +6821,6 @@ var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Version */
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-// Attention:
-// This file duplicates types and values from @angular/core
-// so that we are able to make @angular/compiler independent of @angular/core.
-// This is important to prevent a build cycle, as @angular/core needs to
-// be compiled with the compiler.
 /**
  * @record
  */
@@ -7216,13 +7120,6 @@ var core = Object.freeze({
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var DASH_CASE_REGEXP = /-+([a-z0-9])/g;
 /**
  * @param {?} input
@@ -7303,7 +7200,7 @@ function noUndefined(val) {
  * @record
  */
 
-var ValueTransformer = /** @class */ (function () {
+var ValueTransformer = (function () {
     function ValueTransformer() {
     }
     /**
@@ -7501,7 +7398,7 @@ function isPromise(obj) {
     // It's up to the caller to ensure that obj.then conforms to the spec
     return !!obj && typeof obj.then === 'function';
 }
-var Version = /** @class */ (function () {
+var Version = (function () {
     function Version(full) {
         this.full = full;
         var /** @type {?} */ splits = full.split('.');
@@ -7527,20 +7424,18 @@ var Version = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+/**
  * \@stable
  */
-var VERSION = new Version('5.2.9');
+var VERSION = new Version('5.0.2');
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * An Abstract Syntax Tree node representing part of a parsed Angular template.
@@ -7550,7 +7445,7 @@ var VERSION = new Version('5.2.9');
 /**
  * A segment of text within the template.
  */
-var TextAst = /** @class */ (function () {
+var TextAst = (function () {
     function TextAst(value, ngContentIndex, sourceSpan) {
         this.value = value;
         this.ngContentIndex = ngContentIndex;
@@ -7572,7 +7467,7 @@ var TextAst = /** @class */ (function () {
 /**
  * A bound expression within the text of a template.
  */
-var BoundTextAst = /** @class */ (function () {
+var BoundTextAst = (function () {
     function BoundTextAst(value, ngContentIndex, sourceSpan) {
         this.value = value;
         this.ngContentIndex = ngContentIndex;
@@ -7596,7 +7491,7 @@ var BoundTextAst = /** @class */ (function () {
 /**
  * A plain attribute on an element.
  */
-var AttrAst = /** @class */ (function () {
+var AttrAst = (function () {
     function AttrAst(name, value, sourceSpan) {
         this.name = name;
         this.value = value;
@@ -7619,7 +7514,7 @@ var AttrAst = /** @class */ (function () {
  * A binding for an element property (e.g. `[property]="expression"`) or an animation trigger (e.g.
  * `[\@trigger]="stateExp"`)
  */
-var BoundElementPropertyAst = /** @class */ (function () {
+var BoundElementPropertyAst = (function () {
     function BoundElementPropertyAst(name, type, securityContext, value, unit, sourceSpan) {
         this.name = name;
         this.type = type;
@@ -7648,7 +7543,7 @@ var BoundElementPropertyAst = /** @class */ (function () {
  * A binding for an element event (e.g. `(event)="handler()"`) or an animation trigger event (e.g.
  * `(\@trigger.phase)="callback($event)"`).
  */
-var BoundEventAst = /** @class */ (function () {
+var BoundEventAst = (function () {
     function BoundEventAst(name, target, phase, handler, sourceSpan) {
         this.name = name;
         this.target = target;
@@ -7699,7 +7594,7 @@ var BoundEventAst = /** @class */ (function () {
 /**
  * A reference declaration on an element (e.g. `let someName="expression"`).
  */
-var ReferenceAst = /** @class */ (function () {
+var ReferenceAst = (function () {
     function ReferenceAst(name, value, sourceSpan) {
         this.name = name;
         this.value = value;
@@ -7723,7 +7618,7 @@ var ReferenceAst = /** @class */ (function () {
 /**
  * A variable declaration on a <ng-template> (e.g. `var-someName="someLocalName"`).
  */
-var VariableAst = /** @class */ (function () {
+var VariableAst = (function () {
     function VariableAst(name, value, sourceSpan) {
         this.name = name;
         this.value = value;
@@ -7747,7 +7642,7 @@ var VariableAst = /** @class */ (function () {
 /**
  * An element declaration in a template.
  */
-var ElementAst = /** @class */ (function () {
+var ElementAst = (function () {
     function ElementAst(name, attrs, inputs, outputs, references, directives, providers, hasViewContainer, queryMatches, children, ngContentIndex, sourceSpan, endSourceSpan) {
         this.name = name;
         this.attrs = attrs;
@@ -7781,7 +7676,7 @@ var ElementAst = /** @class */ (function () {
 /**
  * A `<ng-template>` element included in an Angular template.
  */
-var EmbeddedTemplateAst = /** @class */ (function () {
+var EmbeddedTemplateAst = (function () {
     function EmbeddedTemplateAst(attrs, outputs, references, variables, directives, providers, hasViewContainer, queryMatches, children, ngContentIndex, sourceSpan) {
         this.attrs = attrs;
         this.outputs = outputs;
@@ -7813,7 +7708,7 @@ var EmbeddedTemplateAst = /** @class */ (function () {
 /**
  * A directive property with a bound value (e.g. `*ngIf="condition").
  */
-var BoundDirectivePropertyAst = /** @class */ (function () {
+var BoundDirectivePropertyAst = (function () {
     function BoundDirectivePropertyAst(directiveName, templateName, value, sourceSpan) {
         this.directiveName = directiveName;
         this.templateName = templateName;
@@ -7838,7 +7733,7 @@ var BoundDirectivePropertyAst = /** @class */ (function () {
 /**
  * A directive declared on an element.
  */
-var DirectiveAst = /** @class */ (function () {
+var DirectiveAst = (function () {
     function DirectiveAst(directive, inputs, hostProperties, hostEvents, contentQueryStartId, sourceSpan) {
         this.directive = directive;
         this.inputs = inputs;
@@ -7865,7 +7760,7 @@ var DirectiveAst = /** @class */ (function () {
 /**
  * A provider declared on an element
  */
-var ProviderAst = /** @class */ (function () {
+var ProviderAst = (function () {
     function ProviderAst(token, multiProvider, eager, providers, providerType, lifecycleHooks, sourceSpan) {
         this.token = token;
         this.multiProvider = multiProvider;
@@ -7907,7 +7802,7 @@ ProviderAstType[ProviderAstType.Builtin] = "Builtin";
 /**
  * Position where content is to be projected (instance of `<ng-content>` in a template).
  */
-var NgContentAst = /** @class */ (function () {
+var NgContentAst = (function () {
     function NgContentAst(index, ngContentIndex, sourceSpan) {
         this.index = index;
         this.ngContentIndex = ngContentIndex;
@@ -7969,7 +7864,7 @@ PropertyBindingType[PropertyBindingType.Animation] = "Animation";
  * A visitor that accepts each node but doesn't do anything. It is intended to be used
  * as the base class for a visitor that is only interested in a subset of the node types.
  */
-var NullTemplateVisitor = /** @class */ (function () {
+var NullTemplateVisitor = (function () {
     function NullTemplateVisitor() {
     }
     /**
@@ -8110,7 +8005,7 @@ var NullTemplateVisitor = /** @class */ (function () {
  * Base class that can be used to build a visitor that visits each node
  * in an template ast recursively.
  */
-var RecursiveTemplateAstVisitor = /** @class */ (function (_super) {
+var RecursiveTemplateAstVisitor = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(RecursiveTemplateAstVisitor, _super);
     function RecursiveTemplateAstVisitor() {
         return _super.call(this) || this;
@@ -8214,7 +8109,7 @@ function templateVisitAll(visitor, asts, context) {
     if (context === void 0) { context = null; }
     var /** @type {?} */ result = [];
     var /** @type {?} */ visit = visitor.visit ?
-        function (ast) { return ((visitor.visit))(ast, context) || ast.visit(visitor, context); } :
+        function (ast) { return /** @type {?} */ ((visitor.visit))(ast, context) || ast.visit(visitor, context); } :
         function (ast) { return ast.visit(visitor, context); };
     asts.forEach(function (ast) {
         var /** @type {?} */ astResult = visit(ast);
@@ -8229,14 +8124,7 @@ function templateVisitAll(visitor, asts, context) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var CompilerConfig = /** @class */ (function () {
+var CompilerConfig = (function () {
     function CompilerConfig(_a) {
         var _b = _a === void 0 ? {} : _a, _c = _b.defaultEncapsulation, defaultEncapsulation = _c === void 0 ? ViewEncapsulation.Emulated : _c, _d = _b.useJit, useJit = _d === void 0 ? true : _d, _e = _b.jitDevMode, jitDevMode = _e === void 0 ? false : _e, _f = _b.missingTranslation, missingTranslation = _f === void 0 ? null : _f, enableLegacyTemplate = _b.enableLegacyTemplate, preserveWhitespaces = _b.preserveWhitespaces, strictInjectionParameters = _b.strictInjectionParameters;
         this.defaultEncapsulation = defaultEncapsulation;
@@ -8264,18 +8152,11 @@ function preserveWhitespacesDefault(preserveWhitespacesOption, defaultSetting) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * A token representing the a reference to a static type.
  *
  * This token is unique for a filePath and name and can be used as a hash table key.
  */
-var StaticSymbol = /** @class */ (function () {
+var StaticSymbol = (function () {
     function StaticSymbol(filePath, name, members) {
         this.filePath = filePath;
         this.name = name;
@@ -8298,7 +8179,7 @@ var StaticSymbol = /** @class */ (function () {
  * A cache of static symbol used by the StaticReflector to return the same symbol for the
  * same symbol values.
  */
-var StaticSymbolCache = /** @class */ (function () {
+var StaticSymbolCache = (function () {
     function StaticSymbolCache() {
         this.cache = new Map();
     }
@@ -8492,7 +8373,7 @@ function tokenReference(token) {
 /**
  * Metadata about a stylesheet
  */
-var CompileStylesheetMetadata = /** @class */ (function () {
+var CompileStylesheetMetadata = (function () {
     function CompileStylesheetMetadata(_a) {
         var _b = _a === void 0 ? {} : _a, moduleUrl = _b.moduleUrl, styles = _b.styles, styleUrls = _b.styleUrls;
         this.moduleUrl = moduleUrl || null;
@@ -8509,7 +8390,7 @@ var CompileStylesheetMetadata = /** @class */ (function () {
 /**
  * Metadata regarding compilation of a template.
  */
-var CompileTemplateMetadata = /** @class */ (function () {
+var CompileTemplateMetadata = (function () {
     function CompileTemplateMetadata(_a) {
         var encapsulation = _a.encapsulation, template = _a.template, templateUrl = _a.templateUrl, htmlAst = _a.htmlAst, styles = _a.styles, styleUrls = _a.styleUrls, externalStylesheets = _a.externalStylesheets, animations = _a.animations, ngContentSelectors = _a.ngContentSelectors, interpolation = _a.interpolation, isInline = _a.isInline, preserveWhitespaces = _a.preserveWhitespaces;
         this.encapsulation = encapsulation;
@@ -8553,9 +8434,9 @@ var CompileTemplateMetadata = /** @class */ (function () {
 /**
  * Metadata regarding compilation of a directive.
  */
-var CompileDirectiveMetadata = /** @class */ (function () {
+var CompileDirectiveMetadata = (function () {
     function CompileDirectiveMetadata(_a) {
-        var isHost = _a.isHost, type = _a.type, isComponent = _a.isComponent, selector = _a.selector, exportAs = _a.exportAs, changeDetection = _a.changeDetection, inputs = _a.inputs, outputs = _a.outputs, hostListeners = _a.hostListeners, hostProperties = _a.hostProperties, hostAttributes = _a.hostAttributes, providers = _a.providers, viewProviders = _a.viewProviders, queries = _a.queries, guards = _a.guards, viewQueries = _a.viewQueries, entryComponents = _a.entryComponents, template = _a.template, componentViewType = _a.componentViewType, rendererType = _a.rendererType, componentFactory = _a.componentFactory;
+        var isHost = _a.isHost, type = _a.type, isComponent = _a.isComponent, selector = _a.selector, exportAs = _a.exportAs, changeDetection = _a.changeDetection, inputs = _a.inputs, outputs = _a.outputs, hostListeners = _a.hostListeners, hostProperties = _a.hostProperties, hostAttributes = _a.hostAttributes, providers = _a.providers, viewProviders = _a.viewProviders, queries = _a.queries, viewQueries = _a.viewQueries, entryComponents = _a.entryComponents, template = _a.template, componentViewType = _a.componentViewType, rendererType = _a.rendererType, componentFactory = _a.componentFactory;
         this.isHost = !!isHost;
         this.type = type;
         this.isComponent = isComponent;
@@ -8570,7 +8451,6 @@ var CompileDirectiveMetadata = /** @class */ (function () {
         this.providers = _normalizeArray(providers);
         this.viewProviders = _normalizeArray(viewProviders);
         this.queries = _normalizeArray(queries);
-        this.guards = guards;
         this.viewQueries = _normalizeArray(viewQueries);
         this.entryComponents = _normalizeArray(entryComponents);
         this.template = template;
@@ -8587,7 +8467,7 @@ var CompileDirectiveMetadata = /** @class */ (function () {
      * @return {?}
      */
     function (_a) {
-        var isHost = _a.isHost, type = _a.type, isComponent = _a.isComponent, selector = _a.selector, exportAs = _a.exportAs, changeDetection = _a.changeDetection, inputs = _a.inputs, outputs = _a.outputs, host = _a.host, providers = _a.providers, viewProviders = _a.viewProviders, queries = _a.queries, guards = _a.guards, viewQueries = _a.viewQueries, entryComponents = _a.entryComponents, template = _a.template, componentViewType = _a.componentViewType, rendererType = _a.rendererType, componentFactory = _a.componentFactory;
+        var isHost = _a.isHost, type = _a.type, isComponent = _a.isComponent, selector = _a.selector, exportAs = _a.exportAs, changeDetection = _a.changeDetection, inputs = _a.inputs, outputs = _a.outputs, host = _a.host, providers = _a.providers, viewProviders = _a.viewProviders, queries = _a.queries, viewQueries = _a.viewQueries, entryComponents = _a.entryComponents, template = _a.template, componentViewType = _a.componentViewType, rendererType = _a.rendererType, componentFactory = _a.componentFactory;
         var /** @type {?} */ hostListeners = {};
         var /** @type {?} */ hostProperties = {};
         var /** @type {?} */ hostAttributes = {};
@@ -8636,7 +8516,6 @@ var CompileDirectiveMetadata = /** @class */ (function () {
             providers: providers,
             viewProviders: viewProviders,
             queries: queries,
-            guards: guards,
             viewQueries: viewQueries,
             entryComponents: entryComponents,
             template: template,
@@ -8666,7 +8545,6 @@ var CompileDirectiveMetadata = /** @class */ (function () {
             providers: this.providers,
             viewProviders: this.viewProviders,
             queries: this.queries,
-            guards: this.guards,
             viewQueries: this.viewQueries,
             entryComponents: this.entryComponents,
             changeDetection: this.changeDetection,
@@ -8682,7 +8560,7 @@ var CompileDirectiveMetadata = /** @class */ (function () {
  * @record
  */
 
-var CompilePipeMetadata = /** @class */ (function () {
+var CompilePipeMetadata = (function () {
     function CompilePipeMetadata(_a) {
         var type = _a.type, name = _a.name, pure = _a.pure;
         this.type = type;
@@ -8712,7 +8590,7 @@ var CompilePipeMetadata = /** @class */ (function () {
 /**
  * Metadata regarding compilation of a module.
  */
-var CompileNgModuleMetadata = /** @class */ (function () {
+var CompileNgModuleMetadata = (function () {
     function CompileNgModuleMetadata(_a) {
         var type = _a.type, providers = _a.providers, declaredDirectives = _a.declaredDirectives, exportedDirectives = _a.exportedDirectives, declaredPipes = _a.declaredPipes, exportedPipes = _a.exportedPipes, entryComponents = _a.entryComponents, bootstrapComponents = _a.bootstrapComponents, importedModules = _a.importedModules, exportedModules = _a.exportedModules, schemas = _a.schemas, transitiveModule = _a.transitiveModule, id = _a.id;
         this.type = type || null;
@@ -8749,7 +8627,7 @@ var CompileNgModuleMetadata = /** @class */ (function () {
     };
     return CompileNgModuleMetadata;
 }());
-var TransitiveCompileNgModuleMetadata = /** @class */ (function () {
+var TransitiveCompileNgModuleMetadata = (function () {
     function TransitiveCompileNgModuleMetadata() {
         this.directivesSet = new Set();
         this.directives = [];
@@ -8871,7 +8749,7 @@ var TransitiveCompileNgModuleMetadata = /** @class */ (function () {
 function _normalizeArray(obj) {
     return obj || [];
 }
-var ProviderMeta = /** @class */ (function () {
+var ProviderMeta = (function () {
     function ProviderMeta(token, _a) {
         var useClass = _a.useClass, useValue = _a.useValue, useExisting = _a.useExisting, useFactory = _a.useFactory, deps = _a.deps, multi = _a.multi;
         this.token = token;
@@ -8958,13 +8836,6 @@ function templateJitUrl(ngModuleType, compMeta) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * A path is an ordered set of elements. Typically a path is to  a
  * particular offset in a source file. The head of the list is the top
  * most node. The tail is the node that contains the offset directly.
@@ -8981,7 +8852,7 @@ function templateJitUrl(ngModuleType, compMeta) {
  * 'c' at 9-10]` and the path the node at offset 1 would be
  * `['+' at 1-10, 'a' at 1-2]`.
  */
-var AstPath = /** @class */ (function () {
+var AstPath = (function () {
     function AstPath(path, position) {
         if (position === void 0) { position = -1; }
         this.path = path;
@@ -9082,7 +8953,7 @@ var AstPath = /** @class */ (function () {
  * @record
  */
 
-var Text = /** @class */ (function () {
+var Text = (function () {
     function Text(value, sourceSpan) {
         this.value = value;
         this.sourceSpan = sourceSpan;
@@ -9100,7 +8971,7 @@ var Text = /** @class */ (function () {
     function (visitor, context) { return visitor.visitText(this, context); };
     return Text;
 }());
-var Expansion = /** @class */ (function () {
+var Expansion = (function () {
     function Expansion(switchValue, type, cases, sourceSpan, switchValueSourceSpan) {
         this.switchValue = switchValue;
         this.type = type;
@@ -9121,7 +8992,7 @@ var Expansion = /** @class */ (function () {
     function (visitor, context) { return visitor.visitExpansion(this, context); };
     return Expansion;
 }());
-var ExpansionCase = /** @class */ (function () {
+var ExpansionCase = (function () {
     function ExpansionCase(value, expression, sourceSpan, valueSourceSpan, expSourceSpan) {
         this.value = value;
         this.expression = expression;
@@ -9142,7 +9013,7 @@ var ExpansionCase = /** @class */ (function () {
     function (visitor, context) { return visitor.visitExpansionCase(this, context); };
     return ExpansionCase;
 }());
-var Attribute$1 = /** @class */ (function () {
+var Attribute$1 = (function () {
     function Attribute(name, value, sourceSpan, valueSpan) {
         this.name = name;
         this.value = value;
@@ -9162,7 +9033,7 @@ var Attribute$1 = /** @class */ (function () {
     function (visitor, context) { return visitor.visitAttribute(this, context); };
     return Attribute;
 }());
-var Element = /** @class */ (function () {
+var Element = (function () {
     function Element(name, attrs, children, sourceSpan, startSourceSpan, endSourceSpan) {
         if (startSourceSpan === void 0) { startSourceSpan = null; }
         if (endSourceSpan === void 0) { endSourceSpan = null; }
@@ -9186,7 +9057,7 @@ var Element = /** @class */ (function () {
     function (visitor, context) { return visitor.visitElement(this, context); };
     return Element;
 }());
-var Comment = /** @class */ (function () {
+var Comment = (function () {
     function Comment(value, sourceSpan) {
         this.value = value;
         this.sourceSpan = sourceSpan;
@@ -9218,7 +9089,7 @@ function visitAll(visitor, nodes, context) {
     if (context === void 0) { context = null; }
     var /** @type {?} */ result = [];
     var /** @type {?} */ visit = visitor.visit ?
-        function (ast) { return ((visitor.visit))(ast, context) || ast.visit(visitor, context); } :
+        function (ast) { return /** @type {?} */ ((visitor.visit))(ast, context) || ast.visit(visitor, context); } :
         function (ast) { return ast.visit(visitor, context); };
     nodes.forEach(function (ast) {
         var /** @type {?} */ astResult = visit(ast);
@@ -9228,7 +9099,7 @@ function visitAll(visitor, nodes, context) {
     });
     return result;
 }
-var RecursiveVisitor = /** @class */ (function () {
+var RecursiveVisitor = (function () {
     function RecursiveVisitor() {
     }
     /**
@@ -9357,7 +9228,7 @@ function spanOf(ast) {
  */
 function findNode(nodes, position) {
     var /** @type {?} */ path = [];
-    var /** @type {?} */ visitor = new /** @class */ (function (_super) {
+    var /** @type {?} */ visitor = new (function (_super) {
         Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(class_1, _super);
         function class_1() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -9391,13 +9262,6 @@ function findNode(nodes, position) {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * @param {?} identifier
@@ -9456,7 +9320,7 @@ function assertInterpolationSymbols(identifier, value) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var InterpolationConfig = /** @class */ (function () {
+var InterpolationConfig = (function () {
     function InterpolationConfig(start, end) {
         this.start = start;
         this.end = end;
@@ -9484,14 +9348,7 @@ var DEFAULT_INTERPOLATION_CONFIG = new InterpolationConfig('{{', '}}');
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var StyleWithImports = /** @class */ (function () {
+var StyleWithImports = (function () {
     function StyleWithImports(style, styleUrls) {
         this.style = style;
         this.styleUrls = styleUrls;
@@ -9542,13 +9399,6 @@ var URL_WITH_SCHEMA_REGEXP = /^([^:/?#]+):/;
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /** @enum {number} */
 var TagContentType = {
@@ -9881,13 +9731,6 @@ NAMED_ENTITIES['ngsp'] = NGSP_UNICODE;
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var NG_CONTENT_SELECT_ATTR = 'select';
 var LINK_ELEMENT = 'link';
 var LINK_STYLE_REL_ATTR = 'rel';
@@ -9957,7 +9800,7 @@ PreparsedElementType[PreparsedElementType.STYLE] = "STYLE";
 PreparsedElementType[PreparsedElementType.STYLESHEET] = "STYLESHEET";
 PreparsedElementType[PreparsedElementType.SCRIPT] = "SCRIPT";
 PreparsedElementType[PreparsedElementType.OTHER] = "OTHER";
-var PreparsedElement = /** @class */ (function () {
+var PreparsedElement = (function () {
     function PreparsedElement(type, selectAttr, hrefAttr, nonBindable, projectAs) {
         this.type = type;
         this.selectAttr = selectAttr;
@@ -9993,7 +9836,7 @@ function normalizeNgContentSelect(selectAttr) {
  * @record
  */
 
-var DirectiveNormalizer = /** @class */ (function () {
+var DirectiveNormalizer = (function () {
     function DirectiveNormalizer(_resourceLoader, _urlResolver, _htmlParser, _config) {
         this._resourceLoader = _resourceLoader;
         this._urlResolver = _urlResolver;
@@ -10261,7 +10104,7 @@ var DirectiveNormalizer = /** @class */ (function () {
     };
     return DirectiveNormalizer;
 }());
-var TemplatePreparseVisitor = /** @class */ (function () {
+var TemplatePreparseVisitor = (function () {
     function TemplatePreparseVisitor() {
         this.ngContentSelectors = [];
         this.styles = [];
@@ -10374,20 +10217,13 @@ var TemplatePreparseVisitor = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var QUERY_METADATA_IDENTIFIERS = [
     createViewChild,
     createViewChildren,
     createContentChild,
     createContentChildren,
 ];
-var DirectiveResolver = /** @class */ (function () {
+var DirectiveResolver = (function () {
     function DirectiveResolver(_reflector) {
         this._reflector = _reflector;
     }
@@ -10420,8 +10256,7 @@ var DirectiveResolver = /** @class */ (function () {
             var /** @type {?} */ metadata = findLast(typeMetadata, isDirectiveMetadata);
             if (metadata) {
                 var /** @type {?} */ propertyMetadata = this._reflector.propMetadata(type);
-                var /** @type {?} */ guards = this._reflector.guards(type);
-                return this._mergeWithPropertyMetadata(metadata, propertyMetadata, guards, type);
+                return this._mergeWithPropertyMetadata(metadata, propertyMetadata, type);
             }
         }
         if (throwIfNotFound) {
@@ -10432,18 +10267,16 @@ var DirectiveResolver = /** @class */ (function () {
     /**
      * @param {?} dm
      * @param {?} propertyMetadata
-     * @param {?} guards
      * @param {?} directiveType
      * @return {?}
      */
     DirectiveResolver.prototype._mergeWithPropertyMetadata = /**
      * @param {?} dm
      * @param {?} propertyMetadata
-     * @param {?} guards
      * @param {?} directiveType
      * @return {?}
      */
-    function (dm, propertyMetadata, guards, directiveType) {
+    function (dm, propertyMetadata, directiveType) {
         var /** @type {?} */ inputs = [];
         var /** @type {?} */ outputs = [];
         var /** @type {?} */ host = {};
@@ -10493,7 +10326,7 @@ var DirectiveResolver = /** @class */ (function () {
                 queries[propName] = query;
             }
         });
-        return this._merge(dm, inputs, outputs, host, queries, guards, directiveType);
+        return this._merge(dm, inputs, outputs, host, queries, directiveType);
     };
     /**
      * @param {?} def
@@ -10514,13 +10347,11 @@ var DirectiveResolver = /** @class */ (function () {
      */
     function (bindings) {
         var /** @type {?} */ names = new Set();
-        var /** @type {?} */ publicNames = new Set();
         var /** @type {?} */ reversedResult = [];
         // go last to first to allow later entries to overwrite previous entries
         for (var /** @type {?} */ i = bindings.length - 1; i >= 0; i--) {
             var /** @type {?} */ binding = bindings[i];
             var /** @type {?} */ name_1 = this._extractPublicName(binding);
-            publicNames.add(name_1);
             if (!names.has(name_1)) {
                 names.add(name_1);
                 reversedResult.push(binding);
@@ -10534,7 +10365,6 @@ var DirectiveResolver = /** @class */ (function () {
      * @param {?} outputs
      * @param {?} host
      * @param {?} queries
-     * @param {?} guards
      * @param {?} directiveType
      * @return {?}
      */
@@ -10544,11 +10374,10 @@ var DirectiveResolver = /** @class */ (function () {
      * @param {?} outputs
      * @param {?} host
      * @param {?} queries
-     * @param {?} guards
      * @param {?} directiveType
      * @return {?}
      */
-    function (directive, inputs, outputs, host, queries, guards, directiveType) {
+    function (directive, inputs, outputs, host, queries, directiveType) {
         var /** @type {?} */ mergedInputs = this._dedupeBindings(directive.inputs ? directive.inputs.concat(inputs) : inputs);
         var /** @type {?} */ mergedOutputs = this._dedupeBindings(directive.outputs ? directive.outputs.concat(outputs) : outputs);
         var /** @type {?} */ mergedHost = directive.host ? Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __assign */])({}, directive.host, host) : host;
@@ -10585,7 +10414,7 @@ var DirectiveResolver = /** @class */ (function () {
                 host: mergedHost,
                 exportAs: directive.exportAs,
                 queries: mergedQueries,
-                providers: directive.providers, guards: guards
+                providers: directive.providers
             });
         }
     };
@@ -10740,7 +10569,7 @@ TokenType[TokenType.Operator] = "Operator";
 TokenType[TokenType.Number] = "Number";
 TokenType[TokenType.Error] = "Error";
 var KEYWORDS = ['var', 'let', 'as', 'null', 'undefined', 'true', 'false', 'if', 'else', 'this'];
-var Lexer = /** @class */ (function () {
+var Lexer = (function () {
     function Lexer() {
     }
     /**
@@ -10763,7 +10592,7 @@ var Lexer = /** @class */ (function () {
     };
     return Lexer;
 }());
-var Token = /** @class */ (function () {
+var Token = (function () {
     function Token(index, type, numValue, strValue) {
         this.index = index;
         this.type = type;
@@ -10965,7 +10794,7 @@ function newErrorToken(index, message) {
     return new Token(index, TokenType.Error, 0, message);
 }
 var EOF = new Token(-1, TokenType.Character, 0, '');
-var _Scanner = /** @class */ (function () {
+var _Scanner = (function () {
     function _Scanner(input) {
         this.input = input;
         this.peek = 0;
@@ -11339,14 +11168,7 @@ function parseIntAutoRadix(text) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var ParserError = /** @class */ (function () {
+var ParserError = (function () {
     function ParserError(message, input, errLocation, ctxLocation) {
         this.input = input;
         this.errLocation = errLocation;
@@ -11355,14 +11177,14 @@ var ParserError = /** @class */ (function () {
     }
     return ParserError;
 }());
-var ParseSpan = /** @class */ (function () {
+var ParseSpan = (function () {
     function ParseSpan(start, end) {
         this.start = start;
         this.end = end;
     }
     return ParseSpan;
 }());
-var AST = /** @class */ (function () {
+var AST = (function () {
     function AST(span) {
         this.span = span;
     }
@@ -11402,7 +11224,7 @@ var AST = /** @class */ (function () {
  * expression language. The `uninterpretedExpression` part of the quote is
  * therefore not interpreted by the Angular's own expression parser.
  */
-var Quote = /** @class */ (function (_super) {
+var Quote = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(Quote, _super);
     function Quote(span, prefix, uninterpretedExpression, location) {
         var _this = _super.call(this, span) || this;
@@ -11434,7 +11256,7 @@ var Quote = /** @class */ (function (_super) {
     function () { return 'Quote'; };
     return Quote;
 }(AST));
-var EmptyExpr = /** @class */ (function (_super) {
+var EmptyExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(EmptyExpr, _super);
     function EmptyExpr() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -11455,7 +11277,7 @@ var EmptyExpr = /** @class */ (function (_super) {
     };
     return EmptyExpr;
 }(AST));
-var ImplicitReceiver = /** @class */ (function (_super) {
+var ImplicitReceiver = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ImplicitReceiver, _super);
     function ImplicitReceiver() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -11479,7 +11301,7 @@ var ImplicitReceiver = /** @class */ (function (_super) {
 /**
  * Multiple expressions separated by a semicolon.
  */
-var Chain = /** @class */ (function (_super) {
+var Chain = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(Chain, _super);
     function Chain(span, expressions) {
         var _this = _super.call(this, span) || this;
@@ -11502,7 +11324,7 @@ var Chain = /** @class */ (function (_super) {
     };
     return Chain;
 }(AST));
-var Conditional = /** @class */ (function (_super) {
+var Conditional = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(Conditional, _super);
     function Conditional(span, condition, trueExp, falseExp) {
         var _this = _super.call(this, span) || this;
@@ -11527,7 +11349,7 @@ var Conditional = /** @class */ (function (_super) {
     };
     return Conditional;
 }(AST));
-var PropertyRead = /** @class */ (function (_super) {
+var PropertyRead = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(PropertyRead, _super);
     function PropertyRead(span, receiver, name) {
         var _this = _super.call(this, span) || this;
@@ -11551,7 +11373,7 @@ var PropertyRead = /** @class */ (function (_super) {
     };
     return PropertyRead;
 }(AST));
-var PropertyWrite = /** @class */ (function (_super) {
+var PropertyWrite = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(PropertyWrite, _super);
     function PropertyWrite(span, receiver, name, value) {
         var _this = _super.call(this, span) || this;
@@ -11576,7 +11398,7 @@ var PropertyWrite = /** @class */ (function (_super) {
     };
     return PropertyWrite;
 }(AST));
-var SafePropertyRead = /** @class */ (function (_super) {
+var SafePropertyRead = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(SafePropertyRead, _super);
     function SafePropertyRead(span, receiver, name) {
         var _this = _super.call(this, span) || this;
@@ -11600,7 +11422,7 @@ var SafePropertyRead = /** @class */ (function (_super) {
     };
     return SafePropertyRead;
 }(AST));
-var KeyedRead = /** @class */ (function (_super) {
+var KeyedRead = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(KeyedRead, _super);
     function KeyedRead(span, obj, key) {
         var _this = _super.call(this, span) || this;
@@ -11624,7 +11446,7 @@ var KeyedRead = /** @class */ (function (_super) {
     };
     return KeyedRead;
 }(AST));
-var KeyedWrite = /** @class */ (function (_super) {
+var KeyedWrite = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(KeyedWrite, _super);
     function KeyedWrite(span, obj, key, value) {
         var _this = _super.call(this, span) || this;
@@ -11649,7 +11471,7 @@ var KeyedWrite = /** @class */ (function (_super) {
     };
     return KeyedWrite;
 }(AST));
-var BindingPipe = /** @class */ (function (_super) {
+var BindingPipe = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(BindingPipe, _super);
     function BindingPipe(span, exp, name, args) {
         var _this = _super.call(this, span) || this;
@@ -11674,7 +11496,7 @@ var BindingPipe = /** @class */ (function (_super) {
     };
     return BindingPipe;
 }(AST));
-var LiteralPrimitive = /** @class */ (function (_super) {
+var LiteralPrimitive = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(LiteralPrimitive, _super);
     function LiteralPrimitive(span, value) {
         var _this = _super.call(this, span) || this;
@@ -11697,7 +11519,7 @@ var LiteralPrimitive = /** @class */ (function (_super) {
     };
     return LiteralPrimitive;
 }(AST));
-var LiteralArray = /** @class */ (function (_super) {
+var LiteralArray = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(LiteralArray, _super);
     function LiteralArray(span, expressions) {
         var _this = _super.call(this, span) || this;
@@ -11720,7 +11542,7 @@ var LiteralArray = /** @class */ (function (_super) {
     };
     return LiteralArray;
 }(AST));
-var LiteralMap = /** @class */ (function (_super) {
+var LiteralMap = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(LiteralMap, _super);
     function LiteralMap(span, keys, values) {
         var _this = _super.call(this, span) || this;
@@ -11744,7 +11566,7 @@ var LiteralMap = /** @class */ (function (_super) {
     };
     return LiteralMap;
 }(AST));
-var Interpolation = /** @class */ (function (_super) {
+var Interpolation = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(Interpolation, _super);
     function Interpolation(span, strings, expressions) {
         var _this = _super.call(this, span) || this;
@@ -11768,7 +11590,7 @@ var Interpolation = /** @class */ (function (_super) {
     };
     return Interpolation;
 }(AST));
-var Binary = /** @class */ (function (_super) {
+var Binary = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(Binary, _super);
     function Binary(span, operation, left, right) {
         var _this = _super.call(this, span) || this;
@@ -11793,7 +11615,7 @@ var Binary = /** @class */ (function (_super) {
     };
     return Binary;
 }(AST));
-var PrefixNot = /** @class */ (function (_super) {
+var PrefixNot = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(PrefixNot, _super);
     function PrefixNot(span, expression) {
         var _this = _super.call(this, span) || this;
@@ -11816,7 +11638,7 @@ var PrefixNot = /** @class */ (function (_super) {
     };
     return PrefixNot;
 }(AST));
-var NonNullAssert = /** @class */ (function (_super) {
+var NonNullAssert = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(NonNullAssert, _super);
     function NonNullAssert(span, expression) {
         var _this = _super.call(this, span) || this;
@@ -11839,7 +11661,7 @@ var NonNullAssert = /** @class */ (function (_super) {
     };
     return NonNullAssert;
 }(AST));
-var MethodCall = /** @class */ (function (_super) {
+var MethodCall = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(MethodCall, _super);
     function MethodCall(span, receiver, name, args) {
         var _this = _super.call(this, span) || this;
@@ -11864,7 +11686,7 @@ var MethodCall = /** @class */ (function (_super) {
     };
     return MethodCall;
 }(AST));
-var SafeMethodCall = /** @class */ (function (_super) {
+var SafeMethodCall = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(SafeMethodCall, _super);
     function SafeMethodCall(span, receiver, name, args) {
         var _this = _super.call(this, span) || this;
@@ -11889,7 +11711,7 @@ var SafeMethodCall = /** @class */ (function (_super) {
     };
     return SafeMethodCall;
 }(AST));
-var FunctionCall = /** @class */ (function (_super) {
+var FunctionCall = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FunctionCall, _super);
     function FunctionCall(span, target, args) {
         var _this = _super.call(this, span) || this;
@@ -11913,7 +11735,7 @@ var FunctionCall = /** @class */ (function (_super) {
     };
     return FunctionCall;
 }(AST));
-var ASTWithSource = /** @class */ (function (_super) {
+var ASTWithSource = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ASTWithSource, _super);
     function ASTWithSource(ast, source, location, errors) {
         var _this = _super.call(this, new ParseSpan(0, source == null ? 0 : source.length)) || this;
@@ -11946,7 +11768,7 @@ var ASTWithSource = /** @class */ (function (_super) {
     function () { return this.source + " in " + this.location; };
     return ASTWithSource;
 }(AST));
-var TemplateBinding = /** @class */ (function () {
+var TemplateBinding = (function () {
     function TemplateBinding(span, key, keyIsVar, name, expression) {
         this.span = span;
         this.key = key;
@@ -11960,7 +11782,7 @@ var TemplateBinding = /** @class */ (function () {
  * @record
  */
 
-var NullAstVisitor = /** @class */ (function () {
+var NullAstVisitor = (function () {
     function NullAstVisitor() {
     }
     /**
@@ -12185,7 +12007,7 @@ var NullAstVisitor = /** @class */ (function () {
     function (ast, context) { };
     return NullAstVisitor;
 }());
-var RecursiveAstVisitor = /** @class */ (function () {
+var RecursiveAstVisitor = (function () {
     function RecursiveAstVisitor() {
     }
     /**
@@ -12477,7 +12299,7 @@ var RecursiveAstVisitor = /** @class */ (function () {
     function (ast, context) { return null; };
     return RecursiveAstVisitor;
 }());
-var AstTransformer = /** @class */ (function () {
+var AstTransformer = (function () {
     function AstTransformer() {
     }
     /**
@@ -12921,7 +12743,7 @@ function visitAstChildren(ast, visitor, context) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var SplitInterpolation = /** @class */ (function () {
+var SplitInterpolation = (function () {
     function SplitInterpolation(strings, expressions, offsets) {
         this.strings = strings;
         this.expressions = expressions;
@@ -12929,7 +12751,7 @@ var SplitInterpolation = /** @class */ (function () {
     }
     return SplitInterpolation;
 }());
-var TemplateBindingParseResult = /** @class */ (function () {
+var TemplateBindingParseResult = (function () {
     function TemplateBindingParseResult(templateBindings, warnings, errors) {
         this.templateBindings = templateBindings;
         this.warnings = warnings;
@@ -12945,7 +12767,7 @@ function _createInterpolateRegExp(config) {
     var /** @type {?} */ pattern = escapeRegExp(config.start) + '([\\s\\S]*?)' + escapeRegExp(config.end);
     return new RegExp(pattern, 'g');
 }
-var Parser = /** @class */ (function () {
+var Parser = (function () {
     function Parser(_lexer) {
         this._lexer = _lexer;
         this.errors = [];
@@ -13261,7 +13083,7 @@ var Parser = /** @class */ (function () {
     };
     return Parser;
 }());
-var _ParseAST = /** @class */ (function () {
+var _ParseAST = (function () {
     function _ParseAST(input, location, tokens, inputLength, parseAction, errors, offset) {
         this.input = input;
         this.location = location;
@@ -13653,8 +13475,7 @@ var _ParseAST = /** @class */ (function () {
             switch (operator) {
                 case '+':
                     this.advance();
-                    result = this.parsePrefix();
-                    return new Binary(this.span(start), '-', result, new LiteralPrimitive(new ParseSpan(start, start), 0));
+                    return this.parsePrefix();
                 case '-':
                     this.advance();
                     result = this.parsePrefix();
@@ -14019,7 +13840,7 @@ var _ParseAST = /** @class */ (function () {
     };
     return _ParseAST;
 }());
-var SimpleExpressionChecker = /** @class */ (function () {
+var SimpleExpressionChecker = (function () {
     function SimpleExpressionChecker() {
         this.errors = [];
     }
@@ -14275,7 +14096,14 @@ var SimpleExpressionChecker = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var ParseLocation = /** @class */ (function () {
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var ParseLocation = (function () {
     function ParseLocation(file, offset, line, col) {
         this.file = file;
         this.offset = offset;
@@ -14383,14 +14211,14 @@ var ParseLocation = /** @class */ (function () {
     };
     return ParseLocation;
 }());
-var ParseSourceFile = /** @class */ (function () {
+var ParseSourceFile = (function () {
     function ParseSourceFile(content, url) {
         this.content = content;
         this.url = url;
     }
     return ParseSourceFile;
 }());
-var ParseSourceSpan = /** @class */ (function () {
+var ParseSourceSpan = (function () {
     function ParseSourceSpan(start, end, details) {
         if (details === void 0) { details = null; }
         this.start = start;
@@ -14415,7 +14243,7 @@ var ParseErrorLevel = {
 };
 ParseErrorLevel[ParseErrorLevel.WARNING] = "WARNING";
 ParseErrorLevel[ParseErrorLevel.ERROR] = "ERROR";
-var ParseError = /** @class */ (function () {
+var ParseError = (function () {
     function ParseError(span, msg, level) {
         if (level === void 0) { level = ParseErrorLevel.ERROR; }
         this.span = span;
@@ -14512,7 +14340,7 @@ TokenType$1[TokenType$1.EXPANSION_CASE_EXP_START] = "EXPANSION_CASE_EXP_START";
 TokenType$1[TokenType$1.EXPANSION_CASE_EXP_END] = "EXPANSION_CASE_EXP_END";
 TokenType$1[TokenType$1.EXPANSION_FORM_END] = "EXPANSION_FORM_END";
 TokenType$1[TokenType$1.EOF] = "EOF";
-var Token$1 = /** @class */ (function () {
+var Token$1 = (function () {
     function Token(type, parts, sourceSpan) {
         this.type = type;
         this.parts = parts;
@@ -14520,7 +14348,7 @@ var Token$1 = /** @class */ (function () {
     }
     return Token;
 }());
-var TokenError = /** @class */ (function (_super) {
+var TokenError = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(TokenError, _super);
     function TokenError(errorMsg, tokenType, span) {
         var _this = _super.call(this, span, errorMsg) || this;
@@ -14529,7 +14357,7 @@ var TokenError = /** @class */ (function (_super) {
     }
     return TokenError;
 }(ParseError));
-var TokenizeResult = /** @class */ (function () {
+var TokenizeResult = (function () {
     function TokenizeResult(tokens, errors) {
         this.tokens = tokens;
         this.errors = errors;
@@ -14566,13 +14394,13 @@ function _unexpectedCharacterErrorMsg(charCode) {
 function _unknownEntityErrorMsg(entitySrc) {
     return "Unknown entity \"" + entitySrc + "\" - use the \"&#<decimal>;\" or  \"&#x<hex>;\" syntax";
 }
-var _ControlFlowError = /** @class */ (function () {
+var _ControlFlowError = (function () {
     function _ControlFlowError(error) {
         this.error = error;
     }
     return _ControlFlowError;
 }());
-var _Tokenizer = /** @class */ (function () {
+var _Tokenizer = (function () {
     /**
      * @param _file The html source
      * @param _getTagDefinition
@@ -15524,7 +15352,7 @@ function mergeTextTokens(srcTokens) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var TreeError = /** @class */ (function (_super) {
+var TreeError = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(TreeError, _super);
     function TreeError(elementName, span, msg) {
         var _this = _super.call(this, span, msg) || this;
@@ -15548,14 +15376,14 @@ var TreeError = /** @class */ (function (_super) {
     };
     return TreeError;
 }(ParseError));
-var ParseTreeResult = /** @class */ (function () {
+var ParseTreeResult = (function () {
     function ParseTreeResult(rootNodes, errors) {
         this.rootNodes = rootNodes;
         this.errors = errors;
     }
     return ParseTreeResult;
 }());
-var Parser$1 = /** @class */ (function () {
+var Parser$1 = (function () {
     function Parser(getTagDefinition) {
         this.getTagDefinition = getTagDefinition;
     }
@@ -15582,7 +15410,7 @@ var Parser$1 = /** @class */ (function () {
     };
     return Parser;
 }());
-var _TreeBuilder = /** @class */ (function () {
+var _TreeBuilder = (function () {
     function _TreeBuilder(tokens, getTagDefinition) {
         this.tokens = tokens;
         this.getTagDefinition = getTagDefinition;
@@ -16100,7 +15928,7 @@ function decimalDigest(message) {
  *
  * \@internal
  */
-var _SerializerVisitor = /** @class */ (function () {
+var _SerializerVisitor = (function () {
     function _SerializerVisitor() {
     }
     /**
@@ -16202,7 +16030,7 @@ function serializeNodes(nodes) {
  *
  * \@internal
  */
-var _SerializerIgnoreIcuExpVisitor = /** @class */ (function (_super) {
+var _SerializerIgnoreIcuExpVisitor = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(_SerializerIgnoreIcuExpVisitor, _super);
     function _SerializerIgnoreIcuExpVisitor() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -16561,14 +16389,7 @@ function numberTimesBigInt(num, b) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var Message = /** @class */ (function () {
+var Message = (function () {
     /**
      * @param nodes message AST
      * @param placeholders maps placeholder names to static content
@@ -16607,7 +16428,7 @@ var Message = /** @class */ (function () {
  * @record
  */
 
-var Text$1 = /** @class */ (function () {
+var Text$1 = (function () {
     function Text(value, sourceSpan) {
         this.value = value;
         this.sourceSpan = sourceSpan;
@@ -16625,7 +16446,7 @@ var Text$1 = /** @class */ (function () {
     function (visitor, context) { return visitor.visitText(this, context); };
     return Text;
 }());
-var Container = /** @class */ (function () {
+var Container = (function () {
     function Container(children, sourceSpan) {
         this.children = children;
         this.sourceSpan = sourceSpan;
@@ -16643,7 +16464,7 @@ var Container = /** @class */ (function () {
     function (visitor, context) { return visitor.visitContainer(this, context); };
     return Container;
 }());
-var Icu = /** @class */ (function () {
+var Icu = (function () {
     function Icu(expression, type, cases, sourceSpan) {
         this.expression = expression;
         this.type = type;
@@ -16663,7 +16484,7 @@ var Icu = /** @class */ (function () {
     function (visitor, context) { return visitor.visitIcu(this, context); };
     return Icu;
 }());
-var TagPlaceholder = /** @class */ (function () {
+var TagPlaceholder = (function () {
     function TagPlaceholder(tag, attrs, startName, closeName, children, isVoid, sourceSpan) {
         this.tag = tag;
         this.attrs = attrs;
@@ -16686,7 +16507,7 @@ var TagPlaceholder = /** @class */ (function () {
     function (visitor, context) { return visitor.visitTagPlaceholder(this, context); };
     return TagPlaceholder;
 }());
-var Placeholder = /** @class */ (function () {
+var Placeholder = (function () {
     function Placeholder(value, name, sourceSpan) {
         this.value = value;
         this.name = name;
@@ -16705,7 +16526,7 @@ var Placeholder = /** @class */ (function () {
     function (visitor, context) { return visitor.visitPlaceholder(this, context); };
     return Placeholder;
 }());
-var IcuPlaceholder = /** @class */ (function () {
+var IcuPlaceholder = (function () {
     function IcuPlaceholder(value, name, sourceSpan) {
         this.value = value;
         this.name = name;
@@ -16728,7 +16549,7 @@ var IcuPlaceholder = /** @class */ (function () {
  * @record
  */
 
-var CloneVisitor = /** @class */ (function () {
+var CloneVisitor = (function () {
     function CloneVisitor() {
     }
     /**
@@ -16818,7 +16639,7 @@ var CloneVisitor = /** @class */ (function () {
     };
     return CloneVisitor;
 }());
-var RecurseVisitor = /** @class */ (function () {
+var RecurseVisitor = (function () {
     function RecurseVisitor() {
     }
     /**
@@ -16910,7 +16731,7 @@ var RecurseVisitor = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var HtmlTagDefinition = /** @class */ (function () {
+var HtmlTagDefinition = (function () {
     function HtmlTagDefinition(_a) {
         var _b = _a === void 0 ? {} : _a, closedByChildren = _b.closedByChildren, requiredParents = _b.requiredParents, implicitNamespacePrefix = _b.implicitNamespacePrefix, _c = _b.contentType, contentType = _c === void 0 ? TagContentType.PARSABLE_DATA : _c, _d = _b.closedByParent, closedByParent = _d === void 0 ? false : _d, _e = _b.isVoid, isVoid = _e === void 0 ? false : _e, _f = _b.ignoreFirstLf, ignoreFirstLf = _f === void 0 ? false : _f;
         var _this = this;
@@ -17073,8 +16894,10 @@ var TAG_TO_PLACEHOLDER_NAMES = {
  * Creates unique names for placeholder with different content.
  *
  * Returns the same placeholder name when the content is identical.
+ *
+ * \@internal
  */
-var PlaceholderRegistry = /** @class */ (function () {
+var PlaceholderRegistry = (function () {
     function PlaceholderRegistry() {
         this._placeHolderNameCounts = {};
         this._signatureToName = {};
@@ -17223,7 +17046,7 @@ function createI18nMessageFactory(interpolationConfig) {
         return visitor.toI18nMessage(nodes, meaning, description, id);
     };
 }
-var _I18nVisitor = /** @class */ (function () {
+var _I18nVisitor = (function () {
     function _I18nVisitor(_expressionParser, _interpolationConfig) {
         this._expressionParser = _expressionParser;
         this._interpolationConfig = _interpolationConfig;
@@ -17429,7 +17252,7 @@ function _extractPlaceholderName(input) {
 /**
  * An i18n error.
  */
-var I18nError = /** @class */ (function (_super) {
+var I18nError = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(I18nError, _super);
     function I18nError(span, msg) {
         return _super.call(this, span, msg) || this;
@@ -17478,7 +17301,7 @@ function mergeTranslations(nodes, translations, interpolationConfig, implicitTag
     var /** @type {?} */ visitor = new _Visitor(implicitTags, implicitAttrs);
     return visitor.merge(nodes, translations, interpolationConfig);
 }
-var ExtractionResult = /** @class */ (function () {
+var ExtractionResult = (function () {
     function ExtractionResult(messages, errors) {
         this.messages = messages;
         this.errors = errors;
@@ -17499,7 +17322,7 @@ _VisitorMode[_VisitorMode.Merge] = "Merge";
  *
  * \@internal
  */
-var _Visitor = /** @class */ (function () {
+var _Visitor = (function () {
     function _Visitor(_implicitTags, _implicitAttrs) {
         this._implicitTags = _implicitTags;
         this._implicitAttrs = _implicitAttrs;
@@ -18067,7 +17890,7 @@ function _parseMessageMeta(i18n) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var XmlTagDefinition = /** @class */ (function () {
+var XmlTagDefinition = (function () {
     function XmlTagDefinition() {
         this.closedByParent = false;
         this.contentType = TagContentType.PARSABLE_DATA;
@@ -18115,7 +17938,7 @@ function getXmlTagDefinition(tagName) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var XmlParser = /** @class */ (function (_super) {
+var XmlParser = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(XmlParser, _super);
     function XmlParser() {
         return _super.call(this, getXmlTagDefinition) || this;
@@ -18153,7 +17976,7 @@ var XmlParser = /** @class */ (function (_super) {
 /**
  * @abstract
  */
-var Serializer = /** @class */ (function () {
+var Serializer = (function () {
     function Serializer() {
     }
     // Creates a name mapper, see `PlaceholderMapper`
@@ -18180,7 +18003,7 @@ var Serializer = /** @class */ (function () {
 /**
  * A simple mapper that take a function to transform an internal name to a public name
  */
-var SimplePlaceholderMapper = /** @class */ (function (_super) {
+var SimplePlaceholderMapper = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(SimplePlaceholderMapper, _super);
     // create a mapping from the message
     function SimplePlaceholderMapper(message, mapName) {
@@ -18300,17 +18123,10 @@ var SimplePlaceholderMapper = /** @class */ (function (_super) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @record
  */
 
-var _Visitor$1 = /** @class */ (function () {
+var _Visitor$1 = (function () {
     function _Visitor() {
     }
     /**
@@ -18387,7 +18203,7 @@ function serialize(nodes) {
  * @record
  */
 
-var Declaration = /** @class */ (function () {
+var Declaration = (function () {
     function Declaration(unescapedAttrs) {
         var _this = this;
         this.attrs = {};
@@ -18406,7 +18222,7 @@ var Declaration = /** @class */ (function () {
     function (visitor) { return visitor.visitDeclaration(this); };
     return Declaration;
 }());
-var Doctype = /** @class */ (function () {
+var Doctype = (function () {
     function Doctype(rootTag, dtd) {
         this.rootTag = rootTag;
         this.dtd = dtd;
@@ -18422,7 +18238,7 @@ var Doctype = /** @class */ (function () {
     function (visitor) { return visitor.visitDoctype(this); };
     return Doctype;
 }());
-var Tag = /** @class */ (function () {
+var Tag = (function () {
     function Tag(name, unescapedAttrs, children) {
         if (unescapedAttrs === void 0) { unescapedAttrs = {}; }
         if (children === void 0) { children = []; }
@@ -18445,7 +18261,7 @@ var Tag = /** @class */ (function () {
     function (visitor) { return visitor.visitTag(this); };
     return Tag;
 }());
-var Text$2 = /** @class */ (function () {
+var Text$2 = (function () {
     function Text(unescapedValue) {
         this.value = _escapeXml(unescapedValue);
     }
@@ -18460,7 +18276,7 @@ var Text$2 = /** @class */ (function () {
     function (visitor) { return visitor.visitText(this); };
     return Text;
 }());
-var CR = /** @class */ (function (_super) {
+var CR = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(CR, _super);
     function CR(ws) {
         if (ws === void 0) { ws = 0; }
@@ -18499,15 +18315,13 @@ var _XMLNS = 'urn:oasis:names:tc:xliff:document:1.2';
 // TODO(vicb): make this a param (s/_/-/)
 var _DEFAULT_SOURCE_LANG = 'en';
 var _PLACEHOLDER_TAG = 'x';
-var _MARKER_TAG = 'mrk';
 var _FILE_TAG = 'file';
 var _SOURCE_TAG = 'source';
-var _SEGMENT_SOURCE_TAG = 'seg-source';
 var _TARGET_TAG = 'target';
 var _UNIT_TAG = 'trans-unit';
 var _CONTEXT_GROUP_TAG = 'context-group';
 var _CONTEXT_TAG = 'context';
-var Xliff = /** @class */ (function (_super) {
+var Xliff = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(Xliff, _super);
     function Xliff() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -18593,7 +18407,7 @@ var Xliff = /** @class */ (function (_super) {
     function (message) { return digest(message); };
     return Xliff;
 }(Serializer));
-var _WriteVisitor = /** @class */ (function () {
+var _WriteVisitor = (function () {
     function _WriteVisitor() {
     }
     /**
@@ -18703,7 +18517,7 @@ var _WriteVisitor = /** @class */ (function () {
     };
     return _WriteVisitor;
 }());
-var XliffParser = /** @class */ (function () {
+var XliffParser = (function () {
     function XliffParser() {
         this._locale = null;
     }
@@ -18763,9 +18577,8 @@ var XliffParser = /** @class */ (function () {
                     }
                 }
                 break;
-            // ignore those tags
             case _SOURCE_TAG:
-            case _SEGMENT_SOURCE_TAG:
+                // ignore source message
                 break;
             case _TARGET_TAG:
                 var /** @type {?} */ innerTextStart = /** @type {?} */ ((element.startSourceSpan)).end.offset;
@@ -18857,7 +18670,7 @@ var XliffParser = /** @class */ (function () {
     };
     return XliffParser;
 }());
-var XmlToI18n = /** @class */ (function () {
+var XmlToI18n = (function () {
     function XmlToI18n() {
     }
     /**
@@ -18874,7 +18687,8 @@ var XmlToI18n = /** @class */ (function () {
         var /** @type {?} */ xmlIcu = new XmlParser().parse(message, url, true);
         this._errors = xmlIcu.errors;
         var /** @type {?} */ i18nNodes = this._errors.length > 0 || xmlIcu.rootNodes.length == 0 ?
-            [] : [].concat.apply([], visitAll(this, xmlIcu.rootNodes));
+            [] :
+            visitAll(this, xmlIcu.rootNodes);
         return {
             i18nNodes: i18nNodes,
             errors: this._errors,
@@ -18908,12 +18722,10 @@ var XmlToI18n = /** @class */ (function () {
                 return new Placeholder('', nameAttr.value, /** @type {?} */ ((el.sourceSpan)));
             }
             this._addError(el, "<" + _PLACEHOLDER_TAG + "> misses the \"id\" attribute");
-            return null;
         }
-        if (el.name === _MARKER_TAG) {
-            return [].concat.apply([], visitAll(this, el.children));
+        else {
+            this._addError(el, "Unexpected tag");
         }
-        this._addError(el, "Unexpected tag");
         return null;
     };
     /**
@@ -19018,12 +18830,11 @@ var _XMLNS$1 = 'urn:oasis:names:tc:xliff:document:2.0';
 var _DEFAULT_SOURCE_LANG$1 = 'en';
 var _PLACEHOLDER_TAG$1 = 'ph';
 var _PLACEHOLDER_SPANNING_TAG = 'pc';
-var _MARKER_TAG$1 = 'mrk';
 var _XLIFF_TAG = 'xliff';
 var _SOURCE_TAG$1 = 'source';
 var _TARGET_TAG$1 = 'target';
 var _UNIT_TAG$1 = 'unit';
-var Xliff2 = /** @class */ (function (_super) {
+var Xliff2 = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(Xliff2, _super);
     function Xliff2() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -19108,7 +18919,7 @@ var Xliff2 = /** @class */ (function (_super) {
     function (message) { return decimalDigest(message); };
     return Xliff2;
 }(Serializer));
-var _WriteVisitor$1 = /** @class */ (function () {
+var _WriteVisitor$1 = (function () {
     function _WriteVisitor() {
     }
     /**
@@ -19244,7 +19055,7 @@ var _WriteVisitor$1 = /** @class */ (function () {
     };
     return _WriteVisitor;
 }());
-var Xliff2Parser = /** @class */ (function () {
+var Xliff2Parser = (function () {
     function Xliff2Parser() {
         this._locale = null;
     }
@@ -19404,7 +19215,7 @@ var Xliff2Parser = /** @class */ (function () {
     };
     return Xliff2Parser;
 }());
-var XmlToI18n$1 = /** @class */ (function () {
+var XmlToI18n$1 = (function () {
     function XmlToI18n() {
     }
     /**
@@ -19474,8 +19285,6 @@ var XmlToI18n$1 = /** @class */ (function () {
                     return nodes.concat.apply(nodes, [new Placeholder('', startId, el.sourceSpan)].concat(el.children.map(function (node) { return node.visit(_this, null); }), [new Placeholder('', endId, el.sourceSpan)]));
                 }
                 break;
-            case _MARKER_TAG$1:
-                return [].concat.apply([], visitAll(this, el.children));
             default:
                 this._addError(el, "Unexpected tag");
         }
@@ -19588,7 +19397,7 @@ var _PLACEHOLDER_TAG$2 = 'ph';
 var _EXEMPLE_TAG = 'ex';
 var _SOURCE_TAG$2 = 'source';
 var _DOCTYPE = "<!ELEMENT messagebundle (msg)*>\n<!ATTLIST messagebundle class CDATA #IMPLIED>\n\n<!ELEMENT msg (#PCDATA|ph|source)*>\n<!ATTLIST msg id CDATA #IMPLIED>\n<!ATTLIST msg seq CDATA #IMPLIED>\n<!ATTLIST msg name CDATA #IMPLIED>\n<!ATTLIST msg desc CDATA #IMPLIED>\n<!ATTLIST msg meaning CDATA #IMPLIED>\n<!ATTLIST msg obsolete (obsolete) #IMPLIED>\n<!ATTLIST msg xml:space (default|preserve) \"default\">\n<!ATTLIST msg is_hidden CDATA #IMPLIED>\n\n<!ELEMENT source (#PCDATA)>\n\n<!ELEMENT ph (#PCDATA|ex)*>\n<!ATTLIST ph name CDATA #REQUIRED>\n\n<!ELEMENT ex (#PCDATA)>";
-var Xmb = /** @class */ (function (_super) {
+var Xmb = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(Xmb, _super);
     function Xmb() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -19668,7 +19477,7 @@ var Xmb = /** @class */ (function (_super) {
     };
     return Xmb;
 }(Serializer));
-var _Visitor$2 = /** @class */ (function () {
+var _Visitor$2 = (function () {
     function _Visitor() {
     }
     /**
@@ -19789,7 +19598,7 @@ var _Visitor$2 = /** @class */ (function () {
 function digest$1(message) {
     return decimalDigest(message);
 }
-var ExampleVisitor = /** @class */ (function () {
+var ExampleVisitor = (function () {
     function ExampleVisitor() {
     }
     /**
@@ -19875,7 +19684,7 @@ function toPublicName(internalName) {
 var _TRANSLATIONS_TAG = 'translationbundle';
 var _TRANSLATION_TAG = 'translation';
 var _PLACEHOLDER_TAG$3 = 'ph';
-var Xtb = /** @class */ (function (_super) {
+var Xtb = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(Xtb, _super);
     function Xtb() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -19966,7 +19775,7 @@ function createLazyProperty(messages, id, valueFn) {
         set: function (_) { throw new Error('Could not overwrite an XTB translation'); },
     });
 }
-var XtbParser = /** @class */ (function () {
+var XtbParser = (function () {
     function XtbParser() {
         this._locale = null;
     }
@@ -20111,7 +19920,7 @@ var XtbParser = /** @class */ (function () {
     };
     return XtbParser;
 }());
-var XmlToI18n$2 = /** @class */ (function () {
+var XmlToI18n$2 = (function () {
     function XmlToI18n() {
     }
     /**
@@ -20251,7 +20060,7 @@ var XmlToI18n$2 = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var HtmlParser = /** @class */ (function (_super) {
+var HtmlParser = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(HtmlParser, _super);
     function HtmlParser() {
         return _super.call(this, getHtmlTagDefinition) || this;
@@ -20292,7 +20101,7 @@ var HtmlParser = /** @class */ (function (_super) {
 /**
  * A container for translated messages
  */
-var TranslationBundle = /** @class */ (function () {
+var TranslationBundle = (function () {
     function TranslationBundle(_i18nNodesByMsgId, locale, digest, mapperFactory, missingTranslationStrategy, console) {
         if (_i18nNodesByMsgId === void 0) { _i18nNodesByMsgId = {}; }
         if (missingTranslationStrategy === void 0) { missingTranslationStrategy = MissingTranslationStrategy.Warning; }
@@ -20321,7 +20130,7 @@ var TranslationBundle = /** @class */ (function () {
     function (content, url, serializer, missingTranslationStrategy, console) {
         var _a = serializer.load(content, url), locale = _a.locale, i18nNodesByMsgId = _a.i18nNodesByMsgId;
         var /** @type {?} */ digestFn = function (m) { return serializer.digest(m); };
-        var /** @type {?} */ mapperFactory = function (m) { return ((serializer.createNameMapper(m))); };
+        var /** @type {?} */ mapperFactory = function (m) { return /** @type {?} */ ((serializer.createNameMapper(m))); };
         return new TranslationBundle(i18nNodesByMsgId, locale, digestFn, mapperFactory, missingTranslationStrategy, console);
     };
     // Returns the translation as HTML nodes from the given source message.
@@ -20351,7 +20160,7 @@ var TranslationBundle = /** @class */ (function () {
     function (srcMsg) { return this.digest(srcMsg) in this._i18nNodesByMsgId; };
     return TranslationBundle;
 }());
-var I18nToHtmlVisitor = /** @class */ (function () {
+var I18nToHtmlVisitor = (function () {
     function I18nToHtmlVisitor(_i18nNodesByMsgId, _locale, _digest, _mapperFactory, _missingTranslationStrategy, _console) {
         if (_i18nNodesByMsgId === void 0) { _i18nNodesByMsgId = {}; }
         this._i18nNodesByMsgId = _i18nNodesByMsgId;
@@ -20569,7 +20378,7 @@ var I18nToHtmlVisitor = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var I18NHtmlParser = /** @class */ (function () {
+var I18NHtmlParser = (function () {
     function I18NHtmlParser(_htmlParser, translations, translationsFormat, missingTranslation, console) {
         if (missingTranslation === void 0) { missingTranslation = MissingTranslationStrategy.Warning; }
         this._htmlParser = _htmlParser;
@@ -20652,7 +20461,7 @@ var JIT_SUMMARY_NAME = /NgSummary$/;
 function ngfactoryFilePath(filePath, forceSourceFile) {
     if (forceSourceFile === void 0) { forceSourceFile = false; }
     var /** @type {?} */ urlWithSuffix = splitTypescriptSuffix(filePath, forceSourceFile);
-    return urlWithSuffix[0] + ".ngfactory" + normalizeGenFileSuffix(urlWithSuffix[1]);
+    return urlWithSuffix[0] + ".ngfactory" + urlWithSuffix[1];
 }
 /**
  * @param {?} filePath
@@ -20683,13 +20492,6 @@ function splitTypescriptSuffix(path, forceSourceFile) {
         return [path.substring(0, lastDot), path.substring(lastDot)];
     }
     return [path, ''];
-}
-/**
- * @param {?} srcFileSuffix
- * @return {?}
- */
-function normalizeGenFileSuffix(srcFileSuffix) {
-    return srcFileSuffix === '.tsx' ? '.ts' : srcFileSuffix;
 }
 /**
  * @param {?} fileName
@@ -20750,15 +20552,8 @@ function createLoweredSymbol(id) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var CORE = '@angular/core';
-var Identifiers = /** @class */ (function () {
+var Identifiers = (function () {
     function Identifiers() {
     }
     Identifiers.ANALYZE_FOR_ENTRY_COMPONENTS = {
@@ -20875,13 +20670,6 @@ function createTokenForExternalReference(reflector, reference) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** @enum {number} */
 var LifecycleHooks = {
     OnInit: 0,
@@ -20959,11 +20747,11 @@ function getHookName(hook) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var _SELECTOR_REGEXP = new RegExp('(\\:not\\()|' + //":not("
-    '([-\\w]+)|' + // "tag"
-    '(?:\\.([-\\w]+))|' + // ".class"
-    '(?:\\[([-.\\w*]+)(?:=([\"\']?)([^\\]\"\']*)\\5)?\\])|' + // "[name]", "[name=value]",
-    '(\\))|' + // ")"
+var _SELECTOR_REGEXP = new RegExp('(\\:not\\()|' +
+    '([-\\w]+)|' +
+    '(?:\\.([-\\w]+))|' +
+    '(?:\\[([-.\\w*]+)(?:=([\"\']?)([^\\]\"\']*)\\5)?\\])|' +
+    '(\\))|' +
     '(\\s*,\\s*)', // ","
 'g');
 /**
@@ -20971,7 +20759,7 @@ var _SELECTOR_REGEXP = new RegExp('(\\:not\\()|' + //":not("
  * css classes and attribute/value pairs with the purpose
  * of selecting subsets out of them.
  */
-var CssSelector = /** @class */ (function () {
+var CssSelector = (function () {
     function CssSelector() {
         this.element = null;
         this.classNames = [];
@@ -21133,7 +20921,7 @@ var CssSelector = /** @class */ (function () {
  * Reads a list of CssSelectors and allows to calculate which ones
  * are contained in a given CssSelector.
  */
-var SelectorMatcher = /** @class */ (function () {
+var SelectorMatcher = (function () {
     function SelectorMatcher() {
         this._elementMap = new Map();
         this._elementPartialMap = new Map();
@@ -21413,14 +21201,14 @@ var SelectorMatcher = /** @class */ (function () {
     };
     return SelectorMatcher;
 }());
-var SelectorListContext = /** @class */ (function () {
+var SelectorListContext = (function () {
     function SelectorListContext(selectors) {
         this.selectors = selectors;
         this.alreadyMatched = false;
     }
     return SelectorListContext;
 }());
-var SelectorContext = /** @class */ (function () {
+var SelectorContext = (function () {
     function SelectorContext(selector, cbContext, listContext) {
         this.selector = selector;
         this.cbContext = cbContext;
@@ -21466,7 +21254,7 @@ var SelectorContext = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 var ERROR_COMPONENT_TYPE = 'ngComponentType';
-var CompileMetadataResolver = /** @class */ (function () {
+var CompileMetadataResolver = (function () {
     function CompileMetadataResolver(_config, _htmlParser, _ngModuleResolver, _directiveResolver, _pipeResolver, _summaryResolver, _schemaRegistry, _directiveNormalizer, _console, _staticSymbolCache, _reflector, _errorCollector) {
         this._config = _config;
         this._htmlParser = _htmlParser;
@@ -21741,7 +21529,6 @@ var CompileMetadataResolver = /** @class */ (function () {
             providers: [],
             viewProviders: [],
             queries: [],
-            guards: {},
             viewQueries: [],
             componentViewType: hostViewType,
             rendererType: /** @type {?} */ ({ id: '__Host__', encapsulation: ViewEncapsulation.None, styles: [], data: {} }),
@@ -21784,7 +21571,6 @@ var CompileMetadataResolver = /** @class */ (function () {
                 providers: metadata.providers,
                 viewProviders: metadata.viewProviders,
                 queries: metadata.queries,
-                guards: metadata.guards,
                 viewQueries: metadata.viewQueries,
                 entryComponents: metadata.entryComponents,
                 componentViewType: metadata.componentViewType,
@@ -21884,7 +21670,7 @@ var CompileMetadataResolver = /** @class */ (function () {
             }
             if (compMeta.entryComponents) {
                 entryComponentMetadata = flattenAndDedupeArray(compMeta.entryComponents)
-                    .map(function (type) { return ((_this._getEntryComponentMetadata(type))); })
+                    .map(function (type) { return /** @type {?} */ ((_this._getEntryComponentMetadata(type))); })
                     .concat(entryComponentMetadata);
             }
             if (!selector) {
@@ -21922,7 +21708,6 @@ var CompileMetadataResolver = /** @class */ (function () {
             providers: providers || [],
             viewProviders: viewProviders || [],
             queries: queries || [],
-            guards: dirMeta.guards || {},
             viewQueries: viewQueries || [],
             entryComponents: entryComponentMetadata,
             componentViewType: nonNormalizedTemplateMetadata ? this.getComponentViewClass(directiveType) :
@@ -22014,19 +21799,16 @@ var CompileMetadataResolver = /** @class */ (function () {
     };
     /**
      * @param {?} moduleType
-     * @param {?=} alreadyCollecting
      * @return {?}
      */
     CompileMetadataResolver.prototype.getNgModuleSummary = /**
      * @param {?} moduleType
-     * @param {?=} alreadyCollecting
      * @return {?}
      */
-    function (moduleType, alreadyCollecting) {
-        if (alreadyCollecting === void 0) { alreadyCollecting = null; }
+    function (moduleType) {
         var /** @type {?} */ moduleSummary = /** @type {?} */ (this._loadSummary(moduleType, CompileSummaryKind.NgModule));
         if (!moduleSummary) {
-            var /** @type {?} */ moduleMeta = this.getNgModuleMetadata(moduleType, false, alreadyCollecting);
+            var /** @type {?} */ moduleMeta = this.getNgModuleMetadata(moduleType, false);
             moduleSummary = moduleMeta ? moduleMeta.toSummary() : null;
             if (moduleSummary) {
                 this._summaryCache.set(moduleType, moduleSummary);
@@ -22070,19 +21852,16 @@ var CompileMetadataResolver = /** @class */ (function () {
     /**
      * @param {?} moduleType
      * @param {?=} throwIfNotFound
-     * @param {?=} alreadyCollecting
      * @return {?}
      */
     CompileMetadataResolver.prototype.getNgModuleMetadata = /**
      * @param {?} moduleType
      * @param {?=} throwIfNotFound
-     * @param {?=} alreadyCollecting
      * @return {?}
      */
-    function (moduleType, throwIfNotFound, alreadyCollecting) {
+    function (moduleType, throwIfNotFound) {
         var _this = this;
         if (throwIfNotFound === void 0) { throwIfNotFound = true; }
-        if (alreadyCollecting === void 0) { alreadyCollecting = null; }
         moduleType = resolveForwardRef(moduleType);
         var /** @type {?} */ compileMeta = this._ngModuleCache.get(moduleType);
         if (compileMeta) {
@@ -22117,15 +21896,7 @@ var CompileMetadataResolver = /** @class */ (function () {
                 if (importedModuleType) {
                     if (_this._checkSelfImport(moduleType, importedModuleType))
                         return;
-                    if (!alreadyCollecting)
-                        alreadyCollecting = new Set();
-                    if (alreadyCollecting.has(importedModuleType)) {
-                        _this._reportError(syntaxError(_this._getTypeDescriptor(importedModuleType) + " '" + stringifyType(importedType) + "' is imported recursively by the module '" + stringifyType(moduleType) + "'."), moduleType);
-                        return;
-                    }
-                    alreadyCollecting.add(importedModuleType);
-                    var /** @type {?} */ importedModuleSummary = _this.getNgModuleSummary(importedModuleType, alreadyCollecting);
-                    alreadyCollecting.delete(importedModuleType);
+                    var /** @type {?} */ importedModuleSummary = _this.getNgModuleSummary(importedModuleType);
                     if (!importedModuleSummary) {
                         _this._reportError(syntaxError("Unexpected " + _this._getTypeDescriptor(importedType) + " '" + stringifyType(importedType) + "' imported by the module '" + stringifyType(moduleType) + "'. Please add a @NgModule annotation."), moduleType);
                         return;
@@ -22144,15 +21915,7 @@ var CompileMetadataResolver = /** @class */ (function () {
                     _this._reportError(syntaxError("Unexpected value '" + stringifyType(exportedType) + "' exported by the module '" + stringifyType(moduleType) + "'"), moduleType);
                     return;
                 }
-                if (!alreadyCollecting)
-                    alreadyCollecting = new Set();
-                if (alreadyCollecting.has(exportedType)) {
-                    _this._reportError(syntaxError(_this._getTypeDescriptor(exportedType) + " '" + stringify(exportedType) + "' is exported recursively by the module '" + stringifyType(moduleType) + "'"), moduleType);
-                    return;
-                }
-                alreadyCollecting.add(exportedType);
-                var /** @type {?} */ exportedModuleSummary = _this.getNgModuleSummary(exportedType, alreadyCollecting);
-                alreadyCollecting.delete(exportedType);
+                var /** @type {?} */ exportedModuleSummary = _this.getNgModuleSummary(exportedType);
                 if (exportedModuleSummary) {
                     exportedModules.push(exportedModuleSummary);
                 }
@@ -22211,7 +21974,7 @@ var CompileMetadataResolver = /** @class */ (function () {
         }
         if (meta.entryComponents) {
             entryComponents.push.apply(entryComponents, flattenAndDedupeArray(meta.entryComponents)
-                .map(function (type) { return ((_this._getEntryComponentMetadata(type))); }));
+                .map(function (type) { return /** @type {?} */ ((_this._getEntryComponentMetadata(type))); }));
         }
         if (meta.bootstrap) {
             flattenAndDedupeArray(meta.bootstrap).forEach(function (type) {
@@ -22222,7 +21985,7 @@ var CompileMetadataResolver = /** @class */ (function () {
                 bootstrapComponents.push(_this._getIdentifierMetadata(type));
             });
         }
-        entryComponents.push.apply(entryComponents, bootstrapComponents.map(function (type) { return ((_this._getEntryComponentMetadata(type.reference))); }));
+        entryComponents.push.apply(entryComponents, bootstrapComponents.map(function (type) { return /** @type {?} */ ((_this._getEntryComponentMetadata(type.reference))); }));
         if (meta.schemas) {
             schemas.push.apply(schemas, flattenAndDedupeArray(meta.schemas));
         }
@@ -22933,7 +22696,7 @@ function isValidType(value) {
 function extractIdentifiers(value, targetIdentifiers) {
     visitValue(value, new _CompileValueConverter(), targetIdentifiers);
 }
-var _CompileValueConverter = /** @class */ (function (_super) {
+var _CompileValueConverter = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(_CompileValueConverter, _super);
     function _CompileValueConverter() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -22980,13 +22743,6 @@ function componentStillLoadingError(compType) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** @enum {number} */
 var TypeModifier = {
     Const: 0,
@@ -22995,7 +22751,7 @@ TypeModifier[TypeModifier.Const] = "Const";
 /**
  * @abstract
  */
-var Type$1 = /** @class */ (function () {
+var Type$1 = (function () {
     function Type(modifiers) {
         if (modifiers === void 0) { modifiers = null; }
         this.modifiers = modifiers;
@@ -23031,7 +22787,7 @@ BuiltinTypeName[BuiltinTypeName.Int] = "Int";
 BuiltinTypeName[BuiltinTypeName.Number] = "Number";
 BuiltinTypeName[BuiltinTypeName.Function] = "Function";
 BuiltinTypeName[BuiltinTypeName.Inferred] = "Inferred";
-var BuiltinType = /** @class */ (function (_super) {
+var BuiltinType = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(BuiltinType, _super);
     function BuiltinType(name, modifiers) {
         if (modifiers === void 0) { modifiers = null; }
@@ -23054,7 +22810,7 @@ var BuiltinType = /** @class */ (function (_super) {
     };
     return BuiltinType;
 }(Type$1));
-var ExpressionType = /** @class */ (function (_super) {
+var ExpressionType = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ExpressionType, _super);
     function ExpressionType(value, modifiers) {
         if (modifiers === void 0) { modifiers = null; }
@@ -23077,7 +22833,7 @@ var ExpressionType = /** @class */ (function (_super) {
     };
     return ExpressionType;
 }(Type$1));
-var ArrayType = /** @class */ (function (_super) {
+var ArrayType = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ArrayType, _super);
     function ArrayType(of, modifiers) {
         if (modifiers === void 0) { modifiers = null; }
@@ -23100,7 +22856,7 @@ var ArrayType = /** @class */ (function (_super) {
     };
     return ArrayType;
 }(Type$1));
-var MapType = /** @class */ (function (_super) {
+var MapType = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(MapType, _super);
     function MapType(valueType, modifiers) {
         if (modifiers === void 0) { modifiers = null; }
@@ -23198,7 +22954,7 @@ function areAllEquivalent(base, other) {
 /**
  * @abstract
  */
-var Expression = /** @class */ (function () {
+var Expression = (function () {
     function Expression(type, sourceSpan) {
         this.type = type || null;
         this.sourceSpan = sourceSpan || null;
@@ -23531,7 +23287,7 @@ BuiltinVar[BuiltinVar.This] = "This";
 BuiltinVar[BuiltinVar.Super] = "Super";
 BuiltinVar[BuiltinVar.CatchError] = "CatchError";
 BuiltinVar[BuiltinVar.CatchStack] = "CatchStack";
-var ReadVarExpr = /** @class */ (function (_super) {
+var ReadVarExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ReadVarExpr, _super);
     function ReadVarExpr(name, type, sourceSpan) {
         var _this = _super.call(this, type, sourceSpan) || this;
@@ -23585,7 +23341,7 @@ var ReadVarExpr = /** @class */ (function (_super) {
     };
     return ReadVarExpr;
 }(Expression));
-var WriteVarExpr = /** @class */ (function (_super) {
+var WriteVarExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(WriteVarExpr, _super);
     function WriteVarExpr(name, value, type, sourceSpan) {
         var _this = _super.call(this, type || value.type, sourceSpan) || this;
@@ -23632,7 +23388,7 @@ var WriteVarExpr = /** @class */ (function (_super) {
     };
     return WriteVarExpr;
 }(Expression));
-var WriteKeyExpr = /** @class */ (function (_super) {
+var WriteKeyExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(WriteKeyExpr, _super);
     function WriteKeyExpr(receiver, index, value, type, sourceSpan) {
         var _this = _super.call(this, type || value.type, sourceSpan) || this;
@@ -23668,7 +23424,7 @@ var WriteKeyExpr = /** @class */ (function (_super) {
     };
     return WriteKeyExpr;
 }(Expression));
-var WritePropExpr = /** @class */ (function (_super) {
+var WritePropExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(WritePropExpr, _super);
     function WritePropExpr(receiver, name, value, type, sourceSpan) {
         var _this = _super.call(this, type || value.type, sourceSpan) || this;
@@ -23713,7 +23469,7 @@ var BuiltinMethod = {
 BuiltinMethod[BuiltinMethod.ConcatArray] = "ConcatArray";
 BuiltinMethod[BuiltinMethod.SubscribeObservable] = "SubscribeObservable";
 BuiltinMethod[BuiltinMethod.Bind] = "Bind";
-var InvokeMethodExpr = /** @class */ (function (_super) {
+var InvokeMethodExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(InvokeMethodExpr, _super);
     function InvokeMethodExpr(receiver, method, args, type, sourceSpan) {
         var _this = _super.call(this, type, sourceSpan) || this;
@@ -23756,7 +23512,7 @@ var InvokeMethodExpr = /** @class */ (function (_super) {
     };
     return InvokeMethodExpr;
 }(Expression));
-var InvokeFunctionExpr = /** @class */ (function (_super) {
+var InvokeFunctionExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(InvokeFunctionExpr, _super);
     function InvokeFunctionExpr(fn, args, type, sourceSpan) {
         var _this = _super.call(this, type, sourceSpan) || this;
@@ -23791,7 +23547,7 @@ var InvokeFunctionExpr = /** @class */ (function (_super) {
     };
     return InvokeFunctionExpr;
 }(Expression));
-var InstantiateExpr = /** @class */ (function (_super) {
+var InstantiateExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(InstantiateExpr, _super);
     function InstantiateExpr(classExpr, args, type, sourceSpan) {
         var _this = _super.call(this, type, sourceSpan) || this;
@@ -23826,7 +23582,7 @@ var InstantiateExpr = /** @class */ (function (_super) {
     };
     return InstantiateExpr;
 }(Expression));
-var LiteralExpr = /** @class */ (function (_super) {
+var LiteralExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(LiteralExpr, _super);
     function LiteralExpr(value, type, sourceSpan) {
         var _this = _super.call(this, type, sourceSpan) || this;
@@ -23859,7 +23615,7 @@ var LiteralExpr = /** @class */ (function (_super) {
     };
     return LiteralExpr;
 }(Expression));
-var ExternalExpr = /** @class */ (function (_super) {
+var ExternalExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ExternalExpr, _super);
     function ExternalExpr(value, type, typeParams, sourceSpan) {
         if (typeParams === void 0) { typeParams = null; }
@@ -23895,7 +23651,7 @@ var ExternalExpr = /** @class */ (function (_super) {
     };
     return ExternalExpr;
 }(Expression));
-var ExternalReference = /** @class */ (function () {
+var ExternalReference = (function () {
     function ExternalReference(moduleName, name, runtime) {
         this.moduleName = moduleName;
         this.name = name;
@@ -23903,7 +23659,7 @@ var ExternalReference = /** @class */ (function () {
     }
     return ExternalReference;
 }());
-var ConditionalExpr = /** @class */ (function (_super) {
+var ConditionalExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ConditionalExpr, _super);
     function ConditionalExpr(condition, trueCase, falseCase, type, sourceSpan) {
         if (falseCase === void 0) { falseCase = null; }
@@ -23940,7 +23696,7 @@ var ConditionalExpr = /** @class */ (function (_super) {
     };
     return ConditionalExpr;
 }(Expression));
-var NotExpr = /** @class */ (function (_super) {
+var NotExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(NotExpr, _super);
     function NotExpr(condition, sourceSpan) {
         var _this = _super.call(this, BOOL_TYPE, sourceSpan) || this;
@@ -23973,7 +23729,7 @@ var NotExpr = /** @class */ (function (_super) {
     };
     return NotExpr;
 }(Expression));
-var AssertNotNull = /** @class */ (function (_super) {
+var AssertNotNull = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(AssertNotNull, _super);
     function AssertNotNull(condition, sourceSpan) {
         var _this = _super.call(this, condition.type, sourceSpan) || this;
@@ -24006,7 +23762,7 @@ var AssertNotNull = /** @class */ (function (_super) {
     };
     return AssertNotNull;
 }(Expression));
-var CastExpr = /** @class */ (function (_super) {
+var CastExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(CastExpr, _super);
     function CastExpr(value, type, sourceSpan) {
         var _this = _super.call(this, type, sourceSpan) || this;
@@ -24039,7 +23795,7 @@ var CastExpr = /** @class */ (function (_super) {
     };
     return CastExpr;
 }(Expression));
-var FnParam = /** @class */ (function () {
+var FnParam = (function () {
     function FnParam(name, type) {
         if (type === void 0) { type = null; }
         this.name = name;
@@ -24056,7 +23812,7 @@ var FnParam = /** @class */ (function () {
     function (param) { return this.name === param.name; };
     return FnParam;
 }());
-var FunctionExpr = /** @class */ (function (_super) {
+var FunctionExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FunctionExpr, _super);
     function FunctionExpr(params, statements, type, sourceSpan) {
         var _this = _super.call(this, type, sourceSpan) || this;
@@ -24105,7 +23861,7 @@ var FunctionExpr = /** @class */ (function (_super) {
     };
     return FunctionExpr;
 }(Expression));
-var BinaryOperatorExpr = /** @class */ (function (_super) {
+var BinaryOperatorExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(BinaryOperatorExpr, _super);
     function BinaryOperatorExpr(operator, lhs, rhs, type, sourceSpan) {
         var _this = _super.call(this, type || lhs.type, sourceSpan) || this;
@@ -24141,7 +23897,7 @@ var BinaryOperatorExpr = /** @class */ (function (_super) {
     };
     return BinaryOperatorExpr;
 }(Expression));
-var ReadPropExpr = /** @class */ (function (_super) {
+var ReadPropExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ReadPropExpr, _super);
     function ReadPropExpr(receiver, name, type, sourceSpan) {
         var _this = _super.call(this, type, sourceSpan) || this;
@@ -24187,7 +23943,7 @@ var ReadPropExpr = /** @class */ (function (_super) {
     };
     return ReadPropExpr;
 }(Expression));
-var ReadKeyExpr = /** @class */ (function (_super) {
+var ReadKeyExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ReadKeyExpr, _super);
     function ReadKeyExpr(receiver, index, type, sourceSpan) {
         var _this = _super.call(this, type, sourceSpan) || this;
@@ -24233,7 +23989,7 @@ var ReadKeyExpr = /** @class */ (function (_super) {
     };
     return ReadKeyExpr;
 }(Expression));
-var LiteralArrayExpr = /** @class */ (function (_super) {
+var LiteralArrayExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(LiteralArrayExpr, _super);
     function LiteralArrayExpr(entries, type, sourceSpan) {
         var _this = _super.call(this, type, sourceSpan) || this;
@@ -24266,7 +24022,7 @@ var LiteralArrayExpr = /** @class */ (function (_super) {
     };
     return LiteralArrayExpr;
 }(Expression));
-var LiteralMapEntry = /** @class */ (function () {
+var LiteralMapEntry = (function () {
     function LiteralMapEntry(key, value, quoted) {
         this.key = key;
         this.value = value;
@@ -24285,7 +24041,7 @@ var LiteralMapEntry = /** @class */ (function () {
     };
     return LiteralMapEntry;
 }());
-var LiteralMapExpr = /** @class */ (function (_super) {
+var LiteralMapExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(LiteralMapExpr, _super);
     function LiteralMapExpr(entries, type, sourceSpan) {
         var _this = _super.call(this, type, sourceSpan) || this;
@@ -24322,7 +24078,7 @@ var LiteralMapExpr = /** @class */ (function (_super) {
     };
     return LiteralMapExpr;
 }(Expression));
-var CommaExpr = /** @class */ (function (_super) {
+var CommaExpr = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(CommaExpr, _super);
     function CommaExpr(parts, sourceSpan) {
         var _this = _super.call(this, parts[parts.length - 1].type, sourceSpan) || this;
@@ -24377,7 +24133,7 @@ StmtModifier[StmtModifier.Exported] = "Exported";
 /**
  * @abstract
  */
-var Statement = /** @class */ (function () {
+var Statement = (function () {
     function Statement(modifiers, sourceSpan) {
         this.modifiers = modifiers || [];
         this.sourceSpan = sourceSpan || null;
@@ -24393,7 +24149,7 @@ var Statement = /** @class */ (function () {
     function (modifier) { return /** @type {?} */ ((this.modifiers)).indexOf(modifier) !== -1; };
     return Statement;
 }());
-var DeclareVarStmt = /** @class */ (function (_super) {
+var DeclareVarStmt = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(DeclareVarStmt, _super);
     function DeclareVarStmt(name, value, type, modifiers, sourceSpan) {
         if (modifiers === void 0) { modifiers = null; }
@@ -24430,7 +24186,7 @@ var DeclareVarStmt = /** @class */ (function (_super) {
     };
     return DeclareVarStmt;
 }(Statement));
-var DeclareFunctionStmt = /** @class */ (function (_super) {
+var DeclareFunctionStmt = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(DeclareFunctionStmt, _super);
     function DeclareFunctionStmt(name, params, statements, type, modifiers, sourceSpan) {
         if (modifiers === void 0) { modifiers = null; }
@@ -24468,7 +24224,7 @@ var DeclareFunctionStmt = /** @class */ (function (_super) {
     };
     return DeclareFunctionStmt;
 }(Statement));
-var ExpressionStatement = /** @class */ (function (_super) {
+var ExpressionStatement = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ExpressionStatement, _super);
     function ExpressionStatement(expr, sourceSpan) {
         var _this = _super.call(this, null, sourceSpan) || this;
@@ -24501,7 +24257,7 @@ var ExpressionStatement = /** @class */ (function (_super) {
     };
     return ExpressionStatement;
 }(Statement));
-var ReturnStatement = /** @class */ (function (_super) {
+var ReturnStatement = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ReturnStatement, _super);
     function ReturnStatement(value, sourceSpan) {
         var _this = _super.call(this, null, sourceSpan) || this;
@@ -24534,7 +24290,7 @@ var ReturnStatement = /** @class */ (function (_super) {
     };
     return ReturnStatement;
 }(Statement));
-var AbstractClassPart = /** @class */ (function () {
+var AbstractClassPart = (function () {
     function AbstractClassPart(type, modifiers) {
         this.modifiers = modifiers;
         if (!modifiers) {
@@ -24553,7 +24309,7 @@ var AbstractClassPart = /** @class */ (function () {
     function (modifier) { return /** @type {?} */ ((this.modifiers)).indexOf(modifier) !== -1; };
     return AbstractClassPart;
 }());
-var ClassField = /** @class */ (function (_super) {
+var ClassField = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ClassField, _super);
     function ClassField(name, type, modifiers) {
         if (modifiers === void 0) { modifiers = null; }
@@ -24572,7 +24328,7 @@ var ClassField = /** @class */ (function (_super) {
     function (f) { return this.name === f.name; };
     return ClassField;
 }(AbstractClassPart));
-var ClassMethod = /** @class */ (function (_super) {
+var ClassMethod = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ClassMethod, _super);
     function ClassMethod(name, params, body, type, modifiers) {
         if (modifiers === void 0) { modifiers = null; }
@@ -24595,7 +24351,7 @@ var ClassMethod = /** @class */ (function (_super) {
     };
     return ClassMethod;
 }(AbstractClassPart));
-var ClassGetter = /** @class */ (function (_super) {
+var ClassGetter = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ClassGetter, _super);
     function ClassGetter(name, body, type, modifiers) {
         if (modifiers === void 0) { modifiers = null; }
@@ -24617,7 +24373,7 @@ var ClassGetter = /** @class */ (function (_super) {
     };
     return ClassGetter;
 }(AbstractClassPart));
-var ClassStmt = /** @class */ (function (_super) {
+var ClassStmt = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ClassStmt, _super);
     function ClassStmt(name, parent, fields, getters, constructorMethod, methods, modifiers, sourceSpan) {
         if (modifiers === void 0) { modifiers = null; }
@@ -24661,7 +24417,7 @@ var ClassStmt = /** @class */ (function (_super) {
     };
     return ClassStmt;
 }(Statement));
-var IfStmt = /** @class */ (function (_super) {
+var IfStmt = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(IfStmt, _super);
     function IfStmt(condition, trueCase, falseCase, sourceSpan) {
         if (falseCase === void 0) { falseCase = []; }
@@ -24699,7 +24455,7 @@ var IfStmt = /** @class */ (function (_super) {
     };
     return IfStmt;
 }(Statement));
-var CommentStmt = /** @class */ (function (_super) {
+var CommentStmt = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(CommentStmt, _super);
     function CommentStmt(comment, sourceSpan) {
         var _this = _super.call(this, null, sourceSpan) || this;
@@ -24730,7 +24486,7 @@ var CommentStmt = /** @class */ (function (_super) {
     };
     return CommentStmt;
 }(Statement));
-var TryCatchStmt = /** @class */ (function (_super) {
+var TryCatchStmt = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(TryCatchStmt, _super);
     function TryCatchStmt(bodyStmts, catchStmts, sourceSpan) {
         var _this = _super.call(this, null, sourceSpan) || this;
@@ -24765,7 +24521,7 @@ var TryCatchStmt = /** @class */ (function (_super) {
     };
     return TryCatchStmt;
 }(Statement));
-var ThrowStmt = /** @class */ (function (_super) {
+var ThrowStmt = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ThrowStmt, _super);
     function ThrowStmt(error, sourceSpan) {
         var _this = _super.call(this, null, sourceSpan) || this;
@@ -24802,7 +24558,7 @@ var ThrowStmt = /** @class */ (function (_super) {
  * @record
  */
 
-var AstTransformer$1 = /** @class */ (function () {
+var AstTransformer$1 = (function () {
     function AstTransformer() {
     }
     /**
@@ -25246,7 +25002,7 @@ var AstTransformer$1 = /** @class */ (function () {
     };
     return AstTransformer;
 }());
-var RecursiveAstVisitor$1 = /** @class */ (function () {
+var RecursiveAstVisitor$1 = (function () {
     function RecursiveAstVisitor() {
     }
     /**
@@ -25792,7 +25548,7 @@ function findReadVarNames(stmts) {
     visitor.visitAllStatements(stmts, null);
     return visitor.varNames;
 }
-var _ReadVarVisitor = /** @class */ (function (_super) {
+var _ReadVarVisitor = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(_ReadVarVisitor, _super);
     function _ReadVarVisitor() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -25854,7 +25610,7 @@ function collectExternalReferences(stmts) {
     visitor.visitAllStatements(stmts, null);
     return visitor.externalReferences;
 }
-var _FindExternalReferencesVisitor = /** @class */ (function (_super) {
+var _FindExternalReferencesVisitor = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(_FindExternalReferencesVisitor, _super);
     function _FindExternalReferencesVisitor() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -25901,7 +25657,7 @@ function applySourceSpanToExpressionIfNeeded(expr, sourceSpan) {
     var /** @type {?} */ transformer = new _ApplySourceSpanTransformer(sourceSpan);
     return expr.visitExpression(transformer, null);
 }
-var _ApplySourceSpanTransformer = /** @class */ (function (_super) {
+var _ApplySourceSpanTransformer = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(_ApplySourceSpanTransformer, _super);
     function _ApplySourceSpanTransformer(sourceSpan) {
         var _this = _super.call(this) || this;
@@ -26063,7 +25819,7 @@ function literal(value, type, sourceSpan) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var ProviderError = /** @class */ (function (_super) {
+var ProviderError = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ProviderError, _super);
     function ProviderError(message, span) {
         return _super.call(this, span, message) || this;
@@ -26074,7 +25830,7 @@ var ProviderError = /** @class */ (function (_super) {
  * @record
  */
 
-var ProviderViewContext = /** @class */ (function () {
+var ProviderViewContext = (function () {
     function ProviderViewContext(reflector, component) {
         var _this = this;
         this.reflector = reflector;
@@ -26090,7 +25846,7 @@ var ProviderViewContext = /** @class */ (function () {
     }
     return ProviderViewContext;
 }());
-var ProviderElementContext = /** @class */ (function () {
+var ProviderElementContext = (function () {
     function ProviderElementContext(viewContext, _parent, _isViewRoot, _directiveAsts, attrs, refs, isTemplate, contentQueryStartId, _sourceSpan) {
         var _this = this;
         this.viewContext = viewContext;
@@ -26295,12 +26051,12 @@ var ProviderElementContext = /** @class */ (function () {
             else if (provider.useFactory) {
                 var /** @type {?} */ deps = provider.deps || provider.useFactory.diDeps;
                 transformedDeps =
-                    deps.map(function (dep) { return ((_this._getDependency(resolvedProvider.providerType, dep, eager))); });
+                    deps.map(function (dep) { return /** @type {?} */ ((_this._getDependency(resolvedProvider.providerType, dep, eager))); });
             }
             else if (provider.useClass) {
                 var /** @type {?} */ deps = provider.deps || provider.useClass.diDeps;
                 transformedDeps =
-                    deps.map(function (dep) { return ((_this._getDependency(resolvedProvider.providerType, dep, eager))); });
+                    deps.map(function (dep) { return /** @type {?} */ ((_this._getDependency(resolvedProvider.providerType, dep, eager))); });
             }
             return _transformProvider(provider, {
                 useExisting: transformedUseExisting,
@@ -26416,7 +26172,7 @@ var ProviderElementContext = /** @class */ (function () {
     };
     return ProviderElementContext;
 }());
-var NgModuleProviderAnalyzer = /** @class */ (function () {
+var NgModuleProviderAnalyzer = (function () {
     function NgModuleProviderAnalyzer(reflector, ngModule, extraProviders, sourceSpan) {
         var _this = this;
         this.reflector = reflector;
@@ -26703,7 +26459,7 @@ function convertValueToOutputAst(ctx, value, type) {
     if (type === void 0) { type = null; }
     return visitValue(value, new _ValueOutputAstTransformer(ctx), type);
 }
-var _ValueOutputAstTransformer = /** @class */ (function () {
+var _ValueOutputAstTransformer = (function () {
     function _ValueOutputAstTransformer(ctx) {
         this.ctx = ctx;
     }
@@ -26775,13 +26531,6 @@ var _ValueOutputAstTransformer = /** @class */ (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * @param {?} ctx
@@ -27003,14 +26752,14 @@ function componentFactoryResolverProviderDef(reflector, ctx, flags, entryCompone
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var NgModuleCompileResult = /** @class */ (function () {
+var NgModuleCompileResult = (function () {
     function NgModuleCompileResult(ngModuleFactoryVar) {
         this.ngModuleFactoryVar = ngModuleFactoryVar;
     }
     return NgModuleCompileResult;
 }());
 var LOG_VAR = variable('_l');
-var NgModuleCompiler = /** @class */ (function () {
+var NgModuleCompiler = (function () {
     function NgModuleCompiler(reflector) {
         this.reflector = reflector;
     }
@@ -27095,16 +26844,9 @@ var NgModuleCompiler = /** @class */ (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Resolves types to {\@link NgModule}.
  */
-var NgModuleResolver = /** @class */ (function () {
+var NgModuleResolver = (function () {
     function NgModuleResolver(_reflector) {
         this._reflector = _reflector;
     }
@@ -27157,7 +26899,7 @@ var NgModuleResolver = /** @class */ (function () {
 // https://docs.google.com/document/d/1U1RGAehQwRypUTovF1KRlpiOFze0b-_2gc6fAH0KY0k/edit
 var VERSION$1 = 3;
 var JS_B64_PREFIX = '# sourceMappingURL=data:application/json;base64,';
-var SourceMapGenerator = /** @class */ (function () {
+var SourceMapGenerator = (function () {
     function SourceMapGenerator(file) {
         if (file === void 0) { file = null; }
         this.file = file;
@@ -27359,13 +27101,6 @@ function toBase64Digit(value) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var _SINGLE_QUOTE_ESCAPE_STRING_RE = /'|\\|\n|\r|\$/g;
 var _LEGAL_IDENTIFIER_RE = /^[$A-Z_][0-9A-Z_$]*$/i;
 var _INDENT_WITH = '  ';
@@ -27375,7 +27110,7 @@ var CATCH_STACK_VAR$1 = variable('stack', null, null);
  * @record
  */
 
-var _EmittedLine = /** @class */ (function () {
+var _EmittedLine = (function () {
     function _EmittedLine(indent) {
         this.indent = indent;
         this.partsLength = 0;
@@ -27384,7 +27119,7 @@ var _EmittedLine = /** @class */ (function () {
     }
     return _EmittedLine;
 }());
-var EmitterVisitorContext = /** @class */ (function () {
+var EmitterVisitorContext = (function () {
     function EmitterVisitorContext(_indent) {
         this._indent = _indent;
         this._classes = [];
@@ -27644,7 +27379,7 @@ var EmitterVisitorContext = /** @class */ (function () {
 /**
  * @abstract
  */
-var AbstractEmitterVisitor = /** @class */ (function () {
+var AbstractEmitterVisitor = (function () {
     function AbstractEmitterVisitor(_escapeDollarInStrings) {
         this._escapeDollarInStrings = _escapeDollarInStrings;
     }
@@ -28253,13 +27988,6 @@ function _createIndent(count) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @param {?} ast
  * @return {?}
  */
@@ -28283,7 +28011,7 @@ function debugOutputAstAsTypeScript(ast) {
     });
     return ctx.toSource();
 }
-var TypeScriptEmitter = /** @class */ (function () {
+var TypeScriptEmitter = (function () {
     function TypeScriptEmitter() {
     }
     /**
@@ -28347,7 +28075,7 @@ var TypeScriptEmitter = /** @class */ (function () {
     };
     return TypeScriptEmitter;
 }());
-var _TsEmitterVisitor = /** @class */ (function (_super) {
+var _TsEmitterVisitor = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(_TsEmitterVisitor, _super);
     function _TsEmitterVisitor(referenceFilter) {
         var _this = _super.call(this, false) || this;
@@ -28914,20 +28642,13 @@ var _TsEmitterVisitor = /** @class */ (function (_super) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Resolve a `Type` for {\@link Pipe}.
  *
  * This interface can be overridden by the application developer to create custom behavior.
  *
  * See {\@link Compiler}
  */
-var PipeResolver = /** @class */ (function () {
+var PipeResolver = (function () {
     function PipeResolver(_reflector) {
         this._reflector = _reflector;
     }
@@ -29036,16 +28757,9 @@ registerContext(SecurityContext.RESOURCE_URL, [
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @abstract
  */
-var ElementSchemaRegistry = /** @class */ (function () {
+var ElementSchemaRegistry = (function () {
     function ElementSchemaRegistry() {
     }
     return ElementSchemaRegistry;
@@ -29270,7 +28984,7 @@ var _ATTR_TO_PROP = {
     'readonly': 'readOnly',
     'tabindex': 'tabIndex',
 };
-var DomElementSchemaRegistry = /** @class */ (function (_super) {
+var DomElementSchemaRegistry = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(DomElementSchemaRegistry, _super);
     function DomElementSchemaRegistry() {
         var _this = _super.call(this) || this;
@@ -29567,138 +29281,7 @@ function _isPixelDimensionStyle(prop) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * This file is a port of shadowCSS from webcomponents.js to TypeScript.
- *
- * Please make sure to keep to edits in sync with the source file.
- *
- * Source:
- * https://github.com/webcomponents/webcomponentsjs/blob/4efecd7e0e/src/ShadowCSS/ShadowCSS.js
- *
- * The original file level comment is reproduced below
- */
-/*
-  This is a limited shim for ShadowDOM css styling.
-  https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#styles
-
-  The intention here is to support only the styling features which can be
-  relatively simply implemented. The goal is to allow users to avoid the
-  most obvious pitfalls and do so without compromising performance significantly.
-  For ShadowDOM styling that's not covered here, a set of best practices
-  can be provided that should allow users to accomplish more complex styling.
-
-  The following is a list of specific ShadowDOM styling features and a brief
-  discussion of the approach used to shim.
-
-  Shimmed features:
-
-  * :host, :host-context: ShadowDOM allows styling of the shadowRoot's host
-  element using the :host rule. To shim this feature, the :host styles are
-  reformatted and prefixed with a given scope name and promoted to a
-  document level stylesheet.
-  For example, given a scope name of .foo, a rule like this:
-
-    :host {
-        background: red;
-      }
-    }
-
-  becomes:
-
-    .foo {
-      background: red;
-    }
-
-  * encapsulation: Styles defined within ShadowDOM, apply only to
-  dom inside the ShadowDOM. Polymer uses one of two techniques to implement
-  this feature.
-
-  By default, rules are prefixed with the host element tag name
-  as a descendant selector. This ensures styling does not leak out of the 'top'
-  of the element's ShadowDOM. For example,
-
-  div {
-      font-weight: bold;
-    }
-
-  becomes:
-
-  x-foo div {
-      font-weight: bold;
-    }
-
-  becomes:
-
-
-  Alternatively, if WebComponents.ShadowCSS.strictStyling is set to true then
-  selectors are scoped by adding an attribute selector suffix to each
-  simple selector that contains the host element tag name. Each element
-  in the element's ShadowDOM template is also given the scope attribute.
-  Thus, these rules match only elements that have the scope attribute.
-  For example, given a scope name of x-foo, a rule like this:
-
-    div {
-      font-weight: bold;
-    }
-
-  becomes:
-
-    div[x-foo] {
-      font-weight: bold;
-    }
-
-  Note that elements that are dynamically added to a scope must have the scope
-  selector added to them manually.
-
-  * upper/lower bound encapsulation: Styles which are defined outside a
-  shadowRoot should not cross the ShadowDOM boundary and should not apply
-  inside a shadowRoot.
-
-  This styling behavior is not emulated. Some possible ways to do this that
-  were rejected due to complexity and/or performance concerns include: (1) reset
-  every possible property for every possible selector for a given scope name;
-  (2) re-implement css in javascript.
-
-  As an alternative, users should make sure to use selectors
-  specific to the scope in which they are working.
-
-  * ::distributed: This behavior is not emulated. It's often not necessary
-  to style the contents of a specific insertion point and instead, descendants
-  of the host element can be styled selectively. Users can also create an
-  extra node around an insertion point and style that node's contents
-  via descendent selectors. For example, with a shadowRoot like this:
-
-    <style>
-      ::content(div) {
-        background: red;
-      }
-    </style>
-    <content></content>
-
-  could become:
-
-    <style>
-      / *@polyfill .content-container div * /
-      ::content(div) {
-        background: red;
-      }
-    </style>
-    <div class="content-container">
-      <content></content>
-    </div>
-
-  Note the use of @polyfill in the comment above a ShadowDOM specific style
-  declaration. This is a directive to the styling shim to use the selector
-  in comments in lieu of the next selector when running under polyfill.
-*/
-var ShadowCss = /** @class */ (function () {
+var ShadowCss = (function () {
     function ShadowCss() {
         this.strictStyling = true;
     }
@@ -29724,11 +29307,10 @@ var ShadowCss = /** @class */ (function () {
      */
     function (cssText, selector, hostSelector) {
         if (hostSelector === void 0) { hostSelector = ''; }
-        var /** @type {?} */ commentsWithHash = extractCommentsWithHash(cssText);
+        var /** @type {?} */ sourceMappingUrl = extractSourceMappingUrl(cssText);
         cssText = stripComments(cssText);
         cssText = this._insertDirectives(cssText);
-        var /** @type {?} */ scopedCssText = this._scopeCssText(cssText, selector, hostSelector);
-        return [scopedCssText].concat(commentsWithHash).join('\n');
+        return this._scopeCssText(cssText, selector, hostSelector) + sourceMappingUrl;
     };
     /**
      * @param {?} cssText
@@ -30150,7 +29732,7 @@ var ShadowCss = /** @class */ (function () {
     };
     return ShadowCss;
 }());
-var SafeSelector = /** @class */ (function () {
+var SafeSelector = (function () {
     function SafeSelector(selector) {
         var _this = this;
         this.placeholders = [];
@@ -30228,20 +29810,22 @@ var _commentRe = /\/\*\s*[\s\S]*?\*\//g;
 function stripComments(input) {
     return input.replace(_commentRe, '');
 }
-var _commentWithHashRe = /\/\*\s*#\s*source(Mapping)?URL=[\s\S]+?\*\//g;
+// all comments except inline source mapping
+var _sourceMappingUrlRe = /\/\*\s*#\s*sourceMappingURL=[\s\S]+?\*\//;
 /**
  * @param {?} input
  * @return {?}
  */
-function extractCommentsWithHash(input) {
-    return input.match(_commentWithHashRe) || [];
+function extractSourceMappingUrl(input) {
+    var /** @type {?} */ matcher = input.match(_sourceMappingUrlRe);
+    return matcher ? matcher[0] : '';
 }
 var _ruleRe = /(\s*)([^;\{\}]+?)(\s*)((?:{%BLOCK%}?\s*;?)|(?:\s*;))/g;
 var _curlyRe = /([{}])/g;
 var OPEN_CURLY = '{';
 var CLOSE_CURLY = '}';
 var BLOCK_PLACEHOLDER = '%BLOCK%';
-var CssRule = /** @class */ (function () {
+var CssRule = (function () {
     function CssRule(selector, content) {
         this.selector = selector;
         this.content = content;
@@ -30274,7 +29858,7 @@ function processRules(input, ruleCallback) {
         return "" + m[1] + rule.selector + m[3] + contentPrefix + rule.content + suffix;
     });
 }
-var StringWithEscapedBlocks = /** @class */ (function () {
+var StringWithEscapedBlocks = (function () {
     function StringWithEscapedBlocks(escapedString, blocks) {
         this.escapedString = escapedString;
         this.blocks = blocks;
@@ -30332,7 +29916,7 @@ function escapeBlocks(input) {
 var COMPONENT_VARIABLE = '%COMP%';
 var HOST_ATTR = "_nghost-" + COMPONENT_VARIABLE;
 var CONTENT_ATTR = "_ngcontent-" + COMPONENT_VARIABLE;
-var StylesCompileDependency = /** @class */ (function () {
+var StylesCompileDependency = (function () {
     function StylesCompileDependency(name, moduleUrl, setValue) {
         this.name = name;
         this.moduleUrl = moduleUrl;
@@ -30340,7 +29924,7 @@ var StylesCompileDependency = /** @class */ (function () {
     }
     return StylesCompileDependency;
 }());
-var CompiledStylesheet = /** @class */ (function () {
+var CompiledStylesheet = (function () {
     function CompiledStylesheet(outputCtx, stylesVar, dependencies, isShimmed, meta) {
         this.outputCtx = outputCtx;
         this.stylesVar = stylesVar;
@@ -30350,7 +29934,7 @@ var CompiledStylesheet = /** @class */ (function () {
     }
     return CompiledStylesheet;
 }());
-var StyleCompiler = /** @class */ (function () {
+var StyleCompiler = (function () {
     function StyleCompiler(_urlResolver) {
         this._urlResolver = _urlResolver;
         this._shadowCss = new ShadowCss();
@@ -30517,7 +30101,7 @@ function replaceNgsp(value) {
  * whitespace removal. The default option for whitespace removal will be revisited in Angular 6
  * and might be changed to "on" by default.
  */
-var WhitespaceVisitor = /** @class */ (function () {
+var WhitespaceVisitor = (function () {
     function WhitespaceVisitor() {
     }
     /**
@@ -30653,7 +30237,7 @@ function expandNodes(nodes) {
     var /** @type {?} */ expander = new _Expander();
     return new ExpansionResult(visitAll(expander, nodes), expander.isExpanded, expander.errors);
 }
-var ExpansionResult = /** @class */ (function () {
+var ExpansionResult = (function () {
     function ExpansionResult(nodes, expanded, errors) {
         this.nodes = nodes;
         this.expanded = expanded;
@@ -30661,7 +30245,7 @@ var ExpansionResult = /** @class */ (function () {
     }
     return ExpansionResult;
 }());
-var ExpansionError = /** @class */ (function (_super) {
+var ExpansionError = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ExpansionError, _super);
     function ExpansionError(span, errorMsg) {
         return _super.call(this, span, errorMsg) || this;
@@ -30673,7 +30257,7 @@ var ExpansionError = /** @class */ (function (_super) {
  *
  * \@internal
  */
-var _Expander = /** @class */ (function () {
+var _Expander = (function () {
     function _Expander() {
         this.isExpanded = false;
         this.errors = [];
@@ -30794,13 +30378,6 @@ function _expandDefaultForm(ast, errors) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var PROPERTY_PARTS_SEPARATOR = '.';
 var ATTRIBUTE_PREFIX = 'attr';
 var CLASS_PREFIX = 'class';
@@ -30818,7 +30395,7 @@ BoundPropertyType[BoundPropertyType.ANIMATION] = "ANIMATION";
 /**
  * Represents a parsed property.
  */
-var BoundProperty = /** @class */ (function () {
+var BoundProperty = (function () {
     function BoundProperty(name, expression, type, sourceSpan) {
         this.name = name;
         this.expression = expression;
@@ -30832,7 +30409,7 @@ var BoundProperty = /** @class */ (function () {
 /**
  * Parses bindings in templates and in the directive host area.
  */
-var BindingParser = /** @class */ (function () {
+var BindingParser = (function () {
     function BindingParser(_exprParser, _interpolationConfig, _schemaRegistry, pipes, _targetErrors) {
         var _this = this;
         this._exprParser = _exprParser;
@@ -31401,7 +30978,7 @@ var BindingParser = /** @class */ (function () {
     };
     return BindingParser;
 }());
-var PipeCollector = /** @class */ (function (_super) {
+var PipeCollector = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(PipeCollector, _super);
     function PipeCollector() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -31507,14 +31084,14 @@ function warnOnlyOnce(warnings) {
         return true;
     };
 }
-var TemplateParseError = /** @class */ (function (_super) {
+var TemplateParseError = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(TemplateParseError, _super);
     function TemplateParseError(message, span, level) {
         return _super.call(this, span, message, level) || this;
     }
     return TemplateParseError;
 }(ParseError));
-var TemplateParseResult = /** @class */ (function () {
+var TemplateParseResult = (function () {
     function TemplateParseResult(templateAst, usedPipes, errors) {
         this.templateAst = templateAst;
         this.usedPipes = usedPipes;
@@ -31522,7 +31099,7 @@ var TemplateParseResult = /** @class */ (function () {
     }
     return TemplateParseResult;
 }());
-var TemplateParser = /** @class */ (function () {
+var TemplateParser = (function () {
     function TemplateParser(_config, _reflector, _exprParser, _schemaRegistry, _htmlParser, _console, transforms) {
         this._config = _config;
         this._reflector = _reflector;
@@ -31708,7 +31285,7 @@ var TemplateParser = /** @class */ (function () {
     };
     return TemplateParser;
 }());
-var TemplateParseVisitor = /** @class */ (function () {
+var TemplateParseVisitor = (function () {
     function TemplateParseVisitor(reflector, config, providerViewContext, directives, _bindingParser, _schemaRegistry, _schemas, _targetErrors) {
         var _this = this;
         this.reflector = reflector;
@@ -32221,7 +31798,7 @@ var TemplateParseVisitor = /** @class */ (function () {
      */
     function (directives) {
         return this._findComponentDirectives(directives)
-            .map(function (directive) { return ((identifierName(directive.directive.type))); });
+            .map(function (directive) { return /** @type {?} */ ((identifierName(directive.directive.type))); });
     };
     /**
      * @param {?} directives
@@ -32377,7 +31954,7 @@ var TemplateParseVisitor = /** @class */ (function () {
     };
     return TemplateParseVisitor;
 }());
-var NonBindableVisitor = /** @class */ (function () {
+var NonBindableVisitor = (function () {
     function NonBindableVisitor() {
     }
     /**
@@ -32475,7 +32052,7 @@ var NonBindableVisitor = /** @class */ (function () {
  *
  * would be {name: 'myMenu', value: 'coolMenu', sourceSpan: ...}
  */
-var ElementOrDirectiveRef = /** @class */ (function () {
+var ElementOrDirectiveRef = (function () {
     function ElementOrDirectiveRef(name, value, sourceSpan) {
         this.name = name;
         this.value = value;
@@ -32512,7 +32089,7 @@ function splitExportAs(exportAs) {
 function splitClasses(classAttrValue) {
     return classAttrValue.trim().split(/\s+/g);
 }
-var ElementContext = /** @class */ (function () {
+var ElementContext = (function () {
     function ElementContext(isTemplateElement, _ngContentIndexMatcher, _wildcardNgContentIndex, providerContext) {
         this.isTemplateElement = isTemplateElement;
         this._ngContentIndexMatcher = _ngContentIndexMatcher;
@@ -32653,7 +32230,7 @@ function isTemplate(el, enableLegacyTemplate, reportDeprecation) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var EventHandlerVars = /** @class */ (function () {
+var EventHandlerVars = (function () {
     function EventHandlerVars() {
     }
     EventHandlerVars.event = variable('$event');
@@ -32663,7 +32240,7 @@ var EventHandlerVars = /** @class */ (function () {
  * @record
  */
 
-var ConvertActionBindingResult = /** @class */ (function () {
+var ConvertActionBindingResult = (function () {
     function ConvertActionBindingResult(stmts, allowDefault) {
         this.stmts = stmts;
         this.allowDefault = allowDefault;
@@ -32741,23 +32318,13 @@ function convertActionBinding(localResolver, implicitReceiver, action, bindingId
 function convertPropertyBindingBuiltins(converterFactory, ast) {
     return convertBuiltins(converterFactory, ast);
 }
-var ConvertPropertyBindingResult = /** @class */ (function () {
+var ConvertPropertyBindingResult = (function () {
     function ConvertPropertyBindingResult(stmts, currValExpr) {
         this.stmts = stmts;
         this.currValExpr = currValExpr;
     }
     return ConvertPropertyBindingResult;
 }());
-/** @enum {number} */
-var BindingForm = {
-    // The general form of binding expression, supports all expressions.
-    General: 0,
-    // Try to generate a simple binding (no temporaries or statements)
-    // otherise generate a general binding
-    TrySimple: 1,
-};
-BindingForm[BindingForm.General] = "General";
-BindingForm[BindingForm.TrySimple] = "TrySimple";
 /**
  * Converts the given expression AST into an executable output AST, assuming the expression
  * is used in property binding. The expression has to be preprocessed via
@@ -32766,10 +32333,9 @@ BindingForm[BindingForm.TrySimple] = "TrySimple";
  * @param {?} implicitReceiver
  * @param {?} expressionWithoutBuiltins
  * @param {?} bindingId
- * @param {?} form
  * @return {?}
  */
-function convertPropertyBinding(localResolver, implicitReceiver, expressionWithoutBuiltins, bindingId, form) {
+function convertPropertyBinding(localResolver, implicitReceiver, expressionWithoutBuiltins, bindingId) {
     if (!localResolver) {
         localResolver = new DefaultLocalResolver();
     }
@@ -32782,10 +32348,7 @@ function convertPropertyBinding(localResolver, implicitReceiver, expressionWitho
             stmts.push(temporaryDeclaration(bindingId, i));
         }
     }
-    else if (form == BindingForm.TrySimple) {
-        return new ConvertPropertyBindingResult([], outputExpr);
-    }
-    stmts.push(currValExpr.set(outputExpr).toDeclStmt(DYNAMIC_TYPE, [StmtModifier.Final]));
+    stmts.push(currValExpr.set(outputExpr).toDeclStmt(null, [StmtModifier.Final]));
     return new ConvertPropertyBindingResult(stmts, currValExpr);
 }
 /**
@@ -32864,7 +32427,7 @@ function convertToStatementIfNeeded(mode, expr) {
         return expr;
     }
 }
-var _BuiltinAstConverter = /** @class */ (function (_super) {
+var _BuiltinAstConverter = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(_BuiltinAstConverter, _super);
     function _BuiltinAstConverter(_converterFactory) {
         var _this = _super.call(this) || this;
@@ -32918,7 +32481,7 @@ var _BuiltinAstConverter = /** @class */ (function (_super) {
     };
     return _BuiltinAstConverter;
 }(AstTransformer));
-var _AstToIrVisitor = /** @class */ (function () {
+var _AstToIrVisitor = (function () {
     function _AstToIrVisitor(_localResolver, _implicitReceiver, bindingId) {
         this._localResolver = _localResolver;
         this._implicitReceiver = _implicitReceiver;
@@ -33161,12 +32724,7 @@ var _AstToIrVisitor = /** @class */ (function () {
      * @return {?}
      */
     function (ast, mode) {
-        // For literal values of null, undefined, true, or false allow type inteference
-        // to infer the type.
-        var /** @type {?} */ type = ast.value === null || ast.value === undefined || ast.value === true || ast.value === true ?
-            INFERRED_TYPE :
-            undefined;
-        return convertToStatementIfNeeded(mode, literal(ast.value, type));
+        return convertToStatementIfNeeded(mode, literal(ast.value));
     };
     /**
      * @param {?} name
@@ -33188,13 +32746,6 @@ var _AstToIrVisitor = /** @class */ (function () {
      * @return {?}
      */
     function (ast, mode) {
-        if (ast.receiver instanceof ImplicitReceiver && ast.name == '$any') {
-            var /** @type {?} */ args = /** @type {?} */ (this.visitAll(ast.args, _Mode.Expression));
-            if (args.length != 1) {
-                throw new Error("Invalid call to $any, expected 1 argument but received " + (args.length || 'none'));
-            }
-            return (/** @type {?} */ (args[0])).cast(DYNAMIC_TYPE);
-        }
         var /** @type {?} */ leftMostSafe = this.leftMostSafeNode(ast);
         if (leftMostSafe) {
             return this.convertSafeAccess(ast, leftMostSafe, mode);
@@ -33717,7 +33268,7 @@ function flattenStatements(arg, output) {
         output.push(arg);
     }
 }
-var DefaultLocalResolver = /** @class */ (function () {
+var DefaultLocalResolver = (function () {
     function DefaultLocalResolver() {
     }
     /**
@@ -33763,7 +33314,7 @@ function convertStmtIntoExpression(stmt) {
     }
     return null;
 }
-var BuiltinFunctionCall = /** @class */ (function (_super) {
+var BuiltinFunctionCall = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(BuiltinFunctionCall, _super);
     function BuiltinFunctionCall(span, args, converter) {
         var _this = _super.call(this, span, null, args) || this;
@@ -33779,16 +33330,9 @@ var BuiltinFunctionCall = /** @class */ (function (_super) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Generates code that is used to type check templates.
  */
-var TypeCheckCompiler = /** @class */ (function () {
+var TypeCheckCompiler = (function () {
     function TypeCheckCompiler(options, reflector) {
         this.options = options;
         this.reflector = reflector;
@@ -33813,7 +33357,6 @@ var TypeCheckCompiler = /** @class */ (function () {
      * @param {?} template
      * @param {?} usedPipes
      * @param {?} externalReferenceVars
-     * @param {?} ctx
      * @return {?}
      */
     TypeCheckCompiler.prototype.compileComponent = /**
@@ -33828,49 +33371,26 @@ var TypeCheckCompiler = /** @class */ (function () {
      * @param {?} template
      * @param {?} usedPipes
      * @param {?} externalReferenceVars
-     * @param {?} ctx
      * @return {?}
      */
-    function (componentId, component, template, usedPipes, externalReferenceVars, ctx) {
+    function (componentId, component, template, usedPipes, externalReferenceVars) {
         var _this = this;
         var /** @type {?} */ pipes = new Map();
         usedPipes.forEach(function (p) { return pipes.set(p.name, p.type.reference); });
         var /** @type {?} */ embeddedViewCount = 0;
-        var /** @type {?} */ viewBuilderFactory = function (parent, guards) {
+        var /** @type {?} */ viewBuilderFactory = function (parent) {
             var /** @type {?} */ embeddedViewIndex = embeddedViewCount++;
-            return new ViewBuilder(_this.options, _this.reflector, externalReferenceVars, parent, component.type.reference, component.isHost, embeddedViewIndex, pipes, guards, ctx, viewBuilderFactory);
+            return new ViewBuilder(_this.options, _this.reflector, externalReferenceVars, parent, component.type.reference, component.isHost, embeddedViewIndex, pipes, viewBuilderFactory);
         };
-        var /** @type {?} */ visitor = viewBuilderFactory(null, []);
+        var /** @type {?} */ visitor = viewBuilderFactory(null);
         visitor.visitAll([], template);
         return visitor.build(componentId);
     };
     return TypeCheckCompiler;
 }());
 var DYNAMIC_VAR_NAME = '_any';
-var TypeCheckLocalResolver = /** @class */ (function () {
-    function TypeCheckLocalResolver() {
-    }
-    /**
-     * @param {?} name
-     * @return {?}
-     */
-    TypeCheckLocalResolver.prototype.getLocal = /**
-     * @param {?} name
-     * @return {?}
-     */
-    function (name) {
-        if (name === EventHandlerVars.event.name) {
-            // References to the event should not be type-checked.
-            // TODO(chuckj): determine a better type for the event.
-            return variable(DYNAMIC_VAR_NAME);
-        }
-        return null;
-    };
-    return TypeCheckLocalResolver;
-}());
-var defaultResolver = new TypeCheckLocalResolver();
-var ViewBuilder = /** @class */ (function () {
-    function ViewBuilder(options, reflector, externalReferenceVars, parent, component, isHostComponent, embeddedViewIndex, pipes, guards, ctx, viewBuilderFactory) {
+var ViewBuilder = (function () {
+    function ViewBuilder(options, reflector, externalReferenceVars, parent, component, isHostComponent, embeddedViewIndex, pipes, viewBuilderFactory) {
         this.options = options;
         this.reflector = reflector;
         this.externalReferenceVars = externalReferenceVars;
@@ -33879,8 +33399,6 @@ var ViewBuilder = /** @class */ (function () {
         this.isHostComponent = isHostComponent;
         this.embeddedViewIndex = embeddedViewIndex;
         this.pipes = pipes;
-        this.guards = guards;
-        this.ctx = ctx;
         this.viewBuilderFactory = viewBuilderFactory;
         this.refOutputVars = new Map();
         this.variables = [];
@@ -33911,33 +33429,6 @@ var ViewBuilder = /** @class */ (function () {
             throw new Error("Illegal State: referring to a type without a variable " + JSON.stringify(type));
         }
         return varName;
-    };
-    /**
-     * @param {?} ast
-     * @return {?}
-     */
-    ViewBuilder.prototype.getTypeGuardExpressions = /**
-     * @param {?} ast
-     * @return {?}
-     */
-    function (ast) {
-        var /** @type {?} */ result = this.guards.slice();
-        for (var _i = 0, _a = ast.directives; _i < _a.length; _i++) {
-            var directive = _a[_i];
-            for (var _b = 0, _c = directive.inputs; _b < _c.length; _b++) {
-                var input = _c[_b];
-                var /** @type {?} */ guard = directive.directive.guards[input.directiveName];
-                if (guard) {
-                    var /** @type {?} */ useIf = guard === 'UseIf';
-                    result.push({
-                        guard: guard,
-                        useIf: useIf,
-                        expression: /** @type {?} */ ({ context: this.component, value: input.value })
-                    });
-                }
-            }
-        }
-        return result;
     };
     /**
      * @param {?} variables
@@ -33972,37 +33463,18 @@ var ViewBuilder = /** @class */ (function () {
         this.updates.forEach(function (expression) {
             var _a = _this.preprocessUpdateExpression(expression), sourceSpan = _a.sourceSpan, context = _a.context, value = _a.value;
             var /** @type {?} */ bindingId = "" + bindingCount++;
-            var /** @type {?} */ nameResolver = context === _this.component ? _this : defaultResolver;
-            var _b = convertPropertyBinding(nameResolver, variable(_this.getOutputVar(context)), value, bindingId, BindingForm.General), stmts = _b.stmts, currValExpr = _b.currValExpr;
+            var /** @type {?} */ nameResolver = context === _this.component ? _this : null;
+            var _b = convertPropertyBinding(nameResolver, variable(_this.getOutputVar(context)), value, bindingId), stmts = _b.stmts, currValExpr = _b.currValExpr;
             stmts.push(new ExpressionStatement(currValExpr));
             viewStmts.push.apply(viewStmts, stmts.map(function (stmt) { return applySourceSpanToStatementIfNeeded(stmt, sourceSpan); }));
         });
         this.actions.forEach(function (_a) {
             var sourceSpan = _a.sourceSpan, context = _a.context, value = _a.value;
             var /** @type {?} */ bindingId = "" + bindingCount++;
-            var /** @type {?} */ nameResolver = context === _this.component ? _this : defaultResolver;
+            var /** @type {?} */ nameResolver = context === _this.component ? _this : null;
             var stmts = convertActionBinding(nameResolver, variable(_this.getOutputVar(context)), value, bindingId).stmts;
             viewStmts.push.apply(viewStmts, stmts.map(function (stmt) { return applySourceSpanToStatementIfNeeded(stmt, sourceSpan); }));
         });
-        if (this.guards.length) {
-            var /** @type {?} */ guardExpression = undefined;
-            for (var _i = 0, _a = this.guards; _i < _a.length; _i++) {
-                var guard = _a[_i];
-                var _b = this.preprocessUpdateExpression(guard.expression), context = _b.context, value = _b.value;
-                var /** @type {?} */ bindingId = "" + bindingCount++;
-                var /** @type {?} */ nameResolver = context === this.component ? this : defaultResolver;
-                // We only support support simple expressions and ignore others as they
-                // are unlikely to affect type narrowing.
-                var _c = convertPropertyBinding(nameResolver, variable(this.getOutputVar(context)), value, bindingId, BindingForm.TrySimple), stmts = _c.stmts, currValExpr = _c.currValExpr;
-                if (stmts.length == 0) {
-                    var /** @type {?} */ guardClause = guard.useIf ? currValExpr : this.ctx.importExpr(guard.guard).callFn([currValExpr]);
-                    guardExpression = guardExpression ? guardExpression.and(guardClause) : guardClause;
-                }
-            }
-            if (guardExpression) {
-                viewStmts = [new IfStmt(guardExpression, viewStmts)];
-            }
-        }
         var /** @type {?} */ viewName = "_View_" + componentId + "_" + this.embeddedViewIndex;
         var /** @type {?} */ viewFactory = new DeclareFunctionStmt(viewName, [], viewStmts);
         targetStatements.push(viewFactory);
@@ -34042,12 +33514,7 @@ var ViewBuilder = /** @class */ (function () {
         // for the context in any embedded view.
         // We keep this behaivor behind a flag for now.
         if (this.options.fullTemplateTypeCheck) {
-            // Find any applicable type guards. For example, NgIf has a type guard on ngIf
-            // (see NgIf.ngIfTypeGuard) that can be used to indicate that a template is only
-            // stamped out if ngIf is truthy so any bindings in the template can assume that,
-            // if a nullable type is used for ngIf, that expression is not null or undefined.
-            var /** @type {?} */ guards = this.getTypeGuardExpressions(ast);
-            var /** @type {?} */ childVisitor = this.viewBuilderFactory(this, guards);
+            var /** @type {?} */ childVisitor = this.viewBuilderFactory(this);
             this.children.push(childVisitor);
             childVisitor.visitAll(ast.variables, ast.children);
         }
@@ -34330,14 +33797,14 @@ var ViewBuilder = /** @class */ (function () {
 var CLASS_ATTR$1 = 'class';
 var STYLE_ATTR = 'style';
 var IMPLICIT_TEMPLATE_VAR = '\$implicit';
-var ViewCompileResult = /** @class */ (function () {
+var ViewCompileResult = (function () {
     function ViewCompileResult(viewClassVar, rendererTypeVar) {
         this.viewClassVar = viewClassVar;
         this.rendererTypeVar = rendererTypeVar;
     }
     return ViewCompileResult;
 }());
-var ViewCompiler = /** @class */ (function () {
+var ViewCompiler = (function () {
     function ViewCompiler(_reflector) {
         this._reflector = _reflector;
     }
@@ -34396,7 +33863,7 @@ var CHECK_VAR = variable('_ck');
 var COMP_VAR = variable('_co');
 var EVENT_NAME_VAR = variable('en');
 var ALLOW_DEFAULT_VAR = variable("ad");
-var ViewBuilder$1 = /** @class */ (function () {
+var ViewBuilder$1 = (function () {
     function ViewBuilder(reflector, outputCtx, parent, component, embeddedViewIndex, usedPipes, staticQueryIds, viewBuilderFactory) {
         this.reflector = reflector;
         this.outputCtx = outputCtx;
@@ -34415,8 +33882,8 @@ var ViewBuilder$1 = /** @class */ (function () {
         // for the context in any embedded view. We keep this behaivor for now
         // to be able to introduce the new view compiler without too many errors.
         this.compType = this.embeddedViewIndex > 0 ?
-            DYNAMIC_TYPE : /** @type {?} */
-            ((expressionType(outputCtx.importExpr(this.component.type.reference))));
+            DYNAMIC_TYPE :
+            /** @type {?} */ ((expressionType(outputCtx.importExpr(this.component.type.reference))));
         this.viewName = viewClassName(this.component.type.reference, this.embeddedViewIndex);
     }
     /**
@@ -35279,7 +34746,7 @@ var ViewBuilder$1 = /** @class */ (function () {
                 var sourceSpan = _a.sourceSpan, context = _a.context, value = _a.value;
                 var /** @type {?} */ bindingId = "" + updateBindingCount++;
                 var /** @type {?} */ nameResolver = context === COMP_VAR ? self : null;
-                var _b = convertPropertyBinding(nameResolver, context, value, bindingId, BindingForm.General), stmts = _b.stmts, currValExpr = _b.currValExpr;
+                var _b = convertPropertyBinding(nameResolver, context, value, bindingId), stmts = _b.stmts, currValExpr = _b.currValExpr;
                 updateStmts.push.apply(updateStmts, stmts.map(function (stmt) { return applySourceSpanToStatementIfNeeded(stmt, sourceSpan); }));
                 return applySourceSpanToExpressionIfNeeded(currValExpr, sourceSpan);
             });
@@ -35616,16 +35083,9 @@ function elementEventFullName(target, name) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * A container for message extracted from the templates.
  */
-var MessageBundle = /** @class */ (function () {
+var MessageBundle = (function () {
     function MessageBundle(_htmlParser, _implicitTags, _implicitAttrs, _locale) {
         if (_locale === void 0) { _locale = null; }
         this._htmlParser = _htmlParser;
@@ -35708,7 +35168,7 @@ var MessageBundle = /** @class */ (function () {
     };
     return MessageBundle;
 }());
-var MapPlaceholderNames = /** @class */ (function (_super) {
+var MapPlaceholderNames = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(MapPlaceholderNames, _super);
     function MapPlaceholderNames() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -35784,7 +35244,7 @@ var MapPlaceholderNames = /** @class */ (function (_super) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var GeneratedFile = /** @class */ (function () {
+var GeneratedFile = (function () {
     function GeneratedFile(srcFileUrl, genFileUrl, sourceOrStmts) {
         this.srcFileUrl = srcFileUrl;
         this.genFileUrl = genFileUrl;
@@ -35918,754 +35378,6 @@ function parseLazyRoute(route, reflector, module) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var ResolvedStaticSymbol = /** @class */ (function () {
-    function ResolvedStaticSymbol(symbol, metadata) {
-        this.symbol = symbol;
-        this.metadata = metadata;
-    }
-    return ResolvedStaticSymbol;
-}());
-/**
- * The host of the SymbolResolverHost disconnects the implementation from TypeScript / other
- * language
- * services and from underlying file systems.
- * @record
- */
-
-var SUPPORTED_SCHEMA_VERSION = 4;
-/**
- * This class is responsible for loading metadata per symbol,
- * and normalizing references between symbols.
- *
- * Internally, it only uses symbols without members,
- * and deduces the values for symbols with members based
- * on these symbols.
- */
-var StaticSymbolResolver = /** @class */ (function () {
-    function StaticSymbolResolver(host, staticSymbolCache, summaryResolver, errorRecorder) {
-        this.host = host;
-        this.staticSymbolCache = staticSymbolCache;
-        this.summaryResolver = summaryResolver;
-        this.errorRecorder = errorRecorder;
-        this.metadataCache = new Map();
-        this.resolvedSymbols = new Map();
-        this.resolvedFilePaths = new Set();
-        this.importAs = new Map();
-        this.symbolResourcePaths = new Map();
-        this.symbolFromFile = new Map();
-        this.knownFileNameToModuleNames = new Map();
-    }
-    /**
-     * @param {?} staticSymbol
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.resolveSymbol = /**
-     * @param {?} staticSymbol
-     * @return {?}
-     */
-    function (staticSymbol) {
-        if (staticSymbol.members.length > 0) {
-            return /** @type {?} */ ((this._resolveSymbolMembers(staticSymbol)));
-        }
-        // Note: always ask for a summary first,
-        // as we might have read shallow metadata via a .d.ts file
-        // for the symbol.
-        var /** @type {?} */ resultFromSummary = /** @type {?} */ ((this._resolveSymbolFromSummary(staticSymbol)));
-        if (resultFromSummary) {
-            return resultFromSummary;
-        }
-        var /** @type {?} */ resultFromCache = this.resolvedSymbols.get(staticSymbol);
-        if (resultFromCache) {
-            return resultFromCache;
-        }
-        // Note: Some users use libraries that were not compiled with ngc, i.e. they don't
-        // have summaries, only .d.ts files. So we always need to check both, the summary
-        // and metadata.
-        this._createSymbolsOf(staticSymbol.filePath);
-        return /** @type {?} */ ((this.resolvedSymbols.get(staticSymbol)));
-    };
-    /**
-     * getImportAs produces a symbol that can be used to import the given symbol.
-     * The import might be different than the symbol if the symbol is exported from
-     * a library with a summary; in which case we want to import the symbol from the
-     * ngfactory re-export instead of directly to avoid introducing a direct dependency
-     * on an otherwise indirect dependency.
-     *
-     * @param staticSymbol the symbol for which to generate a import symbol
-     */
-    /**
-     * getImportAs produces a symbol that can be used to import the given symbol.
-     * The import might be different than the symbol if the symbol is exported from
-     * a library with a summary; in which case we want to import the symbol from the
-     * ngfactory re-export instead of directly to avoid introducing a direct dependency
-     * on an otherwise indirect dependency.
-     *
-     * @param {?} staticSymbol the symbol for which to generate a import symbol
-     * @param {?=} useSummaries
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.getImportAs = /**
-     * getImportAs produces a symbol that can be used to import the given symbol.
-     * The import might be different than the symbol if the symbol is exported from
-     * a library with a summary; in which case we want to import the symbol from the
-     * ngfactory re-export instead of directly to avoid introducing a direct dependency
-     * on an otherwise indirect dependency.
-     *
-     * @param {?} staticSymbol the symbol for which to generate a import symbol
-     * @param {?=} useSummaries
-     * @return {?}
-     */
-    function (staticSymbol, useSummaries) {
-        if (useSummaries === void 0) { useSummaries = true; }
-        if (staticSymbol.members.length) {
-            var /** @type {?} */ baseSymbol = this.getStaticSymbol(staticSymbol.filePath, staticSymbol.name);
-            var /** @type {?} */ baseImportAs = this.getImportAs(baseSymbol, useSummaries);
-            return baseImportAs ?
-                this.getStaticSymbol(baseImportAs.filePath, baseImportAs.name, staticSymbol.members) :
-                null;
-        }
-        var /** @type {?} */ summarizedFileName = stripSummaryForJitFileSuffix(staticSymbol.filePath);
-        if (summarizedFileName !== staticSymbol.filePath) {
-            var /** @type {?} */ summarizedName = stripSummaryForJitNameSuffix(staticSymbol.name);
-            var /** @type {?} */ baseSymbol = this.getStaticSymbol(summarizedFileName, summarizedName, staticSymbol.members);
-            var /** @type {?} */ baseImportAs = this.getImportAs(baseSymbol, useSummaries);
-            return baseImportAs ?
-                this.getStaticSymbol(summaryForJitFileName(baseImportAs.filePath), summaryForJitName(baseImportAs.name), baseSymbol.members) :
-                null;
-        }
-        var /** @type {?} */ result = (useSummaries && this.summaryResolver.getImportAs(staticSymbol)) || null;
-        if (!result) {
-            result = /** @type {?} */ ((this.importAs.get(staticSymbol)));
-        }
-        return result;
-    };
-    /**
-     * getResourcePath produces the path to the original location of the symbol and should
-     * be used to determine the relative location of resource references recorded in
-     * symbol metadata.
-     */
-    /**
-     * getResourcePath produces the path to the original location of the symbol and should
-     * be used to determine the relative location of resource references recorded in
-     * symbol metadata.
-     * @param {?} staticSymbol
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.getResourcePath = /**
-     * getResourcePath produces the path to the original location of the symbol and should
-     * be used to determine the relative location of resource references recorded in
-     * symbol metadata.
-     * @param {?} staticSymbol
-     * @return {?}
-     */
-    function (staticSymbol) {
-        return this.symbolResourcePaths.get(staticSymbol) || staticSymbol.filePath;
-    };
-    /**
-     * getTypeArity returns the number of generic type parameters the given symbol
-     * has. If the symbol is not a type the result is null.
-     */
-    /**
-     * getTypeArity returns the number of generic type parameters the given symbol
-     * has. If the symbol is not a type the result is null.
-     * @param {?} staticSymbol
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.getTypeArity = /**
-     * getTypeArity returns the number of generic type parameters the given symbol
-     * has. If the symbol is not a type the result is null.
-     * @param {?} staticSymbol
-     * @return {?}
-     */
-    function (staticSymbol) {
-        // If the file is a factory/ngsummary file, don't resolve the symbol as doing so would
-        // cause the metadata for an factory/ngsummary file to be loaded which doesn't exist.
-        // All references to generated classes must include the correct arity whenever
-        // generating code.
-        if (isGeneratedFile(staticSymbol.filePath)) {
-            return null;
-        }
-        var /** @type {?} */ resolvedSymbol = unwrapResolvedMetadata(this.resolveSymbol(staticSymbol));
-        while (resolvedSymbol && resolvedSymbol.metadata instanceof StaticSymbol) {
-            resolvedSymbol = unwrapResolvedMetadata(this.resolveSymbol(resolvedSymbol.metadata));
-        }
-        return (resolvedSymbol && resolvedSymbol.metadata && resolvedSymbol.metadata.arity) || null;
-    };
-    /**
-     * @param {?} filePath
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.getKnownModuleName = /**
-     * @param {?} filePath
-     * @return {?}
-     */
-    function (filePath) {
-        return this.knownFileNameToModuleNames.get(filePath) || null;
-    };
-    /**
-     * @param {?} sourceSymbol
-     * @param {?} targetSymbol
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.recordImportAs = /**
-     * @param {?} sourceSymbol
-     * @param {?} targetSymbol
-     * @return {?}
-     */
-    function (sourceSymbol, targetSymbol) {
-        sourceSymbol.assertNoMembers();
-        targetSymbol.assertNoMembers();
-        this.importAs.set(sourceSymbol, targetSymbol);
-    };
-    /**
-     * @param {?} fileName
-     * @param {?} moduleName
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.recordModuleNameForFileName = /**
-     * @param {?} fileName
-     * @param {?} moduleName
-     * @return {?}
-     */
-    function (fileName, moduleName) {
-        this.knownFileNameToModuleNames.set(fileName, moduleName);
-    };
-    /**
-     * Invalidate all information derived from the given file.
-     *
-     * @param fileName the file to invalidate
-     */
-    /**
-     * Invalidate all information derived from the given file.
-     *
-     * @param {?} fileName the file to invalidate
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.invalidateFile = /**
-     * Invalidate all information derived from the given file.
-     *
-     * @param {?} fileName the file to invalidate
-     * @return {?}
-     */
-    function (fileName) {
-        this.metadataCache.delete(fileName);
-        this.resolvedFilePaths.delete(fileName);
-        var /** @type {?} */ symbols = this.symbolFromFile.get(fileName);
-        if (symbols) {
-            this.symbolFromFile.delete(fileName);
-            for (var _i = 0, symbols_1 = symbols; _i < symbols_1.length; _i++) {
-                var symbol = symbols_1[_i];
-                this.resolvedSymbols.delete(symbol);
-                this.importAs.delete(symbol);
-                this.symbolResourcePaths.delete(symbol);
-            }
-        }
-    };
-    /* @internal */
-    /**
-     * @template T
-     * @param {?} cb
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.ignoreErrorsFor = /**
-     * @template T
-     * @param {?} cb
-     * @return {?}
-     */
-    function (cb) {
-        var /** @type {?} */ recorder = this.errorRecorder;
-        this.errorRecorder = function () { };
-        try {
-            return cb();
-        }
-        finally {
-            this.errorRecorder = recorder;
-        }
-    };
-    /**
-     * @param {?} staticSymbol
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype._resolveSymbolMembers = /**
-     * @param {?} staticSymbol
-     * @return {?}
-     */
-    function (staticSymbol) {
-        var /** @type {?} */ members = staticSymbol.members;
-        var /** @type {?} */ baseResolvedSymbol = this.resolveSymbol(this.getStaticSymbol(staticSymbol.filePath, staticSymbol.name));
-        if (!baseResolvedSymbol) {
-            return null;
-        }
-        var /** @type {?} */ baseMetadata = unwrapResolvedMetadata(baseResolvedSymbol.metadata);
-        if (baseMetadata instanceof StaticSymbol) {
-            return new ResolvedStaticSymbol(staticSymbol, this.getStaticSymbol(baseMetadata.filePath, baseMetadata.name, members));
-        }
-        else if (baseMetadata && baseMetadata.__symbolic === 'class') {
-            if (baseMetadata.statics && members.length === 1) {
-                return new ResolvedStaticSymbol(staticSymbol, baseMetadata.statics[members[0]]);
-            }
-        }
-        else {
-            var /** @type {?} */ value = baseMetadata;
-            for (var /** @type {?} */ i = 0; i < members.length && value; i++) {
-                value = value[members[i]];
-            }
-            return new ResolvedStaticSymbol(staticSymbol, value);
-        }
-        return null;
-    };
-    /**
-     * @param {?} staticSymbol
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype._resolveSymbolFromSummary = /**
-     * @param {?} staticSymbol
-     * @return {?}
-     */
-    function (staticSymbol) {
-        var /** @type {?} */ summary = this.summaryResolver.resolveSummary(staticSymbol);
-        return summary ? new ResolvedStaticSymbol(staticSymbol, summary.metadata) : null;
-    };
-    /**
-     * getStaticSymbol produces a Type whose metadata is known but whose implementation is not loaded.
-     * All types passed to the StaticResolver should be pseudo-types returned by this method.
-     *
-     * @param declarationFile the absolute path of the file where the symbol is declared
-     * @param name the name of the type.
-     * @param members a symbol for a static member of the named type
-     */
-    /**
-     * getStaticSymbol produces a Type whose metadata is known but whose implementation is not loaded.
-     * All types passed to the StaticResolver should be pseudo-types returned by this method.
-     *
-     * @param {?} declarationFile the absolute path of the file where the symbol is declared
-     * @param {?} name the name of the type.
-     * @param {?=} members a symbol for a static member of the named type
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.getStaticSymbol = /**
-     * getStaticSymbol produces a Type whose metadata is known but whose implementation is not loaded.
-     * All types passed to the StaticResolver should be pseudo-types returned by this method.
-     *
-     * @param {?} declarationFile the absolute path of the file where the symbol is declared
-     * @param {?} name the name of the type.
-     * @param {?=} members a symbol for a static member of the named type
-     * @return {?}
-     */
-    function (declarationFile, name, members) {
-        return this.staticSymbolCache.get(declarationFile, name, members);
-    };
-    /**
-     * hasDecorators checks a file's metadata for the presense of decorators without evalutating the
-     * metadata.
-     *
-     * @param filePath the absolute path to examine for decorators.
-     * @returns true if any class in the file has a decorator.
-     */
-    /**
-     * hasDecorators checks a file's metadata for the presense of decorators without evalutating the
-     * metadata.
-     *
-     * @param {?} filePath the absolute path to examine for decorators.
-     * @return {?} true if any class in the file has a decorator.
-     */
-    StaticSymbolResolver.prototype.hasDecorators = /**
-     * hasDecorators checks a file's metadata for the presense of decorators without evalutating the
-     * metadata.
-     *
-     * @param {?} filePath the absolute path to examine for decorators.
-     * @return {?} true if any class in the file has a decorator.
-     */
-    function (filePath) {
-        var /** @type {?} */ metadata = this.getModuleMetadata(filePath);
-        if (metadata['metadata']) {
-            return Object.keys(metadata['metadata']).some(function (metadataKey) {
-                var /** @type {?} */ entry = metadata['metadata'][metadataKey];
-                return entry && entry.__symbolic === 'class' && entry.decorators;
-            });
-        }
-        return false;
-    };
-    /**
-     * @param {?} filePath
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.getSymbolsOf = /**
-     * @param {?} filePath
-     * @return {?}
-     */
-    function (filePath) {
-        var /** @type {?} */ summarySymbols = this.summaryResolver.getSymbolsOf(filePath);
-        if (summarySymbols) {
-            return summarySymbols;
-        }
-        // Note: Some users use libraries that were not compiled with ngc, i.e. they don't
-        // have summaries, only .d.ts files, but `summaryResolver.isLibraryFile` returns true.
-        this._createSymbolsOf(filePath);
-        var /** @type {?} */ metadataSymbols = [];
-        this.resolvedSymbols.forEach(function (resolvedSymbol) {
-            if (resolvedSymbol.symbol.filePath === filePath) {
-                metadataSymbols.push(resolvedSymbol.symbol);
-            }
-        });
-        return metadataSymbols;
-    };
-    /**
-     * @param {?} filePath
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype._createSymbolsOf = /**
-     * @param {?} filePath
-     * @return {?}
-     */
-    function (filePath) {
-        var _this = this;
-        if (this.resolvedFilePaths.has(filePath)) {
-            return;
-        }
-        this.resolvedFilePaths.add(filePath);
-        var /** @type {?} */ resolvedSymbols = [];
-        var /** @type {?} */ metadata = this.getModuleMetadata(filePath);
-        if (metadata['importAs']) {
-            // Index bundle indices should use the importAs module name defined
-            // in the bundle.
-            this.knownFileNameToModuleNames.set(filePath, metadata['importAs']);
-        }
-        // handle the symbols in one of the re-export location
-        if (metadata['exports']) {
-            var _loop_1 = function (moduleExport) {
-                // handle the symbols in the list of explicitly re-exported symbols.
-                if (moduleExport.export) {
-                    moduleExport.export.forEach(function (exportSymbol) {
-                        var /** @type {?} */ symbolName;
-                        if (typeof exportSymbol === 'string') {
-                            symbolName = exportSymbol;
-                        }
-                        else {
-                            symbolName = exportSymbol.as;
-                        }
-                        symbolName = unescapeIdentifier(symbolName);
-                        var /** @type {?} */ symName = symbolName;
-                        if (typeof exportSymbol !== 'string') {
-                            symName = unescapeIdentifier(exportSymbol.name);
-                        }
-                        var /** @type {?} */ resolvedModule = _this.resolveModule(moduleExport.from, filePath);
-                        if (resolvedModule) {
-                            var /** @type {?} */ targetSymbol = _this.getStaticSymbol(resolvedModule, symName);
-                            var /** @type {?} */ sourceSymbol = _this.getStaticSymbol(filePath, symbolName);
-                            resolvedSymbols.push(_this.createExport(sourceSymbol, targetSymbol));
-                        }
-                    });
-                }
-                else {
-                    // handle the symbols via export * directives.
-                    var /** @type {?} */ resolvedModule = this_1.resolveModule(moduleExport.from, filePath);
-                    if (resolvedModule) {
-                        var /** @type {?} */ nestedExports = this_1.getSymbolsOf(resolvedModule);
-                        nestedExports.forEach(function (targetSymbol) {
-                            var /** @type {?} */ sourceSymbol = _this.getStaticSymbol(filePath, targetSymbol.name);
-                            resolvedSymbols.push(_this.createExport(sourceSymbol, targetSymbol));
-                        });
-                    }
-                }
-            };
-            var this_1 = this;
-            for (var _i = 0, _a = metadata['exports']; _i < _a.length; _i++) {
-                var moduleExport = _a[_i];
-                _loop_1(moduleExport);
-            }
-        }
-        // handle the actual metadata. Has to be after the exports
-        // as there migth be collisions in the names, and we want the symbols
-        // of the current module to win ofter reexports.
-        if (metadata['metadata']) {
-            // handle direct declarations of the symbol
-            var /** @type {?} */ topLevelSymbolNames_1 = new Set(Object.keys(metadata['metadata']).map(unescapeIdentifier));
-            var /** @type {?} */ origins_1 = metadata['origins'] || {};
-            Object.keys(metadata['metadata']).forEach(function (metadataKey) {
-                var /** @type {?} */ symbolMeta = metadata['metadata'][metadataKey];
-                var /** @type {?} */ name = unescapeIdentifier(metadataKey);
-                var /** @type {?} */ symbol = _this.getStaticSymbol(filePath, name);
-                var /** @type {?} */ origin = origins_1.hasOwnProperty(metadataKey) && origins_1[metadataKey];
-                if (origin) {
-                    // If the symbol is from a bundled index, use the declaration location of the
-                    // symbol so relative references (such as './my.html') will be calculated
-                    // correctly.
-                    var /** @type {?} */ originFilePath = _this.resolveModule(origin, filePath);
-                    if (!originFilePath) {
-                        _this.reportError(new Error("Couldn't resolve original symbol for " + origin + " from " + filePath));
-                    }
-                    else {
-                        _this.symbolResourcePaths.set(symbol, originFilePath);
-                    }
-                }
-                resolvedSymbols.push(_this.createResolvedSymbol(symbol, filePath, topLevelSymbolNames_1, symbolMeta));
-            });
-        }
-        resolvedSymbols.forEach(function (resolvedSymbol) { return _this.resolvedSymbols.set(resolvedSymbol.symbol, resolvedSymbol); });
-        this.symbolFromFile.set(filePath, resolvedSymbols.map(function (resolvedSymbol) { return resolvedSymbol.symbol; }));
-    };
-    /**
-     * @param {?} sourceSymbol
-     * @param {?} topLevelPath
-     * @param {?} topLevelSymbolNames
-     * @param {?} metadata
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.createResolvedSymbol = /**
-     * @param {?} sourceSymbol
-     * @param {?} topLevelPath
-     * @param {?} topLevelSymbolNames
-     * @param {?} metadata
-     * @return {?}
-     */
-    function (sourceSymbol, topLevelPath, topLevelSymbolNames, metadata) {
-        var _this = this;
-        // For classes that don't have Angular summaries / metadata,
-        // we only keep their arity, but nothing else
-        // (e.g. their constructor parameters).
-        // We do this to prevent introducing deep imports
-        // as we didn't generate .ngfactory.ts files with proper reexports.
-        if (this.summaryResolver.isLibraryFile(sourceSymbol.filePath) && metadata &&
-            metadata['__symbolic'] === 'class') {
-            var /** @type {?} */ transformedMeta_1 = { __symbolic: 'class', arity: metadata.arity };
-            return new ResolvedStaticSymbol(sourceSymbol, transformedMeta_1);
-        }
-        var /** @type {?} */ _originalFileMemo;
-        var /** @type {?} */ getOriginalName = function () {
-            if (!_originalFileMemo) {
-                // Guess what hte original file name is from the reference. If it has a `.d.ts` extension
-                // replace it with `.ts`. If it already has `.ts` just leave it in place. If it doesn't have
-                // .ts or .d.ts, append `.ts'. Also, if it is in `node_modules`, trim the `node_module`
-                // location as it is not important to finding the file.
-                _originalFileMemo =
-                    _this.host.getOutputName(topLevelPath.replace(/((\.ts)|(\.d\.ts)|)$/, '.ts')
-                        .replace(/^.*node_modules[/\\]/, ''));
-            }
-            return _originalFileMemo;
-        };
-        var /** @type {?} */ self = this;
-        var ReferenceTransformer = /** @class */ (function (_super) {
-            Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ReferenceTransformer, _super);
-            function ReferenceTransformer() {
-                return _super !== null && _super.apply(this, arguments) || this;
-            }
-            /**
-             * @param {?} map
-             * @param {?} functionParams
-             * @return {?}
-             */
-            ReferenceTransformer.prototype.visitStringMap = /**
-             * @param {?} map
-             * @param {?} functionParams
-             * @return {?}
-             */
-            function (map, functionParams) {
-                var /** @type {?} */ symbolic = map['__symbolic'];
-                if (symbolic === 'function') {
-                    var /** @type {?} */ oldLen = functionParams.length;
-                    functionParams.push.apply(functionParams, (map['parameters'] || []));
-                    var /** @type {?} */ result = _super.prototype.visitStringMap.call(this, map, functionParams);
-                    functionParams.length = oldLen;
-                    return result;
-                }
-                else if (symbolic === 'reference') {
-                    var /** @type {?} */ module = map['module'];
-                    var /** @type {?} */ name_1 = map['name'] ? unescapeIdentifier(map['name']) : map['name'];
-                    if (!name_1) {
-                        return null;
-                    }
-                    var /** @type {?} */ filePath = void 0;
-                    if (module) {
-                        filePath = /** @type {?} */ ((self.resolveModule(module, sourceSymbol.filePath)));
-                        if (!filePath) {
-                            return {
-                                __symbolic: 'error',
-                                message: "Could not resolve " + module + " relative to " + sourceSymbol.filePath + ".",
-                                line: map["line"],
-                                character: map["character"],
-                                fileName: getOriginalName()
-                            };
-                        }
-                        return {
-                            __symbolic: 'resolved',
-                            symbol: self.getStaticSymbol(filePath, name_1),
-                            line: map["line"],
-                            character: map["character"],
-                            fileName: getOriginalName()
-                        };
-                    }
-                    else if (functionParams.indexOf(name_1) >= 0) {
-                        // reference to a function parameter
-                        return { __symbolic: 'reference', name: name_1 };
-                    }
-                    else {
-                        if (topLevelSymbolNames.has(name_1)) {
-                            return self.getStaticSymbol(topLevelPath, name_1);
-                        }
-                        // ambient value
-                        null;
-                    }
-                }
-                else if (symbolic === 'error') {
-                    return Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __assign */])({}, map, { fileName: getOriginalName() });
-                }
-                else {
-                    return _super.prototype.visitStringMap.call(this, map, functionParams);
-                }
-            };
-            return ReferenceTransformer;
-        }(ValueTransformer));
-        var /** @type {?} */ transformedMeta = visitValue(metadata, new ReferenceTransformer(), []);
-        var /** @type {?} */ unwrappedTransformedMeta = unwrapResolvedMetadata(transformedMeta);
-        if (unwrappedTransformedMeta instanceof StaticSymbol) {
-            return this.createExport(sourceSymbol, unwrappedTransformedMeta);
-        }
-        return new ResolvedStaticSymbol(sourceSymbol, transformedMeta);
-    };
-    /**
-     * @param {?} sourceSymbol
-     * @param {?} targetSymbol
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.createExport = /**
-     * @param {?} sourceSymbol
-     * @param {?} targetSymbol
-     * @return {?}
-     */
-    function (sourceSymbol, targetSymbol) {
-        sourceSymbol.assertNoMembers();
-        targetSymbol.assertNoMembers();
-        if (this.summaryResolver.isLibraryFile(sourceSymbol.filePath) &&
-            this.summaryResolver.isLibraryFile(targetSymbol.filePath)) {
-            // This case is for an ng library importing symbols from a plain ts library
-            // transitively.
-            // Note: We rely on the fact that we discover symbols in the direction
-            // from source files to library files
-            this.importAs.set(targetSymbol, this.getImportAs(sourceSymbol) || sourceSymbol);
-        }
-        return new ResolvedStaticSymbol(sourceSymbol, targetSymbol);
-    };
-    /**
-     * @param {?} error
-     * @param {?=} context
-     * @param {?=} path
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.reportError = /**
-     * @param {?} error
-     * @param {?=} context
-     * @param {?=} path
-     * @return {?}
-     */
-    function (error, context, path) {
-        if (this.errorRecorder) {
-            this.errorRecorder(error, (context && context.filePath) || path);
-        }
-        else {
-            throw error;
-        }
-    };
-    /**
-     * @param {?} module an absolute path to a module file.
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.getModuleMetadata = /**
-     * @param {?} module an absolute path to a module file.
-     * @return {?}
-     */
-    function (module) {
-        var /** @type {?} */ moduleMetadata = this.metadataCache.get(module);
-        if (!moduleMetadata) {
-            var /** @type {?} */ moduleMetadatas = this.host.getMetadataFor(module);
-            if (moduleMetadatas) {
-                var /** @type {?} */ maxVersion_1 = -1;
-                moduleMetadatas.forEach(function (md) {
-                    if (md && md['version'] > maxVersion_1) {
-                        maxVersion_1 = md['version'];
-                        moduleMetadata = md;
-                    }
-                });
-            }
-            if (!moduleMetadata) {
-                moduleMetadata =
-                    { __symbolic: 'module', version: SUPPORTED_SCHEMA_VERSION, module: module, metadata: {} };
-            }
-            if (moduleMetadata['version'] != SUPPORTED_SCHEMA_VERSION) {
-                var /** @type {?} */ errorMessage = moduleMetadata['version'] == 2 ?
-                    "Unsupported metadata version " + moduleMetadata['version'] + " for module " + module + ". This module should be compiled with a newer version of ngc" :
-                    "Metadata version mismatch for module " + module + ", found version " + moduleMetadata['version'] + ", expected " + SUPPORTED_SCHEMA_VERSION;
-                this.reportError(new Error(errorMessage));
-            }
-            this.metadataCache.set(module, moduleMetadata);
-        }
-        return moduleMetadata;
-    };
-    /**
-     * @param {?} module
-     * @param {?} symbolName
-     * @param {?=} containingFile
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.getSymbolByModule = /**
-     * @param {?} module
-     * @param {?} symbolName
-     * @param {?=} containingFile
-     * @return {?}
-     */
-    function (module, symbolName, containingFile) {
-        var /** @type {?} */ filePath = this.resolveModule(module, containingFile);
-        if (!filePath) {
-            this.reportError(new Error("Could not resolve module " + module + (containingFile ? ' relative to ' +
-                containingFile : '')));
-            return this.getStaticSymbol("ERROR:" + module, symbolName);
-        }
-        return this.getStaticSymbol(filePath, symbolName);
-    };
-    /**
-     * @param {?} module
-     * @param {?=} containingFile
-     * @return {?}
-     */
-    StaticSymbolResolver.prototype.resolveModule = /**
-     * @param {?} module
-     * @param {?=} containingFile
-     * @return {?}
-     */
-    function (module, containingFile) {
-        try {
-            return this.host.moduleNameToFileName(module, containingFile);
-        }
-        catch (/** @type {?} */ e) {
-            console.error("Could not resolve module '" + module + "' relative to file " + containingFile);
-            this.reportError(e, undefined, containingFile);
-        }
-        return null;
-    };
-    return StaticSymbolResolver;
-}());
-/**
- * @param {?} identifier
- * @return {?}
- */
-function unescapeIdentifier(identifier) {
-    return identifier.startsWith('___') ? identifier.substr(1) : identifier;
-}
-/**
- * @param {?} metadata
- * @return {?}
- */
-function unwrapResolvedMetadata(metadata) {
-    if (metadata && metadata.__symbolic === 'resolved') {
-        return metadata.symbol;
-    }
-    return metadata;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
 /**
  * @param {?} srcFileName
  * @param {?} forJitCtx
@@ -36735,7 +35447,7 @@ function createSummaryForJitFunction(outputCtx, reference, value) {
         StmtModifier.Final, StmtModifier.Exported
     ]));
 }
-var ToJsonSerializer = /** @class */ (function (_super) {
+var ToJsonSerializer = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ToJsonSerializer, _super);
     function ToJsonSerializer(symbolResolver, summaryResolver, srcFileName) {
         var _this = _super.call(this) || this;
@@ -36979,7 +35691,7 @@ var ToJsonSerializer = /** @class */ (function (_super) {
     };
     return ToJsonSerializer;
 }(ValueTransformer));
-var ForJitSerializer = /** @class */ (function () {
+var ForJitSerializer = (function () {
     function ForJitSerializer(outputCtx, symbolResolver, summaryResolver) {
         this.outputCtx = outputCtx;
         this.symbolResolver = symbolResolver;
@@ -37120,7 +35832,7 @@ var ForJitSerializer = /** @class */ (function () {
      */
     function (data) {
         var /** @type {?} */ outputCtx = this.outputCtx;
-        var Transformer = /** @class */ (function () {
+        var Transformer = (function () {
             function Transformer() {
             }
             /**
@@ -37186,7 +35898,7 @@ var ForJitSerializer = /** @class */ (function () {
     };
     return ForJitSerializer;
 }());
-var FromJsonDeserializer = /** @class */ (function (_super) {
+var FromJsonDeserializer = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FromJsonDeserializer, _super);
     function FromJsonDeserializer(symbolCache, summaryResolver) {
         var _this = _super.call(this) || this;
@@ -37259,7 +35971,7 @@ function isCall(metadata) {
  * @return {?}
  */
 function isFunctionCall(metadata) {
-    return isCall(metadata) && unwrapResolvedMetadata(metadata.expression) instanceof StaticSymbol;
+    return isCall(metadata) && metadata.expression instanceof StaticSymbol;
 }
 /**
  * @param {?} metadata
@@ -37267,7 +35979,7 @@ function isFunctionCall(metadata) {
  */
 function isMethodCallOnVariable(metadata) {
     return isCall(metadata) && metadata.expression && metadata.expression.__symbolic === 'select' &&
-        unwrapResolvedMetadata(metadata.expression.expression) instanceof StaticSymbol;
+        metadata.expression.expression instanceof StaticSymbol;
 }
 
 /**
@@ -37290,7 +36002,7 @@ var StubEmitFlags = {
 StubEmitFlags[StubEmitFlags.Basic] = "Basic";
 StubEmitFlags[StubEmitFlags.TypeCheck] = "TypeCheck";
 StubEmitFlags[StubEmitFlags.All] = "All";
-var AotCompiler = /** @class */ (function () {
+var AotCompiler = (function () {
     function AotCompiler(_config, _options, _host, _reflector, _metadataResolver, _templateParser, _styleCompiler, _viewCompiler, _typeCheckCompiler, _ngModuleCompiler, _outputEmitter, _summaryResolver, _symbolResolver) {
         this._config = _config;
         this._options = _options;
@@ -37389,7 +36101,7 @@ var AotCompiler = /** @class */ (function () {
                 genFileNames.push(summaryForJitFileName(file.fileName, true));
             }
         }
-        var /** @type {?} */ fileSuffix = normalizeGenFileSuffix(splitTypescriptSuffix(file.fileName, true)[1]);
+        var /** @type {?} */ fileSuffix = splitTypescriptSuffix(file.fileName, true)[1];
         file.directives.forEach(function (dirSymbol) {
             var /** @type {?} */ compMeta = /** @type {?} */ ((_this._metadataResolver.getNonNormalizedDirectiveMetadata(dirSymbol))).metadata;
             if (!compMeta.isComponent) {
@@ -37537,15 +36249,17 @@ var AotCompiler = /** @class */ (function () {
             // These can be used by the type check block for components,
             // and they also cause TypeScript to include these files into the program too,
             // which will make them part of the analyzedFiles.
-            var /** @type {?} */ externalReferences = ngModuleMeta.transitiveModule.directives.map(function (d) { return d.reference; }).concat(ngModuleMeta.transitiveModule.pipes.map(function (d) { return d.reference; }), ngModuleMeta.importedModules.map(function (m) { return m.type.reference; }), ngModuleMeta.exportedModules.map(function (m) { return m.type.reference; }), _this._externalIdentifierReferences([Identifiers.TemplateRef, Identifiers.ElementRef]));
+            var /** @type {?} */ externalReferences = ngModuleMeta.transitiveModule.directives.map(function (d) { return d.reference; }).concat(ngModuleMeta.transitiveModule.pipes.map(function (d) { return d.reference; }), ngModuleMeta.importedModules.map(function (m) { return m.type.reference; }), ngModuleMeta.exportedModules.map(function (m) { return m.type.reference; }));
             var /** @type {?} */ externalReferenceVars = new Map();
             externalReferences.forEach(function (ref, typeIndex) {
-                externalReferenceVars.set(ref, "_decl" + ngModuleIndex + "_" + typeIndex);
+                if (_this._host.isSourceFile(ref.filePath)) {
+                    externalReferenceVars.set(ref, "_decl" + ngModuleIndex + "_" + typeIndex);
+                }
             });
             externalReferenceVars.forEach(function (varName, reference) {
                 outputCtx.statements.push(variable(varName)
                     .set(NULL_EXPR.cast(DYNAMIC_TYPE))
-                    .toDeclStmt(expressionType(outputCtx.importExpr(reference, /* typeParams */ null, /* useSummaries */ /* useSummaries */ false))));
+                    .toDeclStmt(expressionType(outputCtx.importExpr(reference))));
             });
             if (emitFlags & StubEmitFlags.TypeCheck) {
                 // add the typecheck block for all components of the NgModule
@@ -37563,25 +36277,6 @@ var AotCompiler = /** @class */ (function () {
         if (outputCtx.statements.length === 0) {
             _createEmptyStub(outputCtx);
         }
-    };
-    /**
-     * @param {?} references
-     * @return {?}
-     */
-    AotCompiler.prototype._externalIdentifierReferences = /**
-     * @param {?} references
-     * @return {?}
-     */
-    function (references) {
-        var /** @type {?} */ result = [];
-        for (var _i = 0, references_1 = references; _i < references_1.length; _i++) {
-            var reference = references_1[_i];
-            var /** @type {?} */ token = createTokenForExternalReference(this._reflector, reference);
-            if (token.identifier) {
-                result.push(token.identifier.reference);
-            }
-        }
-        return result;
     };
     /**
      * @param {?} ctx
@@ -37603,7 +36298,7 @@ var AotCompiler = /** @class */ (function () {
      */
     function (ctx, componentId, moduleMeta, compMeta, directives, externalReferenceVars) {
         var _a = this._parseTemplate(compMeta, moduleMeta, directives), parsedTemplate = _a.template, usedPipes = _a.pipes;
-        (_b = ctx.statements).push.apply(_b, this._typeCheckCompiler.compileComponent(componentId, compMeta, parsedTemplate, usedPipes, externalReferenceVars, ctx));
+        (_b = ctx.statements).push.apply(_b, this._typeCheckCompiler.compileComponent(componentId, compMeta, parsedTemplate, usedPipes, externalReferenceVars));
         var _b;
     };
     /**
@@ -37677,7 +36372,7 @@ var AotCompiler = /** @class */ (function () {
      */
     function (srcFileUrl, ngModuleByPipeOrDirective, directives, pipes, ngModules, injectables) {
         var _this = this;
-        var /** @type {?} */ fileSuffix = normalizeGenFileSuffix(splitTypescriptSuffix(srcFileUrl, true)[1]);
+        var /** @type {?} */ fileSuffix = splitTypescriptSuffix(srcFileUrl, true)[1];
         var /** @type {?} */ generatedFiles = [];
         var /** @type {?} */ outputCtx = this._createOutputContext(ngfactoryFilePath(srcFileUrl, true));
         generatedFiles.push.apply(generatedFiles, this._createSummary(srcFileUrl, directives, pipes, ngModules, injectables, outputCtx));
@@ -37903,14 +36598,13 @@ var AotCompiler = /** @class */ (function () {
      */
     function (genFilePath) {
         var _this = this;
-        var /** @type {?} */ importExpr$$1 = function (symbol, typeParams, useSummaries) {
+        var /** @type {?} */ importExpr$$1 = function (symbol, typeParams) {
             if (typeParams === void 0) { typeParams = null; }
-            if (useSummaries === void 0) { useSummaries = true; }
             if (!(symbol instanceof StaticSymbol)) {
                 throw new Error("Internal error: unknown identifier " + JSON.stringify(symbol));
             }
             var /** @type {?} */ arity = _this._symbolResolver.getTypeArity(symbol) || 0;
-            var _a = _this._symbolResolver.getImportAs(symbol, useSummaries) || symbol, filePath = _a.filePath, name = _a.name, members = _a.members;
+            var _a = _this._symbolResolver.getImportAs(symbol) || symbol, filePath = _a.filePath, name = _a.name, members = _a.members;
             var /** @type {?} */ importModule = _this._fileNameToModuleName(filePath, genFilePath);
             // It should be good enough to compare filePath to genFilePath and if they are equal
             // there is a self reference. However, ngfactory files generate to .ts but their
@@ -38203,7 +36897,7 @@ function analyzeFile(host, staticSymbolResolver, metadataResolver, fileName) {
  */
 function isValueExportingNonSourceFile(host, metadata) {
     var /** @type {?} */ exportsNonSourceFiles = false;
-    var Visitor = /** @class */ (function () {
+    var Visitor = (function () {
         function Visitor() {
         }
         /**
@@ -38314,75 +37008,6 @@ function mergeAndValidateNgFiles(files) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-/**
- * @record
- */
-
-/**
- * @record
- */
-
-var FORMATTED_MESSAGE = 'ngFormattedMessage';
-/**
- * @param {?} level
- * @return {?}
- */
-function indentStr(level) {
-    if (level <= 0)
-        return '';
-    if (level < 6)
-        return ['', ' ', '  ', '   ', '    ', '     '][level];
-    var /** @type {?} */ half = indentStr(Math.floor(level / 2));
-    return half + half + (level % 2 === 1 ? ' ' : '');
-}
-/**
- * @param {?} chain
- * @param {?=} indent
- * @return {?}
- */
-function formatChain(chain, indent) {
-    if (indent === void 0) { indent = 0; }
-    if (!chain)
-        return '';
-    var /** @type {?} */ position = chain.position ?
-        chain.position.fileName + "(" + (chain.position.line + 1) + "," + (chain.position.column + 1) + ")" :
-        '';
-    var /** @type {?} */ prefix = position && indent === 0 ? position + ": " : '';
-    var /** @type {?} */ postfix = position && indent !== 0 ? " at " + position : '';
-    var /** @type {?} */ message = "" + prefix + chain.message + postfix;
-    return "" + indentStr(indent) + message + ((chain.next && ('\n' + formatChain(chain.next, indent + 2))) || '');
-}
-/**
- * @param {?} chain
- * @return {?}
- */
-function formattedError(chain) {
-    var /** @type {?} */ message = formatChain(chain) + '.';
-    var /** @type {?} */ error = /** @type {?} */ (syntaxError(message));
-    (/** @type {?} */ (error))[FORMATTED_MESSAGE] = true;
-    error.chain = chain;
-    error.position = chain.position;
-    return error;
-}
-/**
- * @param {?} error
- * @return {?}
- */
-function isFormattedError(error) {
-    return !!(/** @type {?} */ (error))[FORMATTED_MESSAGE];
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var ANGULAR_CORE = '@angular/core';
 var ANGULAR_ROUTER = '@angular/router';
 var HIDDEN_KEY = /^\$.*\$$/;
@@ -38392,8 +37017,6 @@ var IGNORE = {
 var USE_VALUE = 'useValue';
 var PROVIDE = 'provide';
 var REFERENCE_SET = new Set([USE_VALUE, 'useFactory', 'data']);
-var TYPEGUARD_POSTFIX = 'TypeGuard';
-var USE_IF = 'UseIf';
 /**
  * @param {?} value
  * @return {?}
@@ -38405,7 +37028,7 @@ function shouldIgnore(value) {
  * A static reflector implements enough of the Reflector API that is necessary to compile
  * templates statically.
  */
-var StaticReflector = /** @class */ (function () {
+var StaticReflector = (function () {
     function StaticReflector(summaryResolver, symbolResolver, knownMetadataClasses, knownMetadataFunctions, errorRecorder) {
         if (knownMetadataClasses === void 0) { knownMetadataClasses = []; }
         if (knownMetadataFunctions === void 0) { knownMetadataFunctions = []; }
@@ -38417,9 +37040,7 @@ var StaticReflector = /** @class */ (function () {
         this.propertyCache = new Map();
         this.parameterCache = new Map();
         this.methodCache = new Map();
-        this.staticCache = new Map();
         this.conversionMap = new Map();
-        this.resolvedExternalReferences = new Map();
         this.annotationForParentClassWithSummaryKind = new Map();
         this.initializeConversionMap();
         knownMetadataClasses.forEach(function (kc) {
@@ -38454,21 +37075,11 @@ var StaticReflector = /** @class */ (function () {
      * @return {?}
      */
     function (ref, containingFile) {
-        var /** @type {?} */ key = undefined;
-        if (!containingFile) {
-            key = ref.moduleName + ":" + ref.name;
-            var /** @type {?} */ declarationSymbol_1 = this.resolvedExternalReferences.get(key);
-            if (declarationSymbol_1)
-                return declarationSymbol_1;
-        }
         var /** @type {?} */ refSymbol = this.symbolResolver.getSymbolByModule(/** @type {?} */ ((ref.moduleName)), /** @type {?} */ ((ref.name)), containingFile);
         var /** @type {?} */ declarationSymbol = this.findSymbolDeclaration(refSymbol);
         if (!containingFile) {
             this.symbolResolver.recordModuleNameForFileName(refSymbol.filePath, /** @type {?} */ ((ref.moduleName)));
             this.symbolResolver.recordImportAs(declarationSymbol, refSymbol);
-        }
-        if (key) {
-            this.resolvedExternalReferences.set(key, declarationSymbol);
         }
         return declarationSymbol;
     };
@@ -38511,16 +37122,12 @@ var StaticReflector = /** @class */ (function () {
      */
     function (symbol) {
         var /** @type {?} */ resolvedSymbol = this.symbolResolver.resolveSymbol(symbol);
-        if (resolvedSymbol) {
-            var /** @type {?} */ resolvedMetadata = resolvedSymbol.metadata;
-            if (resolvedMetadata && resolvedMetadata.__symbolic === 'resolved') {
-                resolvedMetadata = resolvedMetadata.symbol;
-            }
-            if (resolvedMetadata instanceof StaticSymbol) {
-                return this.findSymbolDeclaration(resolvedSymbol.metadata);
-            }
+        if (resolvedSymbol && resolvedSymbol.metadata instanceof StaticSymbol) {
+            return this.findSymbolDeclaration(resolvedSymbol.metadata);
         }
-        return symbol;
+        else {
+            return symbol;
+        }
     };
     /**
      * @param {?} type
@@ -38552,7 +37159,8 @@ var StaticReflector = /** @class */ (function () {
                     var /** @type {?} */ requiredAnnotationTypes = /** @type {?} */ ((this.annotationForParentClassWithSummaryKind.get(/** @type {?} */ ((summary.type.summaryKind)))));
                     var /** @type {?} */ typeHasRequiredAnnotation = requiredAnnotationTypes.some(function (requiredType) { return ownAnnotations_1.some(function (ann) { return requiredType.isTypeOf(ann); }); });
                     if (!typeHasRequiredAnnotation) {
-                        this.reportError(formatMetadataError(metadataError("Class " + type.name + " in " + type.filePath + " extends from a " + CompileSummaryKind[(/** @type {?} */ ((summary.type.summaryKind)))] + " in another compilation unit without duplicating the decorator", undefined, "Please add a " + requiredAnnotationTypes.map(function (type) { return type.ngMetadataName; }).join(' or ') + " decorator to the class"), type), type);
+                        this.reportError(syntaxError("Class " + type.name + " in " + type.filePath + " extends from a " + CompileSummaryKind[(/** @type {?} */ ((summary.type.summaryKind)))] + " in another compilation unit without duplicating the decorator. " +
+                            ("Please add a " + requiredAnnotationTypes.map(function (type) { return type.ngMetadataName; }).join(' or ') + " decorator to the class.")), type);
                     }
                 }
             }
@@ -38684,24 +37292,6 @@ var StaticReflector = /** @class */ (function () {
     };
     /**
      * @param {?} type
-     * @return {?}
-     */
-    StaticReflector.prototype._staticMembers = /**
-     * @param {?} type
-     * @return {?}
-     */
-    function (type) {
-        var /** @type {?} */ staticMembers = this.staticCache.get(type);
-        if (!staticMembers) {
-            var /** @type {?} */ classMetadata = this.getTypeMetadata(type);
-            var /** @type {?} */ staticMemberData = classMetadata['statics'] || {};
-            staticMembers = Object.keys(staticMemberData);
-            this.staticCache.set(type, staticMembers);
-        }
-        return staticMembers;
-    };
-    /**
-     * @param {?} type
      * @param {?} classMetadata
      * @return {?}
      */
@@ -38737,38 +37327,6 @@ var StaticReflector = /** @class */ (function () {
             console.error("Failed on type " + JSON.stringify(type) + " with error " + e);
             throw e;
         }
-    };
-    /**
-     * @param {?} type
-     * @return {?}
-     */
-    StaticReflector.prototype.guards = /**
-     * @param {?} type
-     * @return {?}
-     */
-    function (type) {
-        if (!(type instanceof StaticSymbol)) {
-            this.reportError(new Error("guards received " + JSON.stringify(type) + " which is not a StaticSymbol"), type);
-            return {};
-        }
-        var /** @type {?} */ staticMembers = this._staticMembers(type);
-        var /** @type {?} */ result = {};
-        for (var _i = 0, staticMembers_1 = staticMembers; _i < staticMembers_1.length; _i++) {
-            var name_1 = staticMembers_1[_i];
-            if (name_1.endsWith(TYPEGUARD_POSTFIX)) {
-                var /** @type {?} */ property = name_1.substr(0, name_1.length - TYPEGUARD_POSTFIX.length);
-                var /** @type {?} */ value = void 0;
-                if (property.endsWith(USE_IF)) {
-                    property = name_1.substr(0, property.length - USE_IF.length);
-                    value = USE_IF;
-                }
-                else {
-                    value = this.getStaticSymbol(type.filePath, type.name, [name_1]);
-                }
-                result[property] = value;
-            }
-        }
-        return result;
     };
     /**
      * @param {?} type
@@ -38862,6 +37420,26 @@ var StaticReflector = /** @class */ (function () {
         return this.symbolResolver.getStaticSymbol(declarationFile, name, members);
     };
     /**
+     * @param {?} error
+     * @param {?} context
+     * @param {?=} path
+     * @return {?}
+     */
+    StaticReflector.prototype.reportError = /**
+     * @param {?} error
+     * @param {?} context
+     * @param {?=} path
+     * @return {?}
+     */
+    function (error, context, path) {
+        if (this.errorRecorder) {
+            this.errorRecorder(error, (context && context.filePath) || path);
+        }
+        else {
+            throw error;
+        }
+    };
+    /**
      * Simplify but discard any errors
      * @param {?} context
      * @param {?} value
@@ -38893,10 +37471,10 @@ var StaticReflector = /** @class */ (function () {
      * @return {?}
      */
     function (context, value) {
+        var _this = this;
         var /** @type {?} */ self = this;
         var /** @type {?} */ scope = BindingScope.empty;
         var /** @type {?} */ calling = new Map();
-        var /** @type {?} */ rootContext = context;
         /**
          * @param {?} context
          * @param {?} value
@@ -38914,77 +37492,22 @@ var StaticReflector = /** @class */ (function () {
                 return resolvedSymbol ? resolvedSymbol.metadata : null;
             }
             /**
-             * @param {?} value
-             * @return {?}
-             */
-            function simplifyEagerly(value) {
-                return simplifyInContext(context, value, depth, 0);
-            }
-            /**
-             * @param {?} value
-             * @return {?}
-             */
-            function simplifyLazily(value) {
-                return simplifyInContext(context, value, depth, references + 1);
-            }
-            /**
-             * @param {?} nestedContext
-             * @param {?} value
-             * @return {?}
-             */
-            function simplifyNested(nestedContext, value) {
-                if (nestedContext === context) {
-                    // If the context hasn't changed let the exception propagate unmodified.
-                    return simplifyInContext(nestedContext, value, depth + 1, references);
-                }
-                try {
-                    return simplifyInContext(nestedContext, value, depth + 1, references);
-                }
-                catch (/** @type {?} */ e) {
-                    if (isMetadataError(e)) {
-                        // Propagate the message text up but add a message to the chain that explains how we got
-                        // here.
-                        // e.chain implies e.symbol
-                        var /** @type {?} */ summaryMsg = e.chain ? 'references \'' + /** @type {?} */ ((e.symbol)).name + '\'' : errorSummary(e);
-                        var /** @type {?} */ summary = "'" + nestedContext.name + "' " + summaryMsg;
-                        var /** @type {?} */ chain = { message: summary, position: e.position, next: e.chain };
-                        // TODO(chuckj): retrieve the position information indirectly from the collectors node
-                        // map if the metadata is from a .ts file.
-                        self.error({
-                            message: e.message,
-                            advise: e.advise,
-                            context: e.context, chain: chain,
-                            symbol: nestedContext
-                        }, context);
-                    }
-                    else {
-                        // It is probably an internal error.
-                        throw e;
-                    }
-                }
-            }
-            /**
              * @param {?} functionSymbol
              * @param {?} targetFunction
              * @param {?} args
-             * @param {?} targetExpression
              * @return {?}
              */
-            function simplifyCall(functionSymbol, targetFunction, args, targetExpression) {
+            function simplifyCall(functionSymbol, targetFunction, args) {
                 if (targetFunction && targetFunction['__symbolic'] == 'function') {
                     if (calling.get(functionSymbol)) {
-                        self.error({
-                            message: 'Recursion is not supported',
-                            summary: "called '" + functionSymbol.name + "' recursively",
-                            value: targetFunction
-                        }, functionSymbol);
+                        throw new Error('Recursion not supported');
                     }
                     try {
                         var /** @type {?} */ value_1 = targetFunction['value'];
                         if (value_1 && (depth != 0 || value_1.__symbolic != 'error')) {
                             var /** @type {?} */ parameters = targetFunction['parameters'];
                             var /** @type {?} */ defaults = targetFunction.defaults;
-                            args = args.map(function (arg) { return simplifyNested(context, arg); })
+                            args = args.map(function (arg) { return simplifyInContext(context, arg, depth + 1, references); })
                                 .map(function (arg) { return shouldIgnore(arg) ? undefined : arg; });
                             if (defaults && defaults.length > args.length) {
                                 args.push.apply(args, defaults.slice(args.length).map(function (value) { return simplify(value); }));
@@ -38998,7 +37521,7 @@ var StaticReflector = /** @class */ (function () {
                             var /** @type {?} */ result_1;
                             try {
                                 scope = functionScope.done();
-                                result_1 = simplifyNested(functionSymbol, value_1);
+                                result_1 = simplifyInContext(functionSymbol, value_1, depth + 1, references);
                             }
                             finally {
                                 scope = oldScope;
@@ -39016,20 +37539,7 @@ var StaticReflector = /** @class */ (function () {
                     // non-angular decorator, and we should just ignore it.
                     return IGNORE;
                 }
-                var /** @type {?} */ position = undefined;
-                if (targetExpression && targetExpression.__symbolic == 'resolved') {
-                    var /** @type {?} */ line = targetExpression.line;
-                    var /** @type {?} */ character = targetExpression.character;
-                    var /** @type {?} */ fileName = targetExpression.fileName;
-                    if (fileName != null && line != null && character != null) {
-                        position = { fileName: fileName, line: line, column: character };
-                    }
-                }
-                self.error({
-                    message: FUNCTION_CALL_NOT_SUPPORTED,
-                    context: functionSymbol,
-                    value: targetFunction, position: position
-                }, context);
+                return simplify({ __symbolic: 'error', message: 'Function call not supported', context: functionSymbol });
             }
             /**
              * @param {?} expression
@@ -39047,7 +37557,7 @@ var StaticReflector = /** @class */ (function () {
                         if (item && item.__symbolic === 'spread') {
                             // We call with references as 0 because we require the actual value and cannot
                             // tolerate a reference here.
-                            var /** @type {?} */ spreadArray = simplifyEagerly(item.expression);
+                            var /** @type {?} */ spreadArray = simplifyInContext(context, item.expression, depth, 0);
                             if (Array.isArray(spreadArray)) {
                                 for (var _b = 0, spreadArray_1 = spreadArray; _b < spreadArray_1.length; _b++) {
                                     var spreadItem = spreadArray_1[_b];
@@ -39075,7 +37585,7 @@ var StaticReflector = /** @class */ (function () {
                         var /** @type {?} */ staticSymbol = expression;
                         var /** @type {?} */ declarationValue = resolveReferenceValue(staticSymbol);
                         if (declarationValue != null) {
-                            return simplifyNested(staticSymbol, declarationValue);
+                            return simplifyInContext(staticSymbol, declarationValue, depth + 1, references);
                         }
                         else {
                             return staticSymbol;
@@ -39156,8 +37666,8 @@ var StaticReflector = /** @class */ (function () {
                                 }
                                 return null;
                             case 'index':
-                                var /** @type {?} */ indexTarget = simplifyEagerly(expression['expression']);
-                                var /** @type {?} */ index = simplifyEagerly(expression['index']);
+                                var /** @type {?} */ indexTarget = simplifyInContext(context, expression['expression'], depth, 0);
+                                var /** @type {?} */ index = simplifyInContext(context, expression['index'], depth, 0);
                                 if (indexTarget && isPrimitive(index))
                                     return indexTarget[index];
                                 return null;
@@ -39171,43 +37681,25 @@ var StaticReflector = /** @class */ (function () {
                                         self.getStaticSymbol(selectTarget.filePath, selectTarget.name, members);
                                     var /** @type {?} */ declarationValue = resolveReferenceValue(selectContext);
                                     if (declarationValue != null) {
-                                        return simplifyNested(selectContext, declarationValue);
+                                        return simplifyInContext(selectContext, declarationValue, depth + 1, references);
                                     }
                                     else {
                                         return selectContext;
                                     }
                                 }
                                 if (selectTarget && isPrimitive(member))
-                                    return simplifyNested(selectContext, selectTarget[member]);
+                                    return simplifyInContext(selectContext, selectTarget[member], depth + 1, references);
                                 return null;
                             case 'reference':
-                                // Note: This only has to deal with variable references, as symbol references have
-                                // been converted into 'resolved'
-                                // in the StaticSymbolResolver.
-                                var /** @type {?} */ name_2 = expression['name'];
-                                var /** @type {?} */ localValue = scope.resolve(name_2);
+                                // Note: This only has to deal with variable references,
+                                // as symbol references have been converted into StaticSymbols already
+                                // in the StaticSymbolResolver!
+                                var /** @type {?} */ name_1 = expression['name'];
+                                var /** @type {?} */ localValue = scope.resolve(name_1);
                                 if (localValue != BindingScope.missing) {
                                     return localValue;
                                 }
                                 break;
-                            case 'resolved':
-                                try {
-                                    return simplify(expression.symbol);
-                                }
-                                catch (/** @type {?} */ e) {
-                                    // If an error is reported evaluating the symbol record the position of the
-                                    // reference in the error so it can
-                                    // be reported in the error message generated from the exception.
-                                    if (isMetadataError(e) && expression.fileName != null &&
-                                        expression.line != null && expression.character != null) {
-                                        e.position = {
-                                            fileName: expression.fileName,
-                                            line: expression.line,
-                                            column: expression.character
-                                        };
-                                    }
-                                    throw e;
-                                }
                             case 'class':
                                 return context;
                             case 'function':
@@ -39227,33 +37719,27 @@ var StaticReflector = /** @class */ (function () {
                                     var /** @type {?} */ argExpressions = expression['arguments'] || [];
                                     var /** @type {?} */ converter = self.conversionMap.get(staticSymbol);
                                     if (converter) {
-                                        var /** @type {?} */ args = argExpressions.map(function (arg) { return simplifyNested(context, arg); })
+                                        var /** @type {?} */ args = argExpressions
+                                            .map(function (arg) { return simplifyInContext(context, arg, depth + 1, references); })
                                             .map(function (arg) { return shouldIgnore(arg) ? undefined : arg; });
                                         return converter(context, args);
                                     }
                                     else {
                                         // Determine if the function is one we can simplify.
                                         var /** @type {?} */ targetFunction = resolveReferenceValue(staticSymbol);
-                                        return simplifyCall(staticSymbol, targetFunction, argExpressions, expression['expression']);
+                                        return simplifyCall(staticSymbol, targetFunction, argExpressions);
                                     }
                                 }
                                 return IGNORE;
                             case 'error':
-                                var /** @type {?} */ message = expression.message;
-                                if (expression['line'] != null) {
-                                    self.error({
-                                        message: message,
-                                        context: expression.context,
-                                        value: expression,
-                                        position: {
-                                            fileName: expression['fileName'],
-                                            line: expression['line'],
-                                            column: expression['character']
-                                        }
-                                    }, context);
+                                var /** @type {?} */ message = produceErrorMessage(expression);
+                                if (expression['line']) {
+                                    message =
+                                        message + " (position " + (expression['line'] + 1) + ":" + (expression['character'] + 1) + " in the original .ts file)";
+                                    self.reportError(positionalError(message, context.filePath, expression['line'], expression['character']), context);
                                 }
                                 else {
-                                    self.error({ message: message, context: expression.context }, context);
+                                    self.reportError(new Error(message), context);
                                 }
                                 return IGNORE;
                             case 'ignore':
@@ -39271,27 +37757,35 @@ var StaticReflector = /** @class */ (function () {
                                     return simplify(value);
                                 }
                             }
-                            return simplifyLazily(value);
+                            return simplifyInContext(context, value, depth, references + 1);
                         }
                         return simplify(value);
                     });
                 }
                 return IGNORE;
             }
-            return simplify(value);
-        }
-        var /** @type {?} */ result;
-        try {
-            result = simplifyInContext(context, value, 0, 0);
-        }
-        catch (/** @type {?} */ e) {
-            if (this.errorRecorder) {
-                this.reportError(e, context);
+            try {
+                return simplify(value);
             }
-            else {
-                throw formatMetadataError(e, context);
+            catch (/** @type {?} */ e) {
+                var /** @type {?} */ members = context.members.length ? "." + context.members.join('.') : '';
+                var /** @type {?} */ message = e.message + ", resolving symbol " + context.name + members + " in " + context.filePath;
+                if (e.fileName) {
+                    throw positionalError(message, e.fileName, e.line, e.column);
+                }
+                throw syntaxError(message);
             }
         }
+        var /** @type {?} */ recordedSimplifyInContext = function (context, value) {
+            try {
+                return simplifyInContext(context, value, 0, 0);
+            }
+            catch (/** @type {?} */ e) {
+                _this.reportError(e, context);
+            }
+        };
+        var /** @type {?} */ result = this.errorRecorder ? recordedSimplifyInContext(context, value) :
+            simplifyInContext(context, value, 0, 0);
         if (shouldIgnore(result)) {
             return undefined;
         }
@@ -39310,176 +37804,46 @@ var StaticReflector = /** @class */ (function () {
         return resolvedSymbol && resolvedSymbol.metadata ? resolvedSymbol.metadata :
             { __symbolic: 'class' };
     };
-    /**
-     * @param {?} error
-     * @param {?} context
-     * @param {?=} path
-     * @return {?}
-     */
-    StaticReflector.prototype.reportError = /**
-     * @param {?} error
-     * @param {?} context
-     * @param {?=} path
-     * @return {?}
-     */
-    function (error, context, path) {
-        if (this.errorRecorder) {
-            this.errorRecorder(formatMetadataError(error, context), (context && context.filePath) || path);
-        }
-        else {
-            throw error;
-        }
-    };
-    /**
-     * @param {?} __0
-     * @param {?} reportingContext
-     * @return {?}
-     */
-    StaticReflector.prototype.error = /**
-     * @param {?} __0
-     * @param {?} reportingContext
-     * @return {?}
-     */
-    function (_a, reportingContext) {
-        var message = _a.message, summary = _a.summary, advise = _a.advise, position = _a.position, context = _a.context, value = _a.value, symbol = _a.symbol, chain = _a.chain;
-        this.reportError(metadataError(message, summary, advise, position, symbol, context, chain), reportingContext);
-    };
     return StaticReflector;
 }());
-var METADATA_ERROR = 'ngMetadataError';
-/**
- * @param {?} message
- * @param {?=} summary
- * @param {?=} advise
- * @param {?=} position
- * @param {?=} symbol
- * @param {?=} context
- * @param {?=} chain
- * @return {?}
- */
-function metadataError(message, summary, advise, position, symbol, context, chain) {
-    var /** @type {?} */ error = /** @type {?} */ (syntaxError(message));
-    (/** @type {?} */ (error))[METADATA_ERROR] = true;
-    if (advise)
-        error.advise = advise;
-    if (position)
-        error.position = position;
-    if (summary)
-        error.summary = summary;
-    if (context)
-        error.context = context;
-    if (chain)
-        error.chain = chain;
-    if (symbol)
-        error.symbol = symbol;
-    return error;
-}
 /**
  * @param {?} error
  * @return {?}
  */
-function isMetadataError(error) {
-    return !!(/** @type {?} */ (error))[METADATA_ERROR];
-}
-var REFERENCE_TO_NONEXPORTED_CLASS = 'Reference to non-exported class';
-var VARIABLE_NOT_INITIALIZED = 'Variable not initialized';
-var DESTRUCTURE_NOT_SUPPORTED = 'Destructuring not supported';
-var COULD_NOT_RESOLVE_TYPE = 'Could not resolve type';
-var FUNCTION_CALL_NOT_SUPPORTED = 'Function call not supported';
-var REFERENCE_TO_LOCAL_SYMBOL = 'Reference to a local symbol';
-var LAMBDA_NOT_SUPPORTED = 'Lambda not supported';
-/**
- * @param {?} message
- * @param {?} context
- * @return {?}
- */
-function expandedMessage(message, context) {
-    switch (message) {
-        case REFERENCE_TO_NONEXPORTED_CLASS:
-            if (context && context.className) {
-                return "References to a non-exported class are not supported in decorators but " + context.className + " was referenced.";
-            }
-            break;
-        case VARIABLE_NOT_INITIALIZED:
-            return 'Only initialized variables and constants can be referenced in decorators because the value of this variable is needed by the template compiler';
-        case DESTRUCTURE_NOT_SUPPORTED:
-            return 'Referencing an exported destructured variable or constant is not supported in decorators and this value is needed by the template compiler';
-        case COULD_NOT_RESOLVE_TYPE:
-            if (context && context.typeName) {
-                return "Could not resolve type " + context.typeName;
-            }
-            break;
-        case FUNCTION_CALL_NOT_SUPPORTED:
-            if (context && context.name) {
-                return "Function calls are not supported in decorators but '" + context.name + "' was called";
-            }
-            return 'Function calls are not supported in decorators';
-        case REFERENCE_TO_LOCAL_SYMBOL:
-            if (context && context.name) {
-                return "Reference to a local (non-exported) symbols are not supported in decorators but '" + context.name + "' was referenced";
-            }
-            break;
-        case LAMBDA_NOT_SUPPORTED:
-            return "Function expressions are not supported in decorators";
-    }
-    return message;
-}
-/**
- * @param {?} message
- * @param {?} context
- * @return {?}
- */
-function messageAdvise(message, context) {
-    switch (message) {
-        case REFERENCE_TO_NONEXPORTED_CLASS:
-            if (context && context.className) {
-                return "Consider exporting '" + context.className + "'";
-            }
-            break;
-        case DESTRUCTURE_NOT_SUPPORTED:
-            return 'Consider simplifying to avoid destructuring';
-        case REFERENCE_TO_LOCAL_SYMBOL:
-            if (context && context.name) {
-                return "Consider exporting '" + context.name + "'";
-            }
-            break;
-        case LAMBDA_NOT_SUPPORTED:
-            return "Consider changing the function expression into an exported function";
-    }
-    return undefined;
-}
-/**
- * @param {?} error
- * @return {?}
- */
-function errorSummary(error) {
-    if (error.summary) {
-        return error.summary;
-    }
+function expandedMessage(error) {
     switch (error.message) {
-        case REFERENCE_TO_NONEXPORTED_CLASS:
+        case 'Reference to non-exported class':
             if (error.context && error.context.className) {
-                return "references non-exported class " + error.context.className;
+                return "Reference to a non-exported class " + error.context.className + ". Consider exporting the class";
             }
             break;
-        case VARIABLE_NOT_INITIALIZED:
-            return 'is not initialized';
-        case DESTRUCTURE_NOT_SUPPORTED:
-            return 'is a destructured variable';
-        case COULD_NOT_RESOLVE_TYPE:
-            return 'could not be resolved';
-        case FUNCTION_CALL_NOT_SUPPORTED:
-            if (error.context && error.context.name) {
-                return "calls '" + error.context.name + "'";
+        case 'Variable not initialized':
+            return 'Only initialized variables and constants can be referenced because the value of this variable is needed by the template compiler';
+        case 'Destructuring not supported':
+            return 'Referencing an exported destructured variable or constant is not supported by the template compiler. Consider simplifying this to avoid destructuring';
+        case 'Could not resolve type':
+            if (error.context && error.context.typeName) {
+                return "Could not resolve type " + error.context.typeName;
             }
-            return "calls a function";
-        case REFERENCE_TO_LOCAL_SYMBOL:
+            break;
+        case 'Function call not supported':
+            var /** @type {?} */ prefix = error.context && error.context.name ? "Calling function '" + error.context.name + "', f" : 'F';
+            return prefix +
+                'unction calls are not supported. Consider replacing the function or lambda with a reference to an exported function';
+        case 'Reference to a local symbol':
             if (error.context && error.context.name) {
-                return "references local variable " + error.context.name;
+                return "Reference to a local (non-exported) symbol '" + error.context.name + "'. Consider exporting the symbol";
             }
-            return "references a local variable";
+            break;
     }
-    return 'contains the error';
+    return error.message;
+}
+/**
+ * @param {?} error
+ * @return {?}
+ */
+function produceErrorMessage(error) {
+    return "Error encountered resolving symbol values statically. " + expandedMessage(error);
 }
 /**
  * @param {?} input
@@ -39513,7 +37877,7 @@ function isPrimitive(o) {
 /**
  * @abstract
  */
-var BindingScope = /** @class */ (function () {
+var BindingScope = (function () {
     function BindingScope() {
     }
     /**
@@ -39538,7 +37902,7 @@ var BindingScope = /** @class */ (function () {
     BindingScope.empty = { resolve: function (name) { return BindingScope.missing; } };
     return BindingScope;
 }());
-var PopulatedScope = /** @class */ (function (_super) {
+var PopulatedScope = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(PopulatedScope, _super);
     function PopulatedScope(bindings) {
         var _this = _super.call(this) || this;
@@ -39559,39 +37923,726 @@ var PopulatedScope = /** @class */ (function (_super) {
     return PopulatedScope;
 }(BindingScope));
 /**
- * @param {?} chain
- * @param {?} advise
+ * @param {?} message
+ * @param {?} fileName
+ * @param {?} line
+ * @param {?} column
  * @return {?}
  */
-function formatMetadataMessageChain(chain, advise) {
-    var /** @type {?} */ expanded = expandedMessage(chain.message, chain.context);
-    var /** @type {?} */ nesting = chain.symbol ? " in '" + chain.symbol.name + "'" : '';
-    var /** @type {?} */ message = "" + expanded + nesting;
-    var /** @type {?} */ position = chain.position;
-    var /** @type {?} */ next = chain.next ?
-        formatMetadataMessageChain(chain.next, advise) :
-        advise ? { message: advise } : undefined;
-    return { message: message, position: position, next: next };
+function positionalError(message, fileName, line, column) {
+    var /** @type {?} */ result = syntaxError(message);
+    (/** @type {?} */ (result)).fileName = fileName;
+    (/** @type {?} */ (result)).line = line;
+    (/** @type {?} */ (result)).column = column;
+    return result;
 }
+
 /**
- * @param {?} e
- * @param {?} context
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes} checked by tsc
+ */
+var ResolvedStaticSymbol = (function () {
+    function ResolvedStaticSymbol(symbol, metadata) {
+        this.symbol = symbol;
+        this.metadata = metadata;
+    }
+    return ResolvedStaticSymbol;
+}());
+/**
+ * The host of the SymbolResolverHost disconnects the implementation from TypeScript / other
+ * language
+ * services and from underlying file systems.
+ * @record
+ */
+
+var SUPPORTED_SCHEMA_VERSION = 4;
+/**
+ * This class is responsible for loading metadata per symbol,
+ * and normalizing references between symbols.
+ *
+ * Internally, it only uses symbols without members,
+ * and deduces the values for symbols with members based
+ * on these symbols.
+ */
+var StaticSymbolResolver = (function () {
+    function StaticSymbolResolver(host, staticSymbolCache, summaryResolver, errorRecorder) {
+        this.host = host;
+        this.staticSymbolCache = staticSymbolCache;
+        this.summaryResolver = summaryResolver;
+        this.errorRecorder = errorRecorder;
+        this.metadataCache = new Map();
+        this.resolvedSymbols = new Map();
+        this.resolvedFilePaths = new Set();
+        this.importAs = new Map();
+        this.symbolResourcePaths = new Map();
+        this.symbolFromFile = new Map();
+        this.knownFileNameToModuleNames = new Map();
+    }
+    /**
+     * @param {?} staticSymbol
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.resolveSymbol = /**
+     * @param {?} staticSymbol
+     * @return {?}
+     */
+    function (staticSymbol) {
+        if (staticSymbol.members.length > 0) {
+            return /** @type {?} */ ((this._resolveSymbolMembers(staticSymbol)));
+        }
+        // Note: always ask for a summary first,
+        // as we might have read shallow metadata via a .d.ts file
+        // for the symbol.
+        var /** @type {?} */ resultFromSummary = /** @type {?} */ ((this._resolveSymbolFromSummary(staticSymbol)));
+        if (resultFromSummary) {
+            return resultFromSummary;
+        }
+        var /** @type {?} */ resultFromCache = this.resolvedSymbols.get(staticSymbol);
+        if (resultFromCache) {
+            return resultFromCache;
+        }
+        // Note: Some users use libraries that were not compiled with ngc, i.e. they don't
+        // have summaries, only .d.ts files. So we always need to check both, the summary
+        // and metadata.
+        this._createSymbolsOf(staticSymbol.filePath);
+        return /** @type {?} */ ((this.resolvedSymbols.get(staticSymbol)));
+    };
+    /**
+     * getImportAs produces a symbol that can be used to import the given symbol.
+     * The import might be different than the symbol if the symbol is exported from
+     * a library with a summary; in which case we want to import the symbol from the
+     * ngfactory re-export instead of directly to avoid introducing a direct dependency
+     * on an otherwise indirect dependency.
+     *
+     * @param staticSymbol the symbol for which to generate a import symbol
+     */
+    /**
+     * getImportAs produces a symbol that can be used to import the given symbol.
+     * The import might be different than the symbol if the symbol is exported from
+     * a library with a summary; in which case we want to import the symbol from the
+     * ngfactory re-export instead of directly to avoid introducing a direct dependency
+     * on an otherwise indirect dependency.
+     *
+     * @param {?} staticSymbol the symbol for which to generate a import symbol
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.getImportAs = /**
+     * getImportAs produces a symbol that can be used to import the given symbol.
+     * The import might be different than the symbol if the symbol is exported from
+     * a library with a summary; in which case we want to import the symbol from the
+     * ngfactory re-export instead of directly to avoid introducing a direct dependency
+     * on an otherwise indirect dependency.
+     *
+     * @param {?} staticSymbol the symbol for which to generate a import symbol
+     * @return {?}
+     */
+    function (staticSymbol) {
+        if (staticSymbol.members.length) {
+            var /** @type {?} */ baseSymbol = this.getStaticSymbol(staticSymbol.filePath, staticSymbol.name);
+            var /** @type {?} */ baseImportAs = this.getImportAs(baseSymbol);
+            return baseImportAs ?
+                this.getStaticSymbol(baseImportAs.filePath, baseImportAs.name, staticSymbol.members) :
+                null;
+        }
+        var /** @type {?} */ summarizedFileName = stripSummaryForJitFileSuffix(staticSymbol.filePath);
+        if (summarizedFileName !== staticSymbol.filePath) {
+            var /** @type {?} */ summarizedName = stripSummaryForJitNameSuffix(staticSymbol.name);
+            var /** @type {?} */ baseSymbol = this.getStaticSymbol(summarizedFileName, summarizedName, staticSymbol.members);
+            var /** @type {?} */ baseImportAs = this.getImportAs(baseSymbol);
+            return baseImportAs ?
+                this.getStaticSymbol(summaryForJitFileName(baseImportAs.filePath), summaryForJitName(baseImportAs.name), baseSymbol.members) :
+                null;
+        }
+        var /** @type {?} */ result = this.summaryResolver.getImportAs(staticSymbol);
+        if (!result) {
+            result = /** @type {?} */ ((this.importAs.get(staticSymbol)));
+        }
+        return result;
+    };
+    /**
+     * getResourcePath produces the path to the original location of the symbol and should
+     * be used to determine the relative location of resource references recorded in
+     * symbol metadata.
+     */
+    /**
+     * getResourcePath produces the path to the original location of the symbol and should
+     * be used to determine the relative location of resource references recorded in
+     * symbol metadata.
+     * @param {?} staticSymbol
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.getResourcePath = /**
+     * getResourcePath produces the path to the original location of the symbol and should
+     * be used to determine the relative location of resource references recorded in
+     * symbol metadata.
+     * @param {?} staticSymbol
+     * @return {?}
+     */
+    function (staticSymbol) {
+        return this.symbolResourcePaths.get(staticSymbol) || staticSymbol.filePath;
+    };
+    /**
+     * getTypeArity returns the number of generic type parameters the given symbol
+     * has. If the symbol is not a type the result is null.
+     */
+    /**
+     * getTypeArity returns the number of generic type parameters the given symbol
+     * has. If the symbol is not a type the result is null.
+     * @param {?} staticSymbol
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.getTypeArity = /**
+     * getTypeArity returns the number of generic type parameters the given symbol
+     * has. If the symbol is not a type the result is null.
+     * @param {?} staticSymbol
+     * @return {?}
+     */
+    function (staticSymbol) {
+        // If the file is a factory/ngsummary file, don't resolve the symbol as doing so would
+        // cause the metadata for an factory/ngsummary file to be loaded which doesn't exist.
+        // All references to generated classes must include the correct arity whenever
+        // generating code.
+        if (isGeneratedFile(staticSymbol.filePath)) {
+            return null;
+        }
+        var /** @type {?} */ resolvedSymbol = this.resolveSymbol(staticSymbol);
+        while (resolvedSymbol && resolvedSymbol.metadata instanceof StaticSymbol) {
+            resolvedSymbol = this.resolveSymbol(resolvedSymbol.metadata);
+        }
+        return (resolvedSymbol && resolvedSymbol.metadata && resolvedSymbol.metadata.arity) || null;
+    };
+    /**
+     * @param {?} filePath
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.getKnownModuleName = /**
+     * @param {?} filePath
+     * @return {?}
+     */
+    function (filePath) {
+        return this.knownFileNameToModuleNames.get(filePath) || null;
+    };
+    /**
+     * @param {?} sourceSymbol
+     * @param {?} targetSymbol
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.recordImportAs = /**
+     * @param {?} sourceSymbol
+     * @param {?} targetSymbol
+     * @return {?}
+     */
+    function (sourceSymbol, targetSymbol) {
+        sourceSymbol.assertNoMembers();
+        targetSymbol.assertNoMembers();
+        this.importAs.set(sourceSymbol, targetSymbol);
+    };
+    /**
+     * @param {?} fileName
+     * @param {?} moduleName
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.recordModuleNameForFileName = /**
+     * @param {?} fileName
+     * @param {?} moduleName
+     * @return {?}
+     */
+    function (fileName, moduleName) {
+        this.knownFileNameToModuleNames.set(fileName, moduleName);
+    };
+    /**
+     * Invalidate all information derived from the given file.
+     *
+     * @param fileName the file to invalidate
+     */
+    /**
+     * Invalidate all information derived from the given file.
+     *
+     * @param {?} fileName the file to invalidate
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.invalidateFile = /**
+     * Invalidate all information derived from the given file.
+     *
+     * @param {?} fileName the file to invalidate
+     * @return {?}
+     */
+    function (fileName) {
+        this.metadataCache.delete(fileName);
+        this.resolvedFilePaths.delete(fileName);
+        var /** @type {?} */ symbols = this.symbolFromFile.get(fileName);
+        if (symbols) {
+            this.symbolFromFile.delete(fileName);
+            for (var _i = 0, symbols_1 = symbols; _i < symbols_1.length; _i++) {
+                var symbol = symbols_1[_i];
+                this.resolvedSymbols.delete(symbol);
+                this.importAs.delete(symbol);
+                this.symbolResourcePaths.delete(symbol);
+            }
+        }
+    };
+    /* @internal */
+    /**
+     * @template T
+     * @param {?} cb
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.ignoreErrorsFor = /**
+     * @template T
+     * @param {?} cb
+     * @return {?}
+     */
+    function (cb) {
+        var /** @type {?} */ recorder = this.errorRecorder;
+        this.errorRecorder = function () { };
+        try {
+            return cb();
+        }
+        finally {
+            this.errorRecorder = recorder;
+        }
+    };
+    /**
+     * @param {?} staticSymbol
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype._resolveSymbolMembers = /**
+     * @param {?} staticSymbol
+     * @return {?}
+     */
+    function (staticSymbol) {
+        var /** @type {?} */ members = staticSymbol.members;
+        var /** @type {?} */ baseResolvedSymbol = this.resolveSymbol(this.getStaticSymbol(staticSymbol.filePath, staticSymbol.name));
+        if (!baseResolvedSymbol) {
+            return null;
+        }
+        var /** @type {?} */ baseMetadata = baseResolvedSymbol.metadata;
+        if (baseMetadata instanceof StaticSymbol) {
+            return new ResolvedStaticSymbol(staticSymbol, this.getStaticSymbol(baseMetadata.filePath, baseMetadata.name, members));
+        }
+        else if (baseMetadata && baseMetadata.__symbolic === 'class') {
+            if (baseMetadata.statics && members.length === 1) {
+                return new ResolvedStaticSymbol(staticSymbol, baseMetadata.statics[members[0]]);
+            }
+        }
+        else {
+            var /** @type {?} */ value = baseMetadata;
+            for (var /** @type {?} */ i = 0; i < members.length && value; i++) {
+                value = value[members[i]];
+            }
+            return new ResolvedStaticSymbol(staticSymbol, value);
+        }
+        return null;
+    };
+    /**
+     * @param {?} staticSymbol
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype._resolveSymbolFromSummary = /**
+     * @param {?} staticSymbol
+     * @return {?}
+     */
+    function (staticSymbol) {
+        var /** @type {?} */ summary = this.summaryResolver.resolveSummary(staticSymbol);
+        return summary ? new ResolvedStaticSymbol(staticSymbol, summary.metadata) : null;
+    };
+    /**
+     * getStaticSymbol produces a Type whose metadata is known but whose implementation is not loaded.
+     * All types passed to the StaticResolver should be pseudo-types returned by this method.
+     *
+     * @param declarationFile the absolute path of the file where the symbol is declared
+     * @param name the name of the type.
+     * @param members a symbol for a static member of the named type
+     */
+    /**
+     * getStaticSymbol produces a Type whose metadata is known but whose implementation is not loaded.
+     * All types passed to the StaticResolver should be pseudo-types returned by this method.
+     *
+     * @param {?} declarationFile the absolute path of the file where the symbol is declared
+     * @param {?} name the name of the type.
+     * @param {?=} members a symbol for a static member of the named type
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.getStaticSymbol = /**
+     * getStaticSymbol produces a Type whose metadata is known but whose implementation is not loaded.
+     * All types passed to the StaticResolver should be pseudo-types returned by this method.
+     *
+     * @param {?} declarationFile the absolute path of the file where the symbol is declared
+     * @param {?} name the name of the type.
+     * @param {?=} members a symbol for a static member of the named type
+     * @return {?}
+     */
+    function (declarationFile, name, members) {
+        return this.staticSymbolCache.get(declarationFile, name, members);
+    };
+    /**
+     * hasDecorators checks a file's metadata for the presense of decorators without evalutating the
+     * metadata.
+     *
+     * @param filePath the absolute path to examine for decorators.
+     * @returns true if any class in the file has a decorator.
+     */
+    /**
+     * hasDecorators checks a file's metadata for the presense of decorators without evalutating the
+     * metadata.
+     *
+     * @param {?} filePath the absolute path to examine for decorators.
+     * @return {?} true if any class in the file has a decorator.
+     */
+    StaticSymbolResolver.prototype.hasDecorators = /**
+     * hasDecorators checks a file's metadata for the presense of decorators without evalutating the
+     * metadata.
+     *
+     * @param {?} filePath the absolute path to examine for decorators.
+     * @return {?} true if any class in the file has a decorator.
+     */
+    function (filePath) {
+        var /** @type {?} */ metadata = this.getModuleMetadata(filePath);
+        if (metadata['metadata']) {
+            return Object.keys(metadata['metadata']).some(function (metadataKey) {
+                var /** @type {?} */ entry = metadata['metadata'][metadataKey];
+                return entry && entry.__symbolic === 'class' && entry.decorators;
+            });
+        }
+        return false;
+    };
+    /**
+     * @param {?} filePath
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.getSymbolsOf = /**
+     * @param {?} filePath
+     * @return {?}
+     */
+    function (filePath) {
+        var /** @type {?} */ summarySymbols = this.summaryResolver.getSymbolsOf(filePath);
+        if (summarySymbols) {
+            return summarySymbols;
+        }
+        // Note: Some users use libraries that were not compiled with ngc, i.e. they don't
+        // have summaries, only .d.ts files, but `summaryResolver.isLibraryFile` returns true.
+        this._createSymbolsOf(filePath);
+        var /** @type {?} */ metadataSymbols = [];
+        this.resolvedSymbols.forEach(function (resolvedSymbol) {
+            if (resolvedSymbol.symbol.filePath === filePath) {
+                metadataSymbols.push(resolvedSymbol.symbol);
+            }
+        });
+        return metadataSymbols;
+    };
+    /**
+     * @param {?} filePath
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype._createSymbolsOf = /**
+     * @param {?} filePath
+     * @return {?}
+     */
+    function (filePath) {
+        var _this = this;
+        if (this.resolvedFilePaths.has(filePath)) {
+            return;
+        }
+        this.resolvedFilePaths.add(filePath);
+        var /** @type {?} */ resolvedSymbols = [];
+        var /** @type {?} */ metadata = this.getModuleMetadata(filePath);
+        if (metadata['importAs']) {
+            // Index bundle indices should use the importAs module name defined
+            // in the bundle.
+            this.knownFileNameToModuleNames.set(filePath, metadata['importAs']);
+        }
+        // handle the symbols in one of the re-export location
+        if (metadata['exports']) {
+            var _loop_1 = function (moduleExport) {
+                // handle the symbols in the list of explicitly re-exported symbols.
+                if (moduleExport.export) {
+                    moduleExport.export.forEach(function (exportSymbol) {
+                        var /** @type {?} */ symbolName;
+                        if (typeof exportSymbol === 'string') {
+                            symbolName = exportSymbol;
+                        }
+                        else {
+                            symbolName = exportSymbol.as;
+                        }
+                        symbolName = unescapeIdentifier(symbolName);
+                        var /** @type {?} */ symName = symbolName;
+                        if (typeof exportSymbol !== 'string') {
+                            symName = unescapeIdentifier(exportSymbol.name);
+                        }
+                        var /** @type {?} */ resolvedModule = _this.resolveModule(moduleExport.from, filePath);
+                        if (resolvedModule) {
+                            var /** @type {?} */ targetSymbol = _this.getStaticSymbol(resolvedModule, symName);
+                            var /** @type {?} */ sourceSymbol = _this.getStaticSymbol(filePath, symbolName);
+                            resolvedSymbols.push(_this.createExport(sourceSymbol, targetSymbol));
+                        }
+                    });
+                }
+                else {
+                    // handle the symbols via export * directives.
+                    var /** @type {?} */ resolvedModule = this_1.resolveModule(moduleExport.from, filePath);
+                    if (resolvedModule) {
+                        var /** @type {?} */ nestedExports = this_1.getSymbolsOf(resolvedModule);
+                        nestedExports.forEach(function (targetSymbol) {
+                            var /** @type {?} */ sourceSymbol = _this.getStaticSymbol(filePath, targetSymbol.name);
+                            resolvedSymbols.push(_this.createExport(sourceSymbol, targetSymbol));
+                        });
+                    }
+                }
+            };
+            var this_1 = this;
+            for (var _i = 0, _a = metadata['exports']; _i < _a.length; _i++) {
+                var moduleExport = _a[_i];
+                _loop_1(moduleExport);
+            }
+        }
+        // handle the actual metadata. Has to be after the exports
+        // as there migth be collisions in the names, and we want the symbols
+        // of the current module to win ofter reexports.
+        if (metadata['metadata']) {
+            // handle direct declarations of the symbol
+            var /** @type {?} */ topLevelSymbolNames_1 = new Set(Object.keys(metadata['metadata']).map(unescapeIdentifier));
+            var /** @type {?} */ origins_1 = metadata['origins'] || {};
+            Object.keys(metadata['metadata']).forEach(function (metadataKey) {
+                var /** @type {?} */ symbolMeta = metadata['metadata'][metadataKey];
+                var /** @type {?} */ name = unescapeIdentifier(metadataKey);
+                var /** @type {?} */ symbol = _this.getStaticSymbol(filePath, name);
+                var /** @type {?} */ origin = origins_1.hasOwnProperty(metadataKey) && origins_1[metadataKey];
+                if (origin) {
+                    // If the symbol is from a bundled index, use the declaration location of the
+                    // symbol so relative references (such as './my.html') will be calculated
+                    // correctly.
+                    var /** @type {?} */ originFilePath = _this.resolveModule(origin, filePath);
+                    if (!originFilePath) {
+                        _this.reportError(new Error("Couldn't resolve original symbol for " + origin + " from " + filePath));
+                    }
+                    else {
+                        _this.symbolResourcePaths.set(symbol, originFilePath);
+                    }
+                }
+                resolvedSymbols.push(_this.createResolvedSymbol(symbol, filePath, topLevelSymbolNames_1, symbolMeta));
+            });
+        }
+        resolvedSymbols.forEach(function (resolvedSymbol) { return _this.resolvedSymbols.set(resolvedSymbol.symbol, resolvedSymbol); });
+        this.symbolFromFile.set(filePath, resolvedSymbols.map(function (resolvedSymbol) { return resolvedSymbol.symbol; }));
+    };
+    /**
+     * @param {?} sourceSymbol
+     * @param {?} topLevelPath
+     * @param {?} topLevelSymbolNames
+     * @param {?} metadata
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.createResolvedSymbol = /**
+     * @param {?} sourceSymbol
+     * @param {?} topLevelPath
+     * @param {?} topLevelSymbolNames
+     * @param {?} metadata
+     * @return {?}
+     */
+    function (sourceSymbol, topLevelPath, topLevelSymbolNames, metadata) {
+        // For classes that don't have Angular summaries / metadata,
+        // we only keep their arity, but nothing else
+        // (e.g. their constructor parameters).
+        // We do this to prevent introducing deep imports
+        // as we didn't generate .ngfactory.ts files with proper reexports.
+        if (this.summaryResolver.isLibraryFile(sourceSymbol.filePath) && metadata &&
+            metadata['__symbolic'] === 'class') {
+            var /** @type {?} */ transformedMeta_1 = { __symbolic: 'class', arity: metadata.arity };
+            return new ResolvedStaticSymbol(sourceSymbol, transformedMeta_1);
+        }
+        var /** @type {?} */ self = this;
+        var ReferenceTransformer = (function (_super) {
+            Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ReferenceTransformer, _super);
+            function ReferenceTransformer() {
+                return _super !== null && _super.apply(this, arguments) || this;
+            }
+            /**
+             * @param {?} map
+             * @param {?} functionParams
+             * @return {?}
+             */
+            ReferenceTransformer.prototype.visitStringMap = /**
+             * @param {?} map
+             * @param {?} functionParams
+             * @return {?}
+             */
+            function (map, functionParams) {
+                var /** @type {?} */ symbolic = map['__symbolic'];
+                if (symbolic === 'function') {
+                    var /** @type {?} */ oldLen = functionParams.length;
+                    functionParams.push.apply(functionParams, (map['parameters'] || []));
+                    var /** @type {?} */ result = _super.prototype.visitStringMap.call(this, map, functionParams);
+                    functionParams.length = oldLen;
+                    return result;
+                }
+                else if (symbolic === 'reference') {
+                    var /** @type {?} */ module = map['module'];
+                    var /** @type {?} */ name_1 = map['name'] ? unescapeIdentifier(map['name']) : map['name'];
+                    if (!name_1) {
+                        return null;
+                    }
+                    var /** @type {?} */ filePath = void 0;
+                    if (module) {
+                        filePath = /** @type {?} */ ((self.resolveModule(module, sourceSymbol.filePath)));
+                        if (!filePath) {
+                            return {
+                                __symbolic: 'error',
+                                message: "Could not resolve " + module + " relative to " + sourceSymbol.filePath + "."
+                            };
+                        }
+                        return self.getStaticSymbol(filePath, name_1);
+                    }
+                    else if (functionParams.indexOf(name_1) >= 0) {
+                        // reference to a function parameter
+                        return { __symbolic: 'reference', name: name_1 };
+                    }
+                    else {
+                        if (topLevelSymbolNames.has(name_1)) {
+                            return self.getStaticSymbol(topLevelPath, name_1);
+                        }
+                        // ambient value
+                        null;
+                    }
+                }
+                else {
+                    return _super.prototype.visitStringMap.call(this, map, functionParams);
+                }
+            };
+            return ReferenceTransformer;
+        }(ValueTransformer));
+        var /** @type {?} */ transformedMeta = visitValue(metadata, new ReferenceTransformer(), []);
+        if (transformedMeta instanceof StaticSymbol) {
+            return this.createExport(sourceSymbol, transformedMeta);
+        }
+        return new ResolvedStaticSymbol(sourceSymbol, transformedMeta);
+    };
+    /**
+     * @param {?} sourceSymbol
+     * @param {?} targetSymbol
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.createExport = /**
+     * @param {?} sourceSymbol
+     * @param {?} targetSymbol
+     * @return {?}
+     */
+    function (sourceSymbol, targetSymbol) {
+        sourceSymbol.assertNoMembers();
+        targetSymbol.assertNoMembers();
+        if (this.summaryResolver.isLibraryFile(sourceSymbol.filePath) &&
+            this.summaryResolver.isLibraryFile(targetSymbol.filePath)) {
+            // This case is for an ng library importing symbols from a plain ts library
+            // transitively.
+            // Note: We rely on the fact that we discover symbols in the direction
+            // from source files to library files
+            this.importAs.set(targetSymbol, this.getImportAs(sourceSymbol) || sourceSymbol);
+        }
+        return new ResolvedStaticSymbol(sourceSymbol, targetSymbol);
+    };
+    /**
+     * @param {?} error
+     * @param {?=} context
+     * @param {?=} path
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.reportError = /**
+     * @param {?} error
+     * @param {?=} context
+     * @param {?=} path
+     * @return {?}
+     */
+    function (error, context, path) {
+        if (this.errorRecorder) {
+            this.errorRecorder(error, (context && context.filePath) || path);
+        }
+        else {
+            throw error;
+        }
+    };
+    /**
+     * @param {?} module an absolute path to a module file.
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.getModuleMetadata = /**
+     * @param {?} module an absolute path to a module file.
+     * @return {?}
+     */
+    function (module) {
+        var /** @type {?} */ moduleMetadata = this.metadataCache.get(module);
+        if (!moduleMetadata) {
+            var /** @type {?} */ moduleMetadatas = this.host.getMetadataFor(module);
+            if (moduleMetadatas) {
+                var /** @type {?} */ maxVersion_1 = -1;
+                moduleMetadatas.forEach(function (md) {
+                    if (md['version'] > maxVersion_1) {
+                        maxVersion_1 = md['version'];
+                        moduleMetadata = md;
+                    }
+                });
+            }
+            if (!moduleMetadata) {
+                moduleMetadata =
+                    { __symbolic: 'module', version: SUPPORTED_SCHEMA_VERSION, module: module, metadata: {} };
+            }
+            if (moduleMetadata['version'] != SUPPORTED_SCHEMA_VERSION) {
+                var /** @type {?} */ errorMessage = moduleMetadata['version'] == 2 ?
+                    "Unsupported metadata version " + moduleMetadata['version'] + " for module " + module + ". This module should be compiled with a newer version of ngc" :
+                    "Metadata version mismatch for module " + module + ", found version " + moduleMetadata['version'] + ", expected " + SUPPORTED_SCHEMA_VERSION;
+                this.reportError(new Error(errorMessage));
+            }
+            this.metadataCache.set(module, moduleMetadata);
+        }
+        return moduleMetadata;
+    };
+    /**
+     * @param {?} module
+     * @param {?} symbolName
+     * @param {?=} containingFile
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.getSymbolByModule = /**
+     * @param {?} module
+     * @param {?} symbolName
+     * @param {?=} containingFile
+     * @return {?}
+     */
+    function (module, symbolName, containingFile) {
+        var /** @type {?} */ filePath = this.resolveModule(module, containingFile);
+        if (!filePath) {
+            this.reportError(new Error("Could not resolve module " + module + (containingFile ? ' relative to ' +
+                containingFile : '')));
+            return this.getStaticSymbol("ERROR:" + module, symbolName);
+        }
+        return this.getStaticSymbol(filePath, symbolName);
+    };
+    /**
+     * @param {?} module
+     * @param {?=} containingFile
+     * @return {?}
+     */
+    StaticSymbolResolver.prototype.resolveModule = /**
+     * @param {?} module
+     * @param {?=} containingFile
+     * @return {?}
+     */
+    function (module, containingFile) {
+        try {
+            return this.host.moduleNameToFileName(module, containingFile);
+        }
+        catch (/** @type {?} */ e) {
+            console.error("Could not resolve module '" + module + "' relative to file " + containingFile);
+            this.reportError(e, undefined, containingFile);
+        }
+        return null;
+    };
+    return StaticSymbolResolver;
+}());
+/**
+ * @param {?} identifier
  * @return {?}
  */
-function formatMetadataError(e, context) {
-    if (isMetadataError(e)) {
-        // Produce a formatted version of the and leaving enough information in the original error
-        // to recover the formatting information to eventually produce a diagnostic error message.
-        var /** @type {?} */ position = e.position;
-        var /** @type {?} */ chain = {
-            message: "Error during template compile of '" + context.name + "'",
-            position: position,
-            next: { message: e.message, next: e.chain, context: e.context, symbol: e.symbol }
-        };
-        var /** @type {?} */ advise = e.advise || messageAdvise(e.message, e.context);
-        return formattedError(formatMetadataMessageChain(chain, advise));
-    }
-    return e;
+function unescapeIdentifier(identifier) {
+    return identifier.startsWith('___') ? identifier.substr(1) : identifier;
 }
 
 /**
@@ -39599,17 +38650,10 @@ function formatMetadataError(e, context) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @record
  */
 
-var AotSummaryResolver = /** @class */ (function () {
+var AotSummaryResolver = (function () {
     function AotSummaryResolver(host, staticSymbolCache) {
         this.host = host;
         this.staticSymbolCache = staticSymbolCache;
@@ -39667,15 +38711,13 @@ var AotSummaryResolver = /** @class */ (function () {
      * @return {?}
      */
     function (staticSymbol) {
-        var /** @type {?} */ rootSymbol = staticSymbol.members.length ?
-            this.staticSymbolCache.get(staticSymbol.filePath, staticSymbol.name) :
-            staticSymbol;
-        var /** @type {?} */ summary = this.summaryCache.get(rootSymbol);
+        staticSymbol.assertNoMembers();
+        var /** @type {?} */ summary = this.summaryCache.get(staticSymbol);
         if (!summary) {
             this._loadSummaryFile(staticSymbol.filePath);
             summary = /** @type {?} */ ((this.summaryCache.get(staticSymbol)));
         }
-        return (rootSymbol === staticSymbol && summary) || null;
+        return summary || null;
     };
     /**
      * @param {?} filePath
@@ -39840,12 +38882,12 @@ function createAotCompiler(compilerHost, options, errorCollector) {
 /**
  * @abstract
  */
-var SummaryResolver = /** @class */ (function () {
+var SummaryResolver = (function () {
     function SummaryResolver() {
     }
     return SummaryResolver;
 }());
-var JitSummaryResolver = /** @class */ (function () {
+var JitSummaryResolver = (function () {
     function JitSummaryResolver() {
         this._summaries = new Map();
     }
@@ -39927,13 +38969,6 @@ var JitSummaryResolver = /** @class */ (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @param {?} statements
  * @param {?} reflector
  * @return {?}
@@ -39962,7 +38997,7 @@ function _executeFunctionStatements(varNames, varValues, statements, ctx, visito
     var /** @type {?} */ result = visitor.visitAllStatements(statements, childCtx);
     return result ? result.value : null;
 }
-var _ExecutionContext = /** @class */ (function () {
+var _ExecutionContext = (function () {
     function _ExecutionContext(parent, instance, className, vars) {
         this.parent = parent;
         this.instance = instance;
@@ -39981,7 +39016,7 @@ var _ExecutionContext = /** @class */ (function () {
     };
     return _ExecutionContext;
 }());
-var ReturnValue = /** @class */ (function () {
+var ReturnValue = (function () {
     function ReturnValue(value) {
         this.value = value;
     }
@@ -40037,7 +39072,7 @@ function createDynamicClass(_classStmt, _ctx, _visitor) {
     ctor.prototype = Object.create(superClass.prototype, propertyDescriptors);
     return ctor;
 }
-var StatementInterpreter = /** @class */ (function () {
+var StatementInterpreter = (function () {
     function StatementInterpreter(reflector) {
         this.reflector = reflector;
     }
@@ -40645,7 +39680,7 @@ var CATCH_STACK_VAR$2 = 'stack';
 /**
  * @abstract
  */
-var AbstractJsEmitterVisitor = /** @class */ (function (_super) {
+var AbstractJsEmitterVisitor = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(AbstractJsEmitterVisitor, _super);
     function AbstractJsEmitterVisitor() {
         return _super.call(this, false) || this;
@@ -40982,7 +40017,7 @@ function jitStatements(sourceUrl, statements, reflector, createSourceMaps) {
     converter.createReturnStmt(ctx);
     return evalExpression(sourceUrl, ctx, converter.getArgs(), createSourceMaps);
 }
-var JitEmitterVisitor = /** @class */ (function (_super) {
+var JitEmitterVisitor = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(JitEmitterVisitor, _super);
     function JitEmitterVisitor(reflector) {
         var _this = _super.call(this) || this;
@@ -41114,7 +40149,7 @@ var JitEmitterVisitor = /** @class */ (function (_super) {
  * from a trusted source. Attacker-controlled data introduced by a template could expose your
  * application to XSS risks.  For more detail, see the [Security Guide](http://g.co/ng/security).
  */
-var JitCompiler = /** @class */ (function () {
+var JitCompiler = (function () {
     function JitCompiler(_metadataResolver, _templateParser, _styleCompiler, _viewCompiler, _ngModuleCompiler, _summaryResolver, _reflector, _compilerConfig, _console, getExtraNgModuleProviders) {
         this._metadataResolver = _metadataResolver;
         this._templateParser = _templateParser;
@@ -41131,7 +40166,6 @@ var JitCompiler = /** @class */ (function () {
         this._compiledDirectiveWrapperCache = new Map();
         this._compiledNgModuleCache = new Map();
         this._sharedStylesheetCount = 0;
-        this._addedAotSummaries = new Set();
     }
     /**
      * @param {?} moduleType
@@ -41198,33 +40232,11 @@ var JitCompiler = /** @class */ (function () {
      * @return {?}
      */
     function (summaries) {
+        var _this = this;
         this.clearCache();
-        this._addAotSummaries(summaries);
-    };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    JitCompiler.prototype._addAotSummaries = /**
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn$$1) {
-        if (this._addedAotSummaries.has(fn$$1)) {
-            return;
-        }
-        this._addedAotSummaries.add(fn$$1);
-        var /** @type {?} */ summaries = fn$$1();
-        for (var /** @type {?} */ i = 0; i < summaries.length; i++) {
-            var /** @type {?} */ entry = summaries[i];
-            if (typeof entry === 'function') {
-                this._addAotSummaries(entry);
-            }
-            else {
-                var /** @type {?} */ summary = /** @type {?} */ (entry);
-                this._summaryResolver.addSummary({ symbol: summary.type.reference, metadata: null, type: summary });
-            }
-        }
+        flattenSummaries(summaries).forEach(function (summary) {
+            _this._summaryResolver.addSummary({ symbol: summary.type.reference, metadata: null, type: summary });
+        });
     };
     /**
      * @param {?} ref
@@ -41416,7 +40428,6 @@ var JitCompiler = /** @class */ (function () {
      * @return {?}
      */
     function () {
-        // Note: don't clear the _addedAotSummaries, as they don't change!
         this._metadataResolver.clearCache();
         this._compiledTemplateCache.clear();
         this._compiledHostTemplateCache.clear();
@@ -41568,7 +40579,7 @@ var JitCompiler = /** @class */ (function () {
     };
     return JitCompiler;
 }());
-var CompiledTemplate = /** @class */ (function () {
+var CompiledTemplate = (function () {
     function CompiledTemplate(isHost, compType, compMeta, ngModule, directives) {
         this.isHost = isHost;
         this.compType = compType;
@@ -41608,6 +40619,31 @@ function assertComponent(meta) {
     }
 }
 /**
+ * @param {?} fn
+ * @param {?=} out
+ * @param {?=} seen
+ * @return {?}
+ */
+function flattenSummaries(fn$$1, out, seen) {
+    if (out === void 0) { out = []; }
+    if (seen === void 0) { seen = new Set(); }
+    if (seen.has(fn$$1)) {
+        return out;
+    }
+    seen.add(fn$$1);
+    var /** @type {?} */ summaries = fn$$1();
+    for (var /** @type {?} */ i = 0; i < summaries.length; i++) {
+        var /** @type {?} */ entry = summaries[i];
+        if (typeof entry === 'function') {
+            flattenSummaries(entry, out, seen);
+        }
+        else {
+            out.push(entry);
+        }
+    }
+    return out;
+}
+/**
  * @return {?}
  */
 function createOutputContext() {
@@ -41622,17 +40658,10 @@ function createOutputContext() {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Provides access to reflection data about symbols that the compiler needs.
  * @abstract
  */
-var CompileReflector = /** @class */ (function () {
+var CompileReflector = (function () {
     function CompileReflector() {
     }
     return CompileReflector;
@@ -41641,13 +40670,6 @@ var CompileReflector = /** @class */ (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Create a {\@link UrlResolver} with no package prefix.
@@ -41666,7 +40688,7 @@ function createOfflineCompileUrlResolver() {
  * @record
  */
 
-var UrlResolver = /** @class */ (function () {
+var UrlResolver = (function () {
     function UrlResolverImpl(_packagePrefix) {
         if (_packagePrefix === void 0) { _packagePrefix = null; }
         this._packagePrefix = _packagePrefix;
@@ -41834,16 +40856,16 @@ function _buildFromEncodedParts(opt_scheme, opt_userInfo, opt_domain, opt_port, 
  */
 var _splitRe = new RegExp('^' +
     '(?:' +
-    '([^:/?#.]+)' + // scheme - ignore special characters
+    '([^:/?#.]+)' +
     ':)?' +
     '(?://' +
-    '(?:([^/?#]*)@)?' + // userInfo
-    '([\\w\\d\\-\\u0100-\\uffff.%]*)' + // domain - restrict to letters,
-    '(?::([0-9]+))?' + // port
+    '(?:([^/?#]*)@)?' +
+    '([\\w\\d\\-\\u0100-\\uffff.%]*)' +
+    '(?::([0-9]+))?' +
     ')?' +
-    '([^?#]+)?' + // path
-    '(?:\\?([^#]*))?' + // query
-    '(?:#(.*))?' + // fragment
+    '([^?#]+)?' +
+    '(?:\\?([^#]*))?' +
+    '(?:#(.*))?' +
     '$');
 /** @enum {number} */
 var _ComponentIndex = {
@@ -41971,17 +40993,10 @@ function _resolveUrl(base, url) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * An interface for retrieving documents by URL that the compiler uses
  * to load templates.
  */
-var ResourceLoader = /** @class */ (function () {
+var ResourceLoader = (function () {
     function ResourceLoader() {
     }
     /**
@@ -42008,12 +41023,15 @@ var ResourceLoader = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * Extract i18n messages from source code
+ */
+/**
  * The host of the Extractor disconnects the implementation from TypeScript / other language
  * services and from underlying file systems.
  * @record
  */
 
-var Extractor = /** @class */ (function () {
+var Extractor = (function () {
     function Extractor(host, staticSymbolResolver, messageBundle, metadataResolver) {
         this.host = host;
         this.staticSymbolResolver = staticSymbolResolver;
@@ -42108,6 +41126,21 @@ var Extractor = /** @class */ (function () {
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * Entry point for all APIs of the compiler package.
+ *
+ * <div class="callout is-critical">
+ *   <header>Unstable APIs</header>
+ *   <p>
+ *     All compiler apis are currently considered experimental and private!
+ *   </p>
+ *   <p>
+ *     We expect the APIs in this package to keep on changing. Do not rely on them.
+ *   </p>
+ * </div>
  */
 
 // This file only reexports content of the `src` folder. Keep it that way.
@@ -42264,6 +41297,7 @@ var Extractor = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_14", function() { return platformCore; });
 /* unused harmony export ɵALLOW_MULTIPLE_PLATFORMS */
 /* unused harmony export ɵAPP_ID_RANDOM_PROVIDER */
+/* unused harmony export ɵValueUnwrapper */
 /* unused harmony export ɵdevModeEqual */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_30", function() { return isListLikeIterable; });
 /* unused harmony export ɵChangeDetectorStatus */
@@ -42279,28 +41313,9 @@ var Extractor = /** @class */ (function () {
 /* unused harmony export ɵmakeDecorator */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_31", function() { return isObservable; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_32", function() { return isPromise; });
-/* unused harmony export ɵclearOverrides */
-/* unused harmony export ɵoverrideComponentView */
+/* unused harmony export ɵclearProviderOverrides */
 /* unused harmony export ɵoverrideProvider */
 /* unused harmony export ɵNOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR */
-/* unused harmony export ɵdefineComponent */
-/* unused harmony export ɵdetectChanges */
-/* unused harmony export ɵrenderComponent */
-/* unused harmony export ɵC */
-/* unused harmony export ɵD */
-/* unused harmony export ɵE */
-/* unused harmony export ɵT */
-/* unused harmony export ɵV */
-/* unused harmony export ɵb */
-/* unused harmony export ɵb1 */
-/* unused harmony export ɵc */
-/* unused harmony export ɵcR */
-/* unused harmony export ɵcr */
-/* unused harmony export ɵe */
-/* unused harmony export ɵp */
-/* unused harmony export ɵs */
-/* unused harmony export ɵt */
-/* unused harmony export ɵv */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_44", function() { return registerModuleFactory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_18", function() { return EMPTY_ARRAY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "_19", function() { return EMPTY_MAP; });
@@ -42336,48 +41351,45 @@ var Extractor = /** @class */ (function () {
 /* unused harmony export state */
 /* unused harmony export keyframes */
 /* unused harmony export transition */
-/* unused harmony export ɵbf */
-/* unused harmony export ɵbg */
-/* unused harmony export ɵbk */
-/* unused harmony export ɵbh */
-/* unused harmony export ɵbj */
-/* unused harmony export ɵbi */
-/* unused harmony export ɵbl */
-/* unused harmony export ɵbe */
-/* unused harmony export ɵn */
-/* unused harmony export ɵo */
-/* unused harmony export ɵq */
-/* unused harmony export ɵi */
-/* unused harmony export ɵj */
+/* unused harmony export ɵx */
+/* unused harmony export ɵy */
+/* unused harmony export ɵbc */
+/* unused harmony export ɵz */
+/* unused harmony export ɵbb */
+/* unused harmony export ɵba */
+/* unused harmony export ɵbd */
+/* unused harmony export ɵw */
 /* unused harmony export ɵk */
 /* unused harmony export ɵl */
 /* unused harmony export ɵm */
 /* unused harmony export ɵf */
 /* unused harmony export ɵg */
 /* unused harmony export ɵh */
-/* unused harmony export ɵr */
-/* unused harmony export ɵw */
-/* unused harmony export ɵu */
-/* unused harmony export ɵz */
-/* unused harmony export ɵx */
-/* unused harmony export ɵy */
-/* unused harmony export ɵbc */
-/* unused harmony export ɵa */
+/* unused harmony export ɵi */
+/* unused harmony export ɵj */
+/* unused harmony export ɵb */
+/* unused harmony export ɵc */
 /* unused harmony export ɵd */
-/* unused harmony export ɵba */
-/* unused harmony export ɵbb */
+/* unused harmony export ɵe */
+/* unused harmony export ɵn */
+/* unused harmony export ɵp */
+/* unused harmony export ɵo */
+/* unused harmony export ɵs */
+/* unused harmony export ɵq */
+/* unused harmony export ɵr */
+/* unused harmony export ɵa */
+/* unused harmony export ɵt */
+/* unused harmony export ɵu */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_tslib__ = __webpack_require__("./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_rxjs_Observable__ = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_observable_merge__ = __webpack_require__("./node_modules/rxjs/_esm5/observable/merge.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_operator_share__ = __webpack_require__("./node_modules/rxjs/_esm5/operator/share.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_Subject__ = __webpack_require__("./node_modules/rxjs/_esm5/Subject.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_rxjs_Subscription__ = __webpack_require__("./node_modules/rxjs/_esm5/Subscription.js");
 /**
- * @license Angular v5.2.9
- * (c) 2010-2018 Google, Inc. https://angular.io/
+ * @license Angular v5.0.2
+ * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
-
 
 
 
@@ -42387,13 +41399,6 @@ var Extractor = /** @class */ (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Creates a token that can be used in a DI Provider.
@@ -42417,7 +41422,7 @@ var Extractor = /** @class */ (function () {
  *
  * \@stable
  */
-var InjectionToken = /** @class */ (function () {
+var InjectionToken = (function () {
     function InjectionToken(_desc) {
         this._desc = _desc;
         /**
@@ -42438,13 +41443,6 @@ var InjectionToken = /** @class */ (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * An interface implemented by all Angular type decorators, which allows them to be used as ES7
@@ -42686,7 +41684,7 @@ var Attribute = makeParamDecorator('Attribute', function (attributeName) { retur
  * \@stable
  * @abstract
  */
-var Query = /** @class */ (function () {
+var Query = (function () {
     function Query() {
     }
     return Query;
@@ -42769,13 +41767,6 @@ var ViewChild = makePropDecorator('ViewChild', function (selector, data) {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /** @enum {number} */
 var ChangeDetectionStrategy = {
@@ -42959,13 +41950,6 @@ var HostListener = makePropDecorator('HostListener', function (eventName, args) 
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * A wrapper around a module that also includes the providers.
  *
  * \@stable
@@ -43017,13 +42001,6 @@ var NgModule = makeDecorator('NgModule', function (ngModule) { return ngModule; 
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** @enum {number} */
 var ViewEncapsulation = {
     /**
@@ -43055,31 +42032,17 @@ ViewEncapsulation[ViewEncapsulation.None] = "None";
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * \@whatItDoes Represents the version of Angular
  *
  * \@stable
  */
-var Version = /** @class */ (function () {
+var Version = (function () {
     function Version(full) {
         this.full = full;
         this.major = full.split('.')[0];
@@ -43091,7 +42054,7 @@ var Version = /** @class */ (function () {
 /**
  * \@stable
  */
-var VERSION = new Version('5.2.9');
+var VERSION = new Version('5.0.2');
 
 /**
  * @fileoverview added by tsickle
@@ -43193,19 +42156,11 @@ var Host = makeParamDecorator('Host');
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var __window = typeof window !== 'undefined' && window;
 var __self = typeof self !== 'undefined' && typeof WorkerGlobalScope !== 'undefined' &&
     self instanceof WorkerGlobalScope && self;
 var __global = typeof global !== 'undefined' && global;
 var _global = __window || __global || __self;
-var promise = Promise.resolve(0);
 var _symbolIterator = null;
 /**
  * @return {?}
@@ -43235,13 +42190,7 @@ function getSymbolIterator() {
  * @return {?}
  */
 function scheduleMicroTask(fn) {
-    if (typeof Zone === 'undefined') {
-        // use promise to schedule microTask instead of use Zone
-        promise.then(function () { fn && fn.apply(null, null); });
-    }
-    else {
-        Zone.current.scheduleMicroTask('scheduleMicrotask', fn);
-    }
+    Zone.current.scheduleMicroTask('scheduleMicrotask', fn);
 }
 /**
  * @param {?} a
@@ -43282,13 +42231,6 @@ function stringify(token) {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * An interface that a function passed into {\@link forwardRef} has to implement.
@@ -43347,17 +42289,9 @@ function resolveForwardRef(type) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var SOURCE = '__source';
 var _THROW_IF_NOT_FOUND = new Object();
 var THROW_IF_NOT_FOUND = _THROW_IF_NOT_FOUND;
-var _NullInjector = /** @class */ (function () {
+var _NullInjector = (function () {
     function _NullInjector() {
     }
     /**
@@ -43400,7 +42334,7 @@ var _NullInjector = /** @class */ (function () {
  * \@stable
  * @abstract
  */
-var Injector = /** @class */ (function () {
+var Injector = (function () {
     function Injector() {
     }
     /**
@@ -43416,7 +42350,7 @@ var Injector = /** @class */ (function () {
      * ### Example
      *
      * {\@example core/di/ts/provider_spec.ts region='ConstructorProvider'}
-     * @param {?} options
+     * @param {?} providers
      * @param {?=} parent
      * @return {?}
      */
@@ -43426,17 +42360,12 @@ var Injector = /** @class */ (function () {
      * ### Example
      *
      * {\@example core/di/ts/provider_spec.ts region='ConstructorProvider'}
-     * @param {?} options
+     * @param {?} providers
      * @param {?=} parent
      * @return {?}
      */
-    function (options, parent) {
-        if (Array.isArray(options)) {
-            return new StaticInjector(options, parent);
-        }
-        else {
-            return new StaticInjector(options.providers, options.parent, options.name || null);
-        }
+    function (providers, parent) {
+        return new StaticInjector(providers, parent);
     };
     Injector.THROW_IF_NOT_FOUND = _THROW_IF_NOT_FOUND;
     Injector.NULL = new _NullInjector();
@@ -43458,12 +42387,10 @@ var NG_TEMP_TOKEN_PATH = 'ngTempTokenPath';
 var NULL_INJECTOR = Injector.NULL;
 var NEW_LINE = /\n/gm;
 var NO_NEW_LINE = 'ɵ';
-var StaticInjector = /** @class */ (function () {
-    function StaticInjector(providers, parent, source) {
+var StaticInjector = (function () {
+    function StaticInjector(providers, parent) {
         if (parent === void 0) { parent = NULL_INJECTOR; }
-        if (source === void 0) { source = null; }
         this.parent = parent;
-        this.source = source;
         var /** @type {?} */ records = this._records = new Map();
         records.set(Injector, /** @type {?} */ ({ token: Injector, fn: IDENT, deps: EMPTY, value: this, useNew: false }));
         recursivelyProcessProviders(records, providers);
@@ -43485,10 +42412,7 @@ var StaticInjector = /** @class */ (function () {
         }
         catch (/** @type {?} */ e) {
             var /** @type {?} */ tokenPath = e[NG_TEMP_TOKEN_PATH];
-            if (token[SOURCE]) {
-                tokenPath.unshift(token[SOURCE]);
-            }
-            e.message = formatError('\n' + e.message, tokenPath, this.source);
+            e.message = formatError('\n' + e.message, tokenPath);
             e[NG_TOKEN_PATH] = tokenPath;
             e[NG_TEMP_TOKEN_PATH] = null;
             throw e;
@@ -43724,11 +42648,9 @@ function computeDeps(provider) {
 /**
  * @param {?} text
  * @param {?} obj
- * @param {?=} source
  * @return {?}
  */
-function formatError(text, obj, source) {
-    if (source === void 0) { source = null; }
+function formatError(text, obj) {
     text = text && text.charAt(0) === '\n' && text.charAt(1) == NO_NEW_LINE ? text.substr(2) : text;
     var /** @type {?} */ context = stringify(obj);
     if (obj instanceof Array) {
@@ -43744,7 +42666,7 @@ function formatError(text, obj, source) {
         }
         context = "{" + parts.join(', ') + "}";
     }
-    return "StaticInjectorError" + (source ? '(' + source + ')' : '') + "[" + context + "]: " + text.replace(NEW_LINE, '\n  ');
+    return "StaticInjectorError[" + context + "]: " + text.replace(NEW_LINE, '\n  ');
 }
 /**
  * @param {?} text
@@ -43771,13 +42693,6 @@ function getClosureSafeProperty(objWithPropertyToExtract) {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 
 var ERROR_DEBUG_CONTEXT = 'ngDebugContext';
@@ -43859,7 +42774,7 @@ function defaultErrorLogger(console) {
  *
  * \@stable
  */
-var ErrorHandler = /** @class */ (function () {
+var ErrorHandler = (function () {
     function ErrorHandler() {
         /**
          * \@internal
@@ -44221,7 +43136,7 @@ function mixingMultiProvidersWithRegularProvidersError(provider1, provider2) {
  * providers.
  * @deprecated No replacement
  */
-var ReflectiveKey = /** @class */ (function () {
+var ReflectiveKey = (function () {
     /**
      * Private
      */
@@ -44262,7 +43177,10 @@ var ReflectiveKey = /** @class */ (function () {
     });
     return ReflectiveKey;
 }());
-var KeyRegistry = /** @class */ (function () {
+/**
+ * \@internal
+ */
+var KeyRegistry = (function () {
     function KeyRegistry() {
         this._allKeys = new Map();
     }
@@ -44301,13 +43219,6 @@ var _globalKeyRegistry = new KeyRegistry();
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * \@whatItDoes Represents a type that a Component or other object is instances of.
  *
  * \@description
@@ -44338,12 +43249,10 @@ function isType(v) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * Attention: These regex has to hold even if the code is minified!
+ * Attention: This regex has to hold even if the code is minified!
  */
 var DELEGATE_CTOR = /^function\s+\S+\(\)\s*{[\s\S]+\.apply\(this,\s*arguments\)/;
-var INHERITED_CLASS = /^class\s+[A-Za-z\d$_]*\s*extends\s+[A-Za-z\d$_]+\s*{/;
-var INHERITED_CLASS_WITH_CTOR = /^class\s+[A-Za-z\d$_]*\s*extends\s+[A-Za-z\d$_]+\s*{[\s\S]*constructor\s*\(/;
-var ReflectionCapabilities = /** @class */ (function () {
+var ReflectionCapabilities = (function () {
     function ReflectionCapabilities(reflect) {
         this._reflect = reflect || _global['Reflect'];
     }
@@ -44422,7 +43331,6 @@ var ReflectionCapabilities = /** @class */ (function () {
      * @return {?}
      */
     function (type, parentCtor) {
-        var /** @type {?} */ typeStr = type.toString();
         // If we have no decorators, we only have function.length as metadata.
         // In that case, to detect whether a child class declared an own constructor or not,
         // we need to look inside of that constructor to check whether it is
@@ -44430,8 +43338,7 @@ var ReflectionCapabilities = /** @class */ (function () {
         // This also helps to work around for https://github.com/Microsoft/TypeScript/issues/12439
         // that sets 'design:paramtypes' to []
         // if a class inherits from another class but has no ctor declared itself.
-        if (DELEGATE_CTOR.exec(typeStr) ||
-            (INHERITED_CLASS.exec(typeStr) && !INHERITED_CLASS_WITH_CTOR.exec(typeStr))) {
+        if (DELEGATE_CTOR.exec(type.toString())) {
             return null;
         }
         // Prefer the direct API.
@@ -44613,15 +43520,6 @@ var ReflectionCapabilities = /** @class */ (function () {
         return type instanceof Type && lcProperty in type.prototype;
     };
     /**
-     * @param {?} type
-     * @return {?}
-     */
-    ReflectionCapabilities.prototype.guards = /**
-     * @param {?} type
-     * @return {?}
-     */
-    function (type) { return {}; };
-    /**
      * @param {?} name
      * @return {?}
      */
@@ -44729,7 +43627,7 @@ function convertTsickleDecoratorIntoMetadata(decoratorInvocations) {
  * @return {?}
  */
 function getParentCtor(ctor) {
-    var /** @type {?} */ parentProto = ctor.prototype ? Object.getPrototypeOf(ctor.prototype) : null;
+    var /** @type {?} */ parentProto = Object.getPrototypeOf(ctor.prototype);
     var /** @type {?} */ parentCtor = parentProto ? parentProto.constructor : null;
     // Note: We always use `Object` as the null value
     // to simplify checking later on.
@@ -44741,17 +43639,10 @@ function getParentCtor(ctor) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Provides access to reflection data about symbols. Used internally by Angular
  * to power dependency injection and compilation.
  */
-var Reflector = /** @class */ (function () {
+var Reflector = (function () {
     function Reflector(reflectionCapabilities) {
         this.reflectionCapabilities = reflectionCapabilities;
     }
@@ -44929,7 +43820,7 @@ var reflector = new Reflector(new ReflectionCapabilities());
  * `Dependency` is used by the framework to extend DI.
  * This is internal to Angular and should not be used directly.
  */
-var ReflectiveDependency = /** @class */ (function () {
+var ReflectiveDependency = (function () {
     function ReflectiveDependency(key, optional, visibility) {
         this.key = key;
         this.optional = optional;
@@ -44969,13 +43860,20 @@ var _EMPTY_LIST = [];
  * @record
  */
 
-var ResolvedReflectiveProvider_ = /** @class */ (function () {
+var ResolvedReflectiveProvider_ = (function () {
     function ResolvedReflectiveProvider_(key, resolvedFactories, multiProvider) {
         this.key = key;
         this.resolvedFactories = resolvedFactories;
         this.multiProvider = multiProvider;
-        this.resolvedFactory = this.resolvedFactories[0];
     }
+    Object.defineProperty(ResolvedReflectiveProvider_.prototype, "resolvedFactory", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this.resolvedFactories[0]; },
+        enumerable: true,
+        configurable: true
+    });
     return ResolvedReflectiveProvider_;
 }());
 /**
@@ -44983,7 +43881,7 @@ var ResolvedReflectiveProvider_ = /** @class */ (function () {
  * Provider}.
  * \@experimental
  */
-var ResolvedReflectiveFactory = /** @class */ (function () {
+var ResolvedReflectiveFactory = (function () {
     function ResolvedReflectiveFactory(factory, dependencies) {
         this.factory = factory;
         this.dependencies = dependencies;
@@ -45229,7 +44127,7 @@ var UNDEFINED = new Object();
  * @deprecated from v5 - slow and brings in a lot of code, Use `Injector.create` instead.
  * @abstract
  */
-var ReflectiveInjector = /** @class */ (function () {
+var ReflectiveInjector = (function () {
     function ReflectiveInjector() {
     }
     /**
@@ -45509,7 +44407,7 @@ var ReflectiveInjector = /** @class */ (function () {
     };
     return ReflectiveInjector;
 }());
-var ReflectiveInjector_ = /** @class */ (function () {
+var ReflectiveInjector_ = (function () {
     /**
      * Private
      */
@@ -45865,13 +44763,6 @@ function _mapProviders(injector, fn) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Determine if the argument is shaped like a Promise
  * @param {?} obj
  * @return {?}
@@ -45912,7 +44803,7 @@ var APP_INITIALIZER = new InjectionToken('Application Initializer');
  *
  * \@experimental
  */
-var ApplicationInitStatus = /** @class */ (function () {
+var ApplicationInitStatus = (function () {
     function ApplicationInitStatus(appInits) {
         var _this = this;
         this.appInits = appInits;
@@ -46045,7 +44936,7 @@ var PACKAGE_ROOT_URL = new InjectionToken('Application Packages Root URL');
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var Console = /** @class */ (function () {
+var Console = (function () {
     function Console() {
     }
     /**
@@ -46097,7 +44988,7 @@ var Console = /** @class */ (function () {
  *
  * \@experimental
  */
-var ModuleWithComponentFactories = /** @class */ (function () {
+var ModuleWithComponentFactories = (function () {
     function ModuleWithComponentFactories(ngModuleFactory, componentFactories) {
         this.ngModuleFactory = ngModuleFactory;
         this.componentFactories = componentFactories;
@@ -46120,7 +45011,7 @@ function _throwError() {
  * of components.
  * \@stable
  */
-var Compiler = /** @class */ (function () {
+var Compiler = (function () {
     function Compiler() {
     }
     /**
@@ -46239,7 +45130,7 @@ var COMPILER_OPTIONS = new InjectionToken('compilerOptions');
  * \@experimental
  * @abstract
  */
-var CompilerFactory = /** @class */ (function () {
+var CompilerFactory = (function () {
     function CompilerFactory() {
     }
     return CompilerFactory;
@@ -46250,13 +45141,6 @@ var CompilerFactory = /** @class */ (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Represents an instance of a Component created via a {\@link ComponentFactory}.
  *
  * `ComponentRef` provides access to the Component Instance as well other objects related to this
@@ -46265,7 +45149,7 @@ var CompilerFactory = /** @class */ (function () {
  * \@stable
  * @abstract
  */
-var ComponentRef = /** @class */ (function () {
+var ComponentRef = (function () {
     function ComponentRef() {
     }
     return ComponentRef;
@@ -46274,7 +45158,7 @@ var ComponentRef = /** @class */ (function () {
  * \@stable
  * @abstract
  */
-var ComponentFactory = /** @class */ (function () {
+var ComponentFactory = (function () {
     function ComponentFactory() {
     }
     return ComponentFactory;
@@ -46283,13 +45167,6 @@ var ComponentFactory = /** @class */ (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * @param {?} component
@@ -46306,7 +45183,7 @@ var ERROR_COMPONENT = 'ngComponent';
  * @return {?}
  */
 
-var _NullComponentFactoryResolver = /** @class */ (function () {
+var _NullComponentFactoryResolver = (function () {
     function _NullComponentFactoryResolver() {
     }
     /**
@@ -46328,13 +45205,13 @@ var _NullComponentFactoryResolver = /** @class */ (function () {
  * \@stable
  * @abstract
  */
-var ComponentFactoryResolver = /** @class */ (function () {
+var ComponentFactoryResolver = (function () {
     function ComponentFactoryResolver() {
     }
     ComponentFactoryResolver.NULL = new _NullComponentFactoryResolver();
     return ComponentFactoryResolver;
 }());
-var CodegenComponentFactoryResolver = /** @class */ (function () {
+var CodegenComponentFactoryResolver = (function () {
     function CodegenComponentFactoryResolver(factories, _parent, _ngModule) {
         this._parent = _parent;
         this._ngModule = _ngModule;
@@ -46366,19 +45243,54 @@ var CodegenComponentFactoryResolver = /** @class */ (function () {
     };
     return CodegenComponentFactoryResolver;
 }());
-var ComponentFactoryBoundToModule = /** @class */ (function (_super) {
+var ComponentFactoryBoundToModule = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ComponentFactoryBoundToModule, _super);
     function ComponentFactoryBoundToModule(factory, ngModule) {
         var _this = _super.call(this) || this;
         _this.factory = factory;
         _this.ngModule = ngModule;
-        _this.selector = factory.selector;
-        _this.componentType = factory.componentType;
-        _this.ngContentSelectors = factory.ngContentSelectors;
-        _this.inputs = factory.inputs;
-        _this.outputs = factory.outputs;
         return _this;
     }
+    Object.defineProperty(ComponentFactoryBoundToModule.prototype, "selector", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this.factory.selector; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComponentFactoryBoundToModule.prototype, "componentType", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this.factory.componentType; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComponentFactoryBoundToModule.prototype, "ngContentSelectors", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this.factory.ngContentSelectors; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComponentFactoryBoundToModule.prototype, "inputs", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this.factory.inputs; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ComponentFactoryBoundToModule.prototype, "outputs", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this.factory.outputs; },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @param {?} injector
      * @param {?=} projectableNodes
@@ -46404,13 +45316,6 @@ var ComponentFactoryBoundToModule = /** @class */ (function (_super) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Represents an instance of an NgModule created via a {\@link NgModuleFactory}.
  *
  * `NgModuleRef` provides access to the NgModule Instance as well other objects related to this
@@ -46419,7 +45324,7 @@ var ComponentFactoryBoundToModule = /** @class */ (function (_super) {
  * \@stable
  * @abstract
  */
-var NgModuleRef = /** @class */ (function () {
+var NgModuleRef = (function () {
     function NgModuleRef() {
     }
     return NgModuleRef;
@@ -46432,7 +45337,7 @@ var NgModuleRef = /** @class */ (function () {
  * \@experimental
  * @abstract
  */
-var NgModuleFactory = /** @class */ (function () {
+var NgModuleFactory = (function () {
     function NgModuleFactory() {
     }
     return NgModuleFactory;
@@ -46659,7 +45564,7 @@ var wtfEndTimeRange = wtfEnabled ? endTimeRange : function (r) { return null; };
  * Once a reference implementation of the spec is available, switch to it.
  * \@stable
  */
-var EventEmitter = /** @class */ (function (_super) {
+var EventEmitter = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(EventEmitter, _super);
     /**
      * Creates an instance of {@link EventEmitter}, which depending on `isAsync`,
@@ -46724,11 +45629,7 @@ var EventEmitter = /** @class */ (function (_super) {
                     this.__isAsync ? function () { setTimeout(function () { return complete(); }); } : function () { complete(); };
             }
         }
-        var /** @type {?} */ sink = _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
-        if (generatorOrNext instanceof __WEBPACK_IMPORTED_MODULE_5_rxjs_Subscription__["a" /* Subscription */]) {
-            generatorOrNext.add(sink);
-        }
-        return sink;
+        return _super.prototype.subscribe.call(this, schedulerFn, errorFn, completeFn);
     };
     return EventEmitter;
 }(__WEBPACK_IMPORTED_MODULE_4_rxjs_Subject__["a" /* Subject */]));
@@ -46736,13 +45637,6 @@ var EventEmitter = /** @class */ (function (_super) {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * An injectable service for executing work inside or outside of the Angular zone.
@@ -46764,7 +45658,7 @@ var EventEmitter = /** @class */ (function (_super) {
  * import {NgIf} from '\@angular/common';
  *
  * \@Component({
- *   selector: 'ng-zone-demo',
+ *   selector: 'ng-zone-demo'.
  *   template: `
  *     <h2>Demo: NgZone</h2>
  *
@@ -46796,10 +45690,9 @@ var EventEmitter = /** @class */ (function (_super) {
  *     this.progress = 0;
  *     this._ngZone.runOutsideAngular(() => {
  *       this._increaseProgress(() => {
- *         // reenter the Angular zone and display done
- *         this._ngZone.run(() => { console.log('Outside Done!'); });
- *       });
- *     });
+ *       // reenter the Angular zone and display done
+ *       this._ngZone.run(() => {console.log('Outside Done!') });
+ *     }}));
  *   }
  *
  *   _increaseProgress(doneCallback: () => void) {
@@ -46807,7 +45700,7 @@ var EventEmitter = /** @class */ (function (_super) {
  *     console.log(`Current progress: ${this.progress}%`);
  *
  *     if (this.progress < 100) {
- *       window.setTimeout(() => this._increaseProgress(doneCallback), 10);
+ *       window.setTimeout(() => this._increaseProgress(doneCallback)), 10)
  *     } else {
  *       doneCallback();
  *     }
@@ -46817,7 +45710,7 @@ var EventEmitter = /** @class */ (function (_super) {
  *
  * \@experimental
  */
-var NgZone = /** @class */ (function () {
+var NgZone = (function () {
     function NgZone(_a) {
         var _b = _a.enableLongStackTrace, enableLongStackTrace = _b === void 0 ? false : _b;
         this.hasPendingMicrotasks = false;
@@ -47169,8 +46062,10 @@ function onLeave(zone) {
 /**
  * Provides a noop implementation of `NgZone` which does nothing. This zone requires explicit calls
  * to framework to perform rendering.
+ *
+ * \@internal
  */
-var NoopNgZone = /** @class */ (function () {
+var NoopNgZone = (function () {
     function NoopNgZone() {
         this.hasPendingMicrotasks = false;
         this.hasPendingMacrotasks = false;
@@ -47238,7 +46133,7 @@ var NoopNgZone = /** @class */ (function () {
  * application on the page will have an instance of Testability.
  * \@experimental
  */
-var Testability = /** @class */ (function () {
+var Testability = (function () {
     function Testability(_ngZone) {
         this._ngZone = _ngZone;
         /**
@@ -47432,7 +46327,7 @@ var Testability = /** @class */ (function () {
  * A global registry of {\@link Testability} instances for specific elements.
  * \@experimental
  */
-var TestabilityRegistry = /** @class */ (function () {
+var TestabilityRegistry = (function () {
     function TestabilityRegistry() {
         /**
          * \@internal
@@ -47566,7 +46461,7 @@ var TestabilityRegistry = /** @class */ (function () {
  * @record
  */
 
-var _NoopGetTestability = /** @class */ (function () {
+var _NoopGetTestability = (function () {
     function _NoopGetTestability() {
     }
     /**
@@ -47656,7 +46551,7 @@ function isDevMode() {
  *
  * \@experimental
  */
-var NgProbeToken = /** @class */ (function () {
+var NgProbeToken = (function () {
     function NgProbeToken(name, token) {
         this.name = name;
         this.token = token;
@@ -47693,8 +46588,7 @@ function createPlatform(injector) {
  */
 function createPlatformFactory(parentPlatformFactory, name, providers) {
     if (providers === void 0) { providers = []; }
-    var /** @type {?} */ desc = "Platform: " + name;
-    var /** @type {?} */ marker = new InjectionToken(desc);
+    var /** @type {?} */ marker = new InjectionToken("Platform: " + name);
     return function (extraProviders) {
         if (extraProviders === void 0) { extraProviders = []; }
         var /** @type {?} */ platform = getPlatform();
@@ -47703,8 +46597,7 @@ function createPlatformFactory(parentPlatformFactory, name, providers) {
                 parentPlatformFactory(providers.concat(extraProviders).concat({ provide: marker, useValue: true }));
             }
             else {
-                var /** @type {?} */ injectedProviders = providers.concat(extraProviders).concat({ provide: marker, useValue: true });
-                createPlatform(Injector.create({ providers: injectedProviders, name: desc }));
+                createPlatform(Injector.create(providers.concat(extraProviders).concat({ provide: marker, useValue: true })));
             }
         }
         return assertPlatform(marker);
@@ -47764,7 +46657,7 @@ function getPlatform() {
  *
  * \@stable
  */
-var PlatformRef = /** @class */ (function () {
+var PlatformRef = (function () {
     /** @internal */
     function PlatformRef(_injector) {
         this._injector = _injector;
@@ -47857,18 +46750,17 @@ var PlatformRef = /** @class */ (function () {
         // pass that as parent to the NgModuleFactory.
         var /** @type {?} */ ngZoneOption = options ? options.ngZone : undefined;
         var /** @type {?} */ ngZone = getNgZone(ngZoneOption);
-        var /** @type {?} */ providers = [{ provide: NgZone, useValue: ngZone }];
         // Attention: Don't use ApplicationRef.run here,
         // as we want to be sure that all possible constructor calls are inside `ngZone.run`!
         return ngZone.run(function () {
-            var /** @type {?} */ ngZoneInjector = Injector.create({ providers: providers, parent: _this.injector, name: moduleFactory.moduleType.name });
+            var /** @type {?} */ ngZoneInjector = Injector.create([{ provide: NgZone, useValue: ngZone }], _this.injector);
             var /** @type {?} */ moduleRef = /** @type {?} */ (moduleFactory.create(ngZoneInjector));
             var /** @type {?} */ exceptionHandler = moduleRef.injector.get(ErrorHandler, null);
             if (!exceptionHandler) {
                 throw new Error('No ErrorHandler. Is platform module (BrowserModule) included?');
             }
             moduleRef.onDestroy(function () { return remove(_this._modules, moduleRef); }); /** @type {?} */
-            ((ngZone)).runOutsideAngular(function () { return ((ngZone)).onError.subscribe({ next: function (error) { exceptionHandler.handleError(error); } }); });
+            ((ngZone)).runOutsideAngular(function () { return /** @type {?} */ ((ngZone)).onError.subscribe({ next: function (error) { exceptionHandler.handleError(error); } }); });
             return _callAndReportToErrorHandler(exceptionHandler, /** @type {?} */ ((ngZone)), function () {
                 var /** @type {?} */ initStatus = moduleRef.injector.get(ApplicationInitStatus);
                 initStatus.runInitializers();
@@ -48086,7 +46978,7 @@ function optionsReducer(dst, objs) {
  *
  * \@stable
  */
-var ApplicationRef = /** @class */ (function () {
+var ApplicationRef = (function () {
     /** @internal */
     function ApplicationRef(_zone, _console, _injector, _exceptionHandler, _componentFactoryResolver, _initStatus) {
         var _this = this;
@@ -48429,6 +47321,7 @@ function remove(list, el) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// Public API for Zone
 
 /**
  * @fileoverview added by tsickle
@@ -48444,7 +47337,7 @@ function remove(list, el) {
 /**
  * @deprecated Use `RendererType2` (and `Renderer2`) instead.
  */
-var RenderComponentType = /** @class */ (function () {
+var RenderComponentType = (function () {
     function RenderComponentType(id, templateUrl, slotCount, encapsulation, styles, animations) {
         this.id = id;
         this.templateUrl = templateUrl;
@@ -48459,7 +47352,7 @@ var RenderComponentType = /** @class */ (function () {
  * @deprecated Debug info is handeled internally in the view engine now.
  * @abstract
  */
-var RenderDebugInfo = /** @class */ (function () {
+var RenderDebugInfo = (function () {
     function RenderDebugInfo() {
     }
     return RenderDebugInfo;
@@ -48473,7 +47366,7 @@ var RenderDebugInfo = /** @class */ (function () {
  * @deprecated Use the `Renderer2` instead.
  * @abstract
  */
-var Renderer = /** @class */ (function () {
+var Renderer = (function () {
     function Renderer() {
     }
     return Renderer;
@@ -48494,7 +47387,7 @@ var Renderer2Interceptor = new InjectionToken('Renderer2Interceptor');
  * @deprecated Use `RendererFactory2` instead.
  * @abstract
  */
-var RootRenderer = /** @class */ (function () {
+var RootRenderer = (function () {
     function RootRenderer() {
     }
     return RootRenderer;
@@ -48508,7 +47401,7 @@ var RootRenderer = /** @class */ (function () {
  * \@experimental
  * @abstract
  */
-var RendererFactory2 = /** @class */ (function () {
+var RendererFactory2 = (function () {
     function RendererFactory2() {
     }
     return RendererFactory2;
@@ -48524,7 +47417,7 @@ RendererStyleFlags2[RendererStyleFlags2.DashCase] = "DashCase";
  * \@experimental
  * @abstract
  */
-var Renderer2 = /** @class */ (function () {
+var Renderer2 = (function () {
     function Renderer2() {
     }
     return Renderer2;
@@ -48541,17 +47434,11 @@ var Renderer2 = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// Public API for render
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * A wrapper around a native element inside of a View.
@@ -48565,7 +47452,7 @@ var Renderer2 = /** @class */ (function () {
  *
  * \@stable
  */
-var ElementRef = /** @class */ (function () {
+var ElementRef = (function () {
     function ElementRef(nativeElement) {
         this.nativeElement = nativeElement;
     }
@@ -48577,18 +47464,11 @@ var ElementRef = /** @class */ (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Used to load ng module factories.
  * \@stable
  * @abstract
  */
-var NgModuleFactoryLoader = /** @class */ (function () {
+var NgModuleFactoryLoader = (function () {
     function NgModuleFactoryLoader() {
     }
     return NgModuleFactoryLoader;
@@ -48632,13 +47512,6 @@ function getModuleFactory(id) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * An unmodifiable list of items that Angular keeps up to date when the state
  * of the application changes.
  *
@@ -48662,13 +47535,36 @@ function getModuleFactory(id) {
  * ```
  * \@stable
  */
-var QueryList = /** @class */ (function () {
+var QueryList = (function () {
     function QueryList() {
         this.dirty = true;
         this._results = [];
         this.changes = new EventEmitter();
-        this.length = 0;
     }
+    Object.defineProperty(QueryList.prototype, "length", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this._results.length; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(QueryList.prototype, "first", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this._results[0]; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(QueryList.prototype, "last", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this._results[this.length - 1]; },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * See
      * [Array.map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
@@ -48817,9 +47713,6 @@ var QueryList = /** @class */ (function () {
     function (res) {
         this._results = flatten(res);
         (/** @type {?} */ (this)).dirty = false;
-        (/** @type {?} */ (this)).length = this._results.length;
-        (/** @type {?} */ (this)).last = this._results[this.length - 1];
-        (/** @type {?} */ (this)).first = this._results[0];
     };
     /**
      * @return {?}
@@ -48885,7 +47778,7 @@ var FACTORY_CLASS_SUFFIX = 'NgFactory';
  * \@experimental
  * @abstract
  */
-var SystemJsNgModuleLoaderConfig = /** @class */ (function () {
+var SystemJsNgModuleLoaderConfig = (function () {
     function SystemJsNgModuleLoaderConfig() {
     }
     return SystemJsNgModuleLoaderConfig;
@@ -48898,7 +47791,7 @@ var DEFAULT_CONFIG = {
  * NgModuleFactoryLoader that uses SystemJS to load NgModuleFactory
  * \@experimental
  */
-var SystemJsNgModuleLoader = /** @class */ (function () {
+var SystemJsNgModuleLoader = (function () {
     function SystemJsNgModuleLoader(_compiler, config) {
         this._compiler = _compiler;
         this._config = config || DEFAULT_CONFIG;
@@ -48981,13 +47874,6 @@ function checkNotEmpty(value, modulePath, exportName) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Represents an Embedded Template that can be used to instantiate Embedded Views.
  *
  * You can access a `TemplateRef`, in two ways. Via a directive placed on a `<ng-template>` element
@@ -49000,7 +47886,7 @@ function checkNotEmpty(value, modulePath, exportName) {
  * \@stable
  * @abstract
  */
-var TemplateRef = /** @class */ (function () {
+var TemplateRef = (function () {
     function TemplateRef() {
     }
     return TemplateRef;
@@ -49009,13 +47895,6 @@ var TemplateRef = /** @class */ (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Represents a container where one or more Views can be attached.
@@ -49036,7 +47915,7 @@ var TemplateRef = /** @class */ (function () {
  * \@stable
  * @abstract
  */
-var ViewContainerRef = /** @class */ (function () {
+var ViewContainerRef = (function () {
     function ViewContainerRef() {
     }
     return ViewContainerRef;
@@ -49047,17 +47926,10 @@ var ViewContainerRef = /** @class */ (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * \@stable
  * @abstract
  */
-var ChangeDetectorRef = /** @class */ (function () {
+var ChangeDetectorRef = (function () {
     function ChangeDetectorRef() {
     }
     return ChangeDetectorRef;
@@ -49068,17 +47940,10 @@ var ChangeDetectorRef = /** @class */ (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * \@stable
  * @abstract
  */
-var ViewRef = /** @class */ (function (_super) {
+var ViewRef = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ViewRef, _super);
     function ViewRef() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -49140,7 +48005,7 @@ var ViewRef = /** @class */ (function (_super) {
  * \@experimental
  * @abstract
  */
-var EmbeddedViewRef = /** @class */ (function (_super) {
+var EmbeddedViewRef = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(EmbeddedViewRef, _super);
     function EmbeddedViewRef() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -49162,19 +48027,13 @@ var EmbeddedViewRef = /** @class */ (function (_super) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+// Public API for compiler
 
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-var EventListener = /** @class */ (function () {
+var EventListener = (function () {
     function EventListener(name, callback) {
         this.name = name;
         this.callback = callback;
@@ -49184,7 +48043,7 @@ var EventListener = /** @class */ (function () {
 /**
  * \@experimental All debugging apis are currently experimental.
  */
-var DebugNode = /** @class */ (function () {
+var DebugNode = (function () {
     function DebugNode(nativeNode, parent, _debugContext) {
         this._debugContext = _debugContext;
         this.nativeNode = nativeNode;
@@ -49241,7 +48100,7 @@ var DebugNode = /** @class */ (function () {
 /**
  * \@experimental All debugging apis are currently experimental.
  */
-var DebugElement = /** @class */ (function (_super) {
+var DebugElement = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(DebugElement, _super);
     function DebugElement(nativeNode, parent, _debugContext) {
         var _this = _super.call(this, nativeNode, parent, _debugContext) || this;
@@ -49509,10 +48368,10 @@ function devModeEqual(a, b) {
 }
 /**
  * Indicates that the result of a {\@link Pipe} transformation has changed even though the
- * reference has not changed.
+ * reference
+ * has not changed.
  *
- * Wrapped values are unwrapped automatically during the change detection, and the unwrapped value
- * is stored.
+ * The wrapped value will be unwrapped by change detection, and the unwrapped value will be stored.
  *
  * Example:
  *
@@ -49526,60 +48385,57 @@ function devModeEqual(a, b) {
  * ```
  * \@stable
  */
-var WrappedValue = /** @class */ (function () {
-    function WrappedValue(value) {
-        this.wrapped = value;
+var WrappedValue = (function () {
+    function WrappedValue(wrapped) {
+        this.wrapped = wrapped;
     }
-    /** Creates a wrapped value. */
     /**
-     * Creates a wrapped value.
      * @param {?} value
      * @return {?}
      */
     WrappedValue.wrap = /**
-     * Creates a wrapped value.
      * @param {?} value
      * @return {?}
      */
     function (value) { return new WrappedValue(value); };
-    /**
-     * Returns the underlying value of a wrapped value.
-     * Returns the given `value` when it is not wrapped.
-     **/
-    /**
-     * Returns the underlying value of a wrapped value.
-     * Returns the given `value` when it is not wrapped.
-     *
-     * @param {?} value
-     * @return {?}
-     */
-    WrappedValue.unwrap = /**
-     * Returns the underlying value of a wrapped value.
-     * Returns the given `value` when it is not wrapped.
-     *
-     * @param {?} value
-     * @return {?}
-     */
-    function (value) { return WrappedValue.isWrapped(value) ? value.wrapped : value; };
-    /** Returns true if `value` is a wrapped value. */
-    /**
-     * Returns true if `value` is a wrapped value.
-     * @param {?} value
-     * @return {?}
-     */
-    WrappedValue.isWrapped = /**
-     * Returns true if `value` is a wrapped value.
-     * @param {?} value
-     * @return {?}
-     */
-    function (value) { return value instanceof WrappedValue; };
     return WrappedValue;
+}());
+/**
+ * Helper class for unwrapping WrappedValue s
+ */
+var ValueUnwrapper = (function () {
+    function ValueUnwrapper() {
+        this.hasWrappedValue = false;
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    ValueUnwrapper.prototype.unwrap = /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        if (value instanceof WrappedValue) {
+            this.hasWrappedValue = true;
+            return value.wrapped;
+        }
+        return value;
+    };
+    /**
+     * @return {?}
+     */
+    ValueUnwrapper.prototype.reset = /**
+     * @return {?}
+     */
+    function () { this.hasWrappedValue = false; };
+    return ValueUnwrapper;
 }());
 /**
  * Represents a basic change from a previous to a new value.
  * \@stable
  */
-var SimpleChange = /** @class */ (function () {
+var SimpleChange = (function () {
     function SimpleChange(previousValue, currentValue, firstChange) {
         this.previousValue = previousValue;
         this.currentValue = currentValue;
@@ -49607,7 +48463,7 @@ function isListLikeIterable(obj) {
     if (!isJsObject(obj))
         return false;
     return Array.isArray(obj) ||
-        (!(obj instanceof Map) && // JS Map are iterables but return entries as [k, v]
+        (!(obj instanceof Map) &&
             // JS Map are iterables but return entries as [k, v]
             getSymbolIterator() in obj); // JS Iterable have a Symbol.iterator prop
 }
@@ -49669,7 +48525,7 @@ function isJsObject(o) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var DefaultIterableDifferFactory = /** @class */ (function () {
+var DefaultIterableDifferFactory = (function () {
     function DefaultIterableDifferFactory() {
     }
     /**
@@ -49700,7 +48556,7 @@ var trackByIdentity = function (index, item) { return item; };
 /**
  * @deprecated v4.0.0 - Should not be part of public API.
  */
-var DefaultIterableDiffer = /** @class */ (function () {
+var DefaultIterableDiffer = (function () {
     function DefaultIterableDiffer(trackByFn) {
         this.length = 0;
         this._linkedRecords = null;
@@ -49749,8 +48605,8 @@ var DefaultIterableDiffer = /** @class */ (function () {
             // Figure out which is the next record to process
             // Order: remove, add, move
             var /** @type {?} */ record = !nextRemove ||
-                nextIt && /** @type {?} */ ((nextIt.currentIndex)) < getPreviousIndex(nextRemove, addRemoveOffset, moveOffsets) ? /** @type {?} */
-                ((nextIt)) :
+                nextIt && /** @type {?} */ ((nextIt.currentIndex)) < getPreviousIndex(nextRemove, addRemoveOffset, moveOffsets) ?
+                /** @type {?} */ ((nextIt)) :
                 nextRemove;
             var /** @type {?} */ adjPreviousIndex = getPreviousIndex(record, addRemoveOffset, moveOffsets);
             var /** @type {?} */ currentIndex = record.currentIndex;
@@ -50510,7 +49366,7 @@ var DefaultIterableDiffer = /** @class */ (function () {
 /**
  * \@stable
  */
-var IterableChangeRecord_ = /** @class */ (function () {
+var IterableChangeRecord_ = (function () {
     function IterableChangeRecord_(item, trackById) {
         this.item = item;
         this.trackById = trackById;
@@ -50559,7 +49415,7 @@ var IterableChangeRecord_ = /** @class */ (function () {
     }
     return IterableChangeRecord_;
 }());
-var _DuplicateItemRecordList = /** @class */ (function () {
+var _DuplicateItemRecordList = (function () {
     function _DuplicateItemRecordList() {
         /**
          * \@internal
@@ -50674,7 +49530,7 @@ var _DuplicateItemRecordList = /** @class */ (function () {
     };
     return _DuplicateItemRecordList;
 }());
-var _DuplicateMap = /** @class */ (function () {
+var _DuplicateMap = (function () {
     function _DuplicateMap() {
         this.map = new Map();
     }
@@ -50800,7 +49656,7 @@ function getPreviousIndex(item, addRemoveOffset, moveOffsets) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var DefaultKeyValueDifferFactory = /** @class */ (function () {
+var DefaultKeyValueDifferFactory = (function () {
     function DefaultKeyValueDifferFactory() {
     }
     /**
@@ -50823,7 +49679,7 @@ var DefaultKeyValueDifferFactory = /** @class */ (function () {
     function () { return new DefaultKeyValueDiffer(); };
     return DefaultKeyValueDifferFactory;
 }());
-var DefaultKeyValueDiffer = /** @class */ (function () {
+var DefaultKeyValueDiffer = (function () {
     function DefaultKeyValueDiffer() {
         this._records = new Map();
         this._mapHead = null;
@@ -51185,7 +50041,7 @@ var DefaultKeyValueDiffer = /** @class */ (function () {
 /**
  * \@stable
  */
-var KeyValueChangeRecord_ = /** @class */ (function () {
+var KeyValueChangeRecord_ = (function () {
     function KeyValueChangeRecord_(key) {
         this.key = key;
         this.previousValue = null;
@@ -51276,7 +50132,7 @@ var KeyValueChangeRecord_ = /** @class */ (function () {
  * A repository of different iterable diffing strategies used by NgFor, NgClass, and others.
  * \@stable
  */
-var IterableDiffers = /** @class */ (function () {
+var IterableDiffers = (function () {
     function IterableDiffers(factories) {
         this.factories = factories;
     }
@@ -51448,7 +50304,7 @@ function getTypeNameForDebugging(type) {
  * A repository of different Map diffing strategies used by NgClass, NgStyle, and others.
  * \@stable
  */
-var KeyValueDiffers = /** @class */ (function () {
+var KeyValueDiffers = (function () {
     function KeyValueDiffers(factories) {
         this.factories = factories;
     }
@@ -51600,6 +50456,11 @@ var defaultKeyValueDiffers = new KeyValueDiffers(keyValDiff);
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * @module
+ * @description
+ * Change detection enables data binding in Angular.
+ */
 
 /**
  * @fileoverview added by tsickle
@@ -51638,69 +50499,14 @@ var platformCore = createPlatformFactory(null, 'core', _CORE_PLATFORM_PROVIDERS)
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * Provide this token to set the locale of your application.
- * It is used for i18n extraction, by i18n pipes (DatePipe, I18nPluralPipe, CurrencyPipe,
- * DecimalPipe and PercentPipe) and by ICU expressions.
- *
- * See the {\@linkDocs guide/i18n#setting-up-locale i18n guide} for more information.
- *
- * ### Example
- *
- * ```typescript
- * import { LOCALE_ID } from '\@angular/core';
- * import { platformBrowserDynamic } from '\@angular/platform-browser-dynamic';
- * import { AppModule } from './app/app.module';
- *
- * platformBrowserDynamic().bootstrapModule(AppModule, {
- *   providers: [{provide: LOCALE_ID, useValue: 'en-US' }]
- * });
- * ```
- *
  * \@experimental i18n support is experimental.
  */
 var LOCALE_ID = new InjectionToken('LocaleId');
 /**
- * Use this token at bootstrap to provide the content of your translation file (`xtb`,
- * `xlf` or `xlf2`) when you want to translate your application in another language.
- *
- * See the {\@linkDocs guide/i18n#merge i18n guide} for more information.
- *
- * ### Example
- *
- * ```typescript
- * import { TRANSLATIONS } from '\@angular/core';
- * import { platformBrowserDynamic } from '\@angular/platform-browser-dynamic';
- * import { AppModule } from './app/app.module';
- *
- * // content of your translation file
- * const translations = '....';
- *
- * platformBrowserDynamic().bootstrapModule(AppModule, {
- *   providers: [{provide: TRANSLATIONS, useValue: translations }]
- * });
- * ```
- *
  * \@experimental i18n support is experimental.
  */
 var TRANSLATIONS = new InjectionToken('Translations');
 /**
- * Provide this token at bootstrap to set the format of your {\@link TRANSLATIONS}: `xtb`,
- * `xlf` or `xlf2`.
- *
- * See the {\@linkDocs guide/i18n#merge i18n guide} for more information.
- *
- * ### Example
- *
- * ```typescript
- * import { TRANSLATIONS_FORMAT } from '\@angular/core';
- * import { platformBrowserDynamic } from '\@angular/platform-browser-dynamic';
- * import { AppModule } from './app/app.module';
- *
- * platformBrowserDynamic().bootstrapModule(AppModule, {
- *   providers: [{provide: TRANSLATIONS_FORMAT, useValue: 'xlf' }]
- * });
- * ```
- *
  * \@experimental i18n support is experimental.
  */
 var TRANSLATIONS_FORMAT = new InjectionToken('TranslationsFormat');
@@ -51750,7 +50556,7 @@ function _localeFactory(locale) {
  *
  * \@experimental
  */
-var ApplicationModule = /** @class */ (function () {
+var ApplicationModule = (function () {
     // Inject ApplicationRef to make it eager...
     function ApplicationModule(appRef) {
     }
@@ -51782,13 +50588,6 @@ var ApplicationModule = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** @enum {number} */
 var SecurityContext = {
     NONE: 0,
@@ -51810,7 +50609,7 @@ SecurityContext[SecurityContext.RESOURCE_URL] = "RESOURCE_URL";
  * \@stable
  * @abstract
  */
-var Sanitizer = /** @class */ (function () {
+var Sanitizer = (function () {
     function Sanitizer() {
     }
     return Sanitizer;
@@ -51819,13 +50618,6 @@ var Sanitizer = /** @class */ (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * Factory for ViewDefinitions/NgModuleDefinitions.
@@ -51937,44 +50729,6 @@ var Sanitizer = /** @class */ (function () {
  */
 
 /**
- * @param {?} view
- * @param {?} priorInitState
- * @param {?} newInitState
- * @return {?}
- */
-function shiftInitState(view, priorInitState, newInitState) {
-    // Only update the InitState if we are currently in the prior state.
-    // For example, only move into CallingInit if we are in BeforeInit. Only
-    // move into CallingContentInit if we are in CallingInit. Normally this will
-    // always be true because of how checkCycle is called in checkAndUpdateView.
-    // However, if checkAndUpdateView is called recursively or if an exception is
-    // thrown while checkAndUpdateView is running, checkAndUpdateView starts over
-    // from the beginning. This ensures the state is monotonically increasing,
-    // terminating in the AfterInit state, which ensures the Init methods are called
-    // at least once and only once.
-    var /** @type {?} */ state = view.state;
-    var /** @type {?} */ initState = state & 1792;
-    if (initState === priorInitState) {
-        view.state = (state & ~1792 /* InitState_Mask */) | newInitState;
-        view.initIndex = -1;
-        return true;
-    }
-    return initState === newInitState;
-}
-/**
- * @param {?} view
- * @param {?} initState
- * @param {?} index
- * @return {?}
- */
-function shouldCallLifecycleInitHook(view, initState, index) {
-    if ((view.state & 1792 /* InitState_Mask */) === initState && view.initIndex <= index) {
-        view.initIndex = index + 1;
-        return true;
-    }
-    return false;
-}
-/**
  * @record
  */
 
@@ -52066,7 +50820,7 @@ function asQueryList(view, index) {
 /**
  * @abstract
  */
-var DebugContext = /** @class */ (function () {
+var DebugContext = (function () {
     function DebugContext() {
     }
     return DebugContext;
@@ -52086,8 +50840,7 @@ var Services = {
     createComponentView: /** @type {?} */ ((undefined)),
     createNgModuleRef: /** @type {?} */ ((undefined)),
     overrideProvider: /** @type {?} */ ((undefined)),
-    overrideComponentView: /** @type {?} */ ((undefined)),
-    clearOverrides: /** @type {?} */ ((undefined)),
+    clearProviderOverrides: /** @type {?} */ ((undefined)),
     checkAndUpdateView: /** @type {?} */ ((undefined)),
     checkNoChangesView: /** @type {?} */ ((undefined)),
     destroyView: /** @type {?} */ ((undefined)),
@@ -52207,10 +50960,13 @@ function tokenKey(token) {
  * @return {?}
  */
 function unwrapValue(view, nodeIdx, bindingIdx, value) {
-    if (WrappedValue.isWrapped(value)) {
-        value = WrappedValue.unwrap(value);
+    if (value instanceof WrappedValue) {
+        value = value.wrapped;
         var /** @type {?} */ globalBindingIdx = view.def.nodes[nodeIdx].bindingIndex + bindingIdx;
-        var /** @type {?} */ oldValue = WrappedValue.unwrap(view.oldValues[globalBindingIdx]);
+        var /** @type {?} */ oldValue = view.oldValues[globalBindingIdx];
+        if (oldValue instanceof WrappedValue) {
+            oldValue = oldValue.wrapped;
+        }
         view.oldValues[globalBindingIdx] = new WrappedValue(oldValue);
     }
     return value;
@@ -52290,8 +51046,7 @@ function checkAndUpdateBinding(view, def, bindingIdx, value) {
 function checkBindingNoChanges(view, def, bindingIdx, value) {
     var /** @type {?} */ oldValue = view.oldValues[def.bindingIndex + bindingIdx];
     if ((view.state & 1 /* BeforeFirstCheck */) || !devModeEqual(oldValue, value)) {
-        var /** @type {?} */ bindingName = def.bindings[bindingIdx].name;
-        throw expressionChangedAfterItHasBeenCheckedError(Services.createDebugContext(view, def.nodeIndex), bindingName + ": " + oldValue, bindingName + ": " + value, (view.state & 1 /* BeforeFirstCheck */) !== 0);
+        throw expressionChangedAfterItHasBeenCheckedError(Services.createDebugContext(view, def.nodeIndex), oldValue, value, (view.state & 1 /* BeforeFirstCheck */) !== 0);
     }
 }
 /**
@@ -52433,10 +51188,9 @@ function splitMatchedQueriesDsl(matchedQueriesDsl) {
 }
 /**
  * @param {?} deps
- * @param {?=} sourceName
  * @return {?}
  */
-function splitDepsDsl(deps, sourceName) {
+function splitDepsDsl(deps) {
     return deps.map(function (value) {
         var /** @type {?} */ token;
         var /** @type {?} */ flags;
@@ -52446,9 +51200,6 @@ function splitDepsDsl(deps, sourceName) {
         else {
             flags = 0 /* None */;
             token = value;
-        }
-        if (token && (typeof token === 'function' || typeof token === 'object') && sourceName) {
-            Object.defineProperty(token, SOURCE, { value: sourceName, configurable: true });
         }
         return { flags: flags, token: token, tokenKey: tokenKey(token) };
     });
@@ -52740,13 +51491,6 @@ var EMPTY_MAP = {};
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * @param {?} flags
@@ -53154,7 +51898,7 @@ function moduleProvideDef(flags, token, value, deps) {
     // lowered the expression and then stopped evaluating it,
     // i.e. also didn't unwrap it.
     value = resolveForwardRef(value);
-    var /** @type {?} */ depDefs = splitDepsDsl(deps, stringify(token));
+    var /** @type {?} */ depDefs = splitDepsDsl(deps);
     return {
         // will bet set by the module definition
         index: -1,
@@ -53509,13 +52253,6 @@ function removeFromArray(arr, index) {
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 var EMPTY_CONTEXT = new Object();
 /**
  * @param {?} selector
@@ -53536,7 +52273,7 @@ function createComponentFactory(selector, componentType, viewDefFactory, inputs,
 function getComponentViewDefinitionFactory(componentFactory) {
     return (/** @type {?} */ (componentFactory)).viewDefFactory;
 }
-var ComponentFactory_ = /** @class */ (function (_super) {
+var ComponentFactory_ = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ComponentFactory_, _super);
     function ComponentFactory_(selector, componentType, viewDefFactory, _inputs, _outputs, ngContentSelectors) {
         var _this = 
@@ -53616,7 +52353,7 @@ var ComponentFactory_ = /** @class */ (function (_super) {
     };
     return ComponentFactory_;
 }(ComponentFactory));
-var ComponentRef_ = /** @class */ (function (_super) {
+var ComponentRef_ = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ComponentRef_, _super);
     function ComponentRef_(_view, _viewRef, _component) {
         var _this = _super.call(this) || this;
@@ -53682,7 +52419,7 @@ var ComponentRef_ = /** @class */ (function (_super) {
 function createViewContainerData(view, elDef, elData) {
     return new ViewContainerRef_(view, elDef, elData);
 }
-var ViewContainerRef_ = /** @class */ (function () {
+var ViewContainerRef_ = (function () {
     function ViewContainerRef_(_view, _elDef, _data) {
         this._view = _view;
         this._elDef = _elDef;
@@ -53892,7 +52629,7 @@ var ViewContainerRef_ = /** @class */ (function () {
 function createChangeDetectorRef(view) {
     return new ViewRef_(view);
 }
-var ViewRef_ = /** @class */ (function () {
+var ViewRef_ = (function () {
     function ViewRef_(_view) {
         this._view = _view;
         this._viewContainerRef = null;
@@ -53947,13 +52684,9 @@ var ViewRef_ = /** @class */ (function () {
         if (fs.begin) {
             fs.begin();
         }
-        try {
-            Services.checkAndUpdateView(this._view);
-        }
-        finally {
-            if (fs.end) {
-                fs.end();
-            }
+        Services.checkAndUpdateView(this._view);
+        if (fs.end) {
+            fs.end();
         }
     };
     /**
@@ -54048,7 +52781,7 @@ var ViewRef_ = /** @class */ (function () {
 function createTemplateData(view, def) {
     return new TemplateRef_(view, def);
 }
-var TemplateRef_ = /** @class */ (function (_super) {
+var TemplateRef_ = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(TemplateRef_, _super);
     function TemplateRef_(_parentView, _def) {
         var _this = _super.call(this) || this;
@@ -54087,7 +52820,7 @@ var TemplateRef_ = /** @class */ (function (_super) {
 function createInjector(view, elDef) {
     return new Injector_(view, elDef);
 }
-var Injector_ = /** @class */ (function () {
+var Injector_ = (function () {
     function Injector_(view, elDef) {
         this.view = view;
         this.elDef = elDef;
@@ -54135,7 +52868,7 @@ function nodeValue(view, index) {
 function createRendererV1(view) {
     return new RendererAdapter(view.renderer);
 }
-var RendererAdapter = /** @class */ (function () {
+var RendererAdapter = (function () {
     function RendererAdapter(delegate) {
         this.delegate = delegate;
     }
@@ -54435,7 +53168,7 @@ var RendererAdapter = /** @class */ (function () {
 function createNgModuleRef(moduleType, parent, bootstrapComponents, def) {
     return new NgModuleRef_(moduleType, parent, bootstrapComponents, def);
 }
-var NgModuleRef_ = /** @class */ (function () {
+var NgModuleRef_ = (function () {
     function NgModuleRef_(_moduleType, _parent, _bootstrapComponents, _def) {
         this._moduleType = _moduleType;
         this._parent = _parent;
@@ -54443,7 +53176,6 @@ var NgModuleRef_ = /** @class */ (function () {
         this._def = _def;
         this._destroyListeners = [];
         this._destroyed = false;
-        this.injector = this;
         initNgModule(this);
     }
     /**
@@ -54473,6 +53205,14 @@ var NgModuleRef_ = /** @class */ (function () {
          * @return {?}
          */
         function () { return this.get(ComponentFactoryResolver); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(NgModuleRef_.prototype, "injector", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this; },
         enumerable: true,
         configurable: true
     });
@@ -54599,7 +53339,7 @@ function _def(checkIndex, flags, matchedQueriesDsl, childCount, token, value, de
     // lowered the expression and then stopped evaluating it,
     // i.e. also didn't unwrap it.
     value = resolveForwardRef(value);
-    var /** @type {?} */ depDefs = splitDepsDsl(deps, stringify(token));
+    var /** @type {?} */ depDefs = splitDepsDsl(deps);
     return {
         // will bet set by the view definition
         nodeIndex: -1,
@@ -54738,8 +53478,7 @@ function checkAndUpdateDirectiveInline(view, def, v0, v1, v2, v3, v4, v5, v6, v7
     if (changes) {
         directive.ngOnChanges(changes);
     }
-    if ((def.flags & 65536 /* OnInit */) &&
-        shouldCallLifecycleInitHook(view, 256 /* InitState_CallingOnInit */, def.nodeIndex)) {
+    if ((view.state & 2 /* FirstCheck */) && (def.flags & 65536 /* OnInit */)) {
         directive.ngOnInit();
     }
     if (def.flags & 262144 /* DoCheck */) {
@@ -54767,8 +53506,7 @@ function checkAndUpdateDirectiveDynamic(view, def, values) {
     if (changes) {
         directive.ngOnChanges(changes);
     }
-    if ((def.flags & 65536 /* OnInit */) &&
-        shouldCallLifecycleInitHook(view, 256 /* InitState_CallingOnInit */, def.nodeIndex)) {
+    if ((view.state & 2 /* FirstCheck */) && (def.flags & 65536 /* OnInit */)) {
         directive.ngOnInit();
     }
     if (def.flags & 262144 /* DoCheck */) {
@@ -54993,7 +53731,10 @@ function updateProp(view, providerData, def, bindingIdx, value, changes) {
     providerData.instance[propName] = value;
     if (def.flags & 524288 /* OnChanges */) {
         changes = changes || {};
-        var /** @type {?} */ oldValue = WrappedValue.unwrap(view.oldValues[def.bindingIndex + bindingIdx]);
+        var /** @type {?} */ oldValue = view.oldValues[def.bindingIndex + bindingIdx];
+        if (oldValue instanceof WrappedValue) {
+            oldValue = oldValue.wrapped;
+        }
         var /** @type {?} */ binding_1 = def.bindings[bindingIdx];
         changes[/** @type {?} */ ((binding_1.nonMinifiedName))] =
             new SimpleChange(oldValue, value, (view.state & 2 /* FirstCheck */) !== 0);
@@ -55011,13 +53752,12 @@ function callLifecycleHooksChildrenFirst(view, lifecycles) {
         return;
     }
     var /** @type {?} */ nodes = view.def.nodes;
-    var /** @type {?} */ initIndex = 0;
     for (var /** @type {?} */ i = 0; i < nodes.length; i++) {
         var /** @type {?} */ nodeDef = nodes[i];
         var /** @type {?} */ parent_1 = nodeDef.parent;
         if (!parent_1 && nodeDef.flags & lifecycles) {
             // matching root node (e.g. a pipe)
-            callProviderLifecycles(view, i, nodeDef.flags & lifecycles, initIndex++);
+            callProviderLifecycles(view, i, nodeDef.flags & lifecycles);
         }
         if ((nodeDef.childFlags & lifecycles) === 0) {
             // no child matches one of the lifecycles
@@ -55027,7 +53767,7 @@ function callLifecycleHooksChildrenFirst(view, lifecycles) {
             i === parent_1.nodeIndex + parent_1.childCount) {
             // last child of an element
             if (parent_1.directChildFlags & lifecycles) {
-                initIndex = callElementProvidersLifecycles(view, parent_1, lifecycles, initIndex);
+                callElementProvidersLifecycles(view, parent_1, lifecycles);
             }
             parent_1 = parent_1.parent;
         }
@@ -55037,28 +53777,25 @@ function callLifecycleHooksChildrenFirst(view, lifecycles) {
  * @param {?} view
  * @param {?} elDef
  * @param {?} lifecycles
- * @param {?} initIndex
  * @return {?}
  */
-function callElementProvidersLifecycles(view, elDef, lifecycles, initIndex) {
+function callElementProvidersLifecycles(view, elDef, lifecycles) {
     for (var /** @type {?} */ i = elDef.nodeIndex + 1; i <= elDef.nodeIndex + elDef.childCount; i++) {
         var /** @type {?} */ nodeDef = view.def.nodes[i];
         if (nodeDef.flags & lifecycles) {
-            callProviderLifecycles(view, i, nodeDef.flags & lifecycles, initIndex++);
+            callProviderLifecycles(view, i, nodeDef.flags & lifecycles);
         }
         // only visit direct children
         i += nodeDef.childCount;
     }
-    return initIndex;
 }
 /**
  * @param {?} view
  * @param {?} index
  * @param {?} lifecycles
- * @param {?} initIndex
  * @return {?}
  */
-function callProviderLifecycles(view, index, lifecycles, initIndex) {
+function callProviderLifecycles(view, index, lifecycles) {
     var /** @type {?} */ providerData = asProviderData(view, index);
     if (!providerData) {
         return;
@@ -55068,15 +53805,13 @@ function callProviderLifecycles(view, index, lifecycles, initIndex) {
         return;
     }
     Services.setCurrentNode(view, index);
-    if (lifecycles & 1048576 /* AfterContentInit */ &&
-        shouldCallLifecycleInitHook(view, 512 /* InitState_CallingAfterContentInit */, initIndex)) {
+    if (lifecycles & 1048576 /* AfterContentInit */) {
         provider.ngAfterContentInit();
     }
     if (lifecycles & 2097152 /* AfterContentChecked */) {
         provider.ngAfterContentChecked();
     }
-    if (lifecycles & 4194304 /* AfterViewInit */ &&
-        shouldCallLifecycleInitHook(view, 768 /* InitState_CallingAfterViewInit */, initIndex)) {
+    if (lifecycles & 4194304 /* AfterViewInit */) {
         provider.ngAfterViewInit();
     }
     if (lifecycles & 8388608 /* AfterViewChecked */) {
@@ -55301,13 +54036,6 @@ function getQueryValue(view, nodeDef, queryValueType) {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * @param {?} ngContentIndex
@@ -55804,13 +54532,6 @@ function _addInterpolationPart(value, binding) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @param {?} flags
  * @param {?} nodes
  * @param {?=} updateDirectives
@@ -55918,7 +54639,7 @@ function viewDef(flags, nodes, updateDirectives, updateRenderer) {
             }
         }
     }
-    var /** @type {?} */ handleEvent = function (view, nodeIndex, eventName, event) { return ((/** @type {?} */ ((nodes[nodeIndex].element)).handleEvent))(view, eventName, event); };
+    var /** @type {?} */ handleEvent = function (view, nodeIndex, eventName, event) { return /** @type {?} */ ((/** @type {?} */ ((nodes[nodeIndex].element)).handleEvent))(view, eventName, event); };
     return {
         // Will be filled later...
         factory: null,
@@ -56041,8 +54762,7 @@ function createView(root, renderer, parent, parentNodeDef, def) {
         context: null,
         component: null, nodes: nodes,
         state: 13 /* CatInit */, root: root, renderer: renderer,
-        oldValues: new Array(def.bindingCount), disposables: disposables,
-        initIndex: -1
+        oldValues: new Array(def.bindingCount), disposables: disposables
     };
     return view;
 }
@@ -56171,23 +54891,21 @@ function checkAndUpdateView(view) {
     else {
         view.state &= ~2 /* FirstCheck */;
     }
-    shiftInitState(view, 0 /* InitState_BeforeInit */, 256 /* InitState_CallingOnInit */);
     markProjectedViewsForCheck(view);
     Services.updateDirectives(view, 0 /* CheckAndUpdate */);
     execEmbeddedViewsAction(view, ViewAction.CheckAndUpdate);
     execQueriesAction(view, 67108864 /* TypeContentQuery */, 536870912 /* DynamicQuery */, 0 /* CheckAndUpdate */);
-    var /** @type {?} */ callInit = shiftInitState(view, 256 /* InitState_CallingOnInit */, 512 /* InitState_CallingAfterContentInit */);
-    callLifecycleHooksChildrenFirst(view, 2097152 /* AfterContentChecked */ | (callInit ? 1048576 /* AfterContentInit */ : 0));
+    callLifecycleHooksChildrenFirst(view, 2097152 /* AfterContentChecked */ |
+        (view.state & 2 /* FirstCheck */ ? 1048576 /* AfterContentInit */ : 0));
     Services.updateRenderer(view, 0 /* CheckAndUpdate */);
     execComponentViewsAction(view, ViewAction.CheckAndUpdate);
     execQueriesAction(view, 134217728 /* TypeViewQuery */, 536870912 /* DynamicQuery */, 0 /* CheckAndUpdate */);
-    callInit = shiftInitState(view, 512 /* InitState_CallingAfterContentInit */, 768 /* InitState_CallingAfterViewInit */);
-    callLifecycleHooksChildrenFirst(view, 8388608 /* AfterViewChecked */ | (callInit ? 4194304 /* AfterViewInit */ : 0));
+    callLifecycleHooksChildrenFirst(view, 8388608 /* AfterViewChecked */ |
+        (view.state & 2 /* FirstCheck */ ? 4194304 /* AfterViewInit */ : 0));
     if (view.def.flags & 2 /* OnPush */) {
         view.state &= ~8 /* ChecksEnabled */;
     }
     view.state &= ~(64 /* CheckProjectedViews */ | 32 /* CheckProjectedView */);
-    shiftInitState(view, 768 /* InitState_CallingAfterViewInit */, 1024 /* InitState_AfterInit */);
 }
 /**
  * @param {?} view
@@ -56620,8 +55338,7 @@ function initServicesIfNeeded() {
     Services.createComponentView = services.createComponentView;
     Services.createNgModuleRef = services.createNgModuleRef;
     Services.overrideProvider = services.overrideProvider;
-    Services.overrideComponentView = services.overrideComponentView;
-    Services.clearOverrides = services.clearOverrides;
+    Services.clearProviderOverrides = services.clearProviderOverrides;
     Services.checkAndUpdateView = services.checkAndUpdateView;
     Services.checkNoChangesView = services.checkNoChangesView;
     Services.destroyView = services.destroyView;
@@ -56643,8 +55360,7 @@ function createProdServices() {
         createComponentView: createComponentView,
         createNgModuleRef: createNgModuleRef,
         overrideProvider: NOOP,
-        overrideComponentView: NOOP,
-        clearOverrides: NOOP,
+        clearProviderOverrides: NOOP,
         checkAndUpdateView: checkAndUpdateView,
         checkNoChangesView: checkNoChangesView,
         destroyView: destroyView,
@@ -56673,8 +55389,7 @@ function createDebugServices() {
         createComponentView: debugCreateComponentView,
         createNgModuleRef: debugCreateNgModuleRef,
         overrideProvider: debugOverrideProvider,
-        overrideComponentView: debugOverrideComponentView,
-        clearOverrides: debugClearOverrides,
+        clearProviderOverrides: debugClearProviderOverrides,
         checkAndUpdateView: debugCheckAndUpdateView,
         checkNoChangesView: debugCheckNoChangesView,
         destroyView: debugDestroyView,
@@ -56749,14 +55464,8 @@ function debugCreateEmbeddedView(parentView, anchorDef, viewDef$$1, context) {
  * @return {?}
  */
 function debugCreateComponentView(parentView, nodeDef, viewDef$$1, hostElement) {
-    var /** @type {?} */ overrideComponentView = viewDefOverrides.get(/** @type {?} */ ((/** @type {?} */ ((/** @type {?} */ ((nodeDef.element)).componentProvider)).provider)).token);
-    if (overrideComponentView) {
-        viewDef$$1 = overrideComponentView;
-    }
-    else {
-        viewDef$$1 = applyProviderOverridesToView(viewDef$$1);
-    }
-    return callWithDebugContext(DebugAction.create, createComponentView, null, [parentView, nodeDef, viewDef$$1, hostElement]);
+    var /** @type {?} */ defWithOverride = applyProviderOverridesToView(viewDef$$1);
+    return callWithDebugContext(DebugAction.create, createComponentView, null, [parentView, nodeDef, defWithOverride, hostElement]);
 }
 /**
  * @param {?} moduleType
@@ -56770,7 +55479,6 @@ function debugCreateNgModuleRef(moduleType, parentInjector, bootstrapComponents,
     return createNgModuleRef(moduleType, parentInjector, bootstrapComponents, defWithOverride);
 }
 var providerOverrides = new Map();
-var viewDefOverrides = new Map();
 /**
  * @param {?} override
  * @return {?}
@@ -56779,21 +55487,10 @@ function debugOverrideProvider(override) {
     providerOverrides.set(override.token, override);
 }
 /**
- * @param {?} comp
- * @param {?} compFactory
  * @return {?}
  */
-function debugOverrideComponentView(comp, compFactory) {
-    var /** @type {?} */ hostViewDef = resolveDefinition(getComponentViewDefinitionFactory(compFactory));
-    var /** @type {?} */ compViewDef = resolveDefinition(/** @type {?} */ ((/** @type {?} */ ((hostViewDef.nodes[0].element)).componentView)));
-    viewDefOverrides.set(comp, compViewDef);
-}
-/**
- * @return {?}
- */
-function debugClearOverrides() {
+function debugClearProviderOverrides() {
     providerOverrides.clear();
-    viewDefOverrides.clear();
 }
 /**
  * @param {?} def
@@ -57208,7 +55905,7 @@ function nextRenderNodeWithBinding(view, nodeIndex) {
     }
     return null;
 }
-var DebugContext_ = /** @class */ (function () {
+var DebugContext_ = (function () {
     function DebugContext_(view, nodeIndex) {
         this.view = view;
         this.nodeIndex = nodeIndex;
@@ -57446,7 +56143,7 @@ function callWithDebugContext(action, fn, self, args) {
 function getCurrentDebugContext() {
     return _currentView ? new DebugContext_(_currentView, _currentNodeIndex) : null;
 }
-var DebugRendererFactory2 = /** @class */ (function () {
+var DebugRendererFactory2 = (function () {
     function DebugRendererFactory2(delegate) {
         this.delegate = delegate;
     }
@@ -57499,11 +56196,18 @@ var DebugRendererFactory2 = /** @class */ (function () {
     };
     return DebugRendererFactory2;
 }());
-var DebugRenderer2 = /** @class */ (function () {
+var DebugRenderer2 = (function () {
     function DebugRenderer2(delegate) {
         this.delegate = delegate;
-        this.data = this.delegate.data;
     }
+    Object.defineProperty(DebugRenderer2.prototype, "data", {
+        get: /**
+         * @return {?}
+         */
+        function () { return this.delegate.data; },
+        enumerable: true,
+        configurable: true
+    });
     /**
      * @param {?} node
      * @return {?}
@@ -57858,20 +56562,11 @@ function overrideProvider(override) {
     return Services.overrideProvider(override);
 }
 /**
- * @param {?} comp
- * @param {?} componentFactory
  * @return {?}
  */
-function overrideComponentView(comp, componentFactory) {
+function clearProviderOverrides() {
     initServicesIfNeeded();
-    return Services.overrideComponentView(comp, componentFactory);
-}
-/**
- * @return {?}
- */
-function clearOverrides() {
-    initServicesIfNeeded();
-    return Services.clearOverrides();
+    return Services.clearProviderOverrides();
 }
 /**
  * @param {?} ngModuleType
@@ -57882,7 +56577,7 @@ function clearOverrides() {
 function createNgModuleFactory(ngModuleType, bootstrapComponents, defFactory) {
     return new NgModuleFactory_(ngModuleType, bootstrapComponents, defFactory);
 }
-var NgModuleFactory_ = /** @class */ (function (_super) {
+var NgModuleFactory_ = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(NgModuleFactory_, _super);
     function NgModuleFactory_(moduleType, _bootstrapComponents, _ngModuleDefFactory) {
         var _this = 
@@ -57933,2492 +56628,6 @@ var NgModuleFactory_ = /** @class */ (function (_super) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-// The functions in this file verify that the assumptions we are making
-// about state in an instruction are correct before implementing any logic.
-// They are meant only to be called in dev mode as sanity checks.
-/**
- * Stringifies values such that strings are wrapped in explicit quotation marks and
- * other types are stringified normally. Used in error messages (e.g. assertThrow)
- * to make it clear that certain values are of the string type when comparing.
- *
- * e.g. `expected "3" to be 3` is easier to understand than `expected 3 to be 3`.
- *
- * @param {?} value The value to be stringified
- * @return {?} The stringified value
- */
-function stringifyValueForError(value) {
-    return typeof value === 'string' ? "\"" + value + "\"" : '' + value;
-}
-/**
- * @param {?} actual
- * @param {?} name
- * @return {?}
- */
-
-/**
- * @template T
- * @param {?} actual
- * @param {?} expected
- * @param {?} name
- * @param {?=} serializer
- * @return {?}
- */
-function assertEqual(actual, expected, name, serializer) {
-    (actual != expected) && assertThrow(actual, expected, name, '==', serializer);
-}
-/**
- * @template T
- * @param {?} actual
- * @param {?} expected
- * @param {?} name
- * @return {?}
- */
-function assertLessThan(actual, expected, name) {
-    (actual < expected) && assertThrow(actual, expected, name, '>');
-}
-/**
- * @template T
- * @param {?} actual
- * @param {?} name
- * @return {?}
- */
-function assertNotNull(actual, name) {
-    assertNotEqual(actual, null, name);
-}
-/**
- * @template T
- * @param {?} actual
- * @param {?} expected
- * @param {?} name
- * @return {?}
- */
-function assertNotEqual(actual, expected, name) {
-    (actual == expected) && assertThrow(actual, expected, name, '!=');
-}
-/**
- * Throws an error with a message constructed from the arguments.
- *
- * @template T
- * @param {?} actual The actual value (e.g. 3)
- * @param {?} expected The expected value (e.g. 5)
- * @param {?} name The name of the value being checked (e.g. attrs.length)
- * @param {?} operator The comparison operator (e.g. <, >, ==)
- * @param {?=} serializer Function that maps a value to its display value
- * @return {?}
- */
-function assertThrow(actual, expected, name, operator, serializer) {
-    if (serializer === void 0) { serializer = stringifyValueForError; }
-    throw new Error("ASSERT: expected " + name + " " + operator + " " + serializer(expected) + " but was " + serializer(actual) + "!");
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-if (typeof ngDevMode == 'undefined') {
-    if (typeof window != 'undefined')
-        (/** @type {?} */ (window)).ngDevMode = true;
-    if (typeof self != 'undefined')
-        (/** @type {?} */ (self)).ngDevMode = true;
-    if (typeof global != 'undefined')
-        (/** @type {?} */ (global)).ngDevMode = true;
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * @param {?} node
- * @param {?} type
- * @return {?}
- */
-function assertNodeType(node, type) {
-    assertNotEqual(node, null, 'node');
-    assertEqual(node.flags & 3 /* TYPE_MASK */, type, 'Node.type', typeSerializer);
-}
-/**
- * @param {?} node
- * @param {...?} types
- * @return {?}
- */
-
-/**
- * @param {?} type
- * @return {?}
- */
-function typeSerializer(type) {
-    if (type == 1 /* Projection */)
-        return 'Projection';
-    if (type == 0 /* Container */)
-        return 'Container';
-    if (type == 2 /* View */)
-        return 'View';
-    if (type == 3 /* Element */)
-        return 'Element';
-    return '??? ' + type + ' ???';
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * Finds the closest DOM node above a given container in the hierarchy.
- *
- * This is necessary to add or remove elements from the DOM when a view
- * is added or removed from the container. e.g. parent.removeChild(...)
- *
- * @param {?} containerNode The container node whose parent must be found
- * @return {?} Closest DOM node above the container
- */
-function findNativeParent(containerNode) {
-    var /** @type {?} */ container = containerNode;
-    while (container) {
-        ngDevMode && assertNodeType(container, 0 /* Container */);
-        var /** @type {?} */ renderParent = container.data.renderParent;
-        if (renderParent !== null) {
-            return renderParent.native;
-        }
-        var /** @type {?} */ viewOrElement = /** @type {?} */ ((container.parent));
-        ngDevMode && assertNotNull(viewOrElement, 'container.parent');
-        if ((viewOrElement.flags & 3 /* TYPE_MASK */) === 3 /* Element */) {
-            // we are an LElement, which means we are past the last LContainer.
-            // This means than we have not been projected so just ignore.
-            return null;
-        }
-        ngDevMode && assertNodeType(viewOrElement, 2 /* View */);
-        container = (/** @type {?} */ (viewOrElement)).parent;
-    }
-    return null;
-}
-/**
- * Finds the DOM element before which a certain view should be inserting its
- * child elements.
- *
- * If the view has a next (e.g. for loop), elements should be inserted before
- * the next view's first child element. Otherwise, the container's comment
- * anchor is the marker.
- *
- * @param {?} index The index of the view to check
- * @param {?} state ContainerState of the parent container
- * @param {?} native Comment anchor for container
- * @return {?} The DOM element for which the view should insert elements
- */
-function findBeforeNode(index, state, native) {
-    var /** @type {?} */ views = state.views;
-    // Find the node to insert in front of
-    return index + 1 < views.length ?
-        (/** @type {?} */ (views[index + 1].child)).native :
-        native;
-}
-/**
- * @param {?} container
- * @param {?} rootNode
- * @param {?} insertMode
- * @param {?=} beforeNode
- * @return {?}
- */
-function addRemoveViewFromContainer(container, rootNode, insertMode, beforeNode) {
-    ngDevMode && assertNodeType(container, 0 /* Container */);
-    ngDevMode && assertNodeType(rootNode, 2 /* View */);
-    var /** @type {?} */ parent = findNativeParent(container);
-    var /** @type {?} */ node = rootNode.child;
-    if (parent) {
-        while (node) {
-            var /** @type {?} */ type = node.flags & 3;
-            var /** @type {?} */ nextNode = null;
-            var /** @type {?} */ renderer = container.view.renderer;
-            var /** @type {?} */ isFnRenderer = (/** @type {?} */ (renderer)).listen;
-            if (type === 3 /* Element */) {
-                insertMode ? (isFnRenderer ? /** @type {?} */ (((/** @type {?} */ (renderer))
-                    .insertBefore))(parent, /** @type {?} */ ((node.native)), /** @type {?} */ (beforeNode)) :
-                    parent.insertBefore(/** @type {?} */ ((node.native)), /** @type {?} */ (beforeNode), true)) :
-                    (isFnRenderer ? /** @type {?} */ (((/** @type {?} */ (renderer))
-                        .removeChild))(/** @type {?} */ (parent), /** @type {?} */ ((node.native))) :
-                        parent.removeChild(/** @type {?} */ ((node.native))));
-                nextNode = node.next;
-            }
-            else if (type === 0 /* Container */) {
-                // if we get to a container, it must be a root node of a view because we are only
-                // propagating down into child views / containers and not child elements
-                var /** @type {?} */ childContainerData = (/** @type {?} */ (node)).data;
-                insertMode ? (isFnRenderer ? /** @type {?} */ (((/** @type {?} */ (renderer))
-                    .appendChild))(/** @type {?} */ (parent), /** @type {?} */ ((node.native))) :
-                    parent.appendChild(/** @type {?} */ ((node.native)))) :
-                    (isFnRenderer ? /** @type {?} */ (((/** @type {?} */ (renderer))
-                        .removeChild))(/** @type {?} */ (parent), /** @type {?} */ ((node.native))) :
-                        parent.removeChild(/** @type {?} */ ((node.native))));
-                nextNode = childContainerData.views.length ? childContainerData.views[0].child : null;
-            }
-            else if (type === 1 /* Projection */) {
-                nextNode = (/** @type {?} */ (node)).data[0];
-            }
-            else {
-                nextNode = (/** @type {?} */ (node)).child;
-            }
-            if (nextNode === null) {
-                while (node && !node.next) {
-                    node = node.parent;
-                    if (node === rootNode)
-                        node = null;
-                }
-                node = node && node.next;
-            }
-            else {
-                node = nextNode;
-            }
-        }
-    }
-}
-/**
- * Traverses the tree of component views and containers to remove listeners and
- * call onDestroy callbacks.
- *
- * Notes:
- *  - Because it's used for onDestroy calls, it needs to be bottom-up.
- *  - Must process containers instead of their views to avoid splicing
- *  when views are destroyed and re-added.
- *  - Using a while loop because it's faster than recursion
- *  - Destroy only called on movement to sibling or movement to parent (laterally or up)
- *
- *  \@param rootView The view to destroy
- * @param {?} rootView
- * @return {?}
- */
-function destroyViewTree(rootView) {
-    var /** @type {?} */ viewOrContainerState = rootView;
-    while (viewOrContainerState) {
-        var /** @type {?} */ next = null;
-        if (viewOrContainerState.views && viewOrContainerState.views.length) {
-            next = viewOrContainerState.views[0].data;
-        }
-        else if (viewOrContainerState.child) {
-            next = viewOrContainerState.child;
-        }
-        else if (viewOrContainerState.next) {
-            cleanUpView(/** @type {?} */ (viewOrContainerState));
-            next = viewOrContainerState.next;
-        }
-        if (next == null) {
-            while (viewOrContainerState && !/** @type {?} */ ((viewOrContainerState)).next) {
-                cleanUpView(/** @type {?} */ (viewOrContainerState));
-                viewOrContainerState = getParentState(viewOrContainerState, rootView);
-            }
-            cleanUpView(/** @type {?} */ (viewOrContainerState) || rootView);
-            next = viewOrContainerState && viewOrContainerState.next;
-        }
-        viewOrContainerState = next;
-    }
-}
-/**
- * Inserts a view into a container.
- *
- * This adds the view to the container's array of active views in the correct
- * position. It also adds the view's elements to the DOM if the container isn't a
- * root node of another view (in that case, the view's elements will be added when
- * the container's parent view is added later).
- *
- * @param {?} container The container into which the view should be inserted
- * @param {?} newView The view to insert
- * @param {?} index The index at which to insert the view
- * @return {?} The inserted view
- */
-function insertView(container, newView, index) {
-    var /** @type {?} */ state = container.data;
-    var /** @type {?} */ views = state.views;
-    if (index > 0) {
-        // This is a new view, we need to add it to the children.
-        setViewNext(views[index - 1], newView);
-    }
-    if (index < views.length && views[index].data.id !== newView.data.id) {
-        // View ID change replace the view.
-        setViewNext(newView, views[index]);
-        views.splice(index, 0, newView);
-    }
-    else if (index >= views.length) {
-        views.push(newView);
-    }
-    if (state.nextIndex <= index) {
-        state.nextIndex++;
-    }
-    // If the container's renderParent is null, we know that it is a root node of its own parent view
-    // and we should wait until that parent processes its nodes (otherwise, we will insert this view's
-    // nodes twice - once now and once when its parent inserts its views).
-    if (container.data.renderParent !== null) {
-        addRemoveViewFromContainer(container, newView, true, findBeforeNode(index, state, container.native));
-    }
-    // Notify query that view has been inserted
-    container.query && container.query.insertView(container, newView, index);
-    return newView;
-}
-/**
- * Removes a view from a container.
- *
- * This method splices the view from the container's array of active views. It also
- * removes the view's elements from the DOM and conducts cleanup (e.g. removing
- * listeners, calling onDestroys).
- *
- * @param {?} container The container from which to remove a view
- * @param {?} removeIndex The index of the view to remove
- * @return {?} The removed view
- */
-function removeView(container, removeIndex) {
-    var /** @type {?} */ views = container.data.views;
-    var /** @type {?} */ viewNode = views[removeIndex];
-    if (removeIndex > 0) {
-        setViewNext(views[removeIndex - 1], viewNode.next);
-    }
-    views.splice(removeIndex, 1);
-    destroyViewTree(viewNode.data);
-    addRemoveViewFromContainer(container, viewNode, false);
-    // Notify query that view has been removed
-    container.query && container.query.removeView(container, viewNode, removeIndex);
-    return viewNode;
-}
-/**
- * Sets a next on the view node, so views in for loops can easily jump from
- * one view to the next to add/remove elements. Also adds the ViewState (view.data)
- * to the view tree for easy traversal when cleaning up the view.
- *
- * @param {?} view The view to set up
- * @param {?} next The view's new next
- * @return {?}
- */
-function setViewNext(view, next) {
-    view.next = next;
-    view.data.next = next ? next.data : null;
-}
-/**
- * Determines which ViewOrContainerState to jump to when traversing back up the
- * tree in destroyViewTree.
- *
- * Normally, the view's parent ViewState should be checked, but in the case of
- * embedded views, the container (which is the view node's parent, but not the
- * ViewState's parent) needs to be checked for a possible next property.
- *
- * @param {?} state The ViewOrContainerState for which we need a parent state
- * @param {?} rootView The rootView, so we don't propagate too far up the view tree
- * @return {?} The correct parent ViewOrContainerState
- */
-function getParentState(state, rootView) {
-    var /** @type {?} */ node;
-    if ((node = /** @type {?} */ (((/** @type {?} */ (state)))).node) &&
-        (node.flags & 3 /* TYPE_MASK */) === 2 /* View */) {
-        // if it's an embedded view, the state needs to go up to the container, in case the
-        // container has a next
-        return /** @type {?} */ (((node.parent)).data);
-    }
-    else {
-        // otherwise, use parent view for containers or component views
-        return state.parent === rootView ? null : state.parent;
-    }
-}
-/**
- * Removes all listeners and call all onDestroys in a given view.
- *
- * @param {?} viewState The ViewState of the view to clean up
- * @return {?}
- */
-function cleanUpView(viewState) {
-    if (!viewState.cleanup)
-        return;
-    var /** @type {?} */ cleanup = /** @type {?} */ ((viewState.cleanup));
-    for (var /** @type {?} */ i = 0; i < cleanup.length - 1; i += 2) {
-        if (typeof cleanup[i] === 'string') {
-            /** @type {?} */ ((cleanup))[i + 1].removeEventListener(cleanup[i], cleanup[i + 2], cleanup[i + 3]);
-            i += 2;
-        }
-        else {
-            cleanup[i].call(cleanup[i + 1]);
-        }
-    }
-    viewState.cleanup = null;
-}
-/**
- * Appends the provided child element to the provided parent, if appropriate.
- *
- * If the parent is a view, the element will be appended as part of viewEnd(), so
- * the element should not be appended now. Similarly, if the child is a content child
- * of a parent component, the child will be appended to the right position later by
- * the content projection system. Otherwise, append normally.
- *
- * @param {?} parent The parent to which to append the child
- * @param {?} child The child that should be appended
- * @param {?} currentView The current view's ViewState
- * @return {?} Whether or not the child was appended
- */
-function appendChild(parent, child, currentView) {
-    // Only add native child element to parent element if the parent element is regular Element.
-    // If parent is:
-    // - Regular element => add child
-    // - Component host element =>
-    //    - Current View, and parent view same => content => don't add -> parent component will
-    //    re-project if needed.
-    //    - Current View, and parent view different => view => add Child
-    // - View element => View's get added separately.
-    if (child !== null && (parent.flags & 3 /* TYPE_MASK */) === 3 /* Element */ &&
-        (parent.view !==
-            currentView /* Crossing View Boundaries, it is Component, but add Element of View */
-            || parent.data === null /* Regular Element. */)) {
-        // We only add element if not in View or not projected.
-        var /** @type {?} */ renderer = currentView.renderer;
-        (/** @type {?} */ (renderer)).listen ? /** @type {?} */ (((/** @type {?} */ (renderer)).appendChild))(/** @type {?} */ (((parent.native))), child) : /** @type {?} */ ((parent.native)).appendChild(child);
-        return true;
-    }
-    return false;
-}
-/**
- * Inserts the provided node before the correct element in the DOM, if appropriate.
- *
- * If the parent is a view, the element will be inserted as part of viewEnd(), so
- * the element should not be inserted now. Similarly, if the child is a content child
- * of a parent component, the child will be inserted to the right position later by
- * the content projection system. Otherwise, insertBefore normally.
- *
- * @param {?} node Node to insert
- * @param {?} currentView The current view's ViewState
- * @return {?}
- */
-function insertChild(node, currentView) {
-    var /** @type {?} */ parent = /** @type {?} */ ((node.parent));
-    // Only add child element to parent element if the parent element is regular Element.
-    // If parent is:
-    // - Normal element => add child
-    // - Component element =>
-    //    - Current View, and parent view same => content don't add -> parent component will
-    //    re-project if needed.
-    //    - Current View, and parent view different => view => add Child
-    // - View element => View's get added separately.
-    if ((parent.flags & 3 /* TYPE_MASK */) === 3 /* Element */ &&
-        (parent.view !==
-            currentView /* Crossing View Boundaries, its Component, but add Element of View */
-            || parent.data === null /* Regular Element. */)) {
-        // We only add element if not in View or not projected.
-        var /** @type {?} */ sibling = node.next;
-        var /** @type {?} */ nativeSibling = null;
-        while (sibling && (nativeSibling = sibling.native) === null) {
-            sibling = sibling.next;
-        }
-        var /** @type {?} */ renderer = currentView.renderer;
-        (/** @type {?} */ (renderer)).listen ? /** @type {?} */ (((/** @type {?} */ (renderer))
-            .insertBefore))(/** @type {?} */ ((parent.native)), /** @type {?} */ ((node.native)), nativeSibling) : /** @type {?} */ ((parent.native)).insertBefore(/** @type {?} */ ((node.native)), nativeSibling, false);
-    }
-}
-/**
- * Appends a projected node to the DOM, or in the case of a projected container,
- * appends the nodes from all of the container's active views to the DOM. Also stores the
- * node in the given projectedNodes array.
- *
- * @param {?} projectedNodes Array to store the projected node
- * @param {?} node The node to process
- * @param {?} currentParent The last parent element to be processed
- * @param {?} currentView The current view's ViewState
- * @return {?}
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * A utility function to match an Ivy node static data against a simple CSS selector
- *
- * @param {?} lNodeStaticData
- * @param {?} selector
- * @return {?} true if node matches the selector.
- */
-
-/**
- * @param {?} lNodeStaticData
- * @param {?} selector
- * @return {?}
- */
-
-/**
- * @param {?} lNodeStaticData
- * @param {?} selector
- * @return {?}
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * Must use this method for CD (instead of === ) since NaN !== NaN
- * @param {?} a
- * @param {?} b
- * @return {?}
- */
-function isDifferent(a, b) {
-    // NaN is the only value that is not equal to itself so the first
-    // test checks if both a and b are not NaN
-    return !(a !== a && b !== b) && a !== b;
-}
-/**
- * @param {?} value
- * @return {?}
- */
-function stringify$1(value) {
-    if (typeof value == 'function')
-        return value.name || value;
-    if (typeof value == 'string')
-        return value;
-    if (value == null)
-        return '';
-    return '' + value;
-}
-/**
- *  Function that throws a "not implemented" error so it's clear certain
- *  behaviors/methods aren't yet ready.
- *
- * @return {?} Not implemented error
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * If a directive is diPublic, bloomAdd sets a property on the instance with this constant as
- * the key and the directive's unique ID as the value. This allows us to map directives to their
- * bloom filter bit for DI.
- */
-var NG_ELEMENT_ID = '__NG_ELEMENT_ID__';
-/**
- * The number of slots in each bloom filter (used by DI). The larger this number, the fewer
- * directives that will share slots, and thus, the fewer false positives when checking for
- * the existence of a directive.
- */
-var BLOOM_SIZE = 128;
-/**
- * Registers this directive as present in its node's injector by flipping the directive's
- * corresponding bit in the injector's bloom filter.
- *
- * @param {?} injector The node injector in which the directive should be registered
- * @param {?} type The directive to register
- * @return {?}
- */
-
-/**
- * Creates (or gets an existing) injector for a given element or container.
- *
- * @param {?} node for which an injector should be retrieved / created.
- * @return {?} Node injector
- */
-
-/**
- * Constructs an injection error with the given text and token.
- *
- * @param {?} text The text of the error
- * @param {?} token The token associated with the error
- * @return {?} The error that was created
- */
-function createInjectionError(text, token) {
-    return new Error("ElementInjector: " + text + " [" + stringify$1(token) + "]");
-}
-/**
- * Makes a directive public to the DI system by adding it to an injector's bloom filter.
- *
- * @param {?} di The node injector in which a directive will be added
- * @param {?} def The definition of the directive to be made public
- * @return {?}
- */
-
-/**
- * Searches for an instance of the given directive type up the injector tree and returns
- * that instance if found.
- *
- * Specifically, it gets the bloom filter bit associated with the directive (see bloomHashBit),
- * checks that bit against the bloom filter structure to identify an injector that might have
- * the directive (see bloomFindPossibleInjector), then searches the directives on that injector
- * for a match.
- *
- * If not found, it will propagate up to the next parent injector until the token
- * is found or the top is reached.
- *
- * @template T
- * @param {?} di Node injector where the search should start
- * @param {?} token The directive type to search for
- * @param {?=} flags Injection flags (e.g. CheckParent)
- * @return {?} The instance found
- */
-
-/**
- * Given a directive type, this function returns the bit in an injector's bloom filter
- * that should be used to determine whether or not the directive is present.
- *
- * When the directive was added to the bloom filter, it was given a unique ID that can be
- * retrieved on the class. Since there are only BLOOM_SIZE slots per bloom filter, the directive's
- * ID must be modulo-ed by BLOOM_SIZE to get the correct bloom bit (directives share slots after
- * BLOOM_SIZE is reached).
- *
- * @param {?} type The directive type
- * @return {?} The bloom bit to check for the directive
- */
-function bloomHashBit(type) {
-    var /** @type {?} */ id = (/** @type {?} */ (type))[NG_ELEMENT_ID];
-    return typeof id === 'number' ? id % BLOOM_SIZE : null;
-}
-/**
- * Finds the closest injector that might have a certain directive.
- *
- * Each directive corresponds to a bit in an injector's bloom filter. Given the bloom bit to
- * check and a starting injector, this function traverses up injectors until it finds an
- * injector that contains a 1 for that bit in its bloom filter. A 1 indicates that the
- * injector may have that directive. It only *may* have the directive because directives begin
- * to share bloom filter bits after the BLOOM_SIZE is reached, and it could correspond to a
- * different directive sharing the bit.
- *
- * Note: We can skip checking further injectors up the tree if an injector's cbf structure
- * has a 0 for that bloom bit. Since cbf contains the merged value of all the parent
- * injectors, a 0 in the bloom bit indicates that the parents definitely do not contain
- * the directive and do not need to be checked.
- *
- * @param {?} startInjector
- * @param {?} bloomBit The bit to check in each injector's bloom filter
- * @return {?} An injector that might have the directive
- */
-function bloomFindPossibleInjector(startInjector, bloomBit) {
-    // Create a mask that targets the specific bit associated with the directive we're looking for.
-    // JS bit operations are 32 bits, so this will be a number between 2^0 and 2^31, corresponding
-    // to bit positions 0 - 31 in a 32 bit integer.
-    var /** @type {?} */ mask = 1 << bloomBit;
-    // Traverse up the injector tree until we find a potential match or until we know there *isn't* a
-    // match.
-    var /** @type {?} */ injector = startInjector;
-    while (injector) {
-        // Our bloom filter size is 128 bits, which is four 32-bit bloom filter buckets:
-        // bf0 = [0 - 31], bf1 = [32 - 63], bf2 = [64 - 95], bf3 = [96 - 127]
-        // Get the bloom filter value from the appropriate bucket based on the directive's bloomBit.
-        var /** @type {?} */ value = bloomBit < 64 ? (bloomBit < 32 ? injector.bf0 : injector.bf1) :
-            (bloomBit < 96 ? injector.bf2 : injector.bf3);
-        // If the bloom filter value has the bit corresponding to the directive's bloomBit flipped on,
-        // this injector is a potential match.
-        if ((value & mask) === mask) {
-            return injector;
-        }
-        // If the current injector does not have the directive, check the bloom filters for the ancestor
-        // injectors (cbf0 - cbf3). These filters capture *all* ancestor injectors.
-        value = bloomBit < 64 ? (bloomBit < 32 ? injector.cbf0 : injector.cbf1) :
-            (bloomBit < 96 ? injector.cbf2 : injector.cbf3);
-        // If the ancestor bloom filter value has the bit corresponding to the directive, traverse up to
-        // find the specific injector. If the ancestor bloom filter does not have the bit, we can abort.
-        injector = (value & mask) ? injector.parent : null;
-    }
-    return null;
-}
-/**
- * Creates an ElementRef for a given node injector and stores it on the injector.
- * Or, if the ElementRef already exists, retrieves the existing ElementRef.
- *
- * @param {?} di The node injector where we should store a created ElementRef
- * @return {?} The ElementRef instance to use
- */
-
-/**
- * Creates a TemplateRef and stores it on the injector. Or, if the TemplateRef already
- * exists, retrieves the existing TemplateRef.
- *
- * @template T
- * @param {?} di The node injector where we should store a created TemplateRef
- * @return {?} The TemplateRef instance to use
- */
-
-/**
- * Creates a ViewContainerRef and stores it on the injector. Or, if the ViewContainerRef
- * already exists, retrieves the existing ViewContainerRef.
- *
- * @param {?} di
- * @return {?} The ViewContainerRef instance to use
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * A predicate which determines if a given element/directive should be included in the query
- * @record
- */
-
-var QueryList_ = /** @class */ (function () {
-    function QueryList_() {
-        this.dirty = false;
-        /**
-         * \@internal
-         */
-        this._valuesTree = null;
-        /**
-         * \@internal
-         */
-        this._values = null;
-    }
-    Object.defineProperty(QueryList_.prototype, "length", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            ngDevMode && assertNotNull(this._values, 'refreshed');
-            return /** @type {?} */ ((this._values)).length;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(QueryList_.prototype, "first", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            ngDevMode && assertNotNull(this._values, 'refreshed');
-            var /** @type {?} */ values = /** @type {?} */ ((this._values));
-            return values.length ? values[0] : null;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(QueryList_.prototype, "last", {
-        get: /**
-         * @return {?}
-         */
-        function () {
-            ngDevMode && assertNotNull(this._values, 'refreshed');
-            var /** @type {?} */ values = /** @type {?} */ ((this._values));
-            return values.length ? values[values.length - 1] : null;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /** @internal */
-    /**
-     * \@internal
-     * @return {?}
-     */
-    QueryList_.prototype._refresh = /**
-     * \@internal
-     * @return {?}
-     */
-    function () {
-        // TODO(misko): needs more logic to flatten tree.
-        if (this._values === null) {
-            this._values = this._valuesTree;
-            return true;
-        }
-        return false;
-    };
-    /**
-     * @template U
-     * @param {?} fn
-     * @return {?}
-     */
-    QueryList_.prototype.map = /**
-     * @template U
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn) {
-        throw new Error('Method not implemented.');
-    };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    QueryList_.prototype.filter = /**
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn) {
-        throw new Error('Method not implemented.');
-    };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    QueryList_.prototype.find = /**
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn) {
-        throw new Error('Method not implemented.');
-    };
-    /**
-     * @template U
-     * @param {?} fn
-     * @param {?} init
-     * @return {?}
-     */
-    QueryList_.prototype.reduce = /**
-     * @template U
-     * @param {?} fn
-     * @param {?} init
-     * @return {?}
-     */
-    function (fn, init) {
-        throw new Error('Method not implemented.');
-    };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    QueryList_.prototype.forEach = /**
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn) {
-        throw new Error('Method not implemented.');
-    };
-    /**
-     * @param {?} fn
-     * @return {?}
-     */
-    QueryList_.prototype.some = /**
-     * @param {?} fn
-     * @return {?}
-     */
-    function (fn) {
-        throw new Error('Method not implemented.');
-    };
-    /**
-     * @return {?}
-     */
-    QueryList_.prototype.toArray = /**
-     * @return {?}
-     */
-    function () {
-        ngDevMode && assertNotNull(this._values, 'refreshed');
-        return /** @type {?} */ ((this._values));
-    };
-    /**
-     * @return {?}
-     */
-    QueryList_.prototype.toString = /**
-     * @return {?}
-     */
-    function () { throw new Error('Method not implemented.'); };
-    /**
-     * @param {?} res
-     * @return {?}
-     */
-    QueryList_.prototype.reset = /**
-     * @param {?} res
-     * @return {?}
-     */
-    function (res) { throw new Error('Method not implemented.'); };
-    /**
-     * @return {?}
-     */
-    QueryList_.prototype.notifyOnChanges = /**
-     * @return {?}
-     */
-    function () { throw new Error('Method not implemented.'); };
-    /**
-     * @return {?}
-     */
-    QueryList_.prototype.setDirty = /**
-     * @return {?}
-     */
-    function () { throw new Error('Method not implemented.'); };
-    /**
-     * @return {?}
-     */
-    QueryList_.prototype.destroy = /**
-     * @return {?}
-     */
-    function () { throw new Error('Method not implemented.'); };
-    return QueryList_;
-}());
-
-/**
- * @param {?} query
- * @return {?}
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/** @enum {number} */
-var RendererStyleFlags3 = {
-    Important: 1,
-    DashCase: 2,
-};
-RendererStyleFlags3[RendererStyleFlags3.Important] = "Important";
-RendererStyleFlags3[RendererStyleFlags3.DashCase] = "DashCase";
-/**
- * Object Oriented style of API needed to create elements and text nodes.
- *
- * This is the native browser API style, e.g. operations are methods on individual objects
- * like HTMLElement. With this style, no additional code is needed as a facade
- * (reducing payload size).
- *
- * @record
- */
-
-/**
- * Procedural style of API needed to create elements and text nodes.
- *
- * In non-native browser environments (e.g. platforms such as web-workers), this is the
- * facade that enables element manipulation. This also facilitates backwards compatibility
- * with Renderer2.
- * @record
- */
-
-/**
- * @record
- */
-
-var domRendererFactory3 = {
-    createRenderer: function (hostElement, rendererType) { return document; }
-};
-/**
- * Subset of API needed for appending elements and text nodes.
- * @record
- */
-
-/**
- * Subset of API needed for writing attributes, properties, and setting up
- * listeners on Element.
- * @record
- */
-
-/**
- * @record
- */
-
-/**
- * @record
- */
-
-/**
- * @record
- */
-
-/**
- * @record
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * Directive (D) sets a property on all component instances using this constant as a key and the
- * component's host node (LElement) as the value. This is used in methods like detectChanges to
- * facilitate jumping from an instance to the host node.
- */
-var NG_HOST_SYMBOL = '__ngHostLNode__';
-/**
- * This property gets set before entering a template.
- *
- * This renderer can be one of two varieties of Renderer3:
- *
- * - ObjectedOrientedRenderer3
- *
- * This is the native browser API style, e.g. operations are methods on individual objects
- * like HTMLElement. With this style, no additional code is needed as a facade (reducing payload
- * size).
- *
- * - ProceduralRenderer3
- *
- * In non-native browser environments (e.g. platforms such as web-workers), this is the facade
- * that enables element manipulation. This also facilitates backwards compatibility with
- * Renderer2.
- */
-var renderer;
-var rendererFactory;
-/**
- * Used to set the parent property when nodes are created.
- */
-var previousOrParentNode;
-/**
- * If `isParent` is:
- *  - `true`: then `previousOrParentNode` points to a parent node.
- *  - `false`: then `previousOrParentNode` points to previous node (sibling).
- */
-var isParent;
-/**
- * The current template's static data (shared between all templates of a
- * given type).
- *
- * Each node's static data is stored at the same index that it's stored
- * in the data array. Any nodes that do not have static data store a null
- * value to avoid a sparse array.
- */
-var ngStaticData;
-/**
- * State of the current view being processed.
- */
-var currentView;
-// The initialization has to be after the `let`, otherwise `createViewState` can't see `let`.
-currentView = createViewState(/** @type {?} */ ((null)), /** @type {?} */ ((null)), []);
-var currentQuery;
-/**
- * This property gets set before entering a template.
- */
-var creationMode;
-/**
- * An array of nodes (text, element, container, etc), their bindings, and
- * any local variables that need to be stored between invocations.
- */
-var data;
-/**
- * Points to the next binding index to read or write to.
- */
-var bindingIndex;
-/**
- * When a view is destroyed, listeners need to be released
- * and onDestroy callbacks need to be called. This cleanup array
- * stores both listener data (in chunks of 4) and onDestroy data
- * (in chunks of 2), as they'll be processed at the same time.
- *
- * If it's a listener being stored:
- * 1st index is: event name to remove
- * 2nd index is: native element
- * 3rd index is: listener function
- * 4th index is: useCapture boolean
- *
- * If it's an onDestroy function:
- * 1st index is: onDestroy function
- * 2nd index is: context for function
- */
-var cleanup;
-/**
- * Index in the data array at which view hooks begin to be stored.
- */
-var viewHookStartIndex;
-/**
- * Swap the current state with a new state.
- *
- * For performance reasons we store the state in the top level of the module.
- * This way we minimize the number of properties to read. Whenever a new view
- * is entered we have to store the state for later, and when the view is
- * exited the state has to be restored
- *
- * @param {?} newViewState New state to become active
- * @param {?} host Element to which the View is a child of
- * @return {?} the previous state;
- */
-function enterView(newViewState, host) {
-    var /** @type {?} */ oldViewState = currentView;
-    data = newViewState.data;
-    bindingIndex = newViewState.bindingStartIndex || 0;
-    ngStaticData = newViewState.ngStaticData;
-    creationMode = newViewState.creationMode;
-    viewHookStartIndex = newViewState.viewHookStartIndex;
-    cleanup = newViewState.cleanup;
-    renderer = newViewState.renderer;
-    if (host != null) {
-        previousOrParentNode = host;
-        isParent = true;
-    }
-    currentView = newViewState;
-    return /** @type {?} */ ((oldViewState));
-}
-/**
- * Used in lieu of enterView to make it clear when we are exiting a child view. This makes
- * the direction of traversal (up or down the view tree) a bit clearer.
- * @param {?} newViewState
- * @return {?}
- */
-function leaveView(newViewState) {
-    executeViewHooks();
-    enterView(newViewState, null);
-}
-/**
- * @param {?} viewId
- * @param {?} renderer
- * @param {?} ngStaticData
- * @return {?}
- */
-function createViewState(viewId, renderer, ngStaticData) {
-    var /** @type {?} */ newView = {
-        parent: currentView,
-        id: viewId,
-        // -1 for component views
-        node: /** @type {?} */ ((null)),
-        // until we initialize it in createNode.
-        data: [],
-        ngStaticData: ngStaticData,
-        cleanup: null,
-        renderer: renderer,
-        child: null,
-        tail: null,
-        next: null,
-        bindingStartIndex: null,
-        creationMode: true,
-        viewHookStartIndex: null
-    };
-    return newView;
-}
-/**
- * @param {?} index
- * @param {?} type
- * @param {?} native
- * @param {?=} state
- * @return {?}
- */
-function createLNode(index, type, native, state) {
-    var /** @type {?} */ parent = isParent ? previousOrParentNode :
-        previousOrParentNode && /** @type {?} */ (previousOrParentNode.parent);
-    var /** @type {?} */ query = (isParent ? currentQuery : previousOrParentNode && previousOrParentNode.query) ||
-        parent && parent.query && parent.query.child();
-    var /** @type {?} */ isState = state != null;
-    var /** @type {?} */ node = {
-        flags: type,
-        native: /** @type {?} */ (native),
-        view: currentView,
-        parent: /** @type {?} */ (parent),
-        child: null,
-        next: null,
-        nodeInjector: parent ? parent.nodeInjector : null,
-        data: isState ? /** @type {?} */ (state) : null,
-        query: query,
-        staticData: null
-    };
-    if ((type & 2 /* ViewOrElement */) === 2 /* ViewOrElement */ && isState) {
-        // Bit of a hack to bust through the readonly because there is a circular dep between
-        // ViewState and LNode.
-        ngDevMode && assertEqual((/** @type {?} */ (state)).node, null, 'viewState.node');
-        (/** @type {?} */ ((state))).node = node;
-    }
-    if (index != null) {
-        // We are Element or Container
-        ngDevMode && assertEqual(data.length, index, 'data.length not in sequence');
-        data[index] = node;
-        // Every node adds a value to the static data array to avoid a sparse array
-        if (index >= ngStaticData.length) {
-            ngStaticData[index] = null;
-        }
-        else {
-            node.staticData = /** @type {?} */ (ngStaticData[index]);
-        }
-        // Now link ourselves into the tree.
-        if (isParent) {
-            currentQuery = null;
-            if (previousOrParentNode.view === currentView ||
-                (previousOrParentNode.flags & 3 /* TYPE_MASK */) === 2 /* View */) {
-                // We are in the same view, which means we are adding content node to the parent View.
-                ngDevMode && assertEqual(previousOrParentNode.child, null, 'previousNode.child');
-                previousOrParentNode.child = node;
-            }
-            else {
-                // We are adding component view, so we don't link parent node child to this node.
-            }
-        }
-        else if (previousOrParentNode) {
-            ngDevMode && assertEqual(previousOrParentNode.next, null, 'previousNode.next');
-            previousOrParentNode.next = node;
-        }
-    }
-    previousOrParentNode = node;
-    isParent = true;
-    return node;
-}
-/**
- * Resets the application state.
- * @return {?}
- */
-function resetApplicationState() {
-    isParent = false;
-    previousOrParentNode = /** @type {?} */ ((null));
-}
-/**
- *
- * @template T
- * @param {?} hostNode
- * @param {?} template Template function with the instructions.
- * @param {?} context to pass into the template.
- * @param {?} providedRendererFactory
- * @param {?} host Existing node to render into.
- * @return {?}
- */
-
-/**
- * @template T
- * @param {?} node
- * @param {?} viewState
- * @param {?} componentOrContext
- * @param {?=} template
- * @return {?}
- */
-function renderComponentOrTemplate(node, viewState, componentOrContext, template) {
-    var /** @type {?} */ oldView = enterView(viewState, node);
-    try {
-        if (rendererFactory.begin) {
-            rendererFactory.begin();
-        }
-        if (template) {
-            ngStaticData = template.ngStaticData || (template.ngStaticData = /** @type {?} */ ([]));
-            template(/** @type {?} */ ((componentOrContext)), creationMode);
-        }
-        else {
-            // Element was stored at 0 and directive was stored at 1 in renderComponent
-            // so to refresh the component, r() needs to be called with (1, 0)
-            (/** @type {?} */ (componentOrContext.constructor)).ngComponentDef.r(1, 0);
-        }
-    }
-    finally {
-        if (rendererFactory.end) {
-            rendererFactory.end();
-        }
-        viewState.creationMode = false;
-        leaveView(oldView);
-    }
-}
-/**
- * @return {?}
- */
-
-/**
- * Makes a directive public to the DI system by adding it to an injector's bloom filter.
- *
- * @param {?} def The definition of the directive to be made public
- * @return {?}
- */
-
-/**
- * Searches for an instance of the given directive type up the injector tree and returns
- * that instance if found.
- *
- * If not found, it will propagate up to the next parent injector until the token
- * is found or the top is reached.
- *
- * Usage example (in factory function):
- *
- * class SomeDirective {
- *   constructor(directive: DirectiveA) {}
- *
- *   static ngDirectiveDef = defineDirective({
- *     type: SomeDirective,
- *     factory: () => new SomeDirective(inject(DirectiveA))
- *   });
- * }
- *
- * @template T
- * @param {?} token The directive type to search for
- * @param {?=} flags Injection flags (e.g. CheckParent)
- * @return {?} The instance found
- */
-
-/**
- * Creates an ElementRef and stores it on the injector.
- * Or, if the ElementRef already exists, retrieves the existing ElementRef.
- *
- * @return {?} The ElementRef instance to use
- */
-
-/**
- * Creates a TemplateRef and stores it on the injector. Or, if the TemplateRef already
- * exists, retrieves the existing TemplateRef.
- *
- * @template T
- * @return {?} The TemplateRef instance to use
- */
-
-/**
- * Creates a ViewContainerRef and stores it on the injector. Or, if the ViewContainerRef
- * already exists, retrieves the existing ViewContainerRef.
- *
- * @return {?} The ViewContainerRef instance to use
- */
-
-/**
- * Create DOM element. The instruction must later be followed by `elementEnd()` call.
- *
- * @param {?} index Index of the element in the data array
- * @param {?=} nameOrComponentDef Name of the DOM Node or `ComponentDef`.
- * @param {?=} attrs Statically bound set of attributes to be written into the DOM element on creation.
- * @param {?=} localName A name under which a given element is exported.
- *
- * Attributes are passed as an array of strings where elements with an even index hold an attribute
- * name and elements with an odd index hold an attribute value, ex.:
- * ['id', 'warning5', 'class', 'alert']
- * @return {?}
- */
-function elementStart(index, nameOrComponentDef, attrs, localName) {
-    var /** @type {?} */ node;
-    var /** @type {?} */ native;
-    if (nameOrComponentDef == null) {
-        // native node retrieval - used for exporting elements as tpl local variables (<div #foo>)
-        var /** @type {?} */ node_1 = /** @type {?} */ ((data[index]));
-        native = node_1 && (/** @type {?} */ (node_1)).native;
-    }
-    else {
-        ngDevMode && assertEqual(currentView.bindingStartIndex, null, 'bindingStartIndex');
-        var /** @type {?} */ isHostElement = typeof nameOrComponentDef !== 'string';
-        var /** @type {?} */ name_1 = isHostElement ? (/** @type {?} */ (nameOrComponentDef)).tag : /** @type {?} */ (nameOrComponentDef);
-        if (name_1 === null) {
-            // TODO: future support for nameless components.
-            throw 'for now name is required';
-        }
-        else {
-            native = renderer.createElement(name_1);
-            var /** @type {?} */ componentView = null;
-            if (isHostElement) {
-                var /** @type {?} */ ngStaticData_1 = getTemplateStatic((/** @type {?} */ (nameOrComponentDef)).template);
-                componentView = addToViewTree(createViewState(-1, rendererFactory.createRenderer(native, (/** @type {?} */ (nameOrComponentDef)).rendererType), ngStaticData_1));
-            }
-            // Only component views should be added to the view tree directly. Embedded views are
-            // accessed through their containers because they may be removed / re-added later.
-            node = createLNode(index, 3 /* Element */, native, componentView);
-            if (node.staticData == null) {
-                ngDevMode && assertDataInRange(index - 1);
-                node.staticData = ngStaticData[index] =
-                    createNodeStatic(name_1, attrs || null, null, localName || null);
-            }
-            if (attrs)
-                setUpAttributes(native, attrs);
-            appendChild(/** @type {?} */ ((node.parent)), native, currentView);
-        }
-    }
-    return native;
-}
-/**
- * Gets static data from a template function or creates a new static
- * data array if it doesn't already exist.
- *
- * @param {?} template The template from which to get static data
- * @return {?} NgStaticData
- */
-function getTemplateStatic(template) {
-    return template.ngStaticData || (template.ngStaticData = /** @type {?} */ ([]));
-}
-/**
- * @param {?} native
- * @param {?} attrs
- * @return {?}
- */
-function setUpAttributes(native, attrs) {
-    ngDevMode && assertEqual(attrs.length % 2, 0, 'attrs.length % 2');
-    var /** @type {?} */ isProceduralRenderer = (/** @type {?} */ (renderer)).setAttribute;
-    for (var /** @type {?} */ i = 0; i < attrs.length; i += 2) {
-        isProceduralRenderer ? /** @type {?} */ (((/** @type {?} */ (renderer)).setAttribute))(native, attrs[i], attrs[i | 1]) :
-            native.setAttribute(attrs[i], attrs[i | 1]);
-    }
-}
-/**
- * @param {?} text
- * @param {?} token
- * @return {?}
- */
-function createError(text, token) {
-    return new Error("Renderer: " + text + " [" + stringify$1(token) + "]");
-}
-/**
- * Locates the host native element, used for bootstrapping existing nodes into rendering pipeline.
- *
- * @param {?} factory
- * @param {?} elementOrSelector Render element or CSS selector to locate the element.
- * @return {?}
- */
-function locateHostElement(factory, elementOrSelector) {
-    ngDevMode && assertDataInRange(-1);
-    rendererFactory = factory;
-    var /** @type {?} */ defaultRenderer = factory.createRenderer(null, null);
-    var /** @type {?} */ rNode = typeof elementOrSelector === 'string' ?
-        ((/** @type {?} */ (defaultRenderer)).selectRootElement ?
-            (/** @type {?} */ (defaultRenderer)).selectRootElement(elementOrSelector) : /** @type {?} */ (((/** @type {?} */ (defaultRenderer)).querySelector))(elementOrSelector)) :
-        elementOrSelector;
-    if (ngDevMode && !rNode) {
-        if (typeof elementOrSelector === 'string') {
-            throw createError('Host node with selector not found:', elementOrSelector);
-        }
-        else {
-            throw createError('Host node is required:', elementOrSelector);
-        }
-    }
-    return rNode;
-}
-/**
- * Creates the host LNode..
- *
- * @param {?} rNode Render host element.
- * @param {?} def
- * @return {?}
- */
-function hostElement(rNode, def) {
-    resetApplicationState();
-    createLNode(0, 3 /* Element */, rNode, createViewState(-1, renderer, getTemplateStatic(def.template)));
-}
-/**
- * Adds an event listener to the current node.
- *
- * If an output exists on one of the node's directives, it also subscribes to the output
- * and saves the subscription for later cleanup.
- *
- * @param {?} eventName Name of the event
- * @param {?} listener The function to be called when event emits
- * @param {?=} useCapture Whether or not to use capture in event listener.
- * @return {?}
- */
-
-/**
- * Mark the end of the element.
- * @return {?}
- */
-function elementEnd() {
-    if (isParent) {
-        isParent = false;
-    }
-    else {
-        ngDevMode && assertHasParent();
-        previousOrParentNode = /** @type {?} */ ((previousOrParentNode.parent));
-    }
-    ngDevMode && assertNodeType(previousOrParentNode, 3 /* Element */);
-    var /** @type {?} */ query = previousOrParentNode.query;
-    query && query.addNode(previousOrParentNode);
-}
-/**
- * Update an attribute on an Element. This is used with a `bind` instruction.
- *
- * @param {?} index The index of the element to update in the data array
- * @param {?} attrName Name of attribute. Because it is going to DOM, this is not subject to
- *        renaming as port of minification.
- * @param {?} value Value to write. This value will go through stringification.
- * @return {?}
- */
-
-/**
- * Update a property on an Element.
- *
- * If the property name also exists as an input property on one of the element's directives,
- * the component property will be set instead of the element property. This check must
- * be conducted at runtime so child components that add new \@Inputs don't have to be re-compiled.
- *
- * @template T
- * @param {?} index The index of the element to update in the data array
- * @param {?} propName Name of property. Because it is going to DOM, this is not subject to
- *        renaming as part of minification.
- * @param {?} value New value to write.
- * @return {?}
- */
-function elementProperty(index, propName, value) {
-    if (value === NO_CHANGE)
-        return;
-    var /** @type {?} */ node = /** @type {?} */ (data[index]);
-    var /** @type {?} */ staticData = /** @type {?} */ ((node.staticData));
-    // if staticData.inputs is undefined, a listener has created output staticData, but inputs haven't
-    // yet been checked
-    if (staticData.inputs === undefined) {
-        // mark inputs as checked
-        staticData.inputs = null;
-        staticData = generatePropertyAliases(node.flags, staticData, true);
-    }
-    var /** @type {?} */ inputData = staticData.inputs;
-    var /** @type {?} */ dataValue;
-    if (inputData && (dataValue = inputData[propName])) {
-        setInputsForProperty(dataValue, value);
-    }
-    else {
-        var /** @type {?} */ native = node.native;
-        (/** @type {?} */ (renderer)).setProperty ?
-            (/** @type {?} */ (renderer)).setProperty(native, propName, value) :
-            native.setProperty ? native.setProperty(propName, value) :
-                (/** @type {?} */ (native))[propName] = value;
-    }
-}
-/**
- * Constructs a LNodeStatic object from the arguments.
- *
- * @param {?} tagName
- * @param {?} attrs
- * @param {?} containerStatic
- * @param {?} localName
- * @return {?} the LNodeStatic object
- */
-function createNodeStatic(tagName, attrs, containerStatic, localName) {
-    return {
-        tagName: tagName,
-        attrs: attrs,
-        localNames: localName ? [localName, -1] : null,
-        initialInputs: undefined,
-        inputs: undefined,
-        outputs: undefined,
-        containerStatic: containerStatic
-    };
-}
-/**
- * Given a list of directive indices and minified input names, sets the
- * input properties on the corresponding directives.
- * @param {?} inputs
- * @param {?} value
- * @return {?}
- */
-function setInputsForProperty(inputs, value) {
-    for (var /** @type {?} */ i = 0; i < inputs.length; i += 2) {
-        ngDevMode && assertDataInRange(/** @type {?} */ (inputs[i]));
-        data[/** @type {?} */ (inputs[i])][inputs[i | 1]] = value;
-    }
-}
-/**
- * This function consolidates all the inputs or outputs defined by directives
- * on this node into one object and stores it in ngStaticData so it can
- * be shared between all templates of this type.
- *
- * @param {?} flags
- * @param {?} data
- * @param {?=} isInputData
- * @return {?}
- */
-function generatePropertyAliases(flags, data, isInputData) {
-    if (isInputData === void 0) { isInputData = false; }
-    var /** @type {?} */ start = flags >> 12;
-    var /** @type {?} */ size = (flags & 4092 /* SIZE_MASK */) >> 2;
-    for (var /** @type {?} */ i = start, /** @type {?} */ ii = start + size; i < ii; i++) {
-        var /** @type {?} */ directiveDef = /** @type {?} */ (((ngStaticData))[i]);
-        var /** @type {?} */ propertyAliasMap = isInputData ? directiveDef.inputs : directiveDef.outputs;
-        for (var /** @type {?} */ publicName in propertyAliasMap) {
-            if (propertyAliasMap.hasOwnProperty(publicName)) {
-                var /** @type {?} */ internalName = propertyAliasMap[publicName];
-                var /** @type {?} */ staticDirData = isInputData ? (data.inputs || (data.inputs = {})) :
-                    (data.outputs || (data.outputs = {}));
-                var /** @type {?} */ hasProperty = staticDirData.hasOwnProperty(publicName);
-                hasProperty ? staticDirData[publicName].push(i, internalName) :
-                    (staticDirData[publicName] = [i, internalName]);
-            }
-        }
-    }
-    return data;
-}
-/**
- * Add or remove a class in a classList.
- *
- * This instruction is meant to handle the [class.foo]="exp" case
- *
- * @template T
- * @param {?} index The index of the element to update in the data array
- * @param {?} className Name of class to toggle. Because it is going to DOM, this is not subject to
- *        renaming as part of minification.
- * @param {?} value A value indicating if a given class should be added or removed.
- * @return {?}
- */
-
-/**
- * Update a given style on an Element.
- *
- * @template T
- * @param {?} index Index of the element to change in the data array
- * @param {?} styleName Name of property. Because it is going to DOM this is not subject to
- *        renaming as part of minification.
- * @param {?} value New value to write (null to remove).
- * @param {?=} suffix Suffix to add to style's value (optional).
- * @return {?}
- */
-function elementStyle(index, styleName, value, suffix) {
-    if (value !== NO_CHANGE) {
-        var /** @type {?} */ lElement = /** @type {?} */ (data[index]);
-        if (value == null) {
-            (/** @type {?} */ (renderer)).removeStyle ?
-                (/** @type {?} */ (renderer))
-                    .removeStyle(lElement.native, styleName, RendererStyleFlags3.DashCase) :
-                lElement.native.style.removeProperty(styleName);
-        }
-        else {
-            (/** @type {?} */ (renderer)).setStyle ?
-                (/** @type {?} */ (renderer))
-                    .setStyle(lElement.native, styleName, suffix ? stringify$1(value) + suffix : stringify$1(value), RendererStyleFlags3.DashCase) :
-                lElement.native.style.setProperty(styleName, suffix ? stringify$1(value) + suffix : stringify$1(value));
-        }
-    }
-}
-/**
- * Create static text node
- *
- * @param {?} index Index of the node in the data array.
- * @param {?=} value Value to write. This value will be stringified.
- *   If value is not provided than the actual creation of the text node is delayed.
- * @return {?}
- */
-function text(index, value) {
-    ngDevMode && assertEqual(currentView.bindingStartIndex, null, 'bindingStartIndex');
-    var /** @type {?} */ textNode = value != null ?
-        ((/** @type {?} */ (renderer)).createText ?
-            (/** @type {?} */ (renderer)).createText(stringify$1(value)) : /** @type {?} */ (((/** @type {?} */ (renderer)).createTextNode))(stringify$1(value))) :
-        null;
-    var /** @type {?} */ node = createLNode(index, 3 /* Element */, textNode);
-    // Text nodes are self closing.
-    isParent = false;
-    appendChild(/** @type {?} */ ((node.parent)), textNode, currentView);
-}
-/**
- * Create text node with binding
- * Bindings should be handled externally with the proper bind(1-8) method
- *
- * @template T
- * @param {?} index Index of the node in the data array.
- * @param {?} value Stringified value to write.
- * @return {?}
- */
-function textBinding(index, value) {
-    // TODO(misko): I don't think index < nodes.length check is needed here.
-    var /** @type {?} */ existingNode = index < data.length && /** @type {?} */ (data[index]);
-    if (existingNode && existingNode.native) {
-        // If DOM node exists and value changed, update textContent
-        value !== NO_CHANGE &&
-            ((/** @type {?} */ (renderer)).setValue ?
-                (/** @type {?} */ (renderer)).setValue(existingNode.native, stringify$1(value)) :
-                existingNode.native.textContent = stringify$1(value));
-    }
-    else if (existingNode) {
-        // Node was created but DOM node creation was delayed. Create and append now.
-        existingNode.native =
-            ((/** @type {?} */ (renderer)).createText ?
-                (/** @type {?} */ (renderer)).createText(stringify$1(value)) : /** @type {?} */ (((/** @type {?} */ (renderer)).createTextNode))(stringify$1(value)));
-        insertChild(existingNode, currentView);
-    }
-    else {
-        text(index, value);
-    }
-}
-/**
- * @template T
- * @param {?} index
- * @param {?=} directive
- * @param {?=} directiveDef
- * @param {?=} localName
- * @return {?}
- */
-function directive(index, directive, directiveDef, localName) {
-    var /** @type {?} */ instance;
-    if (directive == null) {
-        // return existing
-        ngDevMode && assertDataInRange(index);
-        instance = data[index];
-    }
-    else {
-        ngDevMode && assertEqual(currentView.bindingStartIndex, null, 'bindingStartIndex');
-        ngDevMode && assertPreviousIsParent();
-        var /** @type {?} */ flags = /** @type {?} */ ((previousOrParentNode)).flags;
-        var /** @type {?} */ size = flags & 4092;
-        if (size === 0) {
-            flags =
-                (index << 12 /* INDX_SHIFT */) | 4 /* SIZE_SKIP */ | flags & 3 /* TYPE_MASK */;
-        }
-        else {
-            flags += 4 /* SIZE_SKIP */;
-        } /** @type {?} */
-        ((previousOrParentNode)).flags = flags;
-        ngDevMode && assertDataInRange(index - 1);
-        Object.defineProperty(directive, NG_HOST_SYMBOL, { enumerable: false, value: previousOrParentNode });
-        data[index] = instance = directive;
-        if (index >= ngStaticData.length) {
-            ngStaticData[index] = /** @type {?} */ ((directiveDef));
-            if (localName) {
-                ngDevMode &&
-                    assertNotNull(previousOrParentNode.staticData, 'previousOrParentNode.staticData');
-                var /** @type {?} */ nodeStaticData = /** @type {?} */ ((/** @type {?} */ ((previousOrParentNode)).staticData));
-                (nodeStaticData.localNames || (nodeStaticData.localNames = [])).push(localName, index);
-            }
-        }
-        var /** @type {?} */ diPublic_1 = /** @type {?} */ ((directiveDef)).diPublic;
-        if (diPublic_1) {
-            diPublic_1(/** @type {?} */ ((directiveDef)));
-        }
-        var /** @type {?} */ staticData = /** @type {?} */ ((previousOrParentNode.staticData));
-        if (staticData && staticData.attrs) {
-            setInputsFromAttrs(instance, /** @type {?} */ ((directiveDef)).inputs, staticData);
-        }
-    }
-    return instance;
-}
-/**
- * Sets initial input properties on directive instances from attribute data
- *
- * @template T
- * @param {?} instance Instance of the directive on which to set the initial inputs
- * @param {?} inputs The list of inputs from the directive def
- * @param {?} staticData The static data for this node
- * @return {?}
- */
-function setInputsFromAttrs(instance, inputs, staticData) {
-    var /** @type {?} */ directiveIndex = ((previousOrParentNode.flags & 4092 /* SIZE_MASK */) >> 2 /* SIZE_SHIFT */) - 1;
-    var /** @type {?} */ initialInputData = /** @type {?} */ (staticData.initialInputs);
-    if (initialInputData === undefined || directiveIndex >= initialInputData.length) {
-        initialInputData = generateInitialInputs(directiveIndex, inputs, staticData);
-    }
-    var /** @type {?} */ initialInputs = initialInputData[directiveIndex];
-    if (initialInputs) {
-        for (var /** @type {?} */ i = 0; i < initialInputs.length; i += 2) {
-            (/** @type {?} */ (instance))[initialInputs[i]] = initialInputs[i | 1];
-        }
-    }
-}
-/**
- * Generates initialInputData for a node and stores it in the template's static storage
- * so subsequent template invocations don't have to recalculate it.
- *
- * initialInputData is an array containing values that need to be set as input properties
- * for directives on this node, but only once on creation. We need this array to support
- * the case where you set an \@Input property of a directive using attribute-like syntax.
- * e.g. if you have a `name` \@Input, you can set it once like this:
- *
- * <my-component name="Bess"></my-component>
- *
- * @param {?} directiveIndex Index to store the initial input data
- * @param {?} inputs The list of inputs from the directive def
- * @param {?} staticData The static data on this node
- * @return {?}
- */
-function generateInitialInputs(directiveIndex, inputs, staticData) {
-    var /** @type {?} */ initialInputData = staticData.initialInputs || (staticData.initialInputs = []);
-    initialInputData[directiveIndex] = null;
-    var /** @type {?} */ attrs = /** @type {?} */ ((staticData.attrs));
-    for (var /** @type {?} */ i = 0; i < attrs.length; i += 2) {
-        var /** @type {?} */ attrName = attrs[i];
-        var /** @type {?} */ minifiedInputName = inputs[attrName];
-        if (minifiedInputName !== undefined) {
-            var /** @type {?} */ inputsToStore = initialInputData[directiveIndex] || (initialInputData[directiveIndex] = []);
-            inputsToStore.push(minifiedInputName, attrs[i | 1]);
-        }
-    }
-    return initialInputData;
-}
-/**
- * @param {?} lifecycle
- * @param {?=} self
- * @param {?=} method
- * @return {?}
- */
-
-/**
- * Iterates over view hook functions and calls them.
- * @return {?}
- */
-function executeViewHooks() {
-    if (viewHookStartIndex == null)
-        return;
-    // Instead of using splice to remove init hooks after their first run (expensive), we
-    // shift over the AFTER_CHECKED hooks as we call them and truncate once at the end.
-    var /** @type {?} */ checkIndex = /** @type {?} */ (viewHookStartIndex);
-    var /** @type {?} */ writeIndex = checkIndex;
-    while (checkIndex < data.length) {
-        // Call lifecycle hook with its context
-        data[checkIndex + 1].call(data[checkIndex + 2]);
-        if (data[checkIndex] === 16 /* AFTER_VIEW_CHECKED */) {
-            // We know if the writeIndex falls behind that there is an init that needs to
-            // be overwritten.
-            if (writeIndex < checkIndex) {
-                data[writeIndex] = data[checkIndex];
-                data[writeIndex + 1] = data[checkIndex + 1];
-                data[writeIndex + 2] = data[checkIndex + 2];
-            }
-            writeIndex += 3;
-        }
-        checkIndex += 3;
-    }
-    // Truncate once at the writeIndex
-    data.length = writeIndex;
-}
-/**
- * Creates an LContainer.
- *
- * Only `LView`s can go into `LContainer`.
- *
- * @param {?} index The index of the container in the data array
- * @param {?=} template Optional inline template
- * @param {?=} tagName The name of the container element, if applicable
- * @param {?=} attrs The attrs attached to the container, if applicable
- * @param {?=} localName
- * @return {?}
- */
-function containerStart(index, template, tagName, attrs, localName) {
-    ngDevMode && assertEqual(currentView.bindingStartIndex, null, 'bindingStartIndex');
-    // If the direct parent of the container is a view, its views (including its comment)
-    // will need to be added through insertView() when its parent view is being inserted.
-    // For now, it is marked "headless" so we know to append its views later.
-    var /** @type {?} */ comment = renderer.createComment(ngDevMode ? 'container' : '');
-    var /** @type {?} */ renderParent = null;
-    var /** @type {?} */ currentParent = isParent ? previousOrParentNode : /** @type {?} */ ((previousOrParentNode.parent));
-    ngDevMode && assertNotEqual(currentParent, null, 'currentParent');
-    if (appendChild(currentParent, comment, currentView)) {
-        // we are adding to an Element which is either:
-        // - Not a component (will not be re-projected, just added)
-        // - View of the Component
-        renderParent = /** @type {?} */ (currentParent);
-    }
-    var /** @type {?} */ node = createLNode(index, 0 /* Container */, comment, /** @type {?} */ ({
-        views: [],
-        nextIndex: 0, renderParent: renderParent,
-        template: template == null ? null : template,
-        next: null,
-        parent: currentView
-    }));
-    if (node.staticData == null) {
-        node.staticData = ngStaticData[index] =
-            createNodeStatic(tagName || null, attrs || null, [], localName || null);
-    }
-    // Containers are added to the current view tree instead of their embedded views
-    // because views can be removed and re-inserted.
-    addToViewTree(node.data);
-}
-/**
- * @return {?}
- */
-function containerEnd() {
-    if (isParent) {
-        isParent = false;
-    }
-    else {
-        ngDevMode && assertHasParent();
-        previousOrParentNode = /** @type {?} */ ((previousOrParentNode.parent));
-    }
-    ngDevMode && assertNodeType(previousOrParentNode, 0 /* Container */);
-    var /** @type {?} */ query = previousOrParentNode.query;
-    query && query.addNode(previousOrParentNode);
-}
-/**
- * Sets a container up to receive views.
- *
- * @param {?} index The index of the container in the data array
- * @return {?}
- */
-function containerRefreshStart(index) {
-    ngDevMode && assertDataInRange(index);
-    previousOrParentNode = /** @type {?} */ (data[index]);
-    ngDevMode && assertNodeType(previousOrParentNode, 0 /* Container */);
-    isParent = true;
-    (/** @type {?} */ (previousOrParentNode)).data.nextIndex = 0;
-}
-/**
- * Marks the end of the LContainer.
- *
- * Marking the end of ViewContainer is the time when to child Views get inserted or removed.
- * @return {?}
- */
-function containerRefreshEnd() {
-    if (isParent) {
-        isParent = false;
-    }
-    else {
-        ngDevMode && assertNodeType(previousOrParentNode, 2 /* View */);
-        ngDevMode && assertHasParent();
-        previousOrParentNode = /** @type {?} */ ((previousOrParentNode.parent));
-    }
-    ngDevMode && assertNodeType(previousOrParentNode, 0 /* Container */);
-    var /** @type {?} */ container = /** @type {?} */ (previousOrParentNode);
-    ngDevMode && assertNodeType(container, 0 /* Container */);
-    var /** @type {?} */ nextIndex = container.data.nextIndex;
-    while (nextIndex < container.data.views.length) {
-        // remove extra view.
-        removeView(container, nextIndex);
-    }
-}
-/**
- * Creates an LView.
- *
- * @param {?} viewBlockId The ID of this view
- * @return {?} Whether or not this view is in creation mode
- */
-function viewStart(viewBlockId) {
-    var /** @type {?} */ container = /** @type {?} */ ((isParent ? previousOrParentNode : /** @type {?} */ ((previousOrParentNode.parent))));
-    ngDevMode && assertNodeType(container, 0 /* Container */);
-    var /** @type {?} */ containerState = container.data;
-    var /** @type {?} */ views = containerState.views;
-    var /** @type {?} */ existingView = !creationMode && containerState.nextIndex < views.length && views[containerState.nextIndex];
-    var /** @type {?} */ viewUpdateMode = existingView && viewBlockId === (/** @type {?} */ (existingView)).data.id;
-    if (viewUpdateMode) {
-        previousOrParentNode = views[containerState.nextIndex++];
-        ngDevMode && assertNodeType(previousOrParentNode, 2 /* View */);
-        isParent = true;
-        enterView((/** @type {?} */ (existingView)).data, /** @type {?} */ (previousOrParentNode));
-    }
-    else {
-        // When we create a new View, we always reset the state of the instructions.
-        var /** @type {?} */ newViewState = createViewState(viewBlockId, renderer, initViewStaticData(viewBlockId, container));
-        enterView(newViewState, createLNode(null, 2 /* View */, null, newViewState));
-        containerState.nextIndex++;
-    }
-    return !viewUpdateMode;
-}
-/**
- * Initialize the static data for the active view.
- *
- * Each embedded view needs to set the global ngStaticData variable to the static data for
- * that view. Otherwise, the view's static data for a particular node would overwrite
- * the staticdata for a node in the view above it with the same index (since it's in the
- * same template).
- *
- * @param {?} viewIndex The index of the view's static data in containerStatic
- * @param {?} parent The parent container in which to look for the view's static data
- * @return {?} NgStaticData
- */
-function initViewStaticData(viewIndex, parent) {
-    ngDevMode && assertNodeType(parent, 0 /* Container */);
-    var /** @type {?} */ containerStatic = (/** @type {?} */ (((parent)).staticData)).containerStatic;
-    if (viewIndex >= containerStatic.length || containerStatic[viewIndex] == null) {
-        containerStatic[viewIndex] = [];
-    }
-    return containerStatic[viewIndex];
-}
-/**
- * Marks the end of the LView.
- * @return {?}
- */
-function viewEnd() {
-    isParent = false;
-    var /** @type {?} */ viewNode = previousOrParentNode = /** @type {?} */ (currentView.node);
-    var /** @type {?} */ container = /** @type {?} */ (previousOrParentNode.parent);
-    ngDevMode && assertNodeType(viewNode, 2 /* View */);
-    ngDevMode && assertNodeType(container, 0 /* Container */);
-    var /** @type {?} */ containerState = container.data;
-    var /** @type {?} */ previousView = containerState.nextIndex <= containerState.views.length ? /** @type {?} */ (containerState.views[containerState.nextIndex - 1]) :
-        null;
-    var /** @type {?} */ viewIdChanged = previousView == null ? true : previousView.data.id !== viewNode.data.id;
-    if (viewIdChanged) {
-        insertView(container, viewNode, containerState.nextIndex - 1);
-        currentView.creationMode = false;
-    }
-    leaveView(/** @type {?} */ ((/** @type {?} */ ((currentView)).parent)));
-    ngDevMode && assertEqual(isParent, false, 'isParent');
-    ngDevMode && assertNodeType(previousOrParentNode, 2 /* View */);
-}
-/**
- * Refreshes the component view.
- *
- * In other words, enters the component's view and processes it to update bindings, queries, etc.
- *
- * @param directiveIndex
- * @param elementIndex
- * @param template
- */
-var componentRefresh = function (directiveIndex, elementIndex, template) {
-    ngDevMode && assertDataInRange(elementIndex);
-    var /** @type {?} */ element = /** @type {?} */ (((data))[elementIndex]);
-    ngDevMode && assertNodeType(element, 3 /* Element */);
-    ngDevMode && assertNotEqual(element.data, null, 'isComponent');
-    ngDevMode && assertDataInRange(directiveIndex);
-    var /** @type {?} */ hostView = /** @type {?} */ ((element.data));
-    ngDevMode && assertNotEqual(hostView, null, 'hostView');
-    var /** @type {?} */ directive = data[directiveIndex];
-    var /** @type {?} */ oldView = enterView(hostView, element);
-    try {
-        template(directive, creationMode);
-    }
-    finally {
-        hostView.creationMode = false;
-        leaveView(oldView);
-    }
-};
-/**
- * Instruction to distribute projectable nodes among <ng-content> occurrences in a given template.
- * It takes all the selectors from the entire component's template and decides where
- * each projected node belongs (it re-distributes nodes among "buckets" where each "bucket" is
- * backed by a selector).
- *
- * @param {?=} selectors
- * @return {?}
- */
-
-/**
- * Inserts previously re-distributed projected nodes. This instruction must be preceded by a call
- * to the projectionDef instruction.
- *
- * @param {?} nodeIndex
- * @param {?} localIndex - index under which distribution of projected nodes was memorized
- * @param {?=} selectorIndex - 0 means <ng-content> without any selector
- * @return {?}
- */
-
-/**
- * Adds a ViewState or a ContainerState to the end of the current view tree.
- *
- * This structure will be used to traverse through nested views to remove listeners
- * and call onDestroy callbacks.
- *
- * @template T
- * @param {?} state The ViewState or ContainerState to add to the view tree
- * @return {?} The state passed in
- */
-function addToViewTree(state) {
-    currentView.tail ? (currentView.tail.next = state) : (currentView.child = state);
-    currentView.tail = state;
-    return state;
-}
-/**
- * A special value which designates that a value has not changed.
- */
-var NO_CHANGE = /** @type {?} */ ({});
-/**
- * Create interpolation bindings with variable number of arguments.
- *
- * If any of the arguments change, then the interpolation is concatenated
- * and causes an update.
- *
- * @param {?} values an array of values to diff.
- * @return {?}
- */
-
-/**
- * Create a single value binding without interpolation.
- *
- * @template T
- * @param {?} value Value to diff
- * @return {?}
- */
-function bind(value) {
-    var /** @type {?} */ different;
-    if (different = creationMode) {
-        if (typeof currentView.bindingStartIndex !== 'number') {
-            bindingIndex = currentView.bindingStartIndex = data.length;
-        }
-        data[bindingIndex++] = value;
-    }
-    else {
-        if (different = value !== NO_CHANGE && isDifferent(data[bindingIndex], value)) {
-            data[bindingIndex] = value;
-        }
-        bindingIndex++;
-    }
-    return different ? value : NO_CHANGE;
-}
-/**
- * Create an interpolation bindings with 1 arguments.
- *
- * @param {?} prefix static value used for concatenation only.
- * @param {?} value value checked for change.
- * @param {?} suffix static value used for concatenation only.
- * @return {?}
- */
-function bind1(prefix, value, suffix) {
-    return bind(value) === NO_CHANGE ? NO_CHANGE : prefix + stringify$1(value) + suffix;
-}
-/**
- * Create an interpolation bindings with 2 arguments.
- *
- * @param {?} prefix
- * @param {?} v0 value checked for change
- * @param {?} i0
- * @param {?} v1 value checked for change
- * @param {?} suffix
- * @return {?}
- */
-
-/**
- * Create an interpolation bindings with 3 arguments.
- *
- * @param {?} prefix
- * @param {?} v0
- * @param {?} i0
- * @param {?} v1
- * @param {?} i1
- * @param {?} v2
- * @param {?} suffix
- * @return {?}
- */
-
-/**
- * Create an interpolation binding with 4 arguments.
- *
- * @param {?} prefix
- * @param {?} v0
- * @param {?} i0
- * @param {?} v1
- * @param {?} i1
- * @param {?} v2
- * @param {?} i2
- * @param {?} v3
- * @param {?} suffix
- * @return {?}
- */
-
-/**
- * Create an interpolation binding with 5 arguments.
- *
- * @param {?} prefix
- * @param {?} v0
- * @param {?} i0
- * @param {?} v1
- * @param {?} i1
- * @param {?} v2
- * @param {?} i2
- * @param {?} v3
- * @param {?} i3
- * @param {?} v4
- * @param {?} suffix
- * @return {?}
- */
-
-/**
- * Create an interpolation binding with 6 arguments.
- *
- * @param {?} prefix
- * @param {?} v0
- * @param {?} i0
- * @param {?} v1
- * @param {?} i1
- * @param {?} v2
- * @param {?} i2
- * @param {?} v3
- * @param {?} i3
- * @param {?} v4
- * @param {?} i4
- * @param {?} v5
- * @param {?} suffix
- * @return {?}
- */
-
-/**
- * Create an interpolation binding with 7 arguments.
- *
- * @param {?} prefix
- * @param {?} v0
- * @param {?} i0
- * @param {?} v1
- * @param {?} i1
- * @param {?} v2
- * @param {?} i2
- * @param {?} v3
- * @param {?} i3
- * @param {?} v4
- * @param {?} i4
- * @param {?} v5
- * @param {?} i5
- * @param {?} v6
- * @param {?} suffix
- * @return {?}
- */
-
-/**
- * Create an interpolation binding with 8 arguments.
- *
- * @param {?} prefix
- * @param {?} v0
- * @param {?} i0
- * @param {?} v1
- * @param {?} i1
- * @param {?} v2
- * @param {?} i2
- * @param {?} v3
- * @param {?} i3
- * @param {?} v4
- * @param {?} i4
- * @param {?} v5
- * @param {?} i5
- * @param {?} v6
- * @param {?} i6
- * @param {?} v7
- * @param {?} suffix
- * @return {?}
- */
-
-/**
- * @template T
- * @param {?} index
- * @param {?=} value
- * @return {?}
- */
-
-/**
- * @template T
- * @param {?} predicate
- * @param {?=} descend
- * @param {?=} read
- * @return {?}
- */
-
-/**
- * @return {?}
- */
-function assertPreviousIsParent() {
-    assertEqual(isParent, true, 'isParent');
-}
-/**
- * @return {?}
- */
-function assertHasParent() {
-    assertNotEqual(previousOrParentNode.parent, null, 'isParent');
-}
-/**
- * @param {?} index
- * @param {?=} arr
- * @return {?}
- */
-function assertDataInRange(index, arr) {
-    if (arr == null)
-        arr = data;
-    assertLessThan(arr ? arr.length : 0, index, 'data.length');
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * Options that control how the component should be bootstrapped.
- * @record
- */
-
-/**
- * Bootstraps a component, then creates and returns a `ComponentRef` for that component.
- *
- * @template T
- * @param {?} componentType Component to bootstrap
- * @param {?} opts
- * @return {?}
- */
-
-// TODO: A hack to not pull in the NullInjector from @angular/core.
-
-/**
- * Bootstraps a Component into an existing host element and returns an instance
- * of the component.
- *
- * @template T
- * @param {?} componentType Component to bootstrap
- * @param {?=} opts
- * @return {?}
- */
-function renderComponent(componentType, opts) {
-    if (opts === void 0) { opts = {}; }
-    var /** @type {?} */ rendererFactory = opts.rendererFactory || domRendererFactory3;
-    var /** @type {?} */ componentDef = componentType.ngComponentDef;
-    var /** @type {?} */ component;
-    var /** @type {?} */ hostNode = locateHostElement(rendererFactory, opts.host || componentDef.tag);
-    var /** @type {?} */ oldView = enterView(createViewState(-1, rendererFactory.createRenderer(hostNode, componentDef.rendererType), []), /** @type {?} */ ((null)));
-    try {
-        // Create element node at index 0 in data array
-        hostElement(hostNode, componentDef);
-        // Create directive instance with n() and store at index 1 in data array (el is 0)
-        component = directive(1, componentDef.n(), componentDef);
-    }
-    finally {
-        leaveView(oldView);
-    }
-    opts.features && opts.features.forEach(function (feature) { return feature(component, componentDef); });
-    detectChanges(component);
-    return component;
-}
-/**
- * @template T
- * @param {?} component
- * @return {?}
- */
-function detectChanges(component) {
-    ngDevMode && assertNotNull(component, 'component');
-    var /** @type {?} */ hostNode = /** @type {?} */ ((/** @type {?} */ (component))[NG_HOST_SYMBOL]);
-    if (ngDevMode && !hostNode) {
-        createError('Not a directive instance', component);
-    }
-    ngDevMode && assertNotNull(hostNode.data, 'hostNode.data');
-    renderComponentOrTemplate(hostNode, hostNode.view, component);
-    isDirty = false;
-}
-var isDirty = false;
-/**
- * @template T
- * @param {?} component
- * @param {?=} scheduler
- * @return {?}
- */
-
-/**
- * @template T
- * @param {?} component
- * @return {?}
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * Create a component definition object.
- *
- *
- * # Example
- * ```
- * class MyDirective {
- *   // Generated by Angular Template Compiler
- *   // [Symbol] syntax will not be supported by TypeScript until v2.7
- *   static [COMPONENT_DEF_SYMBOL] = defineComponent({
- *     ...
- *   });
- * }
- * ```
- * @template T
- * @param {?} componentDefinition
- * @return {?}
- */
-function defineComponent(componentDefinition) {
-    var /** @type {?} */ def = /** @type {?} */ ({
-        type: componentDefinition.type,
-        diPublic: null,
-        n: componentDefinition.factory,
-        tag: (/** @type {?} */ (componentDefinition)).tag || /** @type {?} */ ((null)),
-        template: (/** @type {?} */ (componentDefinition)).template || /** @type {?} */ ((null)),
-        r: componentDefinition.refresh ||
-            function (d, e) { componentRefresh(d, e, componentDefinition.template); },
-        h: componentDefinition.hostBindings || noop$1,
-        inputs: invertObject(componentDefinition.inputs),
-        outputs: invertObject(componentDefinition.outputs),
-        methods: invertObject(componentDefinition.methods),
-        rendererType: resolveRendererType2(componentDefinition.rendererType) || null,
-    });
-    var /** @type {?} */ feature = componentDefinition.features;
-    feature && feature.forEach(function (fn) { return fn(def); });
-    return def;
-}
-/**
- * @template T
- * @param {?} definition
- * @return {?}
- */
-
-/**
- * @template T
- * @param {?} definition
- * @return {?}
- */
-
-var EMPTY$1 = {};
-/**
- * @return {?}
- */
-function noop$1() { }
-/**
- * Swaps the keys and values of an object.
- * @param {?} obj
- * @return {?}
- */
-function invertObject(obj) {
-    if (obj == null)
-        return EMPTY$1;
-    var /** @type {?} */ newObj = {};
-    for (var /** @type {?} */ minifiedKey in obj) {
-        newObj[obj[minifiedKey]] = minifiedKey;
-    }
-    return newObj;
-}
-/**
- * Create a directive definition object.
- *
- * # Example
- * ```
- * class MyDirective {
- *   // Generated by Angular Template Compiler
- *   // [Symbol] syntax will not be supported by TypeScript until v2.7
- *   static [DIRECTIVE_DEF_SYMBOL] = defineDirective({
- *     ...
- *   });
- * }
- * ```
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-// clang-format on
 
 /**
  * @fileoverview added by tsickle
@@ -60636,7 +56845,7 @@ function invertObject(obj) {
  * The `\@childAnimation` trigger will not animate because `\@.disabled` prevents it from happening
  * (when true).
  *
- * Note that `\@.disabled` will only disable all animations (this means any animations running on
+ * Note that `\@.disbled` will only disable all animations (this means any animations running on
  * the same element will also be disabled).
  *
  * ### Disabling Animations Application-wide
@@ -61106,9 +57315,9 @@ function keyframes$1(steps) {
  *     <button (click)="next()">Next</button>
  *     <hr>
  *     <div [\@bannerAnimation]="selectedIndex" class="banner-container">
- *       <div class="banner" *ngFor="let banner of banners"> {{ banner }} </div>
+ *       <div class="banner"> {{ banner }} </div>
  *     </div>
- *   `,
+ *   `
  *   animations: [
  *     trigger('bannerAnimation', [
  *       transition(":increment", group([
@@ -61128,7 +57337,7 @@ function keyframes$1(steps) {
  *         query(':leave', [
  *           animate('0.5s ease-out', style({ left: '100%' }))
  *         ])
- *       ]))
+ *       ])),
  *     ])
  *   ]
  * })
@@ -61496,6 +57705,13 @@ function transition$1(stateChangeExpr, steps, options) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
  * @deprecated This symbol has moved. Please Import from \@angular/animations instead!
  */
 var AUTO_STYLE = '*';
@@ -61750,8 +57966,8 @@ function transition$$1(stateChangeExpr, steps) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_rxjs_operator_map__ = __webpack_require__("./node_modules/rxjs/_esm5/operator/map.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
 /**
- * @license Angular v5.2.9
- * (c) 2010-2018 Google, Inc. https://angular.io/
+ * @license Angular v5.0.2
+ * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 
@@ -61766,13 +57982,6 @@ function transition$$1(stateChangeExpr, steps) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Base class for control directives.
  *
  * Only used internally in the forms module.
@@ -61780,7 +57989,7 @@ function transition$$1(stateChangeExpr, steps) {
  * \@stable
  * @abstract
  */
-var AbstractControlDirective = /** @class */ (function () {
+var AbstractControlDirective = (function () {
     function AbstractControlDirective() {
     }
     Object.defineProperty(AbstractControlDirective.prototype, "value", {
@@ -62135,7 +58344,7 @@ var AbstractControlDirective = /** @class */ (function () {
  * \@stable
  * @abstract
  */
-var ControlContainer = /** @class */ (function (_super) {
+var ControlContainer = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(ControlContainer, _super);
     function ControlContainer() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -62191,20 +58400,6 @@ function isEmptyInputValue(value) {
  *
  * Provide this using `multi: true` to add validators.
  *
- * ### Example
- *
- * ```typescript
- * \@Directive({
- *   selector: '[custom-validator]',
- *   providers: [{provide: NG_VALIDATORS, useExisting: CustomValidatorDirective, multi: true}]
- * })
- * class CustomValidatorDirective implements Validator {
- *   validate(control: AbstractControl): ValidationErrors | null {
- *     return {"custom": true};
- *   }
- * }
- * ```
- *
  * \@stable
  */
 var NG_VALIDATORS = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* InjectionToken */]('NgValidators');
@@ -62234,25 +58429,19 @@ var EMAIL_REGEXP = /^(?=.{1,254}$)(?=.{1,64}@)[-!#$%&'*+/0-9=?A-Z^_`a-z{|}~]+(\.
  *
  * \@stable
  */
-var Validators = /** @class */ (function () {
+var Validators = (function () {
     function Validators() {
     }
     /**
      * Validator that requires controls to have a value greater than a number.
-     *`min()` exists only as a function, not as a directive. For example,
-     * `control = new FormControl('', Validators.min(3));`.
      */
     /**
      * Validator that requires controls to have a value greater than a number.
-     * `min()` exists only as a function, not as a directive. For example,
-     * `control = new FormControl('', Validators.min(3));`.
      * @param {?} min
      * @return {?}
      */
     Validators.min = /**
      * Validator that requires controls to have a value greater than a number.
-     * `min()` exists only as a function, not as a directive. For example,
-     * `control = new FormControl('', Validators.min(3));`.
      * @param {?} min
      * @return {?}
      */
@@ -62269,20 +58458,14 @@ var Validators = /** @class */ (function () {
     };
     /**
      * Validator that requires controls to have a value less than a number.
-     * `max()` exists only as a function, not as a directive. For example,
-     * `control = new FormControl('', Validators.max(15));`.
      */
     /**
      * Validator that requires controls to have a value less than a number.
-     * `max()` exists only as a function, not as a directive. For example,
-     * `control = new FormControl('', Validators.max(15));`.
      * @param {?} max
      * @return {?}
      */
     Validators.max = /**
      * Validator that requires controls to have a value less than a number.
-     * `max()` exists only as a function, not as a directive. For example,
-     * `control = new FormControl('', Validators.max(15));`.
      * @param {?} max
      * @return {?}
      */
@@ -62409,12 +58592,7 @@ var Validators = /** @class */ (function () {
         var /** @type {?} */ regex;
         var /** @type {?} */ regexStr;
         if (typeof pattern === 'string') {
-            regexStr = '';
-            if (pattern.charAt(0) !== '^')
-                regexStr += '^';
-            regexStr += pattern;
-            if (pattern.charAt(pattern.length - 1) !== '$')
-                regexStr += '$';
+            regexStr = "^" + pattern + "$";
             regex = new RegExp(regexStr);
         }
         else {
@@ -62584,7 +58762,7 @@ var CHECKBOX_VALUE_ACCESSOR = {
  *
  *  \@stable
  */
-var CheckboxControlValueAccessor = /** @class */ (function () {
+var CheckboxControlValueAccessor = (function () {
     function CheckboxControlValueAccessor(_renderer, _elementRef) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
@@ -62687,7 +58865,7 @@ var COMPOSITION_BUFFER_MODE = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["z
  *
  *  \@stable
  */
-var DefaultValueAccessor = /** @class */ (function () {
+var DefaultValueAccessor = (function () {
     function DefaultValueAccessor(_renderer, _elementRef, _compositionMode) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
@@ -62791,10 +58969,10 @@ var DefaultValueAccessor = /** @class */ (function () {
                     // https://github.com/angular/angular/issues/3011 is implemented
                     // selector: '[ngModel],[formControl],[formControlName]',
                     host: {
-                        '(input)': '$any(this)._handleInput($event.target.value)',
+                        '(input)': '_handleInput($event.target.value)',
                         '(blur)': 'onTouched()',
-                        '(compositionstart)': '$any(this)._compositionStart()',
-                        '(compositionend)': '$any(this)._compositionEnd($event.target.value)'
+                        '(compositionstart)': '_compositionStart()',
+                        '(compositionend)': '_compositionEnd($event.target.value)'
                     },
                     providers: [DEFAULT_VALUE_ACCESSOR]
                 },] },
@@ -62811,13 +58989,6 @@ var DefaultValueAccessor = /** @class */ (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /**
  * @param {?} validator
@@ -62869,7 +59040,7 @@ var NUMBER_VALUE_ACCESSOR = {
  *  <input type="number" [(ngModel)]="age">
  *  ```
  */
-var NumberValueAccessor = /** @class */ (function () {
+var NumberValueAccessor = (function () {
     function NumberValueAccessor(_renderer, _elementRef) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
@@ -62965,7 +59136,7 @@ function unimplemented() {
  * \@stable
  * @abstract
  */
-var NgControl = /** @class */ (function (_super) {
+var NgControl = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(NgControl, _super);
     function NgControl() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -63023,7 +59194,7 @@ var RADIO_VALUE_ACCESSOR = {
 /**
  * Internal class used by Angular to uncheck radio buttons with the matching name.
  */
-var RadioControlRegistry = /** @class */ (function () {
+var RadioControlRegistry = (function () {
     function RadioControlRegistry() {
         this._accessors = [];
     }
@@ -63124,7 +59295,7 @@ var RadioControlRegistry = /** @class */ (function () {
  *
  *  \@stable
  */
-var RadioControlValueAccessor = /** @class */ (function () {
+var RadioControlValueAccessor = (function () {
     function RadioControlValueAccessor(_renderer, _elementRef, _registry, _injector) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
@@ -63277,7 +59448,7 @@ var RANGE_VALUE_ACCESSOR = {
  *  <input type="range" [(ngModel)]="age" >
  *  ```
  */
-var RangeValueAccessor = /** @class */ (function () {
+var RangeValueAccessor = (function () {
     function RangeValueAccessor(_renderer, _elementRef) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
@@ -63443,7 +59614,7 @@ function _extractId(valueString) {
  *
  * \@stable
  */
-var SelectControlValueAccessor = /** @class */ (function () {
+var SelectControlValueAccessor = (function () {
     function SelectControlValueAccessor(_renderer, _elementRef) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
@@ -63595,7 +59766,7 @@ var SelectControlValueAccessor = /** @class */ (function () {
  *
  * \@stable
  */
-var NgSelectOption = /** @class */ (function () {
+var NgSelectOption = (function () {
     function NgSelectOption(_element, _renderer, _select) {
         this._element = _element;
         this._renderer = _renderer;
@@ -63740,7 +59911,7 @@ function _extractId$1(valueString) {
  *
  * \@stable
  */
-var SelectMultipleControlValueAccessor = /** @class */ (function () {
+var SelectMultipleControlValueAccessor = (function () {
     function SelectMultipleControlValueAccessor(_renderer, _elementRef) {
         this._renderer = _renderer;
         this._elementRef = _elementRef;
@@ -63924,7 +60095,7 @@ var SelectMultipleControlValueAccessor = /** @class */ (function () {
  * </select>
  * ```
  */
-var NgSelectMultipleOption = /** @class */ (function () {
+var NgSelectMultipleOption = (function () {
     function NgSelectMultipleOption(_element, _renderer, _select) {
         this._element = _element;
         this._renderer = _renderer;
@@ -64099,7 +60270,6 @@ function cleanUpControl(control, dir) {
 function setUpViewChangePipeline(control, dir) {
     /** @type {?} */ ((dir.valueAccessor)).registerOnChange(function (newValue) {
         control._pendingValue = newValue;
-        control._pendingChange = true;
         control._pendingDirty = true;
         if (control.updateOn === 'change')
             updateControl(control, dir);
@@ -64113,7 +60283,7 @@ function setUpViewChangePipeline(control, dir) {
 function setUpBlurPipeline(control, dir) {
     /** @type {?} */ ((dir.valueAccessor)).registerOnTouched(function () {
         control._pendingTouched = true;
-        if (control.updateOn === 'blur' && control._pendingChange)
+        if (control.updateOn === 'blur')
             updateControl(control, dir);
         if (control.updateOn !== 'submit')
             control.markAsTouched();
@@ -64129,7 +60299,6 @@ function updateControl(control, dir) {
     if (control._pendingDirty)
         control.markAsDirty();
     control.setValue(control._pendingValue, { emitModelToViewChange: false });
-    control._pendingChange = false;
 }
 /**
  * @param {?} control
@@ -64234,9 +60403,8 @@ function syncPendingControls(form, directives) {
     form._syncPendingControls();
     directives.forEach(function (dir) {
         var /** @type {?} */ control = /** @type {?} */ (dir.control);
-        if (control.updateOn === 'submit' && control._pendingChange) {
+        if (control.updateOn === 'submit') {
             dir.viewToModelUpdate(control._pendingValue);
-            control._pendingChange = false;
         }
     });
 }
@@ -64292,18 +60460,11 @@ function removeDir(list, el) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * This is a base class for code shared between {\@link NgModelGroup} and {\@link FormGroupName}.
  *
  * \@stable
  */
-var AbstractFormGroupDirective = /** @class */ (function (_super) {
+var AbstractFormGroupDirective = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(AbstractFormGroupDirective, _super);
     function AbstractFormGroupDirective() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -64407,7 +60568,7 @@ var AbstractFormGroupDirective = /** @class */ (function (_super) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var AbstractControlStatus = /** @class */ (function () {
+var AbstractControlStatus = (function () {
     function AbstractControlStatus(cd) {
         this._cd = cd;
     }
@@ -64493,7 +60654,7 @@ var ngControlStatusHost = {
  *
  * \@stable
  */
-var NgControlStatus = /** @class */ (function (_super) {
+var NgControlStatus = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(NgControlStatus, _super);
     function NgControlStatus(cd) {
         return _super.call(this, cd) || this;
@@ -64513,7 +60674,7 @@ var NgControlStatus = /** @class */ (function (_super) {
  *
  * \@stable
  */
-var NgControlStatusGroup = /** @class */ (function (_super) {
+var NgControlStatusGroup = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(NgControlStatusGroup, _super);
     function NgControlStatusGroup(cd) {
         return _super.call(this, cd) || this;
@@ -64628,7 +60789,7 @@ function isOptionsObj(validatorOrOpts) {
  * \@stable
  * @abstract
  */
-var AbstractControl = /** @class */ (function () {
+var AbstractControl = (function () {
     function AbstractControl(validator, asyncValidator) {
         this.validator = validator;
         this.asyncValidator = asyncValidator;
@@ -65044,13 +61205,13 @@ var AbstractControl = /** @class */ (function () {
         if (opts === void 0) { opts = {}; }
         (/** @type {?} */ (this)).status = DISABLED;
         (/** @type {?} */ (this)).errors = null;
-        this._forEachChild(function (control) { control.disable(Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __assign */])({}, opts, { onlySelf: true })); });
+        this._forEachChild(function (control) { control.disable({ onlySelf: true }); });
         this._updateValue();
         if (opts.emitEvent !== false) {
             (/** @type {?} */ (this.valueChanges)).emit(this.value);
             (/** @type {?} */ (this.statusChanges)).emit(this.status);
         }
-        this._updateAncestors(opts);
+        this._updateAncestors(!!opts.onlySelf);
         this._onDisabledChange.forEach(function (changeFn) { return changeFn(true); });
     };
     /**
@@ -65081,22 +61242,22 @@ var AbstractControl = /** @class */ (function () {
     function (opts) {
         if (opts === void 0) { opts = {}; }
         (/** @type {?} */ (this)).status = VALID;
-        this._forEachChild(function (control) { control.enable(Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __assign */])({}, opts, { onlySelf: true })); });
+        this._forEachChild(function (control) { control.enable({ onlySelf: true }); });
         this.updateValueAndValidity({ onlySelf: true, emitEvent: opts.emitEvent });
-        this._updateAncestors(opts);
+        this._updateAncestors(!!opts.onlySelf);
         this._onDisabledChange.forEach(function (changeFn) { return changeFn(false); });
     };
     /**
-     * @param {?} opts
+     * @param {?} onlySelf
      * @return {?}
      */
     AbstractControl.prototype._updateAncestors = /**
-     * @param {?} opts
+     * @param {?} onlySelf
      * @return {?}
      */
-    function (opts) {
-        if (this._parent && !opts.onlySelf) {
-            this._parent.updateValueAndValidity(opts);
+    function (onlySelf) {
+        if (this._parent && !onlySelf) {
+            this._parent.updateValueAndValidity();
             this._parent._updatePristine();
             this._parent._updateTouched();
         }
@@ -65642,7 +61803,7 @@ var AbstractControl = /** @class */ (function () {
  *
  * \@stable
  */
-var FormControl = /** @class */ (function (_super) {
+var FormControl = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FormControl, _super);
     function FormControl(formState, validatorOrOpts, asyncValidator) {
         if (formState === void 0) { formState = null; }
@@ -65851,7 +62012,6 @@ var FormControl = /** @class */ (function (_super) {
         this.markAsPristine(options);
         this.markAsUntouched(options);
         this.setValue(this.value, options);
-        this._pendingChange = false;
     };
     /**
      * @internal
@@ -65962,14 +62122,12 @@ var FormControl = /** @class */ (function (_super) {
      */
     function () {
         if (this.updateOn === 'submit') {
+            this.setValue(this._pendingValue, { onlySelf: true, emitModelToViewChange: false });
             if (this._pendingDirty)
                 this.markAsDirty();
             if (this._pendingTouched)
                 this.markAsTouched();
-            if (this._pendingChange) {
-                this.setValue(this._pendingValue, { onlySelf: true, emitModelToViewChange: false });
-                return true;
-            }
+            return true;
         }
         return false;
     };
@@ -66066,7 +62224,7 @@ var FormControl = /** @class */ (function (_super) {
  *
  * \@stable
  */
-var FormGroup = /** @class */ (function (_super) {
+var FormGroup = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FormGroup, _super);
     function FormGroup(controls, validatorOrOpts, asyncValidator) {
         var _this = _super.call(this, coerceToValidator(validatorOrOpts), coerceToAsyncValidator(asyncValidator, validatorOrOpts)) || this;
@@ -66732,7 +62890,7 @@ var FormGroup = /** @class */ (function (_super) {
  *
  * \@stable
  */
-var FormArray = /** @class */ (function (_super) {
+var FormArray = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FormArray, _super);
     function FormArray(controls, validatorOrOpts, asyncValidator) {
         var _this = _super.call(this, coerceToValidator(validatorOrOpts), coerceToAsyncValidator(asyncValidator, validatorOrOpts)) || this;
@@ -66776,7 +62934,9 @@ var FormArray = /** @class */ (function (_super) {
         this.updateValueAndValidity();
         this._onCollectionChange();
     };
-    /** Insert a new {@link AbstractControl} at the given `index` in the array. */
+    /**
+     * Insert a new {@link AbstractControl} at the given `index` in the array.
+     */
     /**
      * Insert a new {\@link AbstractControl} at the given `index` in the array.
      * @param {?} index
@@ -66793,8 +62953,11 @@ var FormArray = /** @class */ (function (_super) {
         this.controls.splice(index, 0, control);
         this._registerControl(control);
         this.updateValueAndValidity();
+        this._onCollectionChange();
     };
-    /** Remove the control at the given `index` in the array. */
+    /**
+     * Remove the control at the given `index` in the array.
+     */
     /**
      * Remove the control at the given `index` in the array.
      * @param {?} index
@@ -66810,6 +62973,7 @@ var FormArray = /** @class */ (function (_super) {
             this.controls[index]._registerOnCollectionChange(function () { });
         this.controls.splice(index, 1);
         this.updateValueAndValidity();
+        this._onCollectionChange();
     };
     /**
      * Replace an existing control.
@@ -67334,7 +63498,7 @@ var resolvedPromise = Promise.resolve(null);
  *
  *  \@stable
  */
-var NgForm = /** @class */ (function (_super) {
+var NgForm = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(NgForm, _super);
     function NgForm(validators, asyncValidators) {
         var _this = _super.call(this) || this;
@@ -67609,7 +63773,7 @@ var FormErrorExamples = {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var TemplateDrivenErrors = /** @class */ (function () {
+var TemplateDrivenErrors = (function () {
     function TemplateDrivenErrors() {
     }
     /**
@@ -67691,7 +63855,7 @@ var modelGroupProvider = {
  *
  * \@stable
  */
-var NgModelGroup = /** @class */ (function (_super) {
+var NgModelGroup = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(NgModelGroup, _super);
     function NgModelGroup(parent, validators, asyncValidators) {
         var _this = _super.call(this) || this;
@@ -67820,7 +63984,7 @@ var resolvedPromise$1 = Promise.resolve(null);
  *
  *  \@stable
  */
-var NgModel = /** @class */ (function (_super) {
+var NgModel = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(NgModel, _super);
     function NgModel(parent, validators, asyncValidators, valueAccessors) {
         var _this = _super.call(this) || this;
@@ -68061,7 +64225,7 @@ var NgModel = /** @class */ (function (_super) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var ReactiveErrors = /** @class */ (function () {
+var ReactiveErrors = (function () {
     function ReactiveErrors() {
     }
     /**
@@ -68178,7 +64342,7 @@ var formControlBinding$1 = {
  *
  *  \@stable
  */
-var FormControlDirective = /** @class */ (function (_super) {
+var FormControlDirective = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FormControlDirective, _super);
     function FormControlDirective(validators, asyncValidators, valueAccessors) {
         var _this = _super.call(this) || this;
@@ -68344,7 +64508,7 @@ var formDirectiveProvider$1 = {
  *
  *  \@stable
  */
-var FormGroupDirective = /** @class */ (function (_super) {
+var FormGroupDirective = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FormGroupDirective, _super);
     function FormGroupDirective(_validators, _asyncValidators) {
         var _this = _super.call(this) || this;
@@ -68676,7 +64840,7 @@ var formGroupNameProvider = {
  *
  * \@stable
  */
-var FormGroupName = /** @class */ (function (_super) {
+var FormGroupName = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FormGroupName, _super);
     function FormGroupName(parent, validators, asyncValidators) {
         var _this = _super.call(this) || this;
@@ -68764,7 +64928,7 @@ var formArrayNameProvider = {
  *
  * \@stable
  */
-var FormArrayName = /** @class */ (function (_super) {
+var FormArrayName = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FormArrayName, _super);
     function FormArrayName(parent, validators, asyncValidators) {
         var _this = _super.call(this) || this;
@@ -68938,7 +65102,7 @@ var controlNameBinding = {
  *
  *  \@stable
  */
-var FormControlName = /** @class */ (function (_super) {
+var FormControlName = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(FormControlName, _super);
     function FormControlName(parent, validators, asyncValidators, valueAccessors) {
         var _this = _super.call(this) || this;
@@ -69140,7 +65304,7 @@ var CHECKBOX_REQUIRED_VALIDATOR = {
  *
  * \@stable
  */
-var RequiredValidator = /** @class */ (function () {
+var RequiredValidator = (function () {
     function RequiredValidator() {
     }
     Object.defineProperty(RequiredValidator.prototype, "required", {
@@ -69206,7 +65370,7 @@ var RequiredValidator = /** @class */ (function () {
  *
  * \@experimental
  */
-var CheckboxRequiredValidator = /** @class */ (function (_super) {
+var CheckboxRequiredValidator = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_0_tslib__["b" /* __extends */])(CheckboxRequiredValidator, _super);
     function CheckboxRequiredValidator() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -69255,7 +65419,7 @@ var EMAIL_VALIDATOR = {
  *
  * \@experimental
  */
-var EmailValidator = /** @class */ (function () {
+var EmailValidator = (function () {
     function EmailValidator() {
     }
     Object.defineProperty(EmailValidator.prototype, "email", {
@@ -69332,7 +65496,7 @@ var MIN_LENGTH_VALIDATOR = {
  *
  * \@stable
  */
-var MinLengthValidator = /** @class */ (function () {
+var MinLengthValidator = (function () {
     function MinLengthValidator() {
     }
     /**
@@ -69412,7 +65576,7 @@ var MAX_LENGTH_VALIDATOR = {
  *
  * \@stable
  */
-var MaxLengthValidator = /** @class */ (function () {
+var MaxLengthValidator = (function () {
     function MaxLengthValidator() {
     }
     /**
@@ -69491,7 +65655,7 @@ var PATTERN_VALIDATOR = {
  * ```
  * \@stable
  */
-var PatternValidator = /** @class */ (function () {
+var PatternValidator = (function () {
     function PatternValidator() {
     }
     /**
@@ -69580,7 +65744,7 @@ var PatternValidator = /** @class */ (function () {
  *
  * \@stable
  */
-var FormBuilder = /** @class */ (function () {
+var FormBuilder = (function () {
     function FormBuilder() {
     }
     /**
@@ -69739,9 +65903,14 @@ var FormBuilder = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+/**
  * \@stable
  */
-var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_5" /* Version */]('5.2.9');
+var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_5" /* Version */]('5.0.2');
 
 /**
  * @fileoverview added by tsickle
@@ -69767,7 +65936,7 @@ var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_5" /* Version */
  *
  * \@experimental
  */
-var NgNoValidate = /** @class */ (function () {
+var NgNoValidate = (function () {
     function NgNoValidate() {
     }
     NgNoValidate.decorators = [
@@ -69817,7 +65986,7 @@ var REACTIVE_DRIVEN_DIRECTIVES = [FormControlDirective, FormGroupDirective, Form
 /**
  * Internal module used for sharing directives between FormsModule and ReactiveFormsModule
  */
-var InternalFormsSharedModule = /** @class */ (function () {
+var InternalFormsSharedModule = (function () {
     function InternalFormsSharedModule() {
     }
     InternalFormsSharedModule.decorators = [
@@ -69846,7 +66015,7 @@ var InternalFormsSharedModule = /** @class */ (function () {
  * The ng module for forms.
  * \@stable
  */
-var FormsModule = /** @class */ (function () {
+var FormsModule = (function () {
     function FormsModule() {
     }
     FormsModule.decorators = [
@@ -69864,7 +66033,7 @@ var FormsModule = /** @class */ (function () {
  * The ng module for reactive forms.
  * \@stable
  */
-var ReactiveFormsModule = /** @class */ (function () {
+var ReactiveFormsModule = (function () {
     function ReactiveFormsModule() {
     }
     ReactiveFormsModule.decorators = [
@@ -69889,6 +66058,16 @@ var ReactiveFormsModule = /** @class */ (function () {
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * @module
+ * @description
+ * This module is used for handling user input, by defining and building a {@link FormGroup} that
+ * consists of {@link FormControl} objects, and mapping them onto the DOM. {@link FormControl}
+ * objects can then be used to read information from the form DOM elements.
+ *
+ * Forms providers are not included in default providers; you must import these providers
+ * explicitly.
  */
 
 /**
@@ -69965,8 +66144,8 @@ var ReactiveFormsModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
 /**
- * @license Angular v5.2.9
- * (c) 2010-2018 Google, Inc. https://angular.io/
+ * @license Angular v5.0.2
+ * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 
@@ -69992,7 +66171,7 @@ var ReactiveFormsModule = /** @class */ (function () {
  *
  * @deprecated use \@angular/common/http instead
  */
-var BrowserXhr = /** @class */ (function () {
+var BrowserXhr = (function () {
     function BrowserXhr() {
     }
     /**
@@ -70013,13 +66192,6 @@ var BrowserXhr = /** @class */ (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 /** @enum {number} */
 var RequestMethod = {
@@ -70100,13 +66272,6 @@ ResponseContentType[ResponseContentType.Blob] = "Blob";
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Polyfill for [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers/Headers), as
  * specified in the [Fetch Spec](https://fetch.spec.whatwg.org/#headers-class).
  *
@@ -70134,7 +66299,7 @@ ResponseContentType[ResponseContentType.Blob] = "Blob";
  *
  * @deprecated use \@angular/common/http instead
  */
-var Headers = /** @class */ (function () {
+var Headers = (function () {
     // TODO(vicb): any -> string|string[]
     function Headers(headers) {
         var _this = this;
@@ -70430,7 +66595,7 @@ var Headers = /** @class */ (function () {
  *
  * @deprecated use \@angular/common/http instead
  */
-var ResponseOptions = /** @class */ (function () {
+var ResponseOptions = (function () {
     function ResponseOptions(opts) {
         if (opts === void 0) { opts = {}; }
         var body = opts.body, status = opts.status, headers = opts.headers, statusText = opts.statusText, type = opts.type, url = opts.url;
@@ -70578,7 +66743,7 @@ var ResponseOptions = /** @class */ (function () {
  *
  * @deprecated use \@angular/common/http instead
  */
-var BaseResponseOptions = /** @class */ (function (_super) {
+var BaseResponseOptions = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_1_tslib__["b" /* __extends */])(BaseResponseOptions, _super);
     function BaseResponseOptions() {
         return _super.call(this, { status: 200, statusText: 'Ok', type: ResponseType.Default, headers: new Headers() }) || this;
@@ -70596,13 +66761,6 @@ var BaseResponseOptions = /** @class */ (function (_super) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Abstract class from which real backends are derived.
  *
  * The primary purpose of a `ConnectionBackend` is to create new connections to fulfill a given
@@ -70611,7 +66769,7 @@ var BaseResponseOptions = /** @class */ (function (_super) {
  * @deprecated use \@angular/common/http instead
  * @abstract
  */
-var ConnectionBackend = /** @class */ (function () {
+var ConnectionBackend = (function () {
     function ConnectionBackend() {
     }
     return ConnectionBackend;
@@ -70622,7 +66780,7 @@ var ConnectionBackend = /** @class */ (function () {
  * @deprecated use \@angular/common/http instead
  * @abstract
  */
-var Connection = /** @class */ (function () {
+var Connection = (function () {
     function Connection() {
     }
     return Connection;
@@ -70633,7 +66791,7 @@ var Connection = /** @class */ (function () {
  * @deprecated use \@angular/common/http instead
  * @abstract
  */
-var XSRFStrategy = /** @class */ (function () {
+var XSRFStrategy = (function () {
     function XSRFStrategy() {
     }
     return XSRFStrategy;
@@ -70731,13 +66889,6 @@ function stringToArrayBuffer(input) {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @param {?=} rawParams
  * @return {?}
  */
@@ -70760,7 +66911,7 @@ function paramParser(rawParams) {
  * @deprecated use \@angular/common/http instead
  *
  */
-var QueryEncoder = /** @class */ (function () {
+var QueryEncoder = (function () {
     function QueryEncoder() {
     }
     /**
@@ -70834,7 +66985,7 @@ function standardEncoding(v) {
  * ```
  * @deprecated use \@angular/common/http instead
  */
-var URLSearchParams = /** @class */ (function () {
+var URLSearchParams = (function () {
     function URLSearchParams(rawParams, queryEncoder) {
         if (rawParams === void 0) { rawParams = ''; }
         if (queryEncoder === void 0) { queryEncoder = new QueryEncoder(); }
@@ -71038,7 +67189,7 @@ var URLSearchParams = /** @class */ (function () {
  * https://fetch.spec.whatwg.org/#body
  * @abstract
  */
-var Body = /** @class */ (function () {
+var Body = (function () {
     function Body() {
     }
     /**
@@ -71175,13 +67326,6 @@ var Body = /** @class */ (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Creates `Response` instances from provided values.
  *
  * Though this object isn't
@@ -71201,7 +67345,7 @@ var Body = /** @class */ (function () {
  *
  * @deprecated use \@angular/common/http instead
  */
-var Response = /** @class */ (function (_super) {
+var Response = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_1_tslib__["b" /* __extends */])(Response, _super);
     function Response(responseOptions) {
         var _this = _super.call(this) || this;
@@ -71250,7 +67394,7 @@ function _getJsonpConnections() {
     }
     return _jsonpConnections;
 }
-var BrowserJsonp = /** @class */ (function () {
+var BrowserJsonp = (function () {
     function BrowserJsonp() {
     }
     // Construct a <script> element with the specified URL
@@ -71359,7 +67503,7 @@ var JSONP_ERR_WRONG_METHOD = 'JSONP requests must use GET request method.';
  *
  * @deprecated use \@angular/common/http instead
  */
-var JSONPConnection = /** @class */ (function () {
+var JSONPConnection = (function () {
     /** @internal */
     function JSONPConnection(req, _dom, baseResponseOptions) {
         var _this = this;
@@ -71458,7 +67602,7 @@ var JSONPConnection = /** @class */ (function () {
  *
  * @deprecated use \@angular/common/http instead
  */
-var JSONPBackend = /** @class */ (function (_super) {
+var JSONPBackend = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_1_tslib__["b" /* __extends */])(JSONPBackend, _super);
     /** @internal */
     function JSONPBackend(_browserJSONP, _baseResponseOptions) {
@@ -71511,7 +67655,7 @@ var XSSI_PREFIX = /^\)\]\}',?\n/;
  *
  * @deprecated use \@angular/common/http instead
  */
-var XHRConnection = /** @class */ (function () {
+var XHRConnection = (function () {
     function XHRConnection(req, browserXHR, baseResponseOptions) {
         var _this = this;
         this.request = req;
@@ -71660,7 +67804,7 @@ var XHRConnection = /** @class */ (function () {
  *
  * @deprecated use \@angular/common/http instead
  */
-var CookieXSRFStrategy = /** @class */ (function () {
+var CookieXSRFStrategy = (function () {
     function CookieXSRFStrategy(_cookieName, _headerName) {
         if (_cookieName === void 0) { _cookieName = 'XSRF-TOKEN'; }
         if (_headerName === void 0) { _headerName = 'X-XSRF-TOKEN'; }
@@ -71709,7 +67853,7 @@ var CookieXSRFStrategy = /** @class */ (function () {
  * ```
  * @deprecated use \@angular/common/http instead
  */
-var XHRBackend = /** @class */ (function () {
+var XHRBackend = (function () {
     function XHRBackend(_browserXHR, _baseResponseOptions, _xsrfStrategy) {
         this._browserXHR = _browserXHR;
         this._baseResponseOptions = _baseResponseOptions;
@@ -71774,7 +67918,7 @@ var XHRBackend = /** @class */ (function () {
  *
  * @deprecated use \@angular/common/http instead
  */
-var RequestOptions = /** @class */ (function () {
+var RequestOptions = (function () {
     // TODO(Dzmitry): remove search when this.search is removed
     function RequestOptions(opts) {
         if (opts === void 0) { opts = {}; }
@@ -71995,7 +68139,7 @@ var RequestOptions = /** @class */ (function () {
  *
  * @deprecated use \@angular/common/http instead
  */
-var BaseRequestOptions = /** @class */ (function (_super) {
+var BaseRequestOptions = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_1_tslib__["b" /* __extends */])(BaseRequestOptions, _super);
     function BaseRequestOptions() {
         return _super.call(this, { method: RequestMethod.Get, headers: new Headers() }) || this;
@@ -72058,7 +68202,7 @@ var BaseRequestOptions = /** @class */ (function (_super) {
  *
  * @deprecated use \@angular/common/http instead
  */
-var Request = /** @class */ (function (_super) {
+var Request = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_1_tslib__["b" /* __extends */])(Request, _super);
     function Request(requestOptions) {
         var _this = _super.call(this) || this;
@@ -72318,7 +68462,7 @@ function mergeOptions(defaultOpts, providedOpts, method, url) {
  *
  * @deprecated use \@angular/common/http instead
  */
-var Http = /** @class */ (function () {
+var Http = (function () {
     function Http(_backend, _defaultOptions) {
         this._backend = _backend;
         this._defaultOptions = _defaultOptions;
@@ -72505,7 +68649,7 @@ var Http = /** @class */ (function () {
 /**
  * @deprecated use \@angular/common/http instead
  */
-var Jsonp = /** @class */ (function (_super) {
+var Jsonp = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_1_tslib__["b" /* __extends */])(Jsonp, _super);
     function Jsonp(backend, defaultOptions) {
         return _super.call(this, backend, defaultOptions) || this;
@@ -72598,6 +68742,12 @@ var Jsonp = /** @class */ (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * @module
+ * @description
+ * The http module provides services to perform http requests. To get started, see the {@link Http}
+ * class.
+ */
+/**
  * @return {?}
  */
 function _createDefaultCookieXSRFStrategy() {
@@ -72624,7 +68774,7 @@ function jsonpFactory(jsonpBackend, requestOptions) {
  *
  * @deprecated use \@angular/common/http instead
  */
-var HttpModule = /** @class */ (function () {
+var HttpModule = (function () {
     function HttpModule() {
     }
     HttpModule.decorators = [
@@ -72650,7 +68800,7 @@ var HttpModule = /** @class */ (function () {
  *
  * @deprecated use \@angular/common/http instead
  */
-var JsonpModule = /** @class */ (function () {
+var JsonpModule = (function () {
     function JsonpModule() {
     }
     JsonpModule.decorators = [
@@ -72683,9 +68833,14 @@ var JsonpModule = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+/**
  * @deprecated use \@angular/common/http instead
  */
-var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Version */]('5.2.9');
+var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Version */]('5.0.2');
 
 /**
  * @fileoverview added by tsickle
@@ -72737,7 +68892,6 @@ var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Version */
 
 "use strict";
 /* unused harmony export VERSION */
-/* unused harmony export JitCompilerFactory */
 /* unused harmony export RESOURCE_CACHE_PROVIDER */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return platformBrowserDynamic; });
 /* unused harmony export ɵCompilerImpl */
@@ -72745,14 +68899,15 @@ var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Version */
 /* unused harmony export ɵINTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS */
 /* unused harmony export ɵResourceLoaderImpl */
 /* unused harmony export ɵa */
+/* unused harmony export ɵb */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_compiler__ = __webpack_require__("./node_modules/@angular/compiler/esm5/compiler.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_common__ = __webpack_require__("./node_modules/@angular/common/esm5/common.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__("./node_modules/@angular/platform-browser/esm5/platform-browser.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_tslib__ = __webpack_require__("./node_modules/tslib/tslib.es6.js");
 /**
- * @license Angular v5.2.9
- * (c) 2010-2018 Google, Inc. https://angular.io/
+ * @license Angular v5.0.2
+ * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 
@@ -72774,7 +68929,7 @@ var VERSION = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Version */
  */
 var MODULE_SUFFIX = '';
 var builtinExternalReferences = createBuiltinExternalReferencesMap();
-var JitReflector = /** @class */ (function () {
+var JitReflector = (function () {
     function JitReflector() {
         this.builtinExternalReferences = new Map();
         this.reflectionCapabilities = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_20" /* ɵReflectionCapabilities */]();
@@ -72847,15 +69002,6 @@ var JitReflector = /** @class */ (function () {
     function (type, lcProperty) {
         return this.reflectionCapabilities.hasLifecycleHook(type, lcProperty);
     };
-    /**
-     * @param {?} type
-     * @return {?}
-     */
-    JitReflector.prototype.guards = /**
-     * @param {?} type
-     * @return {?}
-     */
-    function (type) { return this.reflectionCapabilities.guards(type); };
     /**
      * @param {?} ref
      * @return {?}
@@ -72949,7 +69095,7 @@ var _NO_RESOURCE_LOADER = {
     }
 };
 var baseHtmlParser = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" /* InjectionToken */]('HtmlParser');
-var CompilerImpl = /** @class */ (function () {
+var CompilerImpl = (function () {
     function CompilerImpl(injector, _metadataResolver, templateParser, styleCompiler, viewCompiler, ngModuleCompiler, summaryResolver, compileReflector, compilerConfig, console) {
         this._metadataResolver = _metadataResolver;
         this._delegate = new __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["k" /* JitCompiler */](_metadataResolver, templateParser, styleCompiler, viewCompiler, ngModuleCompiler, summaryResolver, compileReflector, compilerConfig, console, this.getExtraNgModuleProviders.bind(this));
@@ -73142,11 +69288,7 @@ var COMPILER_PROVIDERS = /** @type {?} */ ([
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["q" /* PipeResolver */], deps: [__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["b" /* CompileReflector */]] },
     { provide: __WEBPACK_IMPORTED_MODULE_0__angular_compiler__["o" /* NgModuleResolver */], deps: [__WEBPACK_IMPORTED_MODULE_0__angular_compiler__["b" /* CompileReflector */]] },
 ]);
-/**
- * \@experimental
- */
-var JitCompilerFactory = /** @class */ (function () {
-    /* @internal */
+var JitCompilerFactory = (function () {
     function JitCompilerFactory(defaultOptions) {
         var /** @type {?} */ compilerOptions = {
             useJit: true,
@@ -73200,7 +69342,7 @@ function _mergeOptions(optionsArr) {
     return {
         useJit: _lastDefined(optionsArr.map(function (options) { return options.useJit; })),
         defaultEncapsulation: _lastDefined(optionsArr.map(function (options) { return options.defaultEncapsulation; })),
-        providers: _mergeArrays(optionsArr.map(function (options) { return ((options.providers)); })),
+        providers: _mergeArrays(optionsArr.map(function (options) { return /** @type {?} */ ((options.providers)); })),
         missingTranslation: _lastDefined(optionsArr.map(function (options) { return options.missingTranslation; })),
         enableLegacyTemplate: _lastDefined(optionsArr.map(function (options) { return options.enableLegacyTemplate; })),
         preserveWhitespaces: _lastDefined(optionsArr.map(function (options) { return options.preserveWhitespaces; })),
@@ -73254,7 +69396,14 @@ var platformCoreDynamic = Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_9
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
-var ResourceLoaderImpl = /** @class */ (function (_super) {
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+var ResourceLoaderImpl = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_4_tslib__["b" /* __extends */])(ResourceLoaderImpl, _super);
     function ResourceLoaderImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -73348,7 +69497,7 @@ var INTERNAL_BROWSER_DYNAMIC_PLATFORM_PROVIDERS = [
  * The template cache needs to be built and loaded into window.$templateCache
  * via a separate mechanism.
  */
-var CachedResourceLoader = /** @class */ (function (_super) {
+var CachedResourceLoader = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_4_tslib__["b" /* __extends */])(CachedResourceLoader, _super);
     function CachedResourceLoader() {
         var _this = _super.call(this) || this;
@@ -73401,9 +69550,14 @@ var CachedResourceLoader = /** @class */ (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+/**
  * \@stable
  */
-var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_5" /* Version */]('5.2.9');
+var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_5" /* Version */]('5.0.2');
 
 /**
  * @fileoverview added by tsickle
@@ -73514,8 +69668,8 @@ var platformBrowserDynamic = Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__[
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__("./node_modules/@angular/core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_tslib__ = __webpack_require__("./node_modules/tslib/tslib.es6.js");
 /**
- * @license Angular v5.2.9
- * (c) 2010-2018 Google, Inc. https://angular.io/
+ * @license Angular v5.0.2
+ * (c) 2010-2017 Google, Inc. https://angular.io/
  * License: MIT
  */
 
@@ -73525,13 +69679,6 @@ var platformBrowserDynamic = Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__[
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 var _DOM = /** @type {?} */ ((null));
 /**
@@ -73561,7 +69708,7 @@ function setRootDomAdapter(adapter) {
  * can introduce XSS risks.
  * @abstract
  */
-var DomAdapter = /** @class */ (function () {
+var DomAdapter = (function () {
     function DomAdapter() {
         this.resourceLoaderType = /** @type {?} */ ((null));
     }
@@ -73605,7 +69752,7 @@ var DomAdapter = /** @class */ (function () {
  * can introduce XSS risks.
  * @abstract
  */
-var GenericBrowserDomAdapter = /** @class */ (function (_super) {
+var GenericBrowserDomAdapter = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(GenericBrowserDomAdapter, _super);
     function GenericBrowserDomAdapter() {
         var _this = _super.call(this) || this;
@@ -73778,7 +69925,7 @@ if (__WEBPACK_IMPORTED_MODULE_1__angular_core__["_27" /* ɵglobal */]['Node']) {
  * \@security Tread carefully! Interacting with the DOM directly is dangerous and
  * can introduce XSS risks.
  */
-var BrowserDomAdapter = /** @class */ (function (_super) {
+var BrowserDomAdapter = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(BrowserDomAdapter, _super);
     function BrowserDomAdapter() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -75139,13 +71286,6 @@ var DOCUMENT$1 = __WEBPACK_IMPORTED_MODULE_0__angular_common__["b" /* DOCUMENT *
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * @return {?}
  */
 function supportsState() {
@@ -75168,7 +71308,7 @@ function supportsState() {
  * This class should not be used directly by an application developer. Instead, use
  * {\@link Location}.
  */
-var BrowserPlatformLocation = /** @class */ (function (_super) {
+var BrowserPlatformLocation = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(BrowserPlatformLocation, _super);
     function BrowserPlatformLocation(_doc) {
         var _this = _super.call(this) || this;
@@ -75328,7 +71468,7 @@ var BrowserPlatformLocation = /** @class */ (function (_super) {
  *
  * \@experimental
  */
-var Meta = /** @class */ (function () {
+var Meta = (function () {
     function Meta(_doc) {
         this._doc = _doc;
         this._dom = getDOM();
@@ -75572,7 +71712,7 @@ var SERVER_TRANSITION_PROVIDERS = [
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var BrowserGetTestability = /** @class */ (function () {
+var BrowserGetTestability = (function () {
     function BrowserGetTestability() {
     }
     /**
@@ -75673,7 +71813,7 @@ var BrowserGetTestability = /** @class */ (function () {
  *
  * \@experimental
  */
-var Title = /** @class */ (function () {
+var Title = (function () {
     function Title(_doc) {
         this._doc = _doc;
     }
@@ -75829,7 +71969,7 @@ var EVENT_MANAGER_PLUGINS = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" 
 /**
  * \@stable
  */
-var EventManager = /** @class */ (function () {
+var EventManager = (function () {
     function EventManager(plugins, _zone) {
         var _this = this;
         this._zone = _zone;
@@ -75915,7 +72055,7 @@ var EventManager = /** @class */ (function () {
 /**
  * @abstract
  */
-var EventManagerPlugin = /** @class */ (function () {
+var EventManagerPlugin = (function () {
     function EventManagerPlugin(_doc) {
         this._doc = _doc;
     }
@@ -75952,7 +72092,7 @@ var EventManagerPlugin = /** @class */ (function () {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var SharedStylesHost = /** @class */ (function () {
+var SharedStylesHost = (function () {
     function SharedStylesHost() {
         /**
          * \@internal
@@ -76001,7 +72141,7 @@ var SharedStylesHost = /** @class */ (function () {
     SharedStylesHost.ctorParameters = function () { return []; };
     return SharedStylesHost;
 }());
-var DomSharedStylesHost = /** @class */ (function (_super) {
+var DomSharedStylesHost = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(DomSharedStylesHost, _super);
     function DomSharedStylesHost(_doc) {
         var _this = _super.call(this) || this;
@@ -76148,7 +72288,7 @@ function decoratePreventDefault(eventHandler) {
         }
     };
 }
-var DomRendererFactory2 = /** @class */ (function () {
+var DomRendererFactory2 = (function () {
     function DomRendererFactory2(eventManager, sharedStylesHost) {
         this.eventManager = eventManager;
         this.sharedStylesHost = sharedStylesHost;
@@ -76216,7 +72356,7 @@ var DomRendererFactory2 = /** @class */ (function () {
     ]; };
     return DomRendererFactory2;
 }());
-var DefaultDomRenderer2 = /** @class */ (function () {
+var DefaultDomRenderer2 = (function () {
     function DefaultDomRenderer2(eventManager) {
         this.eventManager = eventManager;
         this.data = Object.create(null);
@@ -76520,7 +72660,7 @@ function checkNoSyntheticProp(name, nameKind) {
         throw new Error("Found the synthetic " + nameKind + " " + name + ". Please include either \"BrowserAnimationsModule\" or \"NoopAnimationsModule\" in your application.");
     }
 }
-var EmulatedEncapsulationDomRenderer2 = /** @class */ (function (_super) {
+var EmulatedEncapsulationDomRenderer2 = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(EmulatedEncapsulationDomRenderer2, _super);
     function EmulatedEncapsulationDomRenderer2(eventManager, sharedStylesHost, component) {
         var _this = _super.call(this, eventManager) || this;
@@ -76557,7 +72697,7 @@ var EmulatedEncapsulationDomRenderer2 = /** @class */ (function (_super) {
     };
     return EmulatedEncapsulationDomRenderer2;
 }(DefaultDomRenderer2));
-var ShadowDomRenderer = /** @class */ (function (_super) {
+var ShadowDomRenderer = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(ShadowDomRenderer, _super);
     function ShadowDomRenderer(eventManager, sharedStylesHost, hostEl, component) {
         var _this = _super.call(this, eventManager) || this;
@@ -76673,9 +72813,6 @@ var FALSE = 'FALSE';
 var ANGULAR = 'ANGULAR';
 var NATIVE_ADD_LISTENER = 'addEventListener';
 var NATIVE_REMOVE_LISTENER = 'removeEventListener';
-// use the same symbol string which is used in zone.js
-var stopSymbol = '__zone_symbol__propagationStopped';
-var stopMethodSymbol = '__zone_symbol__stopImmediatePropagation';
 var blackListedEvents = (typeof Zone !== 'undefined') && (/** @type {?} */ (Zone))[__symbol__('BLACK_LISTED_EVENTS')];
 var blackListedMap;
 if (blackListedEvents) {
@@ -76716,11 +72853,6 @@ var globalListener = function (event) {
         // itself or others
         var /** @type {?} */ copiedTasks = taskDatas.slice();
         for (var /** @type {?} */ i = 0; i < copiedTasks.length; i++) {
-            // if other listener call event.stopImmediatePropagation
-            // just break
-            if ((/** @type {?} */ (event))[stopSymbol] === true) {
-                break;
-            }
             var /** @type {?} */ taskData = copiedTasks[i];
             if (taskData.zone !== Zone.current) {
                 // only use Zone.run when Zone.current not equals to stored zone
@@ -76732,40 +72864,13 @@ var globalListener = function (event) {
         }
     }
 };
-var DomEventsPlugin = /** @class */ (function (_super) {
+var DomEventsPlugin = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(DomEventsPlugin, _super);
     function DomEventsPlugin(doc, ngZone) {
         var _this = _super.call(this, doc) || this;
         _this.ngZone = ngZone;
-        _this.patchEvent();
         return _this;
     }
-    /**
-     * @return {?}
-     */
-    DomEventsPlugin.prototype.patchEvent = /**
-     * @return {?}
-     */
-    function () {
-        if (!Event || !Event.prototype) {
-            return;
-        }
-        if ((/** @type {?} */ (Event.prototype))[stopMethodSymbol]) {
-            // already patched by zone.js
-            return;
-        }
-        var /** @type {?} */ delegate = (/** @type {?} */ (Event.prototype))[stopMethodSymbol] =
-            Event.prototype.stopImmediatePropagation;
-        Event.prototype.stopImmediatePropagation = function () {
-            if (this) {
-                this[stopSymbol] = true;
-            }
-            // should call native delegate in case
-            // in some enviroment part of the application
-            // will not use the patched Event
-            delegate && delegate.apply(this, arguments);
-        };
-    };
     // This plugin should come last in the list of plugins, because it accepts all
     // events.
     /**
@@ -76869,27 +72974,16 @@ var DomEventsPlugin = /** @class */ (function (_super) {
             // just call native removeEventListener
             return target[NATIVE_REMOVE_LISTENER].apply(target, [eventName, callback, false]);
         }
-        // fix issue 20532, should be able to remove
-        // listener which was added inside of ngZone
-        var /** @type {?} */ found = false;
         for (var /** @type {?} */ i = 0; i < taskDatas.length; i++) {
             // remove listener from taskDatas if the callback equals
             if (taskDatas[i].handler === callback) {
-                found = true;
                 taskDatas.splice(i, 1);
                 break;
             }
         }
-        if (found) {
-            if (taskDatas.length === 0) {
-                // all listeners are removed, we can remove the globalListener from target
-                underlyingRemove.apply(target, [eventName, globalListener, false]);
-            }
-        }
-        else {
-            // not found in taskDatas, the callback may be added inside of ngZone
-            // use native remove listener to remove the calback
-            target[NATIVE_REMOVE_LISTENER].apply(target, [eventName, callback, false]);
+        if (taskDatas.length === 0) {
+            // all listeners are removed, we can remove the globalListener from target
+            underlyingRemove.apply(target, [eventName, globalListener, false]);
         }
     };
     DomEventsPlugin.decorators = [
@@ -76965,7 +73059,7 @@ var HAMMER_GESTURE_CONFIG = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["z" 
 /**
  * \@experimental
  */
-var HammerGestureConfig = /** @class */ (function () {
+var HammerGestureConfig = (function () {
     function HammerGestureConfig() {
         this.events = [];
         this.overrides = {};
@@ -76994,7 +73088,7 @@ var HammerGestureConfig = /** @class */ (function () {
     HammerGestureConfig.ctorParameters = function () { return []; };
     return HammerGestureConfig;
 }());
-var HammerGesturesPlugin = /** @class */ (function (_super) {
+var HammerGesturesPlugin = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(HammerGesturesPlugin, _super);
     function HammerGesturesPlugin(doc, _config) {
         var _this = _super.call(this, doc) || this;
@@ -77089,7 +73183,7 @@ var MODIFIER_KEY_GETTERS = {
 /**
  * \@experimental
  */
-var KeyEventsPlugin = /** @class */ (function (_super) {
+var KeyEventsPlugin = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(KeyEventsPlugin, _super);
     function KeyEventsPlugin(doc) {
         return _super.call(this, doc) || this;
@@ -77245,207 +73339,6 @@ var KeyEventsPlugin = /** @class */ (function (_super) {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
- * This helper class is used to get hold of an inert tree of DOM elements containing dirty HTML
- * that needs sanitizing.
- * Depending upon browser support we must use one of three strategies for doing this.
- * Support: Safari 10.x -> XHR strategy
- * Support: Firefox -> DomParser strategy
- * Default: InertDocument strategy
- */
-var InertBodyHelper = /** @class */ (function () {
-    function InertBodyHelper(defaultDoc, DOM) {
-        this.defaultDoc = defaultDoc;
-        this.DOM = DOM;
-        var /** @type {?} */ inertDocument = this.DOM.createHtmlDocument();
-        this.inertBodyElement = inertDocument.body;
-        if (this.inertBodyElement == null) {
-            // usually there should be only one body element in the document, but IE doesn't have any, so
-            // we need to create one.
-            var /** @type {?} */ inertHtml = this.DOM.createElement('html', inertDocument);
-            this.inertBodyElement = this.DOM.createElement('body', inertDocument);
-            this.DOM.appendChild(inertHtml, this.inertBodyElement);
-            this.DOM.appendChild(inertDocument, inertHtml);
-        }
-        this.DOM.setInnerHTML(this.inertBodyElement, '<svg><g onload="this.parentNode.remove()"></g></svg>');
-        if (this.inertBodyElement.querySelector && !this.inertBodyElement.querySelector('svg')) {
-            // We just hit the Safari 10.1 bug - which allows JS to run inside the SVG G element
-            // so use the XHR strategy.
-            this.getInertBodyElement = this.getInertBodyElement_XHR;
-            return;
-        }
-        this.DOM.setInnerHTML(this.inertBodyElement, '<svg><p><style><img src="</style><img src=x onerror=alert(1)//">');
-        if (this.inertBodyElement.querySelector && this.inertBodyElement.querySelector('svg img')) {
-            // We just hit the Firefox bug - which prevents the inner img JS from being sanitized
-            // so use the DOMParser strategy, if it is available.
-            // If the DOMParser is not available then we are not in Firefox (Server/WebWorker?) so we
-            // fall through to the default strategy below.
-            if (isDOMParserAvailable()) {
-                this.getInertBodyElement = this.getInertBodyElement_DOMParser;
-                return;
-            }
-        }
-        // None of the bugs were hit so it is safe for us to use the default InertDocument strategy
-        this.getInertBodyElement = this.getInertBodyElement_InertDocument;
-    }
-    /**
-     * Use XHR to create and fill an inert body element (on Safari 10.1)
-     * See
-     * https://github.com/cure53/DOMPurify/blob/a992d3a75031cb8bb032e5ea8399ba972bdf9a65/src/purify.js#L439-L449
-     * @param {?} html
-     * @return {?}
-     */
-    InertBodyHelper.prototype.getInertBodyElement_XHR = /**
-     * Use XHR to create and fill an inert body element (on Safari 10.1)
-     * See
-     * https://github.com/cure53/DOMPurify/blob/a992d3a75031cb8bb032e5ea8399ba972bdf9a65/src/purify.js#L439-L449
-     * @param {?} html
-     * @return {?}
-     */
-    function (html) {
-        // We add these extra elements to ensure that the rest of the content is parsed as expected
-        // e.g. leading whitespace is maintained and tags like `<meta>` do not get hoisted to the
-        // `<head>` tag.
-        html = '<body><remove></remove>' + html + '</body>';
-        try {
-            html = encodeURI(html);
-        }
-        catch (/** @type {?} */ e) {
-            return null;
-        }
-        var /** @type {?} */ xhr = new XMLHttpRequest();
-        xhr.responseType = 'document';
-        xhr.open('GET', 'data:text/html;charset=utf-8,' + html, false);
-        xhr.send(null);
-        var /** @type {?} */ body = xhr.response.body;
-        body.removeChild(/** @type {?} */ ((body.firstChild)));
-        return body;
-    };
-    /**
-     * Use DOMParser to create and fill an inert body element (on Firefox)
-     * See https://github.com/cure53/DOMPurify/releases/tag/0.6.7
-     *
-     * @param {?} html
-     * @return {?}
-     */
-    InertBodyHelper.prototype.getInertBodyElement_DOMParser = /**
-     * Use DOMParser to create and fill an inert body element (on Firefox)
-     * See https://github.com/cure53/DOMPurify/releases/tag/0.6.7
-     *
-     * @param {?} html
-     * @return {?}
-     */
-    function (html) {
-        // We add these extra elements to ensure that the rest of the content is parsed as expected
-        // e.g. leading whitespace is maintained and tags like `<meta>` do not get hoisted to the
-        // `<head>` tag.
-        html = '<body><remove></remove>' + html + '</body>';
-        try {
-            var /** @type {?} */ body = /** @type {?} */ (new (/** @type {?} */ (window))
-                .DOMParser()
-                .parseFromString(html, 'text/html')
-                .body);
-            body.removeChild(/** @type {?} */ ((body.firstChild)));
-            return body;
-        }
-        catch (/** @type {?} */ e) {
-            return null;
-        }
-    };
-    /**
-     * Use an HTML5 `template` element, if supported, or an inert body element created via
-     * `createHtmlDocument` to create and fill an inert DOM element.
-     * This is the default sane strategy to use if the browser does not require one of the specialised
-     * strategies above.
-     * @param {?} html
-     * @return {?}
-     */
-    InertBodyHelper.prototype.getInertBodyElement_InertDocument = /**
-     * Use an HTML5 `template` element, if supported, or an inert body element created via
-     * `createHtmlDocument` to create and fill an inert DOM element.
-     * This is the default sane strategy to use if the browser does not require one of the specialised
-     * strategies above.
-     * @param {?} html
-     * @return {?}
-     */
-    function (html) {
-        // Prefer using <template> element if supported.
-        var /** @type {?} */ templateEl = this.DOM.createElement('template');
-        if ('content' in templateEl) {
-            this.DOM.setInnerHTML(templateEl, html);
-            return templateEl;
-        }
-        this.DOM.setInnerHTML(this.inertBodyElement, html);
-        // Support: IE 9-11 only
-        // strip custom-namespaced attributes on IE<=11
-        if (this.defaultDoc.documentMode) {
-            this.stripCustomNsAttrs(this.inertBodyElement);
-        }
-        return this.inertBodyElement;
-    };
-    /**
-     * When IE9-11 comes across an unknown namespaced attribute e.g. 'xlink:foo' it adds 'xmlns:ns1'
-     * attribute to declare ns1 namespace and prefixes the attribute with 'ns1' (e.g.
-     * 'ns1:xlink:foo').
-     *
-     * This is undesirable since we don't want to allow any of these custom attributes. This method
-     * strips them all.
-     * @param {?} el
-     * @return {?}
-     */
-    InertBodyHelper.prototype.stripCustomNsAttrs = /**
-     * When IE9-11 comes across an unknown namespaced attribute e.g. 'xlink:foo' it adds 'xmlns:ns1'
-     * attribute to declare ns1 namespace and prefixes the attribute with 'ns1' (e.g.
-     * 'ns1:xlink:foo').
-     *
-     * This is undesirable since we don't want to allow any of these custom attributes. This method
-     * strips them all.
-     * @param {?} el
-     * @return {?}
-     */
-    function (el) {
-        var _this = this;
-        this.DOM.attributeMap(el).forEach(function (_, attrName) {
-            if (attrName === 'xmlns:ns1' || attrName.indexOf('ns1:') === 0) {
-                _this.DOM.removeAttribute(el, attrName);
-            }
-        });
-        for (var _i = 0, _a = this.DOM.childNodesAsList(el); _i < _a.length; _i++) {
-            var n = _a[_i];
-            if (this.DOM.isElementNode(n))
-                this.stripCustomNsAttrs(/** @type {?} */ (n));
-        }
-    };
-    return InertBodyHelper;
-}());
-/**
- * We need to determine whether the DOMParser exists in the global context.
- * The try-catch is because, on some browsers, trying to access this property
- * on window can actually throw an error.
- *
- * @suppress {uselessCode}
- * @return {?}
- */
-function isDOMParserAvailable() {
-    try {
-        return !!(/** @type {?} */ (window)).DOMParser;
-    }
-    catch (/** @type {?} */ e) {
-        return false;
-    }
-}
-
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * A pattern that recognizes a commonly useful subset of URLs that are safe.
  *
  * This regular expression matches a subset of URLs that will not cause script
@@ -77509,6 +73402,38 @@ function sanitizeSrcset(srcset) {
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+/**
+ * A <body> element that can be safely used to parse untrusted HTML. Lazily initialized below.
+ */
+var inertElement = null;
+/**
+ * Lazily initialized to make sure the DOM adapter gets set before use.
+ */
+var DOM = /** @type {?} */ ((null));
+/**
+ * Returns an HTML element that is guaranteed to not execute code when creating elements in it.
+ * @return {?}
+ */
+function getInertElement() {
+    if (inertElement)
+        return inertElement;
+    DOM = getDOM();
+    // Prefer using <template> element if supported.
+    var /** @type {?} */ templateEl = DOM.createElement('template');
+    if ('content' in templateEl)
+        return templateEl;
+    var /** @type {?} */ doc = DOM.createHtmlDocument();
+    inertElement = DOM.querySelector(doc, 'body');
+    if (inertElement == null) {
+        // usually there should be only one body element in the document, but IE doesn't have any, so we
+        // need to create one.
+        var /** @type {?} */ html = DOM.createElement('html', doc);
+        inertElement = DOM.createElement('body', doc);
+        DOM.appendChild(html, inertElement);
+        DOM.appendChild(doc, html);
+    }
+    return inertElement;
+}
 /**
  * @param {?} tags
  * @return {?}
@@ -77580,11 +73505,10 @@ var VALID_ATTRS = merge(URI_ATTRS, SRCSET_ATTRS, HTML_ATTRS);
  * SanitizingHtmlSerializer serializes a DOM fragment, stripping out any unsafe elements and unsafe
  * attributes.
  */
-var SanitizingHtmlSerializer = /** @class */ (function () {
+var SanitizingHtmlSerializer = (function () {
     function SanitizingHtmlSerializer() {
         this.sanitizedSomething = false;
         this.buf = [];
-        this.DOM = getDOM();
     }
     /**
      * @param {?} el
@@ -77598,33 +73522,33 @@ var SanitizingHtmlSerializer = /** @class */ (function () {
         // This cannot use a TreeWalker, as it has to run on Angular's various DOM adapters.
         // However this code never accesses properties off of `document` before deleting its contents
         // again, so it shouldn't be vulnerable to DOM clobbering.
-        var /** @type {?} */ current = /** @type {?} */ ((this.DOM.firstChild(el)));
+        var /** @type {?} */ current = /** @type {?} */ ((el.firstChild));
         while (current) {
-            if (this.DOM.isElementNode(current)) {
+            if (DOM.isElementNode(current)) {
                 this.startElement(/** @type {?} */ (current));
             }
-            else if (this.DOM.isTextNode(current)) {
-                this.chars(/** @type {?} */ ((this.DOM.nodeValue(current))));
+            else if (DOM.isTextNode(current)) {
+                this.chars(/** @type {?} */ ((DOM.nodeValue(current))));
             }
             else {
                 // Strip non-element, non-text nodes.
                 this.sanitizedSomething = true;
             }
-            if (this.DOM.firstChild(current)) {
-                current = /** @type {?} */ ((this.DOM.firstChild(current)));
+            if (DOM.firstChild(current)) {
+                current = /** @type {?} */ ((DOM.firstChild(current)));
                 continue;
             }
             while (current) {
                 // Leaving the element. Walk up and to the right, closing tags as we go.
-                if (this.DOM.isElementNode(current)) {
+                if (DOM.isElementNode(current)) {
                     this.endElement(/** @type {?} */ (current));
                 }
-                var /** @type {?} */ next = this.checkClobberedElement(current, /** @type {?} */ ((this.DOM.nextSibling(current))));
+                var /** @type {?} */ next = checkClobberedElement(current, /** @type {?} */ ((DOM.nextSibling(current))));
                 if (next) {
                     current = next;
                     break;
                 }
-                current = this.checkClobberedElement(current, /** @type {?} */ ((this.DOM.parentElement(current))));
+                current = checkClobberedElement(current, /** @type {?} */ ((DOM.parentElement(current))));
             }
         }
         return this.buf.join('');
@@ -77639,14 +73563,14 @@ var SanitizingHtmlSerializer = /** @class */ (function () {
      */
     function (element) {
         var _this = this;
-        var /** @type {?} */ tagName = this.DOM.nodeName(element).toLowerCase();
+        var /** @type {?} */ tagName = DOM.nodeName(element).toLowerCase();
         if (!VALID_ELEMENTS.hasOwnProperty(tagName)) {
             this.sanitizedSomething = true;
             return;
         }
         this.buf.push('<');
         this.buf.push(tagName);
-        this.DOM.attributeMap(element).forEach(function (value, attrName) {
+        DOM.attributeMap(element).forEach(function (value, attrName) {
             var /** @type {?} */ lower = attrName.toLowerCase();
             if (!VALID_ATTRS.hasOwnProperty(lower)) {
                 _this.sanitizedSomething = true;
@@ -77674,7 +73598,7 @@ var SanitizingHtmlSerializer = /** @class */ (function () {
      * @return {?}
      */
     function (current) {
-        var /** @type {?} */ tagName = this.DOM.nodeName(current).toLowerCase();
+        var /** @type {?} */ tagName = DOM.nodeName(current).toLowerCase();
         if (VALID_ELEMENTS.hasOwnProperty(tagName) && !VOID_ELEMENTS.hasOwnProperty(tagName)) {
             this.buf.push('</');
             this.buf.push(tagName);
@@ -77690,24 +73614,19 @@ var SanitizingHtmlSerializer = /** @class */ (function () {
      * @return {?}
      */
     function (chars) { this.buf.push(encodeEntities(chars)); };
-    /**
-     * @param {?} node
-     * @param {?} nextNode
-     * @return {?}
-     */
-    SanitizingHtmlSerializer.prototype.checkClobberedElement = /**
-     * @param {?} node
-     * @param {?} nextNode
-     * @return {?}
-     */
-    function (node, nextNode) {
-        if (nextNode && this.DOM.contains(node, nextNode)) {
-            throw new Error("Failed to sanitize html because the element is clobbered: " + this.DOM.getOuterHTML(node));
-        }
-        return nextNode;
-    };
     return SanitizingHtmlSerializer;
 }());
+/**
+ * @param {?} node
+ * @param {?} nextNode
+ * @return {?}
+ */
+function checkClobberedElement(node, nextNode) {
+    if (nextNode && DOM.contains(node, nextNode)) {
+        throw new Error("Failed to sanitize html because the element is clobbered: " + DOM.getOuterHTML(node));
+    }
+    return nextNode;
+}
 // Regular Expressions for parsing tags and attributes
 var SURROGATE_PAIR_REGEXP = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g;
 // ! to ~ is the ASCII range.
@@ -77730,7 +73649,27 @@ function encodeEntities(value) {
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 }
-var inertBodyHelper;
+/**
+ * When IE9-11 comes across an unknown namespaced attribute e.g. 'xlink:foo' it adds 'xmlns:ns1'
+ * attribute to declare ns1 namespace and prefixes the attribute with 'ns1' (e.g. 'ns1:xlink:foo').
+ *
+ * This is undesirable since we don't want to allow any of these custom attributes. This method
+ * strips them all.
+ * @param {?} el
+ * @return {?}
+ */
+function stripCustomNsAttrs(el) {
+    DOM.attributeMap(el).forEach(function (_, attrName) {
+        if (attrName === 'xmlns:ns1' || attrName.indexOf('ns1:') === 0) {
+            DOM.removeAttribute(el, attrName);
+        }
+    });
+    for (var _i = 0, _a = DOM.childNodesAsList(el); _i < _a.length; _i++) {
+        var n = _a[_i];
+        if (DOM.isElementNode(n))
+            stripCustomNsAttrs(/** @type {?} */ (n));
+    }
+}
 /**
  * Sanitizes the given unsafe, untrusted HTML fragment, and returns HTML text that is safe to add to
  * the DOM in a browser environment.
@@ -77739,13 +73678,10 @@ var inertBodyHelper;
  * @return {?}
  */
 function sanitizeHtml(defaultDoc, unsafeHtmlInput) {
-    var /** @type {?} */ DOM = getDOM();
-    var /** @type {?} */ inertBodyElement = null;
     try {
-        inertBodyHelper = inertBodyHelper || new InertBodyHelper(defaultDoc, DOM);
+        var /** @type {?} */ containerEl = getInertElement();
         // Make sure unsafeHtml is actually a string (TypeScript types are not enforced at runtime).
         var /** @type {?} */ unsafeHtml = unsafeHtmlInput ? String(unsafeHtmlInput) : '';
-        inertBodyElement = inertBodyHelper.getInertBodyElement(unsafeHtml);
         // mXSS protection. Repeatedly parse the document to make sure it stabilizes, so that a browser
         // trying to auto-correct incorrect HTML cannot cause formerly inert HTML to become dangerous.
         var /** @type {?} */ mXSSAttempts = 5;
@@ -77756,25 +73692,30 @@ function sanitizeHtml(defaultDoc, unsafeHtmlInput) {
             }
             mXSSAttempts--;
             unsafeHtml = parsedHtml;
-            parsedHtml = DOM.getInnerHTML(inertBodyElement);
-            inertBodyElement = inertBodyHelper.getInertBodyElement(unsafeHtml);
+            DOM.setInnerHTML(containerEl, unsafeHtml);
+            if (defaultDoc.documentMode) {
+                // strip custom-namespaced attributes on IE<=11
+                stripCustomNsAttrs(containerEl);
+            }
+            parsedHtml = DOM.getInnerHTML(containerEl);
         } while (unsafeHtml !== parsedHtml);
         var /** @type {?} */ sanitizer = new SanitizingHtmlSerializer();
-        var /** @type {?} */ safeHtml = sanitizer.sanitizeChildren(DOM.getTemplateContent(inertBodyElement) || inertBodyElement);
+        var /** @type {?} */ safeHtml = sanitizer.sanitizeChildren(DOM.getTemplateContent(containerEl) || containerEl);
+        // Clear out the body element.
+        var /** @type {?} */ parent_1 = DOM.getTemplateContent(containerEl) || containerEl;
+        for (var _i = 0, _a = DOM.childNodesAsList(parent_1); _i < _a.length; _i++) {
+            var child = _a[_i];
+            DOM.removeChild(parent_1, child);
+        }
         if (Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["_13" /* isDevMode */])() && sanitizer.sanitizedSomething) {
             DOM.log('WARNING: sanitizing HTML stripped some content (see http://g.co/ng/security#xss).');
         }
         return safeHtml;
     }
-    finally {
+    catch (/** @type {?} */ e) {
         // In case anything goes wrong, clear out inertElement to reset the entire DOM structure.
-        if (inertBodyElement) {
-            var /** @type {?} */ parent_1 = DOM.getTemplateContent(inertBodyElement) || inertBodyElement;
-            for (var _i = 0, _a = DOM.childNodesAsList(parent_1); _i < _a.length; _i++) {
-                var child = _a[_i];
-                DOM.removeChild(parent_1, child);
-            }
-        }
+        inertElement = null;
+        throw e;
     }
 }
 
@@ -77963,12 +73904,12 @@ function sanitizeStyle(value) {
  * \@stable
  * @abstract
  */
-var DomSanitizer = /** @class */ (function () {
+var DomSanitizer = (function () {
     function DomSanitizer() {
     }
     return DomSanitizer;
 }());
-var DomSanitizerImpl = /** @class */ (function (_super) {
+var DomSanitizerImpl = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(DomSanitizerImpl, _super);
     function DomSanitizerImpl(_doc) {
         var _this = _super.call(this) || this;
@@ -78098,7 +74039,7 @@ var DomSanitizerImpl = /** @class */ (function (_super) {
 /**
  * @abstract
  */
-var SafeValueImpl = /** @class */ (function () {
+var SafeValueImpl = (function () {
     function SafeValueImpl(changingThisBreaksApplicationSecurity) {
         // empty
         this.changingThisBreaksApplicationSecurity = changingThisBreaksApplicationSecurity;
@@ -78115,7 +74056,7 @@ var SafeValueImpl = /** @class */ (function () {
     };
     return SafeValueImpl;
 }());
-var SafeHtmlImpl = /** @class */ (function (_super) {
+var SafeHtmlImpl = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(SafeHtmlImpl, _super);
     function SafeHtmlImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -78129,7 +74070,7 @@ var SafeHtmlImpl = /** @class */ (function (_super) {
     function () { return 'HTML'; };
     return SafeHtmlImpl;
 }(SafeValueImpl));
-var SafeStyleImpl = /** @class */ (function (_super) {
+var SafeStyleImpl = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(SafeStyleImpl, _super);
     function SafeStyleImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -78143,7 +74084,7 @@ var SafeStyleImpl = /** @class */ (function (_super) {
     function () { return 'Style'; };
     return SafeStyleImpl;
 }(SafeValueImpl));
-var SafeScriptImpl = /** @class */ (function (_super) {
+var SafeScriptImpl = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(SafeScriptImpl, _super);
     function SafeScriptImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -78157,7 +74098,7 @@ var SafeScriptImpl = /** @class */ (function (_super) {
     function () { return 'Script'; };
     return SafeScriptImpl;
 }(SafeValueImpl));
-var SafeUrlImpl = /** @class */ (function (_super) {
+var SafeUrlImpl = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(SafeUrlImpl, _super);
     function SafeUrlImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -78171,7 +74112,7 @@ var SafeUrlImpl = /** @class */ (function (_super) {
     function () { return 'URL'; };
     return SafeUrlImpl;
 }(SafeValueImpl));
-var SafeResourceUrlImpl = /** @class */ (function (_super) {
+var SafeResourceUrlImpl = (function (_super) {
     Object(__WEBPACK_IMPORTED_MODULE_2_tslib__["b" /* __extends */])(SafeResourceUrlImpl, _super);
     function SafeResourceUrlImpl() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -78241,7 +74182,7 @@ function _document() {
  *
  * \@stable
  */
-var BrowserModule = /** @class */ (function () {
+var BrowserModule = (function () {
     function BrowserModule(parentModule) {
         if (parentModule) {
             throw new Error("BrowserModule has already been loaded. If you need access to common directives such as NgIf and NgFor from a lazy loaded module, import CommonModule instead.");
@@ -78335,7 +74276,7 @@ var win = typeof window !== 'undefined' && window || /** @type {?} */ ({});
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-var ChangeDetectionPerfRecord = /** @class */ (function () {
+var ChangeDetectionPerfRecord = (function () {
     function ChangeDetectionPerfRecord(msPerTick, numTicks) {
         this.msPerTick = msPerTick;
         this.numTicks = numTicks;
@@ -78346,7 +74287,7 @@ var ChangeDetectionPerfRecord = /** @class */ (function () {
  * Entry point for all Angular profiling-related debug tools. This object
  * corresponds to the `ng.profiler` in the dev console.
  */
-var AngularProfiler = /** @class */ (function () {
+var AngularProfiler = (function () {
     function AngularProfiler(ref) {
         this.appRef = ref.injector.get(__WEBPACK_IMPORTED_MODULE_1__angular_core__["f" /* ApplicationRef */]);
     }
@@ -78436,13 +74377,6 @@ var AngularProfiler = /** @class */ (function () {
 /**
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
- */
-/**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
  */
 var PROFILER_GLOBAL_NAME = 'profiler';
 /**
@@ -78547,7 +74481,7 @@ function makeStateKey(key) {
  *
  * \@experimental
  */
-var TransferState = /** @class */ (function () {
+var TransferState = (function () {
     function TransferState() {
         this.store = {};
         this.onSerializeCallbacks = {};
@@ -78585,9 +74519,7 @@ var TransferState = /** @class */ (function () {
      * @param {?} defaultValue
      * @return {?}
      */
-    function (key, defaultValue) {
-        return this.store[key] !== undefined ? /** @type {?} */ (this.store[key]) : defaultValue;
-    };
+    function (key, defaultValue) { return /** @type {?} */ (this.store[key]) || defaultValue; };
     /**
      * Set the value corresponding to a key.
      */
@@ -78716,7 +74648,7 @@ function initTransferState(doc, appId) {
  *
  * \@experimental
  */
-var BrowserTransferStateModule = /** @class */ (function () {
+var BrowserTransferStateModule = (function () {
     function BrowserTransferStateModule() {
     }
     BrowserTransferStateModule.decorators = [
@@ -78734,18 +74666,11 @@ var BrowserTransferStateModule = /** @class */ (function () {
  * @suppress {checkTypes} checked by tsc
  */
 /**
- * @license
- * Copyright Google Inc. All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Predicates for use with {\@link DebugElement}'s query functions.
  *
  * \@experimental All debugging apis are currently experimental.
  */
-var By = /** @class */ (function () {
+var By = (function () {
     function By() {
     }
     /**
@@ -78830,7 +74755,7 @@ var By = /** @class */ (function () {
      * @return {?}
      */
     function (type) {
-        return function (debugElement) { return ((debugElement.providerTokens)).indexOf(type) !== -1; };
+        return function (debugElement) { return /** @type {?} */ ((debugElement.providerTokens)).indexOf(type) !== -1; };
     };
     return By;
 }());
@@ -78859,9 +74784,14 @@ var By = /** @class */ (function () {
  * found in the LICENSE file at https://angular.io/license
  */
 /**
+ * @module
+ * @description
+ * Entry point for all public APIs of the common package.
+ */
+/**
  * \@stable
  */
-var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_5" /* Version */]('5.2.9');
+var VERSION = new __WEBPACK_IMPORTED_MODULE_1__angular_core__["_5" /* Version */]('5.0.2');
 
 /**
  * @fileoverview added by tsickle
@@ -85990,7 +81920,7 @@ var BehaviorSubject = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return BehaviorSubject;
 }(__WEBPACK_IMPORTED_MODULE_0__Subject__["a" /* Subject */]));
-//# sourceMappingURL=BehaviorSubject.js.map
+//# sourceMappingURL=BehaviorSubject.js.map 
 
 
 /***/ }),
@@ -86037,7 +81967,7 @@ var InnerSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return InnerSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */]));
-//# sourceMappingURL=InnerSubscriber.js.map
+//# sourceMappingURL=InnerSubscriber.js.map 
 
 
 /***/ }),
@@ -86210,7 +82140,7 @@ var Observable = /*@__PURE__*/ (/*@__PURE__*/ function () {
             operator.call(sink, this.source);
         }
         else {
-            sink.add(this.source || !sink.syncErrorThrowable ? this._subscribe(sink) : this._trySubscribe(sink));
+            sink.add(this.source ? this._subscribe(sink) : this._trySubscribe(sink));
         }
         if (sink.syncErrorThrowable) {
             sink.syncErrorThrowable = false;
@@ -86354,7 +82284,7 @@ var Observable = /*@__PURE__*/ (/*@__PURE__*/ function () {
     };
     return Observable;
 }());
-//# sourceMappingURL=Observable.js.map
+//# sourceMappingURL=Observable.js.map 
 
 
 /***/ }),
@@ -86371,7 +82301,7 @@ var empty = {
     error: function (err) { throw err; },
     complete: function () { }
 };
-//# sourceMappingURL=Observer.js.map
+//# sourceMappingURL=Observer.js.map 
 
 
 /***/ }),
@@ -86412,7 +82342,7 @@ var OuterSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return OuterSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */]));
-//# sourceMappingURL=OuterSubscriber.js.map
+//# sourceMappingURL=OuterSubscriber.js.map 
 
 
 /***/ }),
@@ -86596,7 +82526,7 @@ var AnonymousSubject = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return AnonymousSubject;
 }(Subject));
-//# sourceMappingURL=Subject.js.map
+//# sourceMappingURL=Subject.js.map 
 
 
 /***/ }),
@@ -86647,7 +82577,7 @@ var SubjectSubscription = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return SubjectSubscription;
 }(__WEBPACK_IMPORTED_MODULE_0__Subscription__["a" /* Subscription */]));
-//# sourceMappingURL=SubjectSubscription.js.map
+//# sourceMappingURL=SubjectSubscription.js.map 
 
 
 /***/ }),
@@ -86709,13 +82639,9 @@ var Subscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
                     break;
                 }
                 if (typeof destinationOrNext === 'object') {
-                    // HACK(benlesh): To resolve an issue where Node users may have multiple
-                    // copies of rxjs in their node_modules directory.
-                    if (isTrustedSubscriber(destinationOrNext)) {
-                        var trustedSubscriber = destinationOrNext[__WEBPACK_IMPORTED_MODULE_3__symbol_rxSubscriber__["a" /* rxSubscriber */]]();
-                        this.syncErrorThrowable = trustedSubscriber.syncErrorThrowable;
-                        this.destination = trustedSubscriber;
-                        trustedSubscriber.add(this);
+                    if (destinationOrNext instanceof Subscriber) {
+                        this.destination = destinationOrNext;
+                        this.destination.add(this);
                     }
                     else {
                         this.syncErrorThrowable = true;
@@ -86929,10 +82855,7 @@ var SafeSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return SafeSubscriber;
 }(Subscriber));
-function isTrustedSubscriber(obj) {
-    return obj instanceof Subscriber || ('syncErrorThrowable' in obj && obj[__WEBPACK_IMPORTED_MODULE_3__symbol_rxSubscriber__["a" /* rxSubscriber */]]);
-}
-//# sourceMappingURL=Subscriber.js.map
+//# sourceMappingURL=Subscriber.js.map 
 
 
 /***/ }),
@@ -87139,7 +83062,7 @@ var Subscription = /*@__PURE__*/ (/*@__PURE__*/ function () {
 function flattenUnsubscriptionErrors(errors) {
     return errors.reduce(function (errs, err) { return errs.concat((err instanceof __WEBPACK_IMPORTED_MODULE_5__util_UnsubscriptionError__["a" /* UnsubscriptionError */]) ? err.errors : err); }, []);
 }
-//# sourceMappingURL=Subscription.js.map
+//# sourceMappingURL=Subscription.js.map 
 
 
 /***/ }),
@@ -87154,7 +83077,7 @@ function flattenUnsubscriptionErrors(errors) {
 
 
 __WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */].prototype.map = __WEBPACK_IMPORTED_MODULE_1__operator_map__["a" /* map */];
-//# sourceMappingURL=map.js.map
+//# sourceMappingURL=map.js.map 
 
 
 /***/ }),
@@ -87290,7 +83213,7 @@ var ArrayObservable = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return ArrayObservable;
 }(__WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */]));
-//# sourceMappingURL=ArrayObservable.js.map
+//# sourceMappingURL=ArrayObservable.js.map 
 
 
 /***/ }),
@@ -87476,7 +83399,7 @@ var RefCountSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return RefCountSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_2__Subscriber__["a" /* Subscriber */]));
-//# sourceMappingURL=ConnectableObservable.js.map
+//# sourceMappingURL=ConnectableObservable.js.map 
 
 
 /***/ }),
@@ -87568,7 +83491,7 @@ var EmptyObservable = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return EmptyObservable;
 }(__WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */]));
-//# sourceMappingURL=EmptyObservable.js.map
+//# sourceMappingURL=EmptyObservable.js.map 
 
 
 /***/ }),
@@ -87785,7 +83708,7 @@ var ForkJoinSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return ForkJoinSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_4__OuterSubscriber__["a" /* OuterSubscriber */]));
-//# sourceMappingURL=ForkJoinObservable.js.map
+//# sourceMappingURL=ForkJoinObservable.js.map 
 
 
 /***/ }),
@@ -87977,7 +83900,7 @@ var FromEventObservable = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
         else if (isEventTarget(sourceObj)) {
             var source_1 = sourceObj;
             sourceObj.addEventListener(eventName, handler, options);
-            unsubscribe = function () { return source_1.removeEventListener(eventName, handler, options); };
+            unsubscribe = function () { return source_1.removeEventListener(eventName, handler); };
         }
         else if (isJQueryStyleEventEmitter(sourceObj)) {
             var source_2 = sourceObj;
@@ -88016,7 +83939,7 @@ var FromEventObservable = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return FromEventObservable;
 }(__WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */]));
-//# sourceMappingURL=FromEventObservable.js.map
+//# sourceMappingURL=FromEventObservable.js.map 
 
 
 /***/ }),
@@ -88149,7 +84072,7 @@ function dispatchError(arg) {
         subscriber.error(err);
     }
 }
-//# sourceMappingURL=PromiseObservable.js.map
+//# sourceMappingURL=PromiseObservable.js.map 
 
 
 /***/ }),
@@ -88218,7 +84141,7 @@ var ScalarObservable = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return ScalarObservable;
 }(__WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */]));
-//# sourceMappingURL=ScalarObservable.js.map
+//# sourceMappingURL=ScalarObservable.js.map 
 
 
 /***/ }),
@@ -88232,7 +84155,7 @@ var ScalarObservable = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
 /** PURE_IMPORTS_START ._ForkJoinObservable PURE_IMPORTS_END */
 
 var forkJoin = __WEBPACK_IMPORTED_MODULE_0__ForkJoinObservable__["a" /* ForkJoinObservable */].create;
-//# sourceMappingURL=forkJoin.js.map
+//# sourceMappingURL=forkJoin.js.map 
 
 
 /***/ }),
@@ -88246,7 +84169,7 @@ var forkJoin = __WEBPACK_IMPORTED_MODULE_0__ForkJoinObservable__["a" /* ForkJoin
 /** PURE_IMPORTS_START ._FromEventObservable PURE_IMPORTS_END */
 
 var fromEvent = __WEBPACK_IMPORTED_MODULE_0__FromEventObservable__["a" /* FromEventObservable */].create;
-//# sourceMappingURL=fromEvent.js.map
+//# sourceMappingURL=fromEvent.js.map 
 
 
 /***/ }),
@@ -88260,7 +84183,7 @@ var fromEvent = __WEBPACK_IMPORTED_MODULE_0__FromEventObservable__["a" /* FromEv
 /** PURE_IMPORTS_START ._PromiseObservable PURE_IMPORTS_END */
 
 var fromPromise = __WEBPACK_IMPORTED_MODULE_0__PromiseObservable__["a" /* PromiseObservable */].create;
-//# sourceMappingURL=fromPromise.js.map
+//# sourceMappingURL=fromPromise.js.map 
 
 
 /***/ }),
@@ -88269,100 +84192,12 @@ var fromPromise = __WEBPACK_IMPORTED_MODULE_0__PromiseObservable__["a" /* Promis
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = merge;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Observable__ = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__ArrayObservable__ = __webpack_require__("./node_modules/rxjs/_esm5/observable/ArrayObservable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util_isScheduler__ = __webpack_require__("./node_modules/rxjs/_esm5/util/isScheduler.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__operators_mergeAll__ = __webpack_require__("./node_modules/rxjs/_esm5/operators/mergeAll.js");
-/** PURE_IMPORTS_START .._Observable,._ArrayObservable,.._util_isScheduler,.._operators_mergeAll PURE_IMPORTS_END */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return merge; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__operator_merge__ = __webpack_require__("./node_modules/rxjs/_esm5/operator/merge.js");
+/** PURE_IMPORTS_START .._operator_merge PURE_IMPORTS_END */
 
-
-
-
-/* tslint:enable:max-line-length */
-/**
- * Creates an output Observable which concurrently emits all values from every
- * given input Observable.
- *
- * <span class="informal">Flattens multiple Observables together by blending
- * their values into one Observable.</span>
- *
- * <img src="./img/merge.png" width="100%">
- *
- * `merge` subscribes to each given input Observable (as arguments), and simply
- * forwards (without doing any transformation) all the values from all the input
- * Observables to the output Observable. The output Observable only completes
- * once all input Observables have completed. Any error delivered by an input
- * Observable will be immediately emitted on the output Observable.
- *
- * @example <caption>Merge together two Observables: 1s interval and clicks</caption>
- * var clicks = Rx.Observable.fromEvent(document, 'click');
- * var timer = Rx.Observable.interval(1000);
- * var clicksOrTimer = Rx.Observable.merge(clicks, timer);
- * clicksOrTimer.subscribe(x => console.log(x));
- *
- * // Results in the following:
- * // timer will emit ascending values, one every second(1000ms) to console
- * // clicks logs MouseEvents to console everytime the "document" is clicked
- * // Since the two streams are merged you see these happening
- * // as they occur.
- *
- * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>
- * var timer1 = Rx.Observable.interval(1000).take(10);
- * var timer2 = Rx.Observable.interval(2000).take(6);
- * var timer3 = Rx.Observable.interval(500).take(10);
- * var concurrent = 2; // the argument
- * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);
- * merged.subscribe(x => console.log(x));
- *
- * // Results in the following:
- * // - First timer1 and timer2 will run concurrently
- * // - timer1 will emit a value every 1000ms for 10 iterations
- * // - timer2 will emit a value every 2000ms for 6 iterations
- * // - after timer1 hits it's max iteration, timer2 will
- * //   continue, and timer3 will start to run concurrently with timer2
- * // - when timer2 hits it's max iteration it terminates, and
- * //   timer3 will continue to emit a value every 500ms until it is complete
- *
- * @see {@link mergeAll}
- * @see {@link mergeMap}
- * @see {@link mergeMapTo}
- * @see {@link mergeScan}
- *
- * @param {...ObservableInput} observables Input Observables to merge together.
- * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
- * Observables being subscribed to concurrently.
- * @param {Scheduler} [scheduler=null] The IScheduler to use for managing
- * concurrency of input Observables.
- * @return {Observable} an Observable that emits items that are the result of
- * every input Observable.
- * @static true
- * @name merge
- * @owner Observable
- */
-function merge() {
-    var observables = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        observables[_i - 0] = arguments[_i];
-    }
-    var concurrent = Number.POSITIVE_INFINITY;
-    var scheduler = null;
-    var last = observables[observables.length - 1];
-    if (Object(__WEBPACK_IMPORTED_MODULE_2__util_isScheduler__["a" /* isScheduler */])(last)) {
-        scheduler = observables.pop();
-        if (observables.length > 1 && typeof observables[observables.length - 1] === 'number') {
-            concurrent = observables.pop();
-        }
-    }
-    else if (typeof last === 'number') {
-        concurrent = observables.pop();
-    }
-    if (scheduler === null && observables.length === 1 && observables[0] instanceof __WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */]) {
-        return observables[0];
-    }
-    return Object(__WEBPACK_IMPORTED_MODULE_3__operators_mergeAll__["a" /* mergeAll */])(concurrent)(new __WEBPACK_IMPORTED_MODULE_1__ArrayObservable__["a" /* ArrayObservable */](observables, scheduler));
-}
-//# sourceMappingURL=merge.js.map
+var merge = __WEBPACK_IMPORTED_MODULE_0__operator_merge__["a" /* mergeStatic */];
+//# sourceMappingURL=merge.js.map 
 
 
 /***/ }),
@@ -88422,7 +84257,7 @@ function merge() {
 function _do(nextOrObserver, error, complete) {
     return Object(__WEBPACK_IMPORTED_MODULE_0__operators_tap__["a" /* tap */])(nextOrObserver, error, complete)(this);
 }
-//# sourceMappingURL=do.js.map
+//# sourceMappingURL=do.js.map 
 
 
 /***/ }),
@@ -88478,7 +84313,7 @@ function _do(nextOrObserver, error, complete) {
 function filter(predicate, thisArg) {
     return Object(__WEBPACK_IMPORTED_MODULE_0__operators_filter__["a" /* filter */])(predicate, thisArg)(this);
 }
-//# sourceMappingURL=filter.js.map
+//# sourceMappingURL=filter.js.map 
 
 
 /***/ }),
@@ -88498,7 +84333,7 @@ function filter(predicate, thisArg) {
 function letProto(func) {
     return func(this);
 }
-//# sourceMappingURL=let.js.map
+//# sourceMappingURL=let.js.map 
 
 
 /***/ }),
@@ -88547,7 +84382,76 @@ function letProto(func) {
 function map(project, thisArg) {
     return Object(__WEBPACK_IMPORTED_MODULE_0__operators_map__["a" /* map */])(project, thisArg)(this);
 }
-//# sourceMappingURL=map.js.map
+//# sourceMappingURL=map.js.map 
+
+
+/***/ }),
+
+/***/ "./node_modules/rxjs/_esm5/operator/merge.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export merge */
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__operators_merge__ = __webpack_require__("./node_modules/rxjs/_esm5/operators/merge.js");
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_0__operators_merge__["b"]; });
+/** PURE_IMPORTS_START .._operators_merge PURE_IMPORTS_END */
+
+
+/* tslint:enable:max-line-length */
+/**
+ * Creates an output Observable which concurrently emits all values from every
+ * given input Observable.
+ *
+ * <span class="informal">Flattens multiple Observables together by blending
+ * their values into one Observable.</span>
+ *
+ * <img src="./img/merge.png" width="100%">
+ *
+ * `merge` subscribes to each given input Observable (either the source or an
+ * Observable given as argument), and simply forwards (without doing any
+ * transformation) all the values from all the input Observables to the output
+ * Observable. The output Observable only completes once all input Observables
+ * have completed. Any error delivered by an input Observable will be immediately
+ * emitted on the output Observable.
+ *
+ * @example <caption>Merge together two Observables: 1s interval and clicks</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var timer = Rx.Observable.interval(1000);
+ * var clicksOrTimer = clicks.merge(timer);
+ * clicksOrTimer.subscribe(x => console.log(x));
+ *
+ * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>
+ * var timer1 = Rx.Observable.interval(1000).take(10);
+ * var timer2 = Rx.Observable.interval(2000).take(6);
+ * var timer3 = Rx.Observable.interval(500).take(10);
+ * var concurrent = 2; // the argument
+ * var merged = timer1.merge(timer2, timer3, concurrent);
+ * merged.subscribe(x => console.log(x));
+ *
+ * @see {@link mergeAll}
+ * @see {@link mergeMap}
+ * @see {@link mergeMapTo}
+ * @see {@link mergeScan}
+ *
+ * @param {ObservableInput} other An input Observable to merge with the source
+ * Observable. More than one input Observables may be given as argument.
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
+ * Observables being subscribed to concurrently.
+ * @param {Scheduler} [scheduler=null] The IScheduler to use for managing
+ * concurrency of input Observables.
+ * @return {Observable} An Observable that emits items that are the result of
+ * every input Observable.
+ * @method merge
+ * @owner Observable
+ */
+function merge() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        observables[_i - 0] = arguments[_i];
+    }
+    return __WEBPACK_IMPORTED_MODULE_0__operators_merge__["a" /* merge */].apply(void 0, observables)(this);
+}
+//# sourceMappingURL=merge.js.map 
 
 
 /***/ }),
@@ -88580,7 +84484,7 @@ function share() {
     return Object(__WEBPACK_IMPORTED_MODULE_0__operators_share__["a" /* share */])()(this);
 }
 ;
-//# sourceMappingURL=share.js.map
+//# sourceMappingURL=share.js.map 
 
 
 /***/ }),
@@ -88644,7 +84548,7 @@ function share() {
 function switchMap(project, resultSelector) {
     return Object(__WEBPACK_IMPORTED_MODULE_0__operators_switchMap__["a" /* switchMap */])(project, resultSelector)(this);
 }
-//# sourceMappingURL=switchMap.js.map
+//# sourceMappingURL=switchMap.js.map 
 
 
 /***/ }),
@@ -88749,7 +84653,7 @@ var FilterSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return FilterSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */]));
-//# sourceMappingURL=filter.js.map
+//# sourceMappingURL=filter.js.map 
 
 
 /***/ }),
@@ -88849,7 +84753,118 @@ var MapSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return MapSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */]));
-//# sourceMappingURL=map.js.map
+//# sourceMappingURL=map.js.map 
+
+
+/***/ }),
+
+/***/ "./node_modules/rxjs/_esm5/operators/merge.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = merge;
+/* harmony export (immutable) */ __webpack_exports__["b"] = mergeStatic;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Observable__ = __webpack_require__("./node_modules/rxjs/_esm5/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__observable_ArrayObservable__ = __webpack_require__("./node_modules/rxjs/_esm5/observable/ArrayObservable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mergeAll__ = __webpack_require__("./node_modules/rxjs/_esm5/operators/mergeAll.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util_isScheduler__ = __webpack_require__("./node_modules/rxjs/_esm5/util/isScheduler.js");
+/** PURE_IMPORTS_START .._Observable,.._observable_ArrayObservable,._mergeAll,.._util_isScheduler PURE_IMPORTS_END */
+
+
+
+
+/* tslint:enable:max-line-length */
+function merge() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        observables[_i - 0] = arguments[_i];
+    }
+    return function (source) { return source.lift.call(mergeStatic.apply(void 0, [source].concat(observables))); };
+}
+/* tslint:enable:max-line-length */
+/**
+ * Creates an output Observable which concurrently emits all values from every
+ * given input Observable.
+ *
+ * <span class="informal">Flattens multiple Observables together by blending
+ * their values into one Observable.</span>
+ *
+ * <img src="./img/merge.png" width="100%">
+ *
+ * `merge` subscribes to each given input Observable (as arguments), and simply
+ * forwards (without doing any transformation) all the values from all the input
+ * Observables to the output Observable. The output Observable only completes
+ * once all input Observables have completed. Any error delivered by an input
+ * Observable will be immediately emitted on the output Observable.
+ *
+ * @example <caption>Merge together two Observables: 1s interval and clicks</caption>
+ * var clicks = Rx.Observable.fromEvent(document, 'click');
+ * var timer = Rx.Observable.interval(1000);
+ * var clicksOrTimer = Rx.Observable.merge(clicks, timer);
+ * clicksOrTimer.subscribe(x => console.log(x));
+ *
+ * // Results in the following:
+ * // timer will emit ascending values, one every second(1000ms) to console
+ * // clicks logs MouseEvents to console everytime the "document" is clicked
+ * // Since the two streams are merged you see these happening
+ * // as they occur.
+ *
+ * @example <caption>Merge together 3 Observables, but only 2 run concurrently</caption>
+ * var timer1 = Rx.Observable.interval(1000).take(10);
+ * var timer2 = Rx.Observable.interval(2000).take(6);
+ * var timer3 = Rx.Observable.interval(500).take(10);
+ * var concurrent = 2; // the argument
+ * var merged = Rx.Observable.merge(timer1, timer2, timer3, concurrent);
+ * merged.subscribe(x => console.log(x));
+ *
+ * // Results in the following:
+ * // - First timer1 and timer2 will run concurrently
+ * // - timer1 will emit a value every 1000ms for 10 iterations
+ * // - timer2 will emit a value every 2000ms for 6 iterations
+ * // - after timer1 hits it's max iteration, timer2 will
+ * //   continue, and timer3 will start to run concurrently with timer2
+ * // - when timer2 hits it's max iteration it terminates, and
+ * //   timer3 will continue to emit a value every 500ms until it is complete
+ *
+ * @see {@link mergeAll}
+ * @see {@link mergeMap}
+ * @see {@link mergeMapTo}
+ * @see {@link mergeScan}
+ *
+ * @param {...ObservableInput} observables Input Observables to merge together.
+ * @param {number} [concurrent=Number.POSITIVE_INFINITY] Maximum number of input
+ * Observables being subscribed to concurrently.
+ * @param {Scheduler} [scheduler=null] The IScheduler to use for managing
+ * concurrency of input Observables.
+ * @return {Observable} an Observable that emits items that are the result of
+ * every input Observable.
+ * @static true
+ * @name merge
+ * @owner Observable
+ */
+function mergeStatic() {
+    var observables = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        observables[_i - 0] = arguments[_i];
+    }
+    var concurrent = Number.POSITIVE_INFINITY;
+    var scheduler = null;
+    var last = observables[observables.length - 1];
+    if (Object(__WEBPACK_IMPORTED_MODULE_3__util_isScheduler__["a" /* isScheduler */])(last)) {
+        scheduler = observables.pop();
+        if (observables.length > 1 && typeof observables[observables.length - 1] === 'number') {
+            concurrent = observables.pop();
+        }
+    }
+    else if (typeof last === 'number') {
+        concurrent = observables.pop();
+    }
+    if (scheduler === null && observables.length === 1 && observables[0] instanceof __WEBPACK_IMPORTED_MODULE_0__Observable__["a" /* Observable */]) {
+        return observables[0];
+    }
+    return Object(__WEBPACK_IMPORTED_MODULE_2__mergeAll__["a" /* mergeAll */])(concurrent)(new __WEBPACK_IMPORTED_MODULE_1__observable_ArrayObservable__["a" /* ArrayObservable */](observables, scheduler));
+}
+//# sourceMappingURL=merge.js.map 
 
 
 /***/ }),
@@ -88914,7 +84929,7 @@ function mergeAll(concurrent) {
     }
     return Object(__WEBPACK_IMPORTED_MODULE_0__mergeMap__["a" /* mergeMap */])(__WEBPACK_IMPORTED_MODULE_1__util_identity__["a" /* identity */], null, concurrent);
 }
-//# sourceMappingURL=mergeAll.js.map
+//# sourceMappingURL=mergeAll.js.map 
 
 
 /***/ }),
@@ -89105,7 +85120,7 @@ var MergeMapSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return MergeMapSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_1__OuterSubscriber__["a" /* OuterSubscriber */]));
-//# sourceMappingURL=mergeMap.js.map
+//# sourceMappingURL=mergeMap.js.map 
 
 
 /***/ }),
@@ -89173,7 +85188,7 @@ var MulticastOperator = /*@__PURE__*/ (/*@__PURE__*/ function () {
     };
     return MulticastOperator;
 }());
-//# sourceMappingURL=multicast.js.map
+//# sourceMappingURL=multicast.js.map 
 
 
 /***/ }),
@@ -89269,7 +85284,7 @@ var RefCountSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return RefCountSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */]));
-//# sourceMappingURL=refCount.js.map
+//# sourceMappingURL=refCount.js.map 
 
 
 /***/ }),
@@ -89305,7 +85320,7 @@ function share() {
     return function (source) { return Object(__WEBPACK_IMPORTED_MODULE_1__refCount__["a" /* refCount */])()(Object(__WEBPACK_IMPORTED_MODULE_0__multicast__["a" /* multicast */])(shareSubjectFactory)(source)); };
 }
 ;
-//# sourceMappingURL=share.js.map
+//# sourceMappingURL=share.js.map 
 
 
 /***/ }),
@@ -89459,7 +85474,7 @@ var SwitchMapSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return SwitchMapSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_0__OuterSubscriber__["a" /* OuterSubscriber */]));
-//# sourceMappingURL=switchMap.js.map
+//# sourceMappingURL=switchMap.js.map 
 
 
 /***/ }),
@@ -89583,7 +85598,7 @@ var DoSubscriber = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     };
     return DoSubscriber;
 }(__WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */]));
-//# sourceMappingURL=tap.js.map
+//# sourceMappingURL=tap.js.map 
 
 
 /***/ }),
@@ -89632,7 +85647,7 @@ var iterator = /*@__PURE__*/ symbolIteratorPonyfill(__WEBPACK_IMPORTED_MODULE_0_
  * @deprecated use iterator instead
  */
 var $$iterator = iterator;
-//# sourceMappingURL=iterator.js.map
+//# sourceMappingURL=iterator.js.map 
 
 
 /***/ }),
@@ -89669,7 +85684,7 @@ var observable = /*@__PURE__*/ getSymbolObservable(__WEBPACK_IMPORTED_MODULE_0__
  * @deprecated use observable instead
  */
 var $$observable = observable;
-//# sourceMappingURL=observable.js.map
+//# sourceMappingURL=observable.js.map 
 
 
 /***/ }),
@@ -89690,7 +85705,7 @@ var rxSubscriber = (typeof Symbol === 'function' && typeof Symbol.for === 'funct
  * @deprecated use rxSubscriber instead
  */
 var $$rxSubscriber = rxSubscriber;
-//# sourceMappingURL=rxSubscriber.js.map
+//# sourceMappingURL=rxSubscriber.js.map 
 
 
 /***/ }),
@@ -89727,7 +85742,7 @@ var ObjectUnsubscribedError = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     }
     return ObjectUnsubscribedError;
 }(Error));
-//# sourceMappingURL=ObjectUnsubscribedError.js.map
+//# sourceMappingURL=ObjectUnsubscribedError.js.map 
 
 
 /***/ }),
@@ -89762,7 +85777,7 @@ var UnsubscriptionError = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
     }
     return UnsubscriptionError;
 }(Error));
-//# sourceMappingURL=UnsubscriptionError.js.map
+//# sourceMappingURL=UnsubscriptionError.js.map 
 
 
 /***/ }),
@@ -89775,7 +85790,7 @@ var UnsubscriptionError = /*@__PURE__*/ (/*@__PURE__*/ function (_super) {
 // typeof any so that it we don't have to cast when comparing a result to the error object
 /** PURE_IMPORTS_START  PURE_IMPORTS_END */
 var errorObject = { e: {} };
-//# sourceMappingURL=errorObject.js.map
+//# sourceMappingURL=errorObject.js.map 
 
 
 /***/ }),
@@ -89789,7 +85804,7 @@ var errorObject = { e: {} };
 function identity(x) {
     return x;
 }
-//# sourceMappingURL=identity.js.map
+//# sourceMappingURL=identity.js.map 
 
 
 /***/ }),
@@ -89801,7 +85816,7 @@ function identity(x) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return isArray; });
 /** PURE_IMPORTS_START  PURE_IMPORTS_END */
 var isArray = Array.isArray || (function (x) { return x && typeof x.length === 'number'; });
-//# sourceMappingURL=isArray.js.map
+//# sourceMappingURL=isArray.js.map 
 
 
 /***/ }),
@@ -89813,7 +85828,7 @@ var isArray = Array.isArray || (function (x) { return x && typeof x.length === '
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return isArrayLike; });
 /** PURE_IMPORTS_START  PURE_IMPORTS_END */
 var isArrayLike = (function (x) { return x && typeof x.length === 'number'; });
-//# sourceMappingURL=isArrayLike.js.map
+//# sourceMappingURL=isArrayLike.js.map 
 
 
 /***/ }),
@@ -89827,7 +85842,7 @@ var isArrayLike = (function (x) { return x && typeof x.length === 'number'; });
 function isFunction(x) {
     return typeof x === 'function';
 }
-//# sourceMappingURL=isFunction.js.map
+//# sourceMappingURL=isFunction.js.map 
 
 
 /***/ }),
@@ -89841,7 +85856,7 @@ function isFunction(x) {
 function isObject(x) {
     return x != null && typeof x === 'object';
 }
-//# sourceMappingURL=isObject.js.map
+//# sourceMappingURL=isObject.js.map 
 
 
 /***/ }),
@@ -89855,7 +85870,7 @@ function isObject(x) {
 function isPromise(value) {
     return value && typeof value.subscribe !== 'function' && typeof value.then === 'function';
 }
-//# sourceMappingURL=isPromise.js.map
+//# sourceMappingURL=isPromise.js.map 
 
 
 /***/ }),
@@ -89869,7 +85884,7 @@ function isPromise(value) {
 function isScheduler(value) {
     return value && typeof value.schedule === 'function';
 }
-//# sourceMappingURL=isScheduler.js.map
+//# sourceMappingURL=isScheduler.js.map 
 
 
 /***/ }),
@@ -89882,7 +85897,7 @@ function isScheduler(value) {
 /* tslint:disable:no-empty */
 /** PURE_IMPORTS_START  PURE_IMPORTS_END */
 function noop() { }
-//# sourceMappingURL=noop.js.map
+//# sourceMappingURL=noop.js.map 
 
 
 /***/ }),
@@ -89916,7 +85931,7 @@ function pipeFromArray(fns) {
         return fns.reduce(function (prev, fn) { return fn(prev); }, input);
     };
 }
-//# sourceMappingURL=pipe.js.map
+//# sourceMappingURL=pipe.js.map 
 
 
 /***/ }),
@@ -89944,7 +85959,7 @@ var _root = __window || __global || __self;
     }
 })();
 
-//# sourceMappingURL=root.js.map
+//# sourceMappingURL=root.js.map 
 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/webpack/buildin/global.js")))
 
@@ -90040,7 +86055,7 @@ function subscribeToResult(outerSubscriber, result, outerValue, outerIndex) {
     }
     return null;
 }
-//# sourceMappingURL=subscribeToResult.js.map
+//# sourceMappingURL=subscribeToResult.js.map 
 
 
 /***/ }),
@@ -90071,7 +86086,7 @@ function toSubscriber(nextOrObserver, error, complete) {
     }
     return new __WEBPACK_IMPORTED_MODULE_0__Subscriber__["a" /* Subscriber */](nextOrObserver, error, complete);
 }
-//# sourceMappingURL=toSubscriber.js.map
+//# sourceMappingURL=toSubscriber.js.map 
 
 
 /***/ }),
@@ -90099,7 +86114,7 @@ function tryCatch(fn) {
     return tryCatcher;
 }
 ;
-//# sourceMappingURL=tryCatch.js.map
+//# sourceMappingURL=tryCatch.js.map 
 
 
 /***/ }),
@@ -90125,8 +86140,6 @@ function tryCatch(fn) {
 /* unused harmony export __asyncDelegator */
 /* unused harmony export __asyncValues */
 /* unused harmony export __makeTemplateObject */
-/* unused harmony export __importStar */
-/* unused harmony export __importDefault */
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use
@@ -90293,18 +86306,6 @@ function __makeTemplateObject(cooked, raw) {
     if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
     return cooked;
 };
-
-function __importStar(mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result.default = mod;
-    return result;
-}
-
-function __importDefault(mod) {
-    return (mod && mod.__esModule) ? mod : { default: mod };
-}
 
 
 /***/ }),
