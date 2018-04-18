@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EditModal from './EditModal';
+import DeleteModal from './DeleteModal';
 import './List.css'
 import './App.css';
 
@@ -20,11 +21,12 @@ class List extends Component {
                         })}
                         <li className="list-group-item">
                             <button className="btn btn-primary" data-toggle="modal" data-target="#editModal">Edit</button>
-                            <button className="btn btn-secondary">Delete</button>
+                            <button className="btn btn-secondary" data-toggle="modal" data-target="#deleteModal">Delete</button>
                         </li>
                     </ul>
                 </div>
                 <EditModal list={this.props.list} updateList={this.props.updateList} />
+                <DeleteModal list={this.props.list} deleteList={this.props.deleteList} />
             </div>
         );
     }

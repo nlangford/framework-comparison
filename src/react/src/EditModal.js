@@ -30,9 +30,8 @@ class EditModal extends Component {
     }
 
     resetList() {
-        let list = this.props.list;
-
-        this.setState({list: list});
+        console.log('yes?');
+        this.setState({list: this.props.list});
     }
 
     updateListName(event) {
@@ -77,7 +76,7 @@ class EditModal extends Component {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-primary" onClick={() => { this.props.updateList(this.state.list) }} data-dismiss="modal">Save changes</button>
-                        <button type="button" className="btn btn-secondary" onClick={() => { this.resetList() } } data-dismiss="modal">Close</button>
+                        <button type="button" className="btn btn-secondary" onClick={this.resetList} data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

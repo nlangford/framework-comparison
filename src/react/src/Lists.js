@@ -148,6 +148,7 @@ class Lists extends Component {
         };
 
         this.updateList = this.updateList.bind(this);
+        this.deleteList = this.deleteList.bind(this);
     }
 
     updateList(list) {
@@ -159,11 +160,21 @@ class Lists extends Component {
         });
         this.setState({ lists: lists });
     }
+    
+    deleteList(id) {
+        let lists = this.state.lists.filter((item) => {
+            if(item._id === id){
+                return false;
+            }
+            return true;
+        });
+        this.setState({ lists: lists });
+    }
 
     render() {
         return (
             this.state.lists.map((item) => {
-                return <List key={item._id} list={item} updateList={this.updateList} />
+                return <List key={item._id} list={item} updateList={this.updateList} deleteList={this.deleteList} />
             })
         );
     }
