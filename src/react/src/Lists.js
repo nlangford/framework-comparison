@@ -85,14 +85,7 @@ class Lists extends Component {
     render() {
         return (
             <div className="row">
-                {this.state.lists.map(
-                    (item, index) => {
-                        return (
-                            <List key={item._id} list={item} updateList={this.updateList} deleteList={this.deleteList} />
-                        )
-                    }
-                )}
-                <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" style={{ marginTop: '20px' }}>
+            <div className="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2" style={{ marginTop: '20px' }}>
                     <div className="card">
                         <div className="card-header" style={{ textTransform: 'capitalize', fontWeight: 'bold' }}>
                             New List
@@ -104,6 +97,13 @@ class Lists extends Component {
                         </ul>
                     </div>
                 </div>
+                {this.state.lists.map(
+                    (item, index) => {
+                        return (
+                            <List key={item._id} list={item} updateList={this.updateList} deleteList={this.deleteList} />
+                        )
+                    }
+                )}
                 <EditModal id="addModal" list={this.state.emptyItem} confirm={this.addList} />
             </div>
         );
