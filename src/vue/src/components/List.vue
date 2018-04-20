@@ -10,25 +10,29 @@
         </li>
         <li class="list-group-item">
             <button class="btn btn-primary" data-toggle="modal" v-bind:data-target="'#'+edit">Edit</button>
-            <button class="btn btn-secondary" v-on:click="deleteList(list._id)" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            <button class="btn btn-secondary" data-toggle="modal" v-bind:data-target="'#'+del">Delete</button>
         </li>
     </ul>
     <editmodal v-bind:confirm="updateList" v-bind:list="list" v-bind:id="edit"></editmodal>
+    <confirmmodal v-bind:confirm="deleteList" v-bind:list="list" v-bind:id="del"></confirmmodal>
 </div>
 </template>
 
 <script>
 import editmodal from './EditModal'
+import confirmmodal from './ConfirmModal'
 
 export default {
   name: 'list',
   props: ['list', 'updateList', 'deleteList'],
   components: {
-    editmodal
+    editmodal,
+    confirmmodal
   },
   data () {
     return {
-      edit: 'edit-modal-' + this.list._id
+      edit: 'edit-modal-' + this.list._id,
+      del: 'del-modal-' + this.list._id
     }
   }
 }
